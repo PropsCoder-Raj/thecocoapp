@@ -133,3 +133,56 @@ exports.uploadPhoto = async (req, res, next) => {
         return res.status(500).send({ status: false, message: error.message });
     }
 }
+
+/**
+* @swagger
+* /user/upload-photo-multer:
+*   post:
+*     summary: Upload photo-multer
+*     tags:
+*       - User
+*     description: Upload photo-multer
+*     produces:
+*       - application/json
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication.
+*         required: true
+*         schema:
+*           type: string
+*       - in: formData
+*         name: image
+*         description: The image to upload
+*         required: true
+*         schema:
+*           type: file
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.uploadPhotoMulter = async (req, res, next) => {
+    try {
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const uploadPhoto = await commonFunctions.uploadImageCloudinary(req.file.path)
+
+        // Respond with success message and inserted child records
+        return res.status(200).send({
+            status: true,
+            message: "User updated successfully.",
+            result: uploadPhoto,
+            buffer: req.file.buffer,
+            file: req.file
+        });
+    } catch (error) {
+        // Handle any errors during the process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}

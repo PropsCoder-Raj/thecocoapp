@@ -39,7 +39,7 @@ exports.generateOTP = () => {
 }
 
 // Function to upload image to Cloudinary
-exports.uploadImageCloudinary = async (base64) => {
+exports.uploadImageCloudinary = async (url) => {
     // Configure Cloudinary with your credentials from environment variables
     cloudinary.config({
         cloud_name: process.env.cloud_name,
@@ -47,8 +47,8 @@ exports.uploadImageCloudinary = async (base64) => {
         api_secret: process.env.api_secret
     });
 
-    // Upload base64 image to Cloudinary and return the secure URL
-    return (await cloudinary.uploader.upload(base64, { resource_type: "auto" })).secure_url
+    // Upload url image to Cloudinary and return the secure URL
+    return (await cloudinary.uploader.upload(url)).secure_url
 }
 
 exports.sendPinChangedGenerateOTPMail = async (email, otp) => {
