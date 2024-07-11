@@ -33,7 +33,7 @@ const styles = {
     // [theme.breakpoints.up("lg")]: {
     //   paddingLeft: 290,
     // },
-    "@media (max-width:767px)": {
+    "@media(max-width:767px)": {
       paddingTop: "70px !important",
     },
   },
@@ -43,19 +43,20 @@ const styles = {
     overflow: "hidden",
     position: "relative",
     // backgroundColor: "#fff",
-    paddingTop: 70,
     minHeight: "calc(100vh - 70px)",
     // [theme.breakpoints.up("lg")]: {
     //   paddingLeft: 290,
     // },
-    "@media (max-width:767px)": {
-      paddingTop: "70px !important",
-    },
+   
   },
   contentContainer: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
+    margin:"0 20px 0 280px",
+    "@media(max-width:899px)": {
+      margin: "0 20px !important",
+    },
   },
   content: {
     flex: "1 1 auto",
@@ -63,10 +64,10 @@ const styles = {
     overflow: "hidden",
     position: "relative",
     padding: "94px 0px 0px 0px",
-    "@media (max-width:900px)": {
+    "@media(max-width:900px)": {
       paddingTop: "84px !important",
     },
-    "@media (max-width:600px)": {
+    "@media(max-width:600px)": {
       paddingTop: "77px !important",
     },
   },
@@ -102,32 +103,31 @@ const DashboardLayout = ({ children }) => {
   }, [location]);
 
   return (
-    <Box sx={`${themeSeeting.settings.theme ===  "LIGHT"? styles.rootLight:  styles.root  }`}
+    <Box sx={styles.rootLight}
     >
-      <TopBar
+       <TopBar
         onMobileNavOpen={() => setMobileNavOpen(true)}
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}
       />
-  {/* <NavBar
+     
+      <Box
+        sx={  `${styles.wrapper}` 
+        }
+      > 
+        {(location.pathname == "/update-profile" || location.pathname == "/child-profile") &&
+       <NavBar
         tabView={selectedTab}
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
         setSelectedTab={(item) => setSelectedTab(item)}
-      /> */}
-      <div
-        // sx={ 
-        //   themeSeeting.settings.theme === "DARK"
-        //     ? `${styles.wrapper1}`
-        //     : `${styles.wrapper}` 
-        // }
-      >
+      />} 
         <Box sx={styles.contentContainer}>
           <Box sx={ styles.content } id="main-scroll">
             {children}
           </Box>
         </Box>
-      </div>
+      </Box>
     </Box>
   );
 };

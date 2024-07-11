@@ -3,7 +3,7 @@
 // const url = "http://thecocoapp.com:8080/api/v1/";
 
 //Local URL
-const url = "http://localhost:8080/api/v1/";
+const url = "http://localhost:3500/api/v1/";
 
 const ApiConfig = {
   loginGenerateOtp: `${url}auth/login/email-with-pin`,
@@ -24,6 +24,8 @@ const ApiConfig = {
   //child
   getAllChild: `${url}child/get-all-childs`,
   switchChild: `${url}child/switch-to-active-child`,
+  updateChild: `${url}child/update-child`,
+
   //modules
   allModules : `${url}dashboard/get-all-modules`,
   //leason
@@ -31,6 +33,11 @@ const ApiConfig = {
   //questions
   getQuestions: `${url}dashboard/get-questions`,
   attemptQuestions: `${url}questions/attempt-questions`,
+
+  //photo
+  photo: `${url}user/upload-photo`,
+
+  getProfile: `${url}/user/get-profile`
   
 };
 export default ApiConfig;

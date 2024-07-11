@@ -209,82 +209,70 @@ useEffect(()=>{
     }
   };
 
- const renderBoxes = () => {
-   return levelData.map((level, index) => {
-     const isCenterBox = index % 3 === 0;
-     const isSixItems = levelData.length === 6;
-     const isFirstBox = index === 0;
-     let justifyContent = "center";
+  const renderBoxes = (levelValue) => {
+    return levelValue.map((level, index) => {
+      const isCenterBox = index % 3 === 0;
+      const isSixItems = levelValue.length === 6;
+      const isFirstBox = index === 0;
+      let justifyContent = "center";
 
-     // Determine justifyContent based on the index
-     if (index === 0) {
-       // Center the first box
-       justifyContent = "center";
-     } else if (index === 2) {
-       // Odd index: right side, align to the start
-       justifyContent = "flex-start";
-     } else if (levelData.length === 6 && index % 3 === 0) {
-       // Center every third box when there are exactly six items
-       justifyContent = "center";
-     } else if (index % 2 === 0) {
-       // Even index: left side, align to the end
-       justifyContent = "flex-end";
-     } else if (index === 1) {
-       // Odd index: right side, align to the start
-       justifyContent = "flex-end";
-     } else {
-       justifyContent = "flex-start";
-     }
-     return (
-       <Grid
-         item
-         xs={isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
-         key={level._id}
-         container
-         justifyContent={justifyContent}
-         sx={style.GridManrgin}
-       >
-         {level.current_status && (
-           <Box
-             sx={style.customBorder}
-             onClick={() => {
-               navigate("/leason", {
-                 state: {
-                   module_id: level.module_id,
-                   level_id: level._id,
-                 },
-               });
-             }}
-           >
-             {" "}
-             <Typography sx={style.textCss}>START</Typography>{" "}
-           </Box>
-         )}
-         <LockImg
-         onClick={()=>{
-          if (level.complete_status){
-            navigate("/leason", {
-              state: {
-                module_id: level.module_id,
-                level_id: level._id,
-              },
-            });
-          }
-         }}
-           src={
-             level.current_status
-               ? "images/play.png"
-               : level.complete_status
-               ? "images/preview.png"
-               : "images/lock.png"
-           }
-           alt=""
-           style={level.complete_status?{cursor:"pointer"}:{}}
-         />
-       </Grid>
-     );
-   });
- };
+      if (index === 0 || (isSixItems && isCenterBox)) {
+        justifyContent = "center";
+      } else if (index % 3 === 2) {
+        justifyContent = "flex-start";
+      } else if (index % 3 === 1) {
+        justifyContent = "flex-end";
+      }
+
+      return (
+        <Grid
+          item
+          xs={isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
+          key={level._id}
+          container
+          justifyContent={justifyContent}
+          sx={style.GridManrgin}
+        >
+          {level.current_status && (
+            <Box
+              sx={style.customBorder}
+              onClick={() => {
+                navigate("/leason", {
+                  state: {
+                    module_id: level.module_id,
+                    level_id: level._id,
+                  },
+                });
+              }}
+            >
+              <Typography sx={style.textCss}>START</Typography>
+            </Box>
+          )}
+          <LockImg
+            onClick={() => {
+              if (level.complete_status) {
+                navigate("/leason", {
+                  state: {
+                    module_id: level.module_id,
+                    level_id: level._id,
+                  },
+                });
+              }
+            }}
+            src={
+              level.current_status
+                ? "images/play.png"
+                : level.complete_status
+                  ? "images/preview.png"
+                  : "images/lock.png"
+            }
+            alt=""
+            style={level.complete_status ? { cursor: "pointer" } : {}}
+          />
+        </Grid>
+      );
+    });
+  };
 
   const switchChild = async (id) => {
     const token = localStorage.getItem("token");
@@ -314,7 +302,7 @@ useEffect(()=>{
         headers: { token: token },
       });
       if (res.status === 200) {
-        setLevelData(res?.data?.result?.modules[0]?.levels || [])
+        setLevelData(res?.data?.result || [])
       }
     } catch (error) {
       console.log(error, "error");
@@ -337,41 +325,49 @@ useEffect(()=>{
         <Box>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={7}>
-              <Box
-                sx={{
-                  background: "rgba(255, 245, 209, 1)",
-                  borderRadius: "30px",
-                  padding: "0 75px",
-                  paddingBottom: "25px",
-                  textAlign: "center",
-                  marginTop: "47px",
-                }}
-              >
-                <Box>
-                  <StyledImg alt="" src="images/Moduleimage.png" />
-                </Box>
-                <Box
-                  sx={{
-                    backgroundImage: "url('/images/moduleNameBack.png')",
-                    padding: "6px",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    color={"#fff"}
-                    sx={{ fontWeight: "600" }}
-                  >
-                    Module 1
-                  </Typography>
-                </Box>
-              </Box>
-              <Grid container spacing={3} sx={style.levelMargin}>
-                {renderBoxes()}
-              </Grid>
-             
+              {levelData.map((values) => (
+                <>
+                  {values.modules.map((data) => (
+                    <>
+                      <Box
+                        sx={{
+                          background: "rgba(255, 245, 209, 1)",
+                          borderRadius: "30px",
+                          padding: "0 75px",
+                          paddingBottom: "25px",
+                          textAlign: "center",
+                          marginTop: "47px",
+                        }}
+                      >
+                        <Box>
+                          <StyledImg alt="" src="images/Moduleimage.png" />
+                        </Box>
+                        <Box
+                          sx={{
+                            backgroundImage: "url('/images/moduleNameBack.png')",
+                            padding: "6px",
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            textAlign: "center",
+                          }}
+                        >
+                          <Typography
+                            variant="h4"
+                            color={"#fff"}
+                            sx={{ fontWeight: "600" }}
+                          >
+                            Module {data.module_id}
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Grid container spacing={3} sx={style.levelMargin}>
+                        {renderBoxes(data.levels)}
+                      </Grid>
+                    </>
+                  ))}
+                </>
+              ))}
+            
             </Grid>
             <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
               <Box sx={style.GridBox}>
@@ -402,7 +398,9 @@ useEffect(()=>{
                         sx={style.userBox}
                       >
                         <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
-                          <ProfileImg alt="" src={values.gender = "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                          <ProfileImg alt="" src={
+                              values.profilePic ? values.profilePic :
+                            values.gender = "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
                             <Box > <Typography variant="body1">{values.childName}</Typography>
                         <Box sx={style.GapBox}>
                             <Typography variant="body1">{values.totalPoints}</Typography>

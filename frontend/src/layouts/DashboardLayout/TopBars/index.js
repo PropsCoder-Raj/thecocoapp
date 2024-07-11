@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import { AppBar, Toolbar, IconButton, Hidden, SvgIcon, Typography } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Hidden, SvgIcon, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Menu as MenuIcon } from "react-feather";
 import { TopBarData } from "src/layouts/DashboardLayout/TopBar";
 import { useNavigate } from "react-router-dom";
@@ -41,6 +41,9 @@ const styles = {
 const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const confirmationLogouthandler = () => {
     navigate("/login");
     window.localStorage.removeItem("token");
@@ -62,7 +65,7 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
         {...rest}
       >
         <Toolbar sx={styles.toolbar}>
-          <Hidden lgUp>
+          {isMobile && (
             <IconButton
               color="#FF2626"
               onClick={onMobileNavOpen}
@@ -73,7 +76,7 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
                 <MenuIcon  />
               </SvgIcon>
             </IconButton>
-          </Hidden>
+          )}
           <TopBarData />
         </Toolbar>
       </AppBar>

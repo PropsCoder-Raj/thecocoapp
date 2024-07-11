@@ -99,7 +99,6 @@ export default function AlertDialog({
           <Button
             className={style.yesNoButton}
             onClick={handleClose}
-            autoFocus
             disabled={isloading}
           >
             No

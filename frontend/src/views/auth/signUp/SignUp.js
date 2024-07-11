@@ -211,7 +211,6 @@ function SignUp(props) {
                         width: "100%",
                         gap: "15px",
                       }}
-                      autoFocus
                       OTPLength={4}
                       otpType="number"
                     />

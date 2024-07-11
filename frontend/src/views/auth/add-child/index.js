@@ -95,7 +95,6 @@ function AddChild(props) {
         <Typography variant="h4" color={"rgba(67, 69, 71, 1)"}>
           This helps us show modules that are tailored for your child
         </Typography>
-        {console.log("schoolIds: ", schoolIds)}
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={formInitialSchema}
@@ -252,6 +251,8 @@ function AddChild(props) {
                               errors.children?.[index]?.gender}
                           </FormHelperText>
                         </Box>
+                        {child.schoolId &&
+                          <>
                         <Typography variant="h5" sx={{ textAlign: "start" }}>
                           Standard
                         </Typography>
@@ -282,7 +283,7 @@ function AddChild(props) {
                             {touched.children?.[index]?.standard &&
                               errors.children?.[index]?.standard}
                           </FormHelperText>
-                        </Box>
+                        </Box></>}
                         {selectedChild === 1 ? (
                           <Box
                             sx={{

@@ -1,3 +1,5 @@
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
@@ -6,14 +8,19 @@ export default function AuthProvider(props) {
   const [profile, setProfile] = useState({});
 
   const getViewMyProfile = async (values) => {
-    // const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
-     
-setProfile({})
+      const res = await axios({
+        method: "GET",
+        url: ApiConfig.getProfile,
+        headers: { token: token },
+      });
+      if (res.status === 200) {
+        setProfile(res.data.data);
+      }
     } catch (error) {
-     
-      
+      console.log(error, "error");
     }
   };
   useEffect(() => {

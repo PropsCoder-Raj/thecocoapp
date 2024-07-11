@@ -15,13 +15,17 @@ import {
   DialogActions,
   DialogContent,
   Slide,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { AiFillDashboard } from "react-icons/ai";
+import { MdNavigateNext } from "react-icons/md";
 
-import { RiSettingsLine } from "react-icons/ri";
 import NavItem from "./NavItem";
 import { MdHistory } from "react-icons/md";
 import { ListItem, ListItemText, Collapse } from "@mui/material";
+import { IoMdArrowBack } from "react-icons/io";
+import { useTheme } from "@emotion/react";
 
 function renderNavItems({ items, pathname, depth = 0, state, setSelectedTab }) {
   return (
@@ -92,7 +96,7 @@ function reduceChildRoutes({
   }
   return acc;
 }
-const styles={
+const styles = {
   main: {},
   mobileDrawer: {
     width: 256,
@@ -107,11 +111,13 @@ const styles={
     height: "100%",
     background: "#232B3B",
     boxShadow: "0px 10px 30px 0px rgba(0, 0, 0, 0.10)",
+    zIndex: "120",
+    padding:"0 20px",
     "& .lightlogoutButton": {
       display: "flex",
       justifyContent: "start",
       alignItems: "center",
-      position: "absolute",
+      // position: "absolute",
       bottom: "19px",
       left: "17px",
       borderRadius: "5px",
@@ -124,7 +130,7 @@ const styles={
       display: "flex",
       justifyContent: "start",
       alignItems: "center",
-      position: "absolute",
+      // position: "absolute",
       bottom: "19px",
       left: "17px",
       borderRadius: "5px",
@@ -266,7 +272,7 @@ const styles={
     "& .MuiDialog-paperWidthSm": {
       width: "100%",
       maxWidth: "fit-content",
-      padding: "60px",
+      padding: "20px",
       borderRadius: "20px",
       background: "#FFF",
       boxShadow: "3px 4px 9px 0px rgba(0, 0, 0, 0.25)",
@@ -338,22 +344,32 @@ const sections1 = [
   {
     items: [
       {
-        title: "Dashboard",
-        icon: <AiFillDashboard />,
-        href: "/sniper-dashboard",
-        tabview: "Sniper",
+        title: "Help",
+        icon: iconsFunction(
+          "images/help.svg",
+          "dashboard"
+        ),
+        // href: "/map",
+        tabview: "Arbitrage",
+        clickable: true,
       },
       {
-        title: "Bot settings",
-        icon: <RiSettingsLine />,
-        href: "/bot-setting",
-        tabview: "Sniper",
+        title: "About",
+        icon: iconsFunction("images/about.svg",
+          "binaryTree"
+        ),
+        // href: "/binary-tree",
+        tabview: "Arbitrage",
+        clickable: true,
       },
       {
-        title: "Transaction History",
-        icon: <MdHistory />,
-        href: "/sniper-transactions",
-        tabview: "Sniper",
+        title: "Log out",
+        icon: iconsFunction("images/logout.svg",
+          "wallet"
+        ),
+        // href: "/wallet",
+        tabview: "Arbitrage",
+        clickable: false,
       },
     ],
   },
@@ -364,103 +380,35 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
     {
       items: [
         {
-          title: "Dashboard",
+          title: "Help",
           icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightDashboard.svg"
-              : "images/sidebar/map.svg",
+           "images/help.svg",
             "dashboard"
           ),
-          href: "/map",
+          // href: "/map",
           tabview: "Arbitrage",
           clickable: true,
         },
         {
-          title: "Binary Tree",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightBinaryTree.svg"
-              : "images/sidebar/binaryTree.svg",
+          title: "About",
+          icon: iconsFunction( "images/about.svg",
             "binaryTree"
           ),
-          href: "/binary-tree",
+          // href: "/binary-tree",
           tabview: "Arbitrage",
           clickable: true,
         },
         {
-          title: "Wallet",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightWallet.svg"
-              : "images/sidebar/wallet.svg",
+          title: "Log out",
+          icon: iconsFunction( "images/logout.svg",
             "wallet"
           ),
-          href: "/wallet",
+          // href: "/wallet",
           tabview: "Arbitrage",
           clickable: false,
         },
-        {
-          title: "Referral",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightReferral.svg"
-              : "images/sidebar/referral.svg",
-            "referral"
-          ),
-          href: "/referral",
-          tabview: "Arbitrage",
-          clickable: true,
-        },
-        {
-          title: "Reports",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightReports.svg"
-              : "images/sidebar/reports.svg",
-            "reports"
-          ),
-          href: "/reports",
-          tabview: "Arbitrage",
-          clickable: true,
-        },
-        {
-          title: "Transaction History",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightTransaction.svg"
-              : "images/sidebar/transaction.svg",
-            "transaction"
-          ),
-          href: "/transaction-history",
-          tabview: "Arbitrage",
-          clickable: true,
-        },
-        {
-          title: "Settings",
-          icon: iconsFunction(
-            themeSeeting.settings.theme === "LIGHT"
-              ? "images/sidebar/lightSettings.svg"
-              : "images/sidebar/settings.svg",
-            "settings"
-          ),
-          href: "/settings",
-          tabview: "Arbitrage",
-          clickable: true,
-        },
-        // {
-        //   title: "Arbitrage",
-        //   icon: <FaBarcode />,
-        //   tabview: "Arbitrage",
-        //   clickable: true,
-        //   items: [
-
-        //     {
-        //       title: "Triangular",
-        //       href: "/triangular",
-        //       clickable: true,
-        //     },
-        //   ],
-        // },
+        
+  
       ],
     },
   ];
@@ -474,6 +422,9 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   const [isLogout, setIsLogout] = useState(false);
   const renderedSections = tabView === "Arbitrage" ? sections : sections1;
   const User = useContext(UserContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -490,57 +441,16 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   };
   const content = (
     <>
-      <Box height="100%" display="flex" flexDirection="column">
+      <Box height="100%" display="flex" flexDirection="column" sx={{padding:"60px 20px", minWidth:"260px"}}>
         <Box sx={styles.logoBox}>
-          <img
-            src="images/logo.png"
-            alt="logo"
-            style={{ cursor: "pointer", width: "80px" }}
-          />
-        </Box>
 
-        <Box sx={styles.profileBox}>
-          <img
-            sx="profilePic"
-            src={
-              User?.profile?.user_info?.image
-                ? User.profile?.user_info?.image
-                : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEXk5ueutLepsLPo6uursbXJzc/p6+zj5ea2u76orrKvtbi0ubzZ3N3O0dPAxcfg4uPMz9HU19i8wcPDx8qKXtGiAAAFTElEQVR4nO2d3XqzIAyAhUD916L3f6+f1m7tVvtNINFg8x5tZ32fQAIoMcsEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQTghAJD1jWtnXJPP/54IgNzZQulSmxvTH6oYXX4WS+ivhTbqBa1r26cvCdCu6i0YXbdZ0o4A1rzV+5IcE3YE+z58T45lqo7g1Aa/JY5tgoqQF3qb382x7lNzBLcxft+O17QUYfQI4IIeklKsPSN4i6LKj/7Zm8n99RbHJpEw9gEBXNBpKIYLJqKYRwjOikf//r+J8ZsVuacbqCMNleI9TqGLGqMzhnVdBOdd6F/RlrFijiCoVMk320CBIahUxTWI0KKEcJqKbMdpdJb5QvdHq6wCI5qhKlgGMS/RBHkubWDAE+QZxB4xhCyDiDkLZxgGEVdQldzSKbTIhmZkFkSEPcVvmBn2SMuZB9od7fQDsMiDdKJjFUSCQarM5WirZ3C2TT/htYnyPcPfgrFHWz0BI74gr6J/IZiGUxAZGQLqmvQLTrtE/Go4YxhVRIpEw+sww1IIcqr5NKmUUzLF3d4/qPkYIp2T/obPuemlojFUR4t9Q2Vojhb7BmgElWHzLPH8hucfpefPNFTVgs9h1AdU/Pin96vwWbWdf+X9Absn3OdO34aMdsDnP8WgKYisTqI6CkNGqZQo1XA6Ef6AU32SJzOcBukHPF07/xNSgmHKa5BOhtezv6mA/rYJpwXNAnbRZ1XuF3BzDcO3vpA3+ny2909gbqE4hhD3LIPhLLyBNhPZvbZ3B+3tPYa18A7auSlXQayKwTPNLKDcuOB0xPYKDPFTkWsevQPRZ1J8Hji9I1KQ34r7hZhrwNwOZ97QxNx0drwn4QI0wQk1DcEsfKCWKdxVvxPSNUIp/knmAXT+nT+Ko3+0H96rcNb3m1fx7MBTJdeBJ7uFcWsc0wvgAsC4pROW0l2inbAmIBv/7GZmuhQH6API2rr8T0e6yuZJ+80A9LZeG62T3tik31XwxtwZcizKuTHkMjB1WdZde4Kmic/A5ZI3rr1ae21d08PlVHYfAaxw9G9CYRbJ+8ZdbTcMRV1XM3VdF0M32vtoTdZ0+u29s0OttJ5bz64UwinjaFMVY9vkqc3KKSxN21Xl+0L4Q3Vuv1tYl0pqnX6ms4XetFz7gdZVAgUEoJntfOUe4ZwsHd9FzqQ3Vv6xe41l0XJcqcKl6TZvlv7ClAW3BsqQW4X7ypApB8dmTgK4IX5wvqIVj33HtD2qSG4BqznxdIefL27Y4sahi0MdIdvUsDva8agGGbCtITmCY31MHD2O0uIdh/0rJDQ1VX5Zdxz3rR2QDbv6qXl9vudzqQtGm1Jv9LDXOsfvvB7VcZ8PDKD0mQ1VHPYQ9O+Yj4hR1IUD8rBnn3ho2m8oQMxbCFiKlL2ioSW5heeJqegED52CzxCtcGD3Kv8Wms9EYLyUhwaFIhSMBClevWEmiK/Iaogu4H7sg6ppQhQG8RUqivuTGOAJOg6FfgW0q0M0PQMRMEgXaeNf3SYDZ8PIMI0+wHgr/MgN7wYwpiLjCCqM6ydUDZLQiB6nDdNC8SDyig3jPPpFXGcC9O8BUBDVmgBY59E7Md/35Loe/UVEECEJwYggJjELZ4J71SaQSBeC02n4Da29CayJNA28SAhd2CQyC1Xw6pSmGSINQVuMhAZp4DClan9MgmkDDNmezqwS8sgtlXK/EPBhoaSmYVC/F7IO1jQEdHOlabpKh3+jzLQSTUiq4X2I+Ip/zU8rlaqAvkS21ElR+gqu3zbjjL+hIAiCIAiCIAiCIAiCsCf/AKrfVhSbvA+DAAAAAElFTkSuQmCC"
-            }
-            alt="user"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              navigate("/settings");
-            }}
-          />
-          <Box style={{ width: "181px", overflow: "auto" }}>
-            <p
-              sx={
-                themeSeeting.settings.theme === "LIGHT"
-                  ? "name typographyColorLight"
-                  : "name typographyColorDark"
-              }
-            >
-              Hi,{" "}
-              {User?.profile?.user_info?.firstName
-                ? User.profile?.user_info?.firstName
-                : "******"}
-            </p>
-            <p sx="emailId">
-              {User?.profile?.email
-                ? User?.profile?.email?.length > 23
-                  ? User?.profile?.email.slice(0, 18) +
-                    "..." +
-                    User?.profile?.email.slice(
-                      User?.profile?.email?.length - 3,
-                      User?.profile?.email?.length
-                    )
-                  : User?.profile?.email
-                : "**************"}
-            </p>
-          </Box>
         </Box>
-
+        <Box onClick={()=>{navigate("/dashboard")}} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom:"1px solid rgba(229, 229, 229, 1)", cursor:"pointer" }}>
+          <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
+          <Typography >
+            Back to home
+          </Typography>
+        </Box>
         <Box pt={2} pb={2} sx={styles.mainsidebar}>
           <Box sx="sideMenuBox">
             {renderedSections.map((section, i) => (
@@ -556,46 +466,35 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                   const hasItems = item.items && item.items.length > 0;
                   const isItemOpen = isOpen[j] || false;
                   return (
-                    <div key={`item${j}`}>
+                    <Box sx={{cursor:"pointer"}} key={`item${j}`}>
                       <ListItem
-                        button
-                        sx={
-                          themeSeeting.settings.theme === "LIGHT"
-                            ? `${styles.lightListItem} ${
-                                location.pathname === item.href
-                                  ? styles.lightSelectedListItem
-                                  : ""
-                              }`
-                            : `${styles.darkListItem} ${
-                                location.pathname === item.href
-                                  ? styles.darkSelectedListItem
-                                  : ""
-                              }`
-                        }
-                        selected={location.pathname === item.href}
+
+                        sx={{ display: "flex", gap: "10px", justifyContent: "space-between", alignItems: "center", padding: "10px 0 0 0",  borderBottom: "1px solid rgba(229, 229, 229, 1)" } }
                         onClick={() => {
+                          if (item.title === "Log out"){
+                            setIsLogout(true)
+                          }
                           if (hasItems) {
                             handleSublistToggle(j);
                           } else if (item.clickable) {
                             handleItemClick(item.href);
-                          } else {
                           }
                         }}
                       >
+                        <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
                         {item.icon}
-                        <ListItemText primary={item.title} />
+                        <ListItemText primary={item.title} /></Box>
+                        <MdNavigateNext color="rgba(182, 183, 184, 1)"/>
                       </ListItem>
                       {hasItems && (
                         <Collapse in={isItemOpen} timeout="auto" unmountOnExit>
                           <List component="div" disablePadding>
                             {item.items.map((subItem, k) => (
-                              <div key={`subItem${k}`}>
+                              <Box sx={
+                                { cursor: "pointer" }
+                              } key={`subItem${k}`}>
                                 <ListItem
-                                  // sx={
-                                  //   location.pathname === item.href
-                                  //     ? styles.selectedListItem // Apply selected style class
-                                  //     : styles.default // Apply default style class
-                                  // }
+                                  
 
                                   button
                                   // selected={location.pathname === subItem.href}
@@ -609,12 +508,12 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                                   {subItem.icon}
                                   <ListItemText primary={subItem.title} />
                                 </ListItem>
-                              </div>
+                              </Box>
                             ))}
                           </List>
                         </Collapse>
                       )}
-                    </div>
+                    </Box>
                   );
                 })}
               </List>
@@ -622,30 +521,12 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
           </Box>
         </Box>
 
-        <Button
-          onClick={() => setIsLogout(true)}
-          sx={
-            themeSeeting.settings.theme === "LIGHT"
-              ? "lightlogoutButton"
-              : "darklogoutButton"
-          }
-        >
-          <ExitToAppIcon
-            style={{
-              marginRight: "16px",
-            }}
-          />
-          &nbsp; Logout
-        </Button>
-
         {isLogout && (
           <Dialog
             maxWidth="sm"
             fullWidth
-            sx={
-              themeSeeting.settings.theme === "LIGHT"
-                ? styles.lightDailogOpen
-                : styles.darkDailogOpen
+            sx={ styles.lightDailogOpen
+               
             }
             open={isLogout}
             TransitionComponent={Transition}
@@ -685,30 +566,22 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                   textAlign: "center",
                 }}
               >
-                <button
-                  sx={
-                    themeSeeting.settings.theme === "LIGHT"
-                      ? "lightOutlinedButton"
-                      : "darkOutlinedButton"
-                  }
+                <Button
+                 variant="contained"
                   onClick={() => setIsLogout(false)}
                 >
                   Cancel
-                </button>
+                </Button>
                 &nbsp; &nbsp;
-                <button
-                  sx={
-                    themeSeeting.settings.theme === "LIGHT"
-                      ? "lightFilledButton"
-                      : "darkFilledButton"
-                  }
+                <Button
+                  variant="contained"
                   onClick={() => {
                     window.localStorage.clear();
                     navigate("/");
                   }}
                 >
                   Logout
-                </button>
+                </Button>
               </Box>
             </DialogActions>
           </Dialog>
@@ -720,14 +593,11 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   return <>
     {/* <Box sx={styles.main}></Box> */}
 
-    <Hidden lgUp>
+    {isMobile && (
       <Drawer
         anchor="left"
-        styles={{
-          paper:
-            themeSeeting.settings.theme === "LIGHT"
-              ? styles.mobileDrawerLight
-              : styles.desktopDrawer,
+        sx={{
+          paper: styles.desktopDrawer,
         }}
         onClose={onMobileClose}
         open={openMobile}
@@ -735,22 +605,18 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
       >
         <Box p={2}>{content}</Box>
       </Drawer>
-    </Hidden>
-    <Hidden lgDown>
-      <Drawer
-        anchor="left"
-        styles={{
-          paper:
-            themeSeeting.settings.theme === "LIGHT"
-              ? styles.rootLight
-              : styles.desktopDrawer,
-        }}
-        open
-        variant="persistent"
-      >
-        {content}
-      </Drawer>
-    </Hidden>
+    )}
+    {isDesktop && (<Drawer
+      anchor="left"
+      sx={{
+        paper: styles.desktopDrawer,
+      }}
+      open
+      variant="persistent"
+    >
+      {content}
+    </Drawer>
+    )}
   </>;
 };
 

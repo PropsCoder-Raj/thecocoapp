@@ -1,3 +1,5 @@
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
 import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -38,4 +40,27 @@ export function  generateLabels(length){
     labels.push(label);
   }
   return labels;
+};
+
+export const getImageUrl = async (values) => {
+
+  const token = localStorage.getItem("token")
+  try {
+    const res = await axios({
+      method: "POST",
+      url: ApiConfig.photo,
+      headers: { token: token },
+      data: {
+        photo: values,
+      }
+    });
+
+
+    if (res.status === 200) {
+      return 
+    }
+  } catch (error) {
+    return ""
+    
+  }
 };

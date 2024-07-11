@@ -3,14 +3,19 @@ import PropTypes from "prop-types";
 import {
   AppBar,
   Box,
+  IconButton,
+  SvgIcon,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import SettingsContext from "src/context/SettingsContext";
 import { AuthContext } from "src/context/Auth";
 import { UserContext } from "src/context/User";
 import ConfirmationDialog from "src/component/ConfirmationDialog";
+import { useTheme } from "@emotion/react";
+import { IoMenu } from "react-icons/io5";
 
 
 const styles ={
@@ -68,10 +73,11 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
       style={{
         height: "64px",
         justifyContent: "center",
+        zIndex:"1201"
       }}
     >
       <Toolbar sx={styles.toolbar}>
-        <TopBarData />
+        <TopBarData onMobileNavOpen={onMobileNavOpen}/>
       </Toolbar>
     </AppBar>
   );
@@ -86,9 +92,11 @@ TopBar.defaultProps = {
 
 export default TopBar;
 
-export function TopBarData() {
+export function TopBarData({onMobileNavOpen}) {
   const location = useLocation();
   const auth = useContext(AuthContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [state, setState] = React.useState({
@@ -122,6 +130,20 @@ export function TopBarData() {
 
   return (
     <>
+        {isMobile && 
+          <IconButton
+            color="#FF2626"
+            onClick={()=>onMobileNavOpen()}
+            style={{ marginRight: 10 }}
+          >
+            
+            <IoMenu
+               style={{color:"black"}}
+              />
+     
+          </IconButton>}
+        
+       
       <img
         alt=""
         style={styles.logo}
@@ -134,7 +156,7 @@ export function TopBarData() {
       <>
         <Box flexGrow={1} />
         <Box sx={styles.searchBox}>
-          <Box sx={`${styles.customSelectBox}`} onClick={() => setOpen(true)}>
+          <Box sx={`${styles.customSelectBox}`} onClick={() => navigate("/update-profile")}>
             <Typography variant="h4">Logout</Typography>
             <img src="images/profile.png" alt="#" style={{width:"45px", height:"45px"}}/>
           </Box>
