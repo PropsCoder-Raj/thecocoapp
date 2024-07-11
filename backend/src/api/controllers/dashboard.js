@@ -186,8 +186,8 @@ exports.getLessons = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
         const child = await findChild({ _id: req.user.currentChildActive });
-        const standard = await findStandard({ standard_id: child.standard })
-        const lessonsLists = await findAllLessons({ standard_id: standard._id, level_id: level_id, module_id: module_id });
+        // const standard = await findStandard({ standard_id: child.standard })
+        const lessonsLists = await findAllLessons({ level_id: level_id, module_id: module_id });
 
         const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
         let listQuuestions = await findAllQuestions({ module_id, level_id });
@@ -245,8 +245,8 @@ exports.getQuestions = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
         const child = await findChild({ _id: req.user.currentChildActive });
-        const standard = await findStandard({ standard_id: child.standard })
-        let questionsLists = await findAllQuestions({ standard_id: standard._id, level_id: level_id, module_id: module_id });
+        // const standard = await findStandard({ standard_id: child.standard })
+        let questionsLists = await findAllQuestions({ level_id: level_id, module_id: module_id });
 
         const listCompletedQuestions = await findAllCompletedQuestions();
         let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true;
