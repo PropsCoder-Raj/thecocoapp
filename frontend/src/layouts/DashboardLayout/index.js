@@ -5,55 +5,32 @@ import TopBar from "./TopBar";
 import SettingsContext from "src/context/SettingsContext";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "src/context/User";
-import { Box } from "@mui/material";
+import { Box, Drawer, Typography } from "@mui/material";
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
+import styled from "@emotion/styled";
+import toast from "react-hot-toast";
 
 const styles = {
-  root: {
+  rootLight: {
     background: "#FFF",
     height: "100%",
     overflow: "hidden",
     width: "100%",
     minHeight: "100vh",
   },
-  rootLight: {
-    background: "#FFF;",
-    height: "100%",
-    overflow: "hidden",
-    width: "100%",
-    minHeight: "100vh",
-  },
-  wrapper1: {
-    // backgroundColor: "#000",
-    display: "flex",
-    flex: "1 1 auto",
-    overflow: "hidden",
-    position: "relative",
-    paddingTop: 70,
-    minHeight: "calc(100vh - 64px)",
-    // [theme.breakpoints.up("lg")]: {
-    //   paddingLeft: 290,
-    // },
-    "@media(max-width:767px)": {
-      paddingTop: "70px !important",
-    },
-  },
   wrapper: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
     position: "relative",
-    // backgroundColor: "#fff",
     minHeight: "calc(100vh - 70px)",
-    // [theme.breakpoints.up("lg")]: {
-    //   paddingLeft: 290,
-    // },
-   
   },
   contentContainer: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    margin:"0 20px 0 280px",
+    margin: "0 20px 0 280px",
     "@media(max-width:899px)": {
       margin: "0 20px !important",
     },
@@ -71,24 +48,50 @@ const styles = {
       paddingTop: "77px !important",
     },
   },
-  contentKyc: {
-    flex: "1 1 auto",
-    height: "100%",
-    overflow: "hidden",
-    position: "relative",
-    padding: "55px 25px 25px 25px",
-    // [theme.breakpoints.down('lg')]: {
-    //   padding: "30px 28px 30px",
-    // },
+  BoxStyle: {
+    padding: "34px",
+    border: "2px solid rgba(216, 216, 216, 1)",
+    borderRadius: "16px",
+  },
+  profileBox: {
+    display: "flex",
+    gap: "8px",
+  },
+  userBox: {
+    width: "-webkit-fill-available",
+    display: "grid",
+    justifyContent: "start",
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "15px",
+    border: "1px solid rgba(224, 220, 220, 1)",
+  },
+  GapBox: {
+    display: "flex",
+    gap: "5px",
+    alignItems: "center",
+    justifyContent: "start",
   },
 };
+
+const ProfileImg = styled("img")(({ theme }) => ({
+  width: "70px",
+  height: "70px",
+  margin: "0 12px",
+}));
+
+const CoinImg = styled("img")(({ theme }) => ({
+  width: "24px",
+  height: "24px",
+}));
 
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-  const themeSeeting = useContext(SettingsContext);
+  const themeSetting = useContext(SettingsContext);
   const User = useContext(UserContext);
   const [selectedTab, setSelectedTab] = useState("Arbitrage");
+  const [childData, setChildData] = useState([]);
 
   useEffect(() => {
     if (location) {
@@ -102,33 +105,49 @@ const DashboardLayout = ({ children }) => {
     }
   }, [location]);
 
+ 
+
+  
+
+
+
   return (
-    <Box sx={styles.rootLight}
-    >
-       <TopBar
+    <>
+    <Box sx={styles.rootLight}>
+      <TopBar
         onMobileNavOpen={() => setMobileNavOpen(true)}
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}
       />
-     
-      <Box
-        sx={  `${styles.wrapper}` 
-        }
-      > 
-        {(location.pathname == "/update-profile" || location.pathname == "/child-profile") &&
-       <NavBar
-        tabView={selectedTab}
-        onMobileClose={() => setMobileNavOpen(false)}
-        openMobile={isMobileNavOpen}
-        setSelectedTab={(item) => setSelectedTab(item)}
-      />} 
-        <Box sx={styles.contentContainer}>
-          <Box sx={ styles.content } id="main-scroll">
+      <Box sx={styles.wrapper}>
+       
+        {(location.pathname === "/update-profile" || location.pathname === "/child-profile") && (
+          <NavBar
+            tabView={selectedTab}
+            onMobileClose={() => setMobileNavOpen(false)}
+            openMobile={isMobileNavOpen}
+            setSelectedTab={(item) => setSelectedTab(item)}
+          />
+        )}
+        <Box
+          sx={
+            location.pathname === "/update-profile" || location.pathname === "/child-profile"
+              ? styles.contentContainer
+              : {
+                display: "flex",
+                flex: "1 1 auto",
+                overflow: "hidden",
+              }
+          }
+        >
+          <Box sx={styles.content} id="main-scroll">
             {children}
           </Box>
         </Box>
       </Box>
     </Box>
+      
+    </>
   );
 };
 

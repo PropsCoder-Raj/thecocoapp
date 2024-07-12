@@ -16,6 +16,7 @@ import { UserContext } from "src/context/User";
 import ConfirmationDialog from "src/component/ConfirmationDialog";
 import { useTheme } from "@emotion/react";
 import { IoMenu } from "react-icons/io5";
+import { HiSwitchVertical } from "react-icons/hi";
 
 
 const styles ={
@@ -32,6 +33,9 @@ const styles ={
   },
 
   searchBox: {
+    display:"flex",
+    gap:"15px",
+    alignItems:"center"
     // "@media(max-width:900px)": {
     //   display: "none",
     // },
@@ -42,9 +46,7 @@ const styles ={
     gap: "10px",
     justifyContent: "space-evenly",
     alignItems: "center",
-    minWidth: "120px",
-    background: "#D19A1D",
-    padding: "22px 26px",
+  
     "& .contentTypo": {
       color: "rgb(23, 38, 36)",
       display: "flex",
@@ -77,7 +79,7 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
       }}
     >
       <Toolbar sx={styles.toolbar}>
-        <TopBarData onMobileNavOpen={onMobileNavOpen}/>
+        <TopBarData onMobileNavOpen={onMobileNavOpen} />
       </Toolbar>
     </AppBar>
   );
@@ -92,11 +94,13 @@ TopBar.defaultProps = {
 
 export default TopBar;
 
-export function TopBarData({onMobileNavOpen}) {
+export function TopBarData({ onMobileNavOpen }) {
   const location = useLocation();
   const auth = useContext(AuthContext);
+  const User = useContext(UserContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobileChild = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [state, setState] = React.useState({
@@ -130,7 +134,7 @@ export function TopBarData({onMobileNavOpen}) {
 
   return (
     <>
-        {isMobile && 
+      {isMobile && (location.pathname == "/update-profile" || location.pathname == "/child-profile")  &&
           <IconButton
             color="#FF2626"
             onClick={()=>onMobileNavOpen()}
@@ -138,7 +142,7 @@ export function TopBarData({onMobileNavOpen}) {
           >
             
             <IoMenu
-               style={{color:"black"}}
+            style={{ color:"rgba(182, 183, 184, 1)"}}
               />
      
           </IconButton>}
@@ -156,10 +160,24 @@ export function TopBarData({onMobileNavOpen}) {
       <>
         <Box flexGrow={1} />
         <Box sx={styles.searchBox}>
-          <Box sx={`${styles.customSelectBox}`} onClick={() => navigate("/update-profile")}>
-            <Typography variant="h4">Logout</Typography>
-            <img src="images/profile.png" alt="#" style={{width:"45px", height:"45px"}}/>
+          {/* {isMobileChild && 
+          
+          <Box sx={{display:"grid"}} 
+            onClick={() => User.setChildOpen(true)}
+          >
+            <HiSwitchVertical style={{ color: "rgba(182, 183, 184, 1)" }} fontSize={30}/>
+            </Box>} */}
+          <Box sx={styles.customSelectBox} onClick={() => navigate("/update-profile")} 
+            style={{
+              alignItems: "center",
+          display: "grid",
+          marginRight: "10px"
+            }}
+            >
+            {/* <Typography variant="h4">Logout</Typography> */}
+            <img src="images/defaultPic.png" alt="#" style={{width:"45px", height:"45px",borderRadius:"50%"}}/>
           </Box>
+          
         </Box>
       </>
 

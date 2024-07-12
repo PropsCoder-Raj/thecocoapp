@@ -217,7 +217,7 @@ function UpdateProfile() {
                 </Box>
 
                 {
-                    childData.length != 0 ?
+                    childData.length != 0 &&
                 childData.map((values, items) => {
                     return (
                         <Box sx={style.profileBox}>
@@ -248,8 +248,8 @@ function UpdateProfile() {
                                         </Box></Box></Box>
                             </Box>
                         </Box>)
-                }):
-                        <Box sx={style.profileBox}>
+                })}{childData.length < 3 &&
+                        <Box sx={style.profileBox} style={{cursor:"pointer"}}>
                             <Box
                                 style={{ background: "rgba(255, 255, 255, 1)" }}
                                 sx={style.userBox}

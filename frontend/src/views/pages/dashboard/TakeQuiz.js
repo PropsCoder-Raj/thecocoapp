@@ -35,9 +35,10 @@ const style = {
     height: "calc(100vh - 200px)",
   },
   buttonHandle: {
-    display: "flex",
-    justifyContent: "end",
-    gap: "8px",
+    
+    position:"fixed",
+    width:"-webkit-fill-available",
+    bottom:"0"
   },
 };
 const MainBox = styled(Box)(({ theme }) => ({
@@ -51,7 +52,12 @@ const MainBox = styled(Box)(({ theme }) => ({
 const InnerBox = styled(Box)(({ theme }) => ({
   padding: "45px",
   borderTop: "2px solid #D8D8D8",
-  "@media(max-width:767px)": { padding: "30px" },
+  "@media(max-width:100px)": {
+    padding: "30px",
+    borderTop: "2px solid #D8D8D8",
+},
+  "@media(max-width:767px)": { padding: "20px", border:"none" },
+  background:"#fff"
 }));
 
 const TakeImg = styled("img")(({ theme }) => ({
@@ -72,19 +78,34 @@ function TakeQuiz() {
           </Grid>
         </Grid>
       </Container>
-      <InnerBox>
+      <InnerBox sx={style.buttonHandle}>
         <Container>
           <Grid  spacing={4}>
             <Grid item xs={12}>
-              <Box sx={style.buttonHandle}>
-                <Button variant="contained" onClick={()=>{
+              <Box >
+                <Box sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  gap: "8px",
+}}>
+ <Button variant="contained" onClick={()=>{
                   navigate("/questions", {
                     state: {
                       module_id: location?.state?.level_id,
                       level_id: location?.state?.module_id,
                     },
                   });
-                }}>Take Quiz</Button>
+                }}
+                sx={{
+                  width:{
+                    md:"155px",
+                    sm: "-webkit-fill-available",
+                    xs:"-webkit-fill-available"
+                  }
+                }}
+                >Take Quiz</Button>
+                </Box>
+               
               </Box>
             </Grid>
           </Grid>

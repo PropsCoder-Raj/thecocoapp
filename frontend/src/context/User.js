@@ -6,7 +6,9 @@ export const UserContext = createContext();
 
 export default function AuthProvider(props) {
   const [profile, setProfile] = useState({});
+const [callApi, setCallApi] =useState(false);
 
+  const [childOpen, setChildOpen] = useState(false);
   const getViewMyProfile = async (values) => {
     const token = localStorage.getItem("token");
 
@@ -32,6 +34,10 @@ export default function AuthProvider(props) {
   let data = {
     profile,
     getViewMyProfile: () => getViewMyProfile(),
+    callApi,
+    setCallApi,
+    childOpen,
+    setChildOpen
   };
 
   return (

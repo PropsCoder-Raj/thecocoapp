@@ -128,12 +128,12 @@ function ChildProfile() {
             // profilePic: profileData ? profileData : null
         }));
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
-       
+        let sendChildData = location?.state?.childId ? requestBody[0] : requestBody;
         try {
             let res = ""
             location?.state?.childId ?
              res = await axios.put(
-                RequestUrl, requestBody[0],
+                 RequestUrl, sendChildData,
                 {
                     headers: {
                         token: localStorage.getItem("token"),
@@ -153,7 +153,7 @@ function ChildProfile() {
                 navigate("/update-profile");
             }
         } catch (error) {
-            // toast.error(error.response.data.message);
+            toast.error(error.response.data.message);
             setIsLoading(false);
         } 
 
