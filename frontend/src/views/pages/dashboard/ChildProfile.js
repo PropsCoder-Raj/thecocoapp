@@ -140,7 +140,7 @@ function ChildProfile() {
                     },
                 }
                 ) : res = await axios.post(
-                    RequestUrl, requestBody[0],
+                    RequestUrl, sendChildData,
                     {
                         headers: {
                             token: localStorage.getItem("token"),
