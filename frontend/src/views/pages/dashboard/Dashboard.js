@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Box, Container, Drawer, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import Page from "src/component/Page";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { UserContext } from "src/context/User";
 
 const style = {
   HandleMargin: {
@@ -75,6 +76,43 @@ const style = {
     fontWeight: "800",
     color: "#00BAF2",
   },
+  desktopDrawer: {
+    width: "270px",
+    height: "100%",
+    background: "#232B3B",
+    boxShadow: "0px 10px 30px 0px rgba(0, 0, 0, 0.10)",
+    zIndex: "120",
+    padding: "0 20px",
+    "& .lightlogoutButton": {
+      display: "flex",
+      justifyContent: "start",
+      alignItems: "center",
+      // position: "absolute",
+      bottom: "19px",
+      left: "17px",
+      borderRadius: "5px",
+      fontWeight: "400",
+      fontSize: "13px",
+      color: "#fff",
+      backgroundColor: "#151515",
+    },
+    "& .darklogoutButton": {
+      display: "flex",
+      justifyContent: "start",
+      alignItems: "center",
+      // position: "absolute",
+      bottom: "19px",
+      left: "17px",
+      borderRadius: "5px",
+      fontWeight: "400",
+      fontSize: "13px",
+      color: "#151515",
+      backgroundColor: "#fff",
+      // [theme.breakpoints.down('lg')]: {
+      //   position: "inherit",
+      // },
+    },
+  },
 };
 
 // const TitleWrapper = styled('img')(({ theme }) => ({
@@ -113,6 +151,9 @@ function Dashboard() {
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
   const [levelData, setLevelData] = useState([]);
+  const User = useContext(UserContext);
+  const [childOpen, setChildOpen] =useState(false);
+  useEffect(() => { setChildOpen(User.childOpen) }, [User.childOpen])
   const levels = [
     {
       _id: "6679a728f2eac92152686fb5",
@@ -187,10 +228,12 @@ function Dashboard() {
       current_status: false,
     },
   ];
-
+  const handleClose = () => {
+    User.setChildOpen(false);
+  };
 useEffect(()=>{
   getChildData();
-},[])
+}, [User.callApi])
 
   const getChildData = async () => {
     const token = localStorage.getItem("token");
@@ -319,6 +362,50 @@ useEffect(()=>{
         }
       })
   }, [childData])
+
+  const content = (
+    <>
+      <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "20px", minWidth: "260px" }}>
+        <Box sx={style.BoxStyle}>
+          <Typography variant="h4">Switch Profile</Typography>
+          {childData.map((values, items) => {
+            return (
+              <Box sx={style.profileBox} key={items} onClick={() => switchChild(values._id)}>
+                <Box
+                  style={
+                    values.activeStatus
+                      ? { background: "rgba(241, 245, 249, 1)", cursor: "pointer" }
+                      : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }
+                  }
+                  sx={style.userBox}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <ProfileImg
+                      alt=""
+                      src={
+                        values.profilePic
+                          ? values.profilePic
+                          : values.gender === "Male"
+                            ? "images/boyprofile.jpg"
+                            : "images/girlprofile.jpg"
+                      }
+                    />
+                    <Box>
+                      <Typography variant="body1">{values.childName}</Typography>
+                      <Box sx={style.GapBox}>
+                        <Typography variant="body1">{values.totalPoints}</Typography>
+                        <CoinImg alt="" src="images/Coin.png" />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </Box>
+    </>
+  );
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
@@ -349,6 +436,7 @@ useEffect(()=>{
                             backgroundSize: "cover",
                             backgroundRepeat: "no-repeat",
                             textAlign: "center",
+                            borderRadius:"20px"
                           }}
                         >
                           <Typography
@@ -400,7 +488,7 @@ useEffect(()=>{
                         <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
                           <ProfileImg alt="" src={
                               values.profilePic ? values.profilePic :
-                            values.gender = "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                            values.gender == "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
                             <Box > <Typography variant="body1">{values.childName}</Typography>
                         <Box sx={style.GapBox}>
                             <Typography variant="body1">{values.totalPoints}</Typography>
@@ -419,6 +507,16 @@ useEffect(()=>{
           </Grid>
         </Box>
       </Container>
+
+      {childOpen && (
+        <Drawer
+          sx={{
+            paper: style.desktopDrawer,
+          }}
+          anchor="right" onClose={handleClose} variant="persistent" open={childOpen}>
+          {content}
+        </Drawer>
+      )}
     </Page>
   );
 }

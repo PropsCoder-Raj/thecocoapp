@@ -33,7 +33,10 @@ const style = {
     display: "flex",
     justifyContent: "space-between",
     gap: "8px",
-    alignItems: "center"
+    alignItems: "center",
+    "@media(max-width:767px)": { 
+      display:"block",
+    }
   },
   manageBoxHeight: {
     justifyContent: "center",
@@ -41,7 +44,11 @@ const style = {
     height: "calc(100vh - 238px)",
     display: "grid",
     overflow: "auto",
-    "@media(max-width:767px)": { height: "calc(100vh - 285px)" },
+    "@media(max-width:767px)": { height: "calc(100vh - 285px)",
+      justifyContent: "start",
+      alignItems: "start",
+      display:"block"
+     },
   },
 };
 const MainBox = styled(Box)(({ theme }) => ({
@@ -58,12 +65,19 @@ const InnerBox = styled(Box)(({ theme }) => ({
       position: "fixed",
     bottom: "0",
     width: "-webkit-fill-available",
-  "@media(max-width:767px)": { padding: "22px" },
-  "@media(max-width:1000px)": { padding: "30px" },
+  "@media(max-width:767px)": { padding: "15px" },
+  "@media(max-width:1000px)": { padding: "25px" },
 }));
 const TakeImg = styled("img")(({ theme }) => ({
   width: "80px",
   height:"80px",
+  "@media(max-width:767px)": {
+    width: "40px",
+    height: "40px", },
+  "@media(max-width:1000px)": {
+    width: "55px",
+    height: "55px",
+},
 }));
 
 const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
@@ -226,7 +240,10 @@ function QuetionsScreen() {
               <Box sx={style.buttonHandle}>
                 {correctAns === true ? (
                   <Box
-                    sx={{ display: "flex", gap: "8px", alignItems: "center" }}
+                    sx={{
+                      display: "flex", gap: "8px", alignItems: "center", "@media(max-width:767px)": {
+                        marginBottom: "15px"
+                      } }}
                   >
                     <TakeImg src="images/correct.png" alt="" />
                     <Typography variant="h4" color={"#58CC02"}>
@@ -264,6 +281,13 @@ function QuetionsScreen() {
                 )}
 
                 <Button
+                 sx={{
+                  width:{
+                    md:"155px",
+                    sm: "-webkit-fill-available",
+                    xs:"-webkit-fill-available"
+                  }
+                }}
                   style={
                     correctAns === true
                       ? { background: "#58CC02" }
