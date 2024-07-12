@@ -15,7 +15,7 @@ const { standardServices } = require('../service/standards');
 const { aggregateStandards, findStandard } = standardServices;
 
 const { completedModulesService } = require('../service/completedmodules');
-const { findAllCompletedModules } = completedModulesService;
+const { findAllCompletedModules, updateCompletedModule } = completedModulesService;
 
 const { completedLevelsService } = require('../service/completedlevels');
 const { findAllCompletedLevels, createCompletedLevel, updateCompletedLevel } = completedLevelsService;
@@ -182,6 +182,12 @@ exports.attemptQuestions = async (req, res, next) => {
             await updateChild({ _id: req.user.currentChildActive }, { $set: { totalPoints: totalPointsChild } });
             await updateCompletedLevel({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id },
                 { $set: { module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true } });
+
+            if(levelDetails.level_id == 6){
+                await updateCompletedModule({ module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id }, {
+                    $set: { module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true }
+                })
+            }
         }
 
         return res.status(200).send({

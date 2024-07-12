@@ -52,7 +52,7 @@ const { updateCurrentStatus } = require('../helper/utils')
 *         description: Conflict
 */
 exports.getAllModules = async (req, res, next) => {
-    try {
+    // try {
         const child = await findChild({ _id: req.user.currentChildActive });
 
         // Pipeline to check if modules are present for the child's standard
@@ -104,8 +104,8 @@ exports.getAllModules = async (req, res, next) => {
                 ...module,
                 complete_status: !!completedModulesList.find(element =>
                     element.module_id.toString() === module._id.toString() &&
-                    element.child_id.toString() === req.user.currentChildActive ||
-                    element.user_id.toString() === req.user._id
+                    (element.child_id ? (element.child_id.toString() === req.user.currentChildActive && element.user_id.toString() === req.user._id) :
+                    element.user_id.toString() === req.user._id.toString())
                 ),
                 levels: levelsLists
                     .filter(level => level.module_id.toString() === module._id.toString())
@@ -114,38 +114,38 @@ exports.getAllModules = async (req, res, next) => {
                         complete_status: !!completedLevelsList.find(element =>
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
-                            element.child_id.toString() === req.user.currentChildActive.toString() ||
-                            element.user_id.toString() === req.user._id.toString()
+                            (element.child_id ? 
+                                (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                                element.user_id.toString() === req.user._id.toString())
                         )
                     }))
             }))]
         }))
 
-        for (let index = 0; index < processedModules.length; index++) {
-            const element = processedModules[index];
+        for (let indexi = 0; indexi < processedModules.length; indexi++) {
+            const element = processedModules[indexi];
 
-            for (let index = 0; index < element.modules.length; index++) {
-                const modules = element.modules[index];
+            for (let indexj = 0; indexj < element.modules.length; indexj++) {
+                const modules = element.modules[indexj];
                 updateCurrentStatus(modules.levels);
-            }
-            
-        }
 
-        // processedModules = processedModules.forEach((element) => ({
-        //     element.modules.map(module => {
-        //         updateCurrentStatus(module.levels),
-        //         currentChapterName = element.levels.find((level) => level.current_status === true).name
-        //     };
-        // }));
+                
+                if(indexj != 0){
+                    if(element.modules[indexj - 1].complete_status == false){
+                        element.modules[indexj].levels[0].current_status = false;
+                    }
+                }
+            }   
+        }
 
         return res.status(200).send({
             status: true,
             message: "Get Child Data Successfully.",
             result: processedModules
         });
-    } catch (error) {
-        return res.status(500).send({ status: false, message: error.message });
-    }
+    // } catch (error) {
+    //     return res.status(500).send({ status: false, message: error.message });
+    // }
 };
 
 /**
