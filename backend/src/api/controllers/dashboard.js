@@ -104,7 +104,7 @@ exports.getAllModules = async (req, res, next) => {
                 ...module,
                 complete_status: !!completedModulesList.find(element =>
                     element.module_id.toString() === module._id.toString() &&
-                    element.child_id.toString() === req.user.currentChildActive &&
+                    element.child_id.toString() === req.user.currentChildActive ||
                     element.user_id.toString() === req.user._id
                 ),
                 levels: levelsLists
@@ -114,7 +114,7 @@ exports.getAllModules = async (req, res, next) => {
                         complete_status: !!completedLevelsList.find(element =>
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
-                            element.child_id.toString() === req.user.currentChildActive.toString() &&
+                            element.child_id.toString() === req.user.currentChildActive.toString() ||
                             element.user_id.toString() === req.user._id.toString()
                         )
                     }))
