@@ -244,12 +244,13 @@ exports.getLessons = async (req, res, next) => {
 exports.getQuestions = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
-        const child = await findChild({ _id: req.user.currentChildActive });
-        // const standard = await findStandard({ standard_id: child.standard })
+        const standard = await findAllCompletedLevels({ level_id: level_id, module_id: module_id })
         let questionsLists = await findAllQuestions({ level_id: level_id, module_id: module_id });
 
+        console.log(standard);
+
         const listCompletedQuestions = await findAllCompletedQuestions();
-        let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true;
+        let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true, attamptedQuestions = standard.length > 0 ? true : false;
 
         for (let index = 0; index < questionsLists.length; index++) {
             const elementQuestions = questionsLists[index];
@@ -257,8 +258,9 @@ exports.getQuestions = async (req, res, next) => {
                 element.module_id.toString() == module_id.toString() &&
                 element.level_id.toString() == level_id.toString() &&
                 element.question_id.toString() == elementQuestions._id.toString() &&
-                element.child_id.toString() === req.user.currentChildActive &&
-                element.user_id.toString() === req.user._id
+                (element.child_id ? 
+                    (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                    element.user_id.toString() === req.user._id.toString())
             )
             previousQuestionsComplete = isCompletedQuesitons ? isCompletedQuesitons.correstAnswer : false;
             if (isCompletedQuesitons) {
@@ -275,8 +277,8 @@ exports.getQuestions = async (req, res, next) => {
 
         return res.status(200).send({
             status: true,
-            message: "Get Leesons Data Successfully.",
-            result: { currentQuestion, currentPage, quesitons: questionsLists }
+            message: "Get Questions Data Successfully.",
+            result: { attamptedQuestions, currentQuestion, currentPage, quesitons: questionsLists }
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
