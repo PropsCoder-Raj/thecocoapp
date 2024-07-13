@@ -131,7 +131,7 @@ function QuetionsScreen() {
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
         setMax(res.data.result.quesitons.length)
-        setAttempt(res.data.result.loaderPercentage)
+        setAttempt(res.data.result.attamptedQuestions)
       }
     } catch (error) {
       console.log(error, "error");
@@ -188,8 +188,8 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                // value={attempt ? percentage : calculateProgressValue()}
-                value={percentage}
+                value={attempt ? percentage : calculateProgressValue()}
+                // value={percentage}
               />
               <Typography variant="body2" color={"#FE8A36"}>
                 {progress}/{max}
