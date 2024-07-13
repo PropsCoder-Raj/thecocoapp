@@ -8,6 +8,16 @@ const { findSchool, findAllSchool } = schoolServices;
 const { userServices } = require("../service/users")
 const { createUser, findUser, updateUser } = userServices;
 
+
+const { completedModulesService } = require('../service/completedmodules');
+const { updateManyCompletedModules } = completedModulesService;
+
+const { completedLevelsService } = require('../service/completedlevels');
+const { updateManyCompletedLevels } = completedLevelsService;
+
+const { completedQuestionsService } = require('../service/completedquestions');
+const { updateManyCompletedQuestions, findAllCompletedQuestions } = completedQuestionsService;
+
 /**
 * @swagger
 * /child/get-all-childs:
@@ -85,7 +95,7 @@ exports.createChild = async (req, res, next) => {
         if (!Array.isArray(childList)) {
             return res.status(400).send({ status: false, message: "Request body should be an array of children." });
         }
-
+ 
         // Validate each child object in the list
         for (let child of childList) {
             if (child.schoolId && !child.standard) {
@@ -94,7 +104,7 @@ exports.createChild = async (req, res, next) => {
                     message: "Each child must have School Id and Standard fields."
                 });
             }
-        }
+        } 
 
         // Add userId to each child object in the list
         childList = childList.map((child) => ({ ...child, userId: req.userId }));
@@ -113,6 +123,7 @@ exports.createChild = async (req, res, next) => {
 
         // Insert child records
         const insertedChildren = await insertChild(childList);
+        console.log("insertedChildren: ", insertedChildren);
 
         // Update user's currentChildActive field to the last inserted child's ID
         await updateUser({ _id: req.userId }, { $set: { currentChildActive: insertedChildren[insertedChildren.length - 1]._id } });
@@ -120,6 +131,18 @@ exports.createChild = async (req, res, next) => {
         if (listUsersChild.length > 0) {
             let listUsersChildIds = listUsersChild.map(child => child._id);
             await updateManyChild({ _id: { $in: listUsersChildIds } }, { $set: { activeStatus: false } });
+        }else{
+            const listQuestion = await findAllCompletedQuestions({user_id: req.userId});
+            const totalPoints = listQuestion.reduce((total, acc) => {
+                return total + Number(acc.points)
+            }, 0);
+            console.log(totalPoints)
+            await Promise.all([
+                updateManyCompletedLevels({ user_id: req.userId }, { $set: { child_id: insertedChildren[0]._id  } }),
+                updateManyCompletedModules({ user_id: req.userId }, { $set: { child_id: insertedChildren[0]._id  } }),
+                updateManyCompletedQuestions({ user_id: req.userId }, { $set: { child_id: insertedChildren[0]._id  } }),
+                updateChild({ _id: insertedChildren[0]._id }, { $set: { totalPoints: totalPoints } })
+            ])
         }
 
         // Respond with success message and inserted child records

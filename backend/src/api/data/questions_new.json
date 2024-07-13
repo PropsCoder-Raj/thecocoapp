@@ -646,8 +646,8 @@
                 "value": "You get to spend all your saved money at once"
             }
         ],
-        "right_answer": " ",
-        "desc": " Reaching goals through saving brings a sense of accomplishment."
+        "right_answer": "A",
+        "desc": "Reaching goals through saving brings a sense of accomplishment."
     },
     {
         "standard_id": 4,
@@ -672,7 +672,7 @@
                 "value": "To surprise your parents with a gift"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Saving allows you more control and independence on your birthday."
     },
     {
@@ -828,7 +828,7 @@
                 "value": "Ask your parents to buy you both the ice cream and the book"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Saving requires resisting temptations to reach your goal (book)."
     },
     {
@@ -880,7 +880,7 @@
                 "value": "The more money you save, the heavier your piggy bank will get"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "A",
         "desc": "There are ways (like banks) to save your money safely and maybe even earn a little extra! (Ask a grown-up to learn more.)"
     },
     {
@@ -906,7 +906,7 @@
                 "value": "Your money will shrink if you don't use it all the time"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Saving in special places (grown-ups can tell you more) can sometimes lead to a small bonus!"
     },
     {
@@ -1010,7 +1010,7 @@
                 "value": "A new pair of shoes"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "A",
         "desc": "Clothes are a need to protect us from the elements, like feeling warm."
     },
     {
@@ -1088,7 +1088,7 @@
                 "value": "Needs are things you collect, wants are things you use"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Needs keep us healthy, while wants bring us enjoyment."
     },
     {
@@ -1400,7 +1400,7 @@
                 "value": "Stick to your old wants, even if they don't interest you anymore"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "As we grow, our needs and wants change. It's smart to be flexible and save for the things that matter to us at each stage."
     },
     {
@@ -1504,7 +1504,7 @@
                 "value": "By helping out with chores and showing responsibility"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "C",
         "desc": "Even though you might not have a job yet, you can \"earn\" at home by doing chores and being responsible."
     },
     {
@@ -1608,7 +1608,7 @@
                 "value": "They both require expensive tools"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "A",
         "desc": "Just like climbing a tree takes work, earning money (through chores or a job) takes effort. The more effort you put in, the more you achieve."
     },
     {
@@ -2180,7 +2180,7 @@
                 "value": "Putting money in your piggy bank"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "A",
         "desc": "Saving is a wise choice to resist the urge for immediate gratification (like a snack) and focus on a bigger goal (like a new bike)."
     },
     {
@@ -2414,7 +2414,7 @@
                 "value": "It saves money because you won't need to replace things as often"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "C",
         "desc": "Taking care of your toys and clothes means they last longer. This saves you and your parents money because you won't need to buy replacements as frequently!"
     },
     {
@@ -2466,7 +2466,7 @@
                 "value": "There's a right way to wash clothes so they stay in good condition"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "C",
         "desc": "Different clothes require different washing methods. Asking a grown-up for help ensures you wash your clothes properly so they last longer."
     },
     {
@@ -2518,7 +2518,7 @@
                 "value": "Hide the blocks so your friend can't play with them"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Sharing toys responsibly means being careful and taking turns. This way, everyone enjoys the toys and they last longer!"
     },
     {
@@ -2622,7 +2622,7 @@
                 "value": "Grown-ups are the only ones who need to be grateful"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Appreciating what you have (toys, clothes) motivates you to take care of them. When you're grateful for your things, you treat them with respect!"
     },
     {
@@ -2804,7 +2804,7 @@
                 "value": "There's no benefit to choosing a more durable toy"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Choosing a higher quality toy might cost a little more upfront, but it's an investment. The toy will likely last longer, saving you money in the long run because you won't need to replace it as soon as it breaks"
     },
     {
@@ -2882,7 +2882,7 @@
                 "value": "There's no way to save for a bike if you want to enjoy other things"
             }
         ],
-        "right_answer": " ",
+        "right_answer": "B",
         "desc": "Reaching a big savings goal might require some sacrifices. You might choose to save your allowance instead of spending it all on other things. It might be tough, but achieving your goal (like that awesome bike) feels great!"
     },
     {
