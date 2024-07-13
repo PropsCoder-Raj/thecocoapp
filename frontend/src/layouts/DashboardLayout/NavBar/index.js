@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { AiFillDashboard } from "react-icons/ai";
 import { MdNavigateNext } from "react-icons/md";
-
+import { FiEdit3 } from "react-icons/fi";
 import NavItem from "./NavItem";
 import { MdHistory } from "react-icons/md";
 import { ListItem, ListItemText, Collapse } from "@mui/material";
@@ -112,7 +112,7 @@ const styles = {
     background: "#232B3B",
     boxShadow: "0px 10px 30px 0px rgba(0, 0, 0, 0.10)",
     zIndex: "120",
-    padding:"0 20px",
+    padding: "0 20px",
     "& .lightlogoutButton": {
       display: "flex",
       justifyContent: "start",
@@ -189,7 +189,7 @@ const styles = {
   mainsidebar: {},
   logoBox: {
     paddingTop: "28px",
-    paddingBottom: "59px",
+    paddingBottom: "20px",
   },
   profileBox: {
     paddingBottom: "44.35px",
@@ -382,7 +382,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         {
           title: "Help",
           icon: iconsFunction(
-           "images/help.svg",
+            "images/help.svg",
             "dashboard"
           ),
           // href: "/map",
@@ -391,7 +391,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         },
         {
           title: "About",
-          icon: iconsFunction( "images/about.svg",
+          icon: iconsFunction("images/about.svg",
             "binaryTree"
           ),
           // href: "/binary-tree",
@@ -400,15 +400,15 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         },
         {
           title: "Log out",
-          icon: iconsFunction( "images/logout.svg",
+          icon: iconsFunction("images/logout.svg",
             "wallet"
           ),
           // href: "/wallet",
           tabview: "Arbitrage",
           clickable: false,
         },
-        
-  
+
+
       ],
     },
   ];
@@ -425,7 +425,10 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-
+  const [profile, setProfile] = useState("");
+  useEffect(() => {
+    setProfile(User?.profile?.profilePic)
+  }, [User.profile])
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
@@ -441,15 +444,31 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   };
   const content = (
     <>
-      <Box height="100%" display="flex" flexDirection="column" sx={{padding:"60px 20px", minWidth:"260px"}}>
+      <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "60px 20px", minWidth: "260px" }}>
         <Box sx={styles.logoBox}>
 
         </Box>
-        <Box onClick={()=>{navigate("/dashboard")}} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom:"1px solid rgba(229, 229, 229, 1)", cursor:"pointer" }}>
+        <Box onClick={() => { navigate("/dashboard") }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
           <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
           <Typography >
             Back to home
           </Typography>
+        </Box>
+        <Box sx={{ marginTop: "20px", marginBottom:"20px"}}>
+          <Typography >
+            Profile
+          </Typography>
+          <Box sx={{ background: "rgba(230, 248, 254, 1)", padding: "15px", border:"1px solid rgba(51, 200, 245, 1)", borderRadius: "9px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <img src={profile ? profile : "images/defaultPic.png"} alt="#" style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
+              <Typography variant="body1">
+                {User?.profile?.name || "--"}
+              </Typography>
+            </Box>
+            <FiEdit3 style={{ color: "rgba(182, 183, 184, 1)", fontSize: "25px" }} />
+
+          </Box>
+
         </Box>
         <Box pt={2} pb={2} sx={styles.mainsidebar}>
           <Box sx="sideMenuBox">
@@ -466,12 +485,12 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                   const hasItems = item.items && item.items.length > 0;
                   const isItemOpen = isOpen[j] || false;
                   return (
-                    <Box sx={{cursor:"pointer"}} key={`item${j}`}>
+                    <Box sx={{ cursor: "pointer" }} key={`item${j}`}>
                       <ListItem
 
-                        sx={{ display: "flex", gap: "10px", justifyContent: "space-between", alignItems: "center", padding: "10px 0 0 0",  borderBottom: "1px solid rgba(229, 229, 229, 1)" } }
+                        sx={{ display: "flex", gap: "10px", justifyContent: "space-between", alignItems: "center", padding: "10px 0 0 0", borderBottom: "1px solid rgba(229, 229, 229, 1)" }}
                         onClick={() => {
-                          if (item.title === "Log out"){
+                          if (item.title === "Log out") {
                             setIsLogout(true)
                           }
                           if (hasItems) {
@@ -481,10 +500,10 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                           }
                         }}
                       >
-                        <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
-                        {item.icon}
-                        <ListItemText primary={item.title} /></Box>
-                        <MdNavigateNext color="rgba(182, 183, 184, 1)"/>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                          {item.icon}
+                          <ListItemText primary={item.title} /></Box>
+                        <MdNavigateNext color="rgba(182, 183, 184, 1)" />
                       </ListItem>
                       {hasItems && (
                         <Collapse in={isItemOpen} timeout="auto" unmountOnExit>
@@ -494,7 +513,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                                 { cursor: "pointer" }
                               } key={`subItem${k}`}>
                                 <ListItem
-                                  
+
 
                                   button
                                   // selected={location.pathname === subItem.href}
@@ -525,8 +544,8 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
           <Dialog
             maxWidth="sm"
             fullWidth
-            sx={ styles.lightDailogOpen
-               
+            sx={styles.lightDailogOpen
+
             }
             open={isLogout}
             TransitionComponent={Transition}
@@ -567,7 +586,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                 }}
               >
                 <Button
-                 variant="contained"
+                  variant="contained"
                   onClick={() => setIsLogout(false)}
                 >
                   Cancel

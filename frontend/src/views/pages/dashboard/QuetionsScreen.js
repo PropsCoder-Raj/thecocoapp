@@ -104,6 +104,8 @@ function QuetionsScreen() {
     setOpen(false);
   };
   const [open, setOpen] = useState(false);
+  const [attempt, setAttempt] = useState(false);
+  const [percentage, setPercentage] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
   const [quetionsData, setQuetionsData] = useState([]);
@@ -129,6 +131,7 @@ function QuetionsScreen() {
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
         setMax(res.data.result.quesitons.length)
+        setAttempt(res.data.result.loaderPercentage)
       }
     } catch (error) {
       console.log(error, "error");
@@ -155,6 +158,8 @@ function QuetionsScreen() {
       if (res.status === 200) {
         setCorrectAns(res.data.result.correctAnswerStatus);
         setCorrectAnsData(res.data.result)
+        //res.data.result.loaderPercentage
+        setPercentage(res.data.result.loaderPercentage)
       }
     } catch (error) {
       console.log(error, "error");
@@ -183,7 +188,8 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                value={calculateProgressValue()}
+                // value={attempt ? percentage : calculateProgressValue()}
+                value={percentage}
               />
               <Typography variant="body2" color={"#FE8A36"}>
                 {progress}/{max}

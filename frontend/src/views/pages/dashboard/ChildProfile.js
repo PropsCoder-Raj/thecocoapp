@@ -95,8 +95,9 @@ function ChildProfile() {
     const navigate = useNavigate();
     const location = useLocation();
     const [childData, setChildData] = useState([]);
+    const [checkId, setcheckId] = useState(false);
     const [profilePic, setProfilePic] = useState("");
-    const [profileData, setProfileData] = useState(profilePic);
+    const [profileData, setProfileData] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [schoolData, setSchoolData] = useState([]);
     const [schoolIds, setSchoolIds] = useState([]);
@@ -108,7 +109,7 @@ function ChildProfile() {
     const formInitialSchema = {
         children: [
             {
-                name: "",
+                name: location?.state?.data?.childName || "",
                 schoolId: "",
                 dob: "",
                 gender: "",
@@ -117,6 +118,28 @@ function ChildProfile() {
         ],
     };
 
+    const UploadImg = async (value) => {
+        const token = localStorage.getItem("token");
+        setIsLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append("image", value);
+            const res = await axios({
+                method: "POST",
+                url: ApiConfig.photo,
+                headers: { token: token },
+                data: formData
+            });
+            if (res.status === 200) {
+                setProfilePic(res.data.result);
+                setIsLoading(false);
+               
+            }
+        } catch (error) {
+            console.log(error, "error");
+            setIsLoading(false);
+        }
+    };
     const handleFormSubmit = async (values) => {
         setIsLoading(true);
         let requestBody = values.children.map((child) => ({
@@ -128,7 +151,7 @@ function ChildProfile() {
             // profilePic: profileData ? profileData : null
         }));
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
-        let sendChildData = location?.state?.childId ? requestBody[0] : requestBody;
+        let sendChildData = location?.state?.childId ? { ...requestBody[0], profilePic: profilePic } : [{ ...requestBody, profilePic:profilePic}];
         try {
             let res = ""
             location?.state?.childId ?
@@ -193,15 +216,33 @@ function ChildProfile() {
         } catch (error) {
             console.log(error, "error");
         }
+    };//schoolIdCheck
+    const schoolIdCheck = async (value) => {
+        const token = localStorage.getItem("token");
+        try {
+            const res = await axios({
+                method: "GET",
+                url: ApiConfig.schoolIdCheck,
+                headers: { token: token },
+                params: { school_id :value }
+            });
+            if (res.status === 200) {
+                // setcheckId(res.data.data);
+                console.log(res.data.data, "reslut");
+                setcheckId(res.data.data)
+            }
+        } catch (error) {
+            console.log(error, "error");
+        }
     };
-
     const handleImageSelect = (event) => {
         if (event.target.files[0]) {
             const file = event.target.files[0];
             setProfileData(file);
+            UploadImg(file);
             const reader = new FileReader();
             reader.onload = () => {
-                setProfilePic(reader.result);
+                // setProfilePic(reader.result);
             };
             reader.readAsDataURL(file);
         } else {
@@ -351,7 +392,10 @@ function ChildProfile() {
                                                             errors.children?.[index]?.schoolId
                                                         )}
                                                         onBlur={handleBlur}
-                                                        onChange={handleChange}
+                                                        onChange={(e) => {
+                                                            handleChange(e);
+                                                            schoolIdCheck(e.target.value); // Call your additional function here
+                                                        }}
                                                     />
                                                     <FormHelperText
                                                         error={Boolean(
@@ -417,7 +461,7 @@ function ChildProfile() {
                                                             errors.children?.[index]?.gender}
                                                     </FormHelperText>
                                                 </Box>
-                                                {child.schoolId && 
+                                                {checkId && 
                                                 <>
                                                 <Typography variant="h5" sx={{ textAlign: "start" }}>
                                                     Standard
@@ -434,7 +478,7 @@ function ChildProfile() {
                                                         inputProps={{ "aria-label": "Without label" }}
                                                     >
                                                         <MenuItem value="" disabled>Choose one</MenuItem>
-                                                        {[1, 2, 3, 4, 5, 6].map((value) => (
+                                                        {[ 4, 5, 6, 7, 8, 9, 10].map((value) => (
                                                             <MenuItem key={value} value={value.toString()}>
                                                                 {value}
                                                             </MenuItem>

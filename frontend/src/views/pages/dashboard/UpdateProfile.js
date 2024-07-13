@@ -59,7 +59,8 @@ const style = {
         padding: "10px",
         margin: "15px 0",
         border: "1px solid rgba(229, 229, 229, 1)",
-        borderRadius: "8px"
+        borderRadius: "8px",
+        cursor:"pointer"
     },
 };
 const MainBox = styled(Box)(({ theme }) => ({
@@ -87,12 +88,16 @@ const ProfileImg = styled("img")(({ theme }) => ({
 function UpdateProfile() {
     const navigate = useNavigate();
     const location = useLocation();
-    const auth = useContext(UserContext);
+    const User = useContext(UserContext);
     const [childData, setChildData] = useState([]);
+
     const [profilePic, setProfilePic] = useState("");
-    const [profileData, setProfileData] = useState(profilePic);
+    useEffect(() => {
+        setProfilePic(User?.profile?.profilePic)
+    }, [User.profile])
+    const [profileData, setProfileData] = useState("");
     const [name, setName] = useState("");
-    useEffect(() => { setName(auth?.profile?.name || "") }, [auth.profile])
+    useEffect(() => { setName(User?.profile?.name || "") }, [User.profile])
     console.log(childData, "childData");
     useEffect(() => {
         getChildData();
@@ -118,6 +123,7 @@ function UpdateProfile() {
         if (event.target.files[0]) {
             const file = event.target.files[0];
             setProfileData(file);
+            UploadImg(file)
             const reader = new FileReader();
             reader.onload = () => {
                 setProfilePic(reader.result);
@@ -125,6 +131,46 @@ function UpdateProfile() {
             reader.readAsDataURL(file);
         } else {
             setProfileData(profilePic);
+        }
+    };
+
+    const UploadImg = async (value) => {
+        const token = localStorage.getItem("token")
+        try {
+            const formData = new FormData();
+            formData.append("image", value);
+            const res = await axios({
+                method: "POST",
+                url: ApiConfig.photo,
+                headers: { token: token },
+                data:formData
+            });
+            if (res.status === 200) {
+                setProfilePic(res.data.result);
+                UpdateProfile({ profilePic: res.data.result })
+            }
+        } catch (error) {
+            console.log(error, "error");
+        }
+    };
+
+    const UpdateProfile = async (value) => {
+        const token = localStorage.getItem("token")
+        try {
+            const formData = new FormData();
+            formData.append("image", value);
+            const res = await axios({
+                method: "PUT",
+                url: ApiConfig.getUpdateProfile,
+                headers: { token: token },
+                data: value
+            });
+            if (res.status === 200) {
+                setProfilePic(res.data.result);
+                User.getViewMyProfile();
+            }
+        } catch (error) {
+            console.log(error, "error");
         }
     };
     return (
@@ -148,10 +194,7 @@ function UpdateProfile() {
                         <img
                             src={
                                 profilePic
-                                    ? profilePic == `${ApiConfig.imagGet}/media/null` ||
-                                        profilePic == `${ApiConfig.imagGet}/media/None`
-                                        ? "images/defaultPic.png"
-                                        : profilePic
+                                    ? profilePic 
                                     : "images/defaultPic.png"
                             }
                             alt=""
@@ -192,13 +235,13 @@ function UpdateProfile() {
                 </div>
                 <Box>
                     <TextField
-                        placeholder="Your Full name"
+                        placeholder="Your Full email"
                         variant="outlined"
                         fullWidth
                         size="small"
                         disabled
                         inputProps={{ maxLength: 256 }}
-                        value={auth?.profile?.email}
+                        value={User?.profile?.email}
                         name="name"
                         onChange={() => { }}
                         style={{ margin: "15px 0" }}
@@ -211,7 +254,10 @@ function UpdateProfile() {
                         inputProps={{ maxLength: 256 }}
                         value={name}
                         name="name"
-                        onChange={(e) => { setName(e.target.value) }}
+                        onChange={(e) => { setName(e.target.value);
+
+                            UpdateProfile({ name: e.target.value })
+                         }}
                         style={{ marginTop: "5px" }}
                     />
                 </Box>

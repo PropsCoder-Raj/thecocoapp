@@ -27,6 +27,7 @@ function AddChild(props) {
   const [schoolData, setSchoolData] = useState([]);
   const [schoolIds, setSchoolIds] = useState([]);
   const [selectedChild, setSelectedChild] = useState(1);
+  const [checkId, setcheckId] = useState(false);
   const navigate = useNavigate();
 
   const formInitialSchema = {
@@ -85,7 +86,25 @@ function AddChild(props) {
       // console.error(error.response.data.message)
     }
   };
-
+//schoolIdCheck
+    const schoolIdCheck = async (value) => {
+        const token = localStorage.getItem("token");
+        try {
+            const res = await axios({
+                method: "GET",
+                url: ApiConfig.schoolIdCheck,
+                headers: { token: token },
+                params: { school_id :value }
+            });
+            if (res.status === 200) {
+                // setcheckId(res.data.data);
+                console.log(res.data.data, "reslut");
+                setcheckId(res.data.data)
+            }
+        } catch (error) {
+            console.log(error, "error");
+        }
+    };
   return (
     <Page title="Add Child">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -268,7 +287,7 @@ function AddChild(props) {
                             inputProps={{ "aria-label": "Without label" }}
                           >
                             <MenuItem value="" disabled>Choose one</MenuItem>
-                            {[1, 2, 3, 4, 5, 6].map((value) => (
+                              {[4, 5, 6, 7, 8, 9, 10].map((value) => (
                               <MenuItem key={value} value={value.toString()}>
                                 {value}
                               </MenuItem>

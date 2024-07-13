@@ -109,6 +109,10 @@ export function TopBarData({ onMobileNavOpen }) {
     bottom: false,
     right: false,
   });
+  const [profile, setProfile] = useState("");
+  useEffect(()=>{
+    setProfile(User?.profile?.profilePic)
+  }, [User.profile])
   const confirmationHandler = () => {
     setOpen(false);
     navigate("/login");
@@ -175,7 +179,7 @@ export function TopBarData({ onMobileNavOpen }) {
             }}
             >
             {/* <Typography variant="h4">Logout</Typography> */}
-            <img src="images/defaultPic.png" alt="#" style={{width:"45px", height:"45px",borderRadius:"50%"}}/>
+            <img src={profile ? profile: "images/defaultPic.png"} alt="#" style={{width:"45px", height:"45px",borderRadius:"50%"}}/>
           </Box>
           
         </Box>

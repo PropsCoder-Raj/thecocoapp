@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, Container, Grid, LinearProgress, Typography, keyframes, styled } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
+import { Box, Container, Grid, LinearProgress, Typography, keyframes, styled, useMediaQuery } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { IoVolumeMediumOutline } from "react-icons/io5";
 import { GoShareAndroid } from "react-icons/go";
@@ -11,6 +11,9 @@ import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FaAngleDoubleUp } from "react-icons/fa";
+import { FaAngleDoubleDown } from "react-icons/fa";
+import { useTheme } from "@emotion/react";
+
 
 const bottomToTop = keyframes`
   0% {
@@ -113,6 +116,8 @@ const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
     borderRadius: "4px",
   },
 }));
+
+
 function Leason(props) {
   const navigate = useNavigate();
   let min = 1;
@@ -122,6 +127,10 @@ function Leason(props) {
   const [leasonData, setLeasonData] = useState([]);
   const [max, setMax] = useState(leasonData.length);
   const [animationTrigger, setAnimationTrigger] = useState(false);
+  const boxRef = useRef(null);
+  const [startY, setStartY] = useState(0);
+  const [direction, setDirection] = useState("UP");
+
   useEffect(() => {
     getleasonData();
   }, [])
@@ -182,7 +191,86 @@ function Leason(props) {
         return 'rgba(255, 220, 234, 1)';
     }
   };
+//swipe animation
+  const handleStart = (clientY) => {
+    setStartY(clientY);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+  };
 
+  const handleMove = (clientY) => {
+    const newY = clientY - startY;
+    if (boxRef.current) {
+      boxRef.current.style.transform = `translateY(${newY}px)`;
+    }
+  };
+
+  const handleEnd = (clientY) => {
+    const deltaY = clientY - startY;
+    setDirection(deltaY > 0 ? 'DOWN' : 'UP');
+if(deltaY > 0){
+  decreaseProgress();
+}else{
+  increaseProgress();
+  if (progress === max) {
+    navigate("/take-quiz", {
+      state: {
+        module_id: location?.state?.level_id,
+        level_id: location?.state?.module_id,
+      },
+    });
+  }
+}
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+
+    // Smoothly reset the box position
+    if (boxRef.current) {
+      boxRef.current.style.transition = 'transform 0.3s';
+      boxRef.current.style.transform = 'translateY(0px)';
+      setTimeout(() => {
+        if (boxRef.current) {
+          boxRef.current.style.transition = '';
+        }
+      }, 300);
+    }
+  };
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.down('md'));
+//start
+  const handleMouseDown = (e) => {
+    if (isDesktop){
+       handleStart(e.clientY);
+    }
+   
+  };
+
+  const handleMouseMove = (e) => {
+    handleMove(e.clientY);
+  };
+
+  const handleMouseUp = (e) => {
+    handleEnd(e.clientY);
+  };
+//start
+  const handleTouchStart = (e) => {
+    if (isDesktop) {
+      handleStart(e.touches[0].clientY);
+    }
+    
+  };
+
+  const handleTouchMove = (e) => {
+    handleMove(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = (e) => {
+    handleEnd(e.changedTouches[0].clientY);
+  };
   return (
     <MainBox
       sx={{
@@ -190,8 +278,9 @@ function Leason(props) {
         backgroundSize: '100% 200%',
         backgroundPosition: 'bottom',
         animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
-        transition: 'background 1s',// Smooth transition effect
+        transition: 'background 1s',// Smooth transition effect,
       }}
+      
     >
       <Container maxWidth="lg">
         <Grid container >
@@ -206,7 +295,7 @@ function Leason(props) {
                     }}
                     cursor={"pointer"}
                   />
-                  <Box
+                  {/* <Box
                     sx={{ display: "flex", gap: "16px", alignItems: "center" }}
                   >
                     <IoVolumeMediumOutline
@@ -217,7 +306,7 @@ function Leason(props) {
                       }}
                     />
                     <GoShareAndroid color="rgba(0, 0, 0, 1)" />
-                  </Box>
+                  </Box> */}
                 </Box>
                 <Box sx={{}}>
                   <Typography variant="h1">{leasonData[progress - 1]?.name || "--"}</Typography>
@@ -285,12 +374,22 @@ function Leason(props) {
               >
                 <Box sx={{
                   animation: `${bounce} 1s infinite`, // Infinite bouncing animation
+                 
                 }}
-                  onClick={() => {
-                    if (max == 0) {
-
-                    } else {
-                      increaseProgress();
+                  // ref={boxRef}
+                  // onMouseDown={handleMouseDown}
+                  // onTouchStart={handleTouchStart}
+                 
+                >
+                  {direction === 'UP' ? <FaAngleDoubleUp
+                    style={
+                      progress === 3
+                        ? { color: "rgba(232, 215, 124, 1)" }
+                        : progress === 2
+                          ? { color: "rgba(222, 179, 255, 1)" }
+                          : { color: "rgba(255, 179, 209, 1)" }
+                    }
+                    onClick={()=>{increaseProgress()
                       if (progress === max) {
                         navigate("/take-quiz", {
                           state: {
@@ -299,19 +398,15 @@ function Leason(props) {
                           },
                         });
                       }
-
-                    }
-                  }}
-                >
-                <FaAngleDoubleUp 
-                  style={
+                    }}
+                  /> : <FaAngleDoubleDown style={
                     progress === 3
                       ? { color: "rgba(232, 215, 124, 1)" }
                       : progress === 2
                         ? { color: "rgba(222, 179, 255, 1)" }
                         : { color: "rgba(255, 179, 209, 1)" }
-                  }
-                />
+                  } />}
+               
                 </Box>
                
               </Box>
@@ -320,28 +415,33 @@ function Leason(props) {
         </Grid>
       </Container>
       <InnerBox
-      sx={{
-          padding: {
-            md: "10px 25px",
-          sm: "20px 25px",
-          xs: "20px 25px"
-},
-          position: {
-            md: "relative",
-            sm: "fixed",
-            xs: "fixed"
-          },
-          bottom: {
-            md: "",
-            sm: "0",
-            xs: "0"
-          },
-          width: {
-            md: "auto",
-            sm: "-webkit-fill-available",
-            xs: "-webkit-fill-available"
-          }      
-      }}
+
+        sx={{
+            padding: {
+              md: "10px 25px",
+            sm: "20px 25px",
+            xs: "20px 25px"
+            },
+            position: {
+              md: "relative",
+              sm: "fixed",
+              xs: "fixed"
+            },
+            bottom: {
+              md: "",
+              sm: "0",
+              xs: "0"
+            },
+            width: {
+              md: "auto",
+              sm: "-webkit-fill-available",
+              xs: "-webkit-fill-available"
+            },      
+          
+        }}
+        // ref={boxRef}
+        // onMouseDown={handleMouseDown}
+        // onTouchStart={handleTouchStart}
         style={
           progress === 3
             ? { background: "rgba(232, 215, 124, 1)" }
@@ -361,7 +461,20 @@ function Leason(props) {
                   gap: "10px",
                   alignItems: "center",
                 }}
+                
               >
+                <Box sx={{
+                  display: {
+                    md: "none",
+                    sm: "grid",
+                    xs: "grid"
+                  },
+                  alignItems: "center",
+                }}>
+                  <IoChevronBackCircle style={
+                   { color:"#fff"}
+                  } onClick={decreaseProgress}/>
+                </Box>
                 <CustomLinearProgress
                   variant="determinate"
                   value={calculateProgressValue()}
@@ -378,12 +491,17 @@ function Leason(props) {
                 xs: "none"
               }
             }}>
-              <Box sx={style.buttonHandle}>
+              <Box sx={{
+                display: "flex",
+                justifyContent: "end",
+                gap: "8px",
+}}>
                 <IoChevronBackCircle
                   onClick={decreaseProgress}
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
+
                 />
 
                 <IoChevronForwardCircle

@@ -1,9 +1,9 @@
 
 //Live URL
-// const url = "http://thecocoapp.com:8080/api/v1/";
+const url = "http://thecocoapp.com:8080/api/v1/";
 
 //Local URL
-const url = "http://localhost:8080/api/v1/";
+// const url = "http://localhost:8080/api/v1/";
 
 const ApiConfig = {
   loginGenerateOtp: `${url}auth/login/email-with-pin`,
@@ -25,7 +25,8 @@ const ApiConfig = {
   getAllChild: `${url}child/get-all-childs`,
   switchChild: `${url}child/switch-to-active-child`,
   updateChild: `${url}child/update-child`,
-
+//school
+  schoolIdCheck: `${url}/school/is-valid-school`,
   //modules
   allModules : `${url}dashboard/get-all-modules`,
   //leason
@@ -35,9 +36,10 @@ const ApiConfig = {
   attemptQuestions: `${url}questions/attempt-questions`,
 
   //photo
-  photo: `${url}user/upload-photo`,
-
-  getProfile: `${url}/user/get-profile`
+  photo: `${url}user/upload-photo-multer`,
+  getProfile: `${url}/user/get-profile`,
+  getUpdateProfile: `${url}/user/update-profile`,
+  
   
 };
 export default ApiConfig;

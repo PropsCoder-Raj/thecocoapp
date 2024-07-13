@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Container, Drawer, Grid, Typography } from "@mui/material";
+import { Box, Button, Collapse, Container, Dialog, DialogActions, DialogContent, Drawer, Grid, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import Page from "src/component/Page";
@@ -7,6 +7,9 @@ import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { UserContext } from "src/context/User";
+import { IoMdArrowBack } from "react-icons/io";
+import { MdNavigateNext } from "react-icons/md";
+import { HiSwitchHorizontal } from "react-icons/hi";
 
 const style = {
   HandleMargin: {
@@ -22,9 +25,13 @@ const style = {
     },
   },
   BoxStyle: {
-    padding: "34px",
+    padding: "22px",
     border: "2px solid rgba(216, 216, 216, 1)",
     borderRadius: "16px",
+    "@media(max-width:767px)": {
+      marginTop: "15px",
+      padding: "8px 12px",
+    },
   },
   GapBox: {
     display: "flex",
@@ -113,6 +120,227 @@ const style = {
       // },
     },
   },
+  switchChildBox:{
+display:"none",
+    "@media(max-width:600px)": {
+      display: "block",
+    },
+  },
+  switchChild:{
+    display:"flex",
+    gap:"10px", 
+    alignItems:"start"
+  },
+  mobileDrawer: {
+    width: 256,
+    // background: theme.palette.background.header,
+  },
+  mobileDrawer: {
+    width: 256,
+    // background: theme.palette.background.header,
+  },
+  desktopDrawer: {
+    width: "270px",
+    height: "100%",
+    background: "#232B3B",
+    boxShadow: "0px 10px 30px 0px rgba(0, 0, 0, 0.10)",
+    zIndex: "120",
+    padding: "0 20px",
+    "& .lightlogoutButton": {
+      display: "flex",
+      justifyContent: "start",
+      alignItems: "center",
+      // position: "absolute",
+      bottom: "19px",
+      left: "17px",
+      borderRadius: "5px",
+      fontWeight: "400",
+      fontSize: "13px",
+      color: "#fff",
+      backgroundColor: "#151515",
+    },
+    "& .darklogoutButton": {
+      display: "flex",
+      justifyContent: "start",
+      alignItems: "center",
+      // position: "absolute",
+      bottom: "19px",
+      left: "17px",
+      borderRadius: "5px",
+      fontWeight: "400",
+      fontSize: "13px",
+      color: "#151515",
+      backgroundColor: "#fff",
+      // [theme.breakpoints.down('lg')]: {
+      //   position: "inherit",
+      // },
+    },
+  },
+  rootLight: {
+    width: "270px",
+    height: "100%",
+    background: "#fff",
+    boxShadow: "0px 10px 30px 0px rgba(0, 0, 0, 0.10)",
+  },
+  avatar: {
+    cursor: "pointer",
+    width: 64,
+    height: 64,
+  },
+  socialIcon: {
+    cursor: "pointer",
+    marginRight: 5,
+  },
+  button: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "left",
+    height: "45px",
+    paddingLeft: "17px",
+    borderRadius: "12px",
+    marginTop: "-30px",
+    "&:hover": {
+      color: "#fff",
+    },
+    "& svg": {
+      color: "#232B3B",
+      fontSize: "20px",
+    },
+  },
+  btnBox: {
+    position: "relative",
+    left: "30%",
+    bottom: "-250px",
+  },
+
+  sideMenuBox: {
+    "& .MuiCollapse-wrapperInner": {
+      marginLeft: "45px",
+    },
+  },
+  mainsidebar: {},
+  logoBox: {
+    paddingTop: "28px",
+    paddingBottom: "59px",
+  },
+
+  darkListItem: {
+    "& .MuiListItemText-root": {
+      marginLeft: "18px",
+    },
+    "& p": {
+      fontSize: "16px !important",
+      fontWeight: "400",
+    },
+    "& svg": {
+      color: "#fff !important",
+      fontSize: "20px",
+    },
+    "& .MuiTypography-displayBlock": {
+      fontSize: "16px !important",
+      fontWeight: "600",
+      color: "#fff ",
+    },
+  },
+  lightListItem: {
+    "& .MuiListItemText-root": {
+      marginLeft: "18px",
+    },
+    "& p": {
+      fontSize: "16px !important",
+      fontWeight: "400",
+    },
+    "& svg": {
+      color: "#232B3B !important",
+      fontSize: "20px",
+    },
+    "& .MuiTypography-displayBlock": {
+      fontSize: "16px !important",
+      fontWeight: "600",
+
+      color: "#151515 ",
+    },
+  },
+  lightSelectedListItem: {
+    borderRadius: "0px 20px 20px 0px",
+    background: "#0B1426 !important",
+    color: "#151515 ",
+    "& .MuiTypography-displayBlock": {
+      color: "#fff ",
+    },
+  },
+  darkSelectedListItem: {
+    borderRadius: "0px 20px 20px 0px",
+    background: "#fff !important",
+    "& .MuiTypography-displayBlock": {
+      color: "#151515 ",
+    },
+  },
+  lightDailogOpen: {
+    "& .MuiDialog-paperWidthSm": {
+      width: "100%",
+      maxWidth: "fit-content",
+      padding: "20px",
+      borderRadius: "20px",
+      background: "#FFF",
+      boxShadow: "3px 4px 9px 0px rgba(0, 0, 0, 0.25)",
+      // [theme.breakpoints.down('md')]: {
+      //   padding: "30px",
+      // },
+      // [theme.breakpoints.down('sm')]: {
+      //   padding: "5px",
+      // },
+    },
+    "& .lightHeading": {
+      color: "#0B1426",
+      fontSize: "30px",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal",
+      letterSpacing: "0.3px",
+      marginBottom: "13px",
+    },
+    "& .lightSubHeading": {
+      color: "rgba(11, 20, 38, 0.50)",
+      fontSize: "16px",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "24px",
+    },
+  },
+  darkDailogOpen: {
+    "& .MuiDialog-paperWidthSm": {
+      width: "100%",
+      maxWidth: "fit-content",
+      padding: "60px",
+      borderRadius: "20px",
+      background: "#0B1426",
+      boxShadow: "3px 4px 9px 0px rgba(0, 0, 0, 0.25)",
+      // [theme.breakpoints.down('md')]: {
+      //   padding: "30px",
+      // },
+      // [theme.breakpoints.down('sm')]: {
+      //   padding: "5px",
+      // },
+    },
+    "& .darkHeading": {
+      color: "#fff",
+      fontSize: "30px",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal",
+      letterSpacing: "0.3px",
+      marginBottom: "13px",
+    },
+    "& .darkSubHeading": {
+      color: "rgb(144 147 154 / 50%)",
+      fontSize: "16px",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "24px",
+    },
+  },
 };
 
 // const TitleWrapper = styled('img')(({ theme }) => ({
@@ -153,7 +381,19 @@ function Dashboard() {
   const [levelData, setLevelData] = useState([]);
   const User = useContext(UserContext);
   const [childOpen, setChildOpen] =useState(false);
-  useEffect(() => { setChildOpen(User.childOpen) }, [User.childOpen])
+  const [isLogout, setIsLogout] = useState(false);
+  const [isOpen, setIsOpen] = useState([]);
+  const handleItemClick = (path) => {
+    navigate(path);
+  };
+  const handleSublistToggle = (index) => {
+    const newOpenState = [...isOpen];
+    newOpenState[index] = !newOpenState[index];
+    setIsOpen(newOpenState);
+  };
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   const levels = [
     {
       _id: "6679a728f2eac92152686fb5",
@@ -228,12 +468,15 @@ function Dashboard() {
       current_status: false,
     },
   ];
+  const iconsFunction = (icon, alt) => {
+    return <img src={icon} alt={alt} />;
+  };
   const handleClose = () => {
-    User.setChildOpen(false);
+    setChildOpen(false)
   };
 useEffect(()=>{
   getChildData();
-}, [User.callApi])
+}, [childOpen])
 
   const getChildData = async () => {
     const token = localStorage.getItem("token");
@@ -306,7 +549,7 @@ useEffect(()=>{
               level.current_status
                 ? "images/play.png"
                 : level.complete_status
-                  ? "images/preview.png"
+                  ? `images/level/${level.level_id}.png`
                   : "images/lock.png"
             }
             alt=""
@@ -362,10 +605,186 @@ useEffect(()=>{
         }
       })
   }, [childData])
+  const renderedSections = [
+    {
+      items: [
+        {
+          title: "Help",
+          icon: iconsFunction(
+            "images/help.svg",
+            "dashboard"
+          ),
+          // href: "/map",
+          tabview: "Arbitrage",
+          clickable: true,
+        },
+        {
+          title: "About",
+          icon: iconsFunction("images/about.svg",
+            "binaryTree"
+          ),
+          // href: "/binary-tree",
+          tabview: "Arbitrage",
+          clickable: true,
+        },
+        {
+          title: "Log out",
+          icon: iconsFunction("images/logout.svg",
+            "wallet"
+          ),
+          // href: "/wallet",
+          tabview: "Arbitrage",
+          clickable: false,
+        },
 
+
+      ],
+    },
+  ];
+  const contentLog = (
+    <>
+      <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "20px 0px", minWidth: "260px" }}>
+        <Box onClick={() => { setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
+          <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
+          <Typography >
+            Back to home
+          </Typography>
+        </Box>
+        <Box pt={2} pb={2} sx={style.mainsidebar}>
+          <Box sx="sideMenuBox">
+            {renderedSections.map((section, i) => (
+              <List
+                key={`menu${i}`}
+                subheader={
+                  <ListSubheader disableGutters disableSticky>
+                    {section.subheader}
+                  </ListSubheader>
+                }
+              >
+                {section.items.map((item, j) => {
+                  const hasItems = item.items && item.items.length > 0;
+                  const isItemOpen = isOpen[j] || false;
+                  return (
+                    <Box sx={{ cursor: "pointer" }} key={`item${j}`}>
+                      <ListItem
+
+                        sx={{ display: "flex", gap: "10px", justifyContent: "space-between", alignItems: "center", padding: "10px 0 0 0", borderBottom: "1px solid rgba(229, 229, 229, 1)" }}
+                        onClick={() => {
+                          if (item.title === "Log out") {
+                            setIsLogout(true)
+                          }
+                          if (hasItems) {
+                            handleSublistToggle(j);
+                          } else if (item.clickable) {
+                            handleItemClick(item.href);
+                          }
+                        }}
+                      >
+                        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                          {item.icon}
+                          <ListItemText primary={item.title} /></Box>
+                        <MdNavigateNext color="rgba(182, 183, 184, 1)" />
+                      </ListItem>
+                      {hasItems && (
+                        <Collapse in={isItemOpen} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {item.items.map((subItem, k) => (
+                              <Box sx={
+                                { cursor: "pointer" }
+                              } key={`subItem${k}`}>
+                                <ListItem
+
+
+                                  button
+                                  // selected={location.pathname === subItem.href}
+                                  onClick={
+                                    subItem.clickable
+                                      ? () => handleItemClick(subItem.href)
+                                      : undefined
+                                  }
+                                  disabled={!subItem.clickable}
+                                >
+                                  {subItem.icon}
+                                  <ListItemText primary={subItem.title} />
+                                </ListItem>
+                              </Box>
+                            ))}
+                          </List>
+                        </Collapse>
+                      )}
+                    </Box>
+                  );
+                })}
+              </List>
+            ))}
+          </Box>
+        </Box>
+
+        {isLogout && (
+          <Dialog
+            maxWidth="sm"
+            fullWidth
+            sx={style.lightDailogOpen
+
+            }
+            open={isLogout}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={() => setIsLogout(false)}
+          >
+            <DialogContent>
+              <Box sx={style.dialougTitle} align="center">
+                <Typography
+                  variant="h3"
+                >
+                  Logout
+                </Typography>
+                <Typography
+                  variant="h3"
+                >
+                  Are you sure you want to log out?
+                </Typography>
+              </Box>
+            </DialogContent>
+            <DialogActions
+              style={{
+                display: "block",
+              }}
+            >
+              <Box
+                mt={2}
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => setIsLogout(false)}
+                >
+                  Cancel
+                </Button>
+                &nbsp; &nbsp;
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    window.localStorage.clear();
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </Button>
+              </Box>
+            </DialogActions>
+          </Dialog>
+        )}
+      </Box>
+    </>
+  );
   const content = (
     <>
-      <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "20px", minWidth: "260px" }}>
+      <Box height="100%" display="flex" flexDirection="column" sx={childOpen ?{
+        padding: "64px 20px 20px 20px", minWidth: "260px" 
+      }:{ padding: "20px", minWidth: "260px" }}>
         <Box sx={style.BoxStyle}>
           <Typography variant="h4">Switch Profile</Typography>
           {childData.map((values, items) => {
@@ -403,19 +822,27 @@ useEffect(()=>{
             );
           })}
         </Box>
+        {contentLog}
       </Box>
     </>
   );
+ 
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
         <Box>
           <Grid container spacing={4}>
+            <Grid item xs={12} sx={style.switchChildBox}>
+              <Box sx={{display:"flex", justifyContent:"end"}}>
+                <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
+              </Box>
+            </Grid>
             <Grid item xs={12} sm={7}>
+             
               {levelData.map((values) => (
                 <>
                   {values.modules.map((data) => (
-                    <>
+                    <Box>
                       <Box
                         sx={{
                           background: "rgba(255, 245, 209, 1)",
@@ -427,7 +854,7 @@ useEffect(()=>{
                         }}
                       >
                         <Box>
-                          <StyledImg alt="" src="images/Moduleimage.png" />
+                          <StyledImg alt="" src={`images/module/${data.module_id}.png`} />
                         </Box>
                         <Box
                           sx={{
@@ -451,10 +878,12 @@ useEffect(()=>{
                       <Grid container spacing={3} sx={style.levelMargin}>
                         {renderBoxes(data.levels)}
                       </Grid>
-                    </>
+                    </Box>
                   ))}
                 </>
               ))}
+                
+             
             
             </Grid>
             <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
@@ -466,7 +895,11 @@ useEffect(()=>{
                     <TaddyImg alt="" src="images/TaddyIcon.png" />
                     <Box>
                       <Typography variant="h3" fontWeight={"700"} mb={1}>
-                        Hello Dhruv!
+                        Hello {childData.map((values, items) => {
+                          if (values.activeStatus){
+                            return values.childName
+                          }
+                        })}
                       </Typography>
                       <Typography variant="h4">
                         Happy learning! Complete one level daily to top !
@@ -475,7 +908,7 @@ useEffect(()=>{
                   </Box>
                 </Box>
                 <Box sx={style.BoxStyle}>
-                  <Typography variant="h4">Switch Profile</Typography>
+                  <Typography variant="h4">Switch</Typography>
                   {childData.map((values, items)=>{
                     return(
                       <Box sx={style.profileBox} onClick={() => { switchChild(values._id)}}>
@@ -508,15 +941,13 @@ useEffect(()=>{
         </Box>
       </Container>
 
-      {childOpen && (
-        <Drawer
-          sx={{
-            paper: style.desktopDrawer,
-          }}
-          anchor="right" onClose={handleClose} variant="persistent" open={childOpen}>
+        <Drawer open={childOpen}
+          onClose={()=>handleClose()}
+        anchor="right"
+          >
           {content}
         </Drawer>
-      )}
+     
     </Page>
   );
 }

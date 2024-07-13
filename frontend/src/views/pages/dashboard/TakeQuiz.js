@@ -5,8 +5,10 @@ import {
   Container,
   Grid,
   styled,
+  Typography,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
 
 const style = {
   flexBox: {
@@ -42,7 +44,7 @@ const style = {
   },
 };
 const MainBox = styled(Box)(({ theme }) => ({
-  padding: "60px 0px 0 0px",
+  padding: "30px 0px 0 0px",
   height: "100vh",
   overflow: "auto",
   alignItems: "end",
@@ -72,6 +74,17 @@ function TakeQuiz() {
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12}>
+            <Box sx={{
+              display: "flex",
+              gap: "5px",
+              alignItems: "center",
+              cursor: "pointer"
+            }} onClick={() => { navigate("/dashboard") }}>
+              <IoMdArrowBack />
+              <Typography>Back</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
             <Box sx={style.CombineBox}>
               <TakeImg src="images/Answer3Q.png" alt="" />
             </Box>
@@ -81,14 +94,15 @@ function TakeQuiz() {
       <InnerBox sx={style.buttonHandle}>
         <Container>
           <Grid  spacing={4}>
+           
             <Grid item xs={12}>
               <Box >
                 <Box sx={{
                   display: "flex",
                   justifyContent: "end",
                   gap: "8px",
-}}>
- <Button variant="contained" onClick={()=>{
+              }}>
+              <Button variant="contained" onClick={()=>{
                   navigate("/questions", {
                     state: {
                       module_id: location?.state?.level_id,
