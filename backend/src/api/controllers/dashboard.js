@@ -129,7 +129,10 @@ exports.getAllModules = async (req, res, next) => {
                 const modules = element.modules[indexj];
                 updateCurrentStatus(modules.levels);
 
-                
+                if(!req.user.currentChildActive && indexi != 0){
+                    element.modules[indexj].levels[0].current_status = false;
+                }
+
                 if(indexj != 0){
                     if(element.modules[indexj - 1].complete_status == false){
                         element.modules[indexj].levels[0].current_status = false;
