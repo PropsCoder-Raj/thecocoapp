@@ -52,7 +52,7 @@ const { updateCurrentStatus } = require('../helper/utils')
 *         description: Conflict
 */
 exports.getAllModules = async (req, res, next) => {
-    try {
+    // try {
         const child = await findChild({ _id: req.user.currentChildActive });
 
         // Pipeline to check if modules are present for the child's standard
@@ -115,7 +115,7 @@ exports.getAllModules = async (req, res, next) => {
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
                             (element.child_id ? 
-                                (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                                (element.child_id.toString() === req.user.currentChildActive && element.user_id.toString() === req.user._id.toString()) :
                                 element.user_id.toString() === req.user._id.toString())
                         )
                     }))
@@ -143,9 +143,9 @@ exports.getAllModules = async (req, res, next) => {
             message: "Get Modules Data Successfully.",
             result: processedModules
         });
-    } catch (error) {
-        return res.status(500).send({ status: false, message: error.message });
-    }
+    // } catch (error) {
+    //     return res.status(500).send({ status: false, message: error.message });
+    // }
 };
 
 /**
