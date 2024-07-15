@@ -151,12 +151,12 @@ function ChildProfile() {
             // profilePic: profileData ? profileData : null
         }));
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
-        let sendChildData = location?.state?.childId ? { ...requestBody[0], profilePic: profilePic } : [{ ...requestBody, profilePic:profilePic}];
+        let sendChildData = location?.state?.childId ? [{...requestBody[0], "profilePic": profilePic} ] : [{ ...requestBody[0], "profilePic":profilePic}];
         try {
             let res = ""
             location?.state?.childId ?
              res = await axios.put(
-                 RequestUrl, sendChildData,
+                 RequestUrl, sendChildData[0],
                 {
                     headers: {
                         token: localStorage.getItem("token"),

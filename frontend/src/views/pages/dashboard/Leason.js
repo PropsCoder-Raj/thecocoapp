@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { FaAngleDoubleUp } from "react-icons/fa";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useTheme } from "@emotion/react";
+import { useSwipeable } from "react-swipeable";
 
 
 const bottomToTop = keyframes`
@@ -92,8 +93,10 @@ const MainBox = styled(Box)(({ theme }) => ({
 
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
-  
-  
+  display: "grid",
+  alignItems: "end",
+  height: "61px",
+  transition: "all 0.3s ease-in-out"
 }));
 const AddImg = styled("img")(({ theme }) => ({
   width: "100%",
@@ -121,7 +124,8 @@ const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
 function Leason(props) {
   const navigate = useNavigate();
   let min = 1;
-
+  const theme = useTheme();
+  const isMobileChild = useMediaQuery(theme.breakpoints.down('md'));
   const [progress, setProgress] = useState(1);
   const location = useLocation();
   const [leasonData, setLeasonData] = useState([]);
@@ -169,7 +173,7 @@ function Leason(props) {
 
   const calculateProgressValue = () => ((progress - min) / (max - min)) * 100;
 
- 
+
 
 
   useEffect(() => {
@@ -191,87 +195,47 @@ function Leason(props) {
         return 'rgba(255, 220, 234, 1)';
     }
   };
-//swipe animation
-  const handleStart = (clientY) => {
-    setStartY(clientY);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchmove', handleTouchMove);
-    document.addEventListener('touchend', handleTouchEnd);
-  };
+  const [swipedUp, setSwipedUp] = useState(false);
+  const [swipingDirection, setSwipingDirection] = useState('');
 
-  const handleMove = (clientY) => {
-    const newY = clientY - startY;
-    if (boxRef.current) {
-      boxRef.current.style.transform = `translateY(${newY}px)`;
+  const handleSwipedUp = () => {
+    setSwipedUp(true);
+    setSwipingDirection('up');
+    console.log("Swiped Up");
+    increaseProgress()
+    if (progress === max) {
+      navigate("/take-quiz", {
+        state: {
+          module_id: location?.state?.level_id,
+          level_id: location?.state?.module_id,
+        },
+      });
     }
   };
 
-  const handleEnd = (clientY) => {
-    const deltaY = clientY - startY;
-    setDirection(deltaY > 0 ? 'DOWN' : 'UP');
-if(deltaY > 0){
-  decreaseProgress();
-}else{
-  increaseProgress();
-  if (progress === max) {
-    navigate("/take-quiz", {
-      state: {
-        module_id: location?.state?.level_id,
-        level_id: location?.state?.module_id,
-      },
-    });
-  }
-}
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-    document.removeEventListener('touchmove', handleTouchMove);
-    document.removeEventListener('touchend', handleTouchEnd);
+  const handleSwipedDown = () => {
+    setSwipedUp(false);
+    setSwipingDirection('down');
+    console.log("Swiped Down");
+    decreaseProgress();
+  };
 
-    // Smoothly reset the box position
-    if (boxRef.current) {
-      boxRef.current.style.transition = 'transform 0.3s';
-      boxRef.current.style.transform = 'translateY(0px)';
-      setTimeout(() => {
-        if (boxRef.current) {
-          boxRef.current.style.transition = '';
-        }
-      }, 300);
+  const handleSwiping = (e) => {
+    const { dir } = e;
+    if (dir === 'Up' || dir === 'Down') {
+      setSwipingDirection(`Swiping ${dir.toLowerCase()}`);
+      console.log(`Swiping ${dir.toLowerCase()}`);
     }
   };
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.down('md'));
-//start
-  const handleMouseDown = (e) => {
-    if (isDesktop){
-       handleStart(e.clientY);
-    }
-   
-  };
 
-  const handleMouseMove = (e) => {
-    handleMove(e.clientY);
-  };
+  const handlers = useSwipeable({
+    onSwipedUp: handleSwipedUp,
+    onSwipedDown: handleSwipedDown,
+    onSwiping: handleSwiping,
+  });
 
-  const handleMouseUp = (e) => {
-    handleEnd(e.clientY);
-  };
-//start
-  const handleTouchStart = (e) => {
-    if (isDesktop) {
-      handleStart(e.touches[0].clientY);
-    }
-    
-  };
-
-  const handleTouchMove = (e) => {
-    handleMove(e.touches[0].clientY);
-  };
-
-  const handleTouchEnd = (e) => {
-    handleEnd(e.changedTouches[0].clientY);
-  };
   return (
+
     <MainBox
       sx={{
         background: getBackground(progress),
@@ -280,7 +244,7 @@ if(deltaY > 0){
         animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
         transition: 'background 1s',// Smooth transition effect,
       }}
-      
+
     >
       <Container maxWidth="lg">
         <Grid container >
@@ -361,7 +325,7 @@ if(deltaY > 0){
                   md: "auto",
                   sm: "-webkit-fill-available",
                   xs: "-webkit-fill-available"
-                }   ,
+                },
                 justifyContent: "center",
                 marginBottom: "5px",
                 background: getBackground(progress),
@@ -370,18 +334,24 @@ if(deltaY > 0){
                 animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
                 transition: 'background 1s',// Smooth transition effect
               }}
-                
+
               >
                 <Box sx={{
                   animation: `${bounce} 1s infinite`, // Infinite bouncing animation
-                 
+
                 }}
-                  // ref={boxRef}
-                  // onMouseDown={handleMouseDown}
-                  // onTouchStart={handleTouchStart}
-                 
+                // ref={boxRef}
+                // onMouseDown={handleMouseDown}
+                // onTouchStart={handleTouchStart}
+
                 >
-                  {direction === 'UP' ? <FaAngleDoubleUp
+                  {swipingDirection === 'Swiping down' ?  <FaAngleDoubleDown style={
+                    progress === 3
+                      ? { color: "rgba(232, 215, 124, 1)" }
+                      : progress === 2
+                        ? { color: "rgba(222, 179, 255, 1)" }
+                        : { color: "rgba(255, 179, 209, 1)" }
+                  } />:<FaAngleDoubleUp
                     style={
                       progress === 3
                         ? { color: "rgba(232, 215, 124, 1)" }
@@ -389,38 +359,47 @@ if(deltaY > 0){
                           ? { color: "rgba(222, 179, 255, 1)" }
                           : { color: "rgba(255, 179, 209, 1)" }
                     }
-                    onClick={()=>{increaseProgress()
-                      if (progress === max) {
-                        navigate("/take-quiz", {
-                          state: {
-                            module_id: location?.state?.level_id,
-                            level_id: location?.state?.module_id,
-                          },
-                        });
-                      }
-                    }}
-                  /> : <FaAngleDoubleDown style={
-                    progress === 3
-                      ? { color: "rgba(232, 215, 124, 1)" }
-                      : progress === 2
-                        ? { color: "rgba(222, 179, 255, 1)" }
-                        : { color: "rgba(255, 179, 209, 1)" }
-                  } />}
-               
+                  
+                  />}
+
                 </Box>
-               
+
               </Box>
             </Box>
           </Grid>
         </Grid>
       </Container>
       <InnerBox
-
-        sx={{
-            padding: {
-              md: "10px 25px",
+        sx={progress === 3
+          ? {
+          padding: {
+            md: "10px 25px",
             sm: "20px 25px",
             xs: "20px 25px"
+          },
+          position: {
+            md: "relative",
+            sm: "fixed",
+            xs: "fixed"
+          },
+          bottom: {
+            md: "",
+            sm: "0",
+            xs: "0"
+          },
+          width: {
+            md: "auto",
+            sm: "-webkit-fill-available",
+            xs: "-webkit-fill-available"
+          },
+            alignItems : "center",
+
+            background: "rgba(232, 215, 124, 1)",
+          } : progress === 2 ? {
+            padding: {
+              md: "10px 25px",
+              sm: "20px 25px",
+              xs: "20px 25px"
             },
             position: {
               md: "relative",
@@ -436,52 +415,92 @@ if(deltaY > 0){
               md: "auto",
               sm: "-webkit-fill-available",
               xs: "-webkit-fill-available"
-            },      
-          
-        }}
+            },
+            alignItems: "center",
+            background: "rgba(222, 179, 255, 1)"
+          } : {
+            padding: {
+              md: "10px 25px",
+              sm: "20px 25px",
+              xs: "20px 25px"
+            },
+            position: {
+              md: "relative",
+              sm: "fixed",
+              xs: "fixed"
+            },
+            bottom: {
+              md: "",
+              sm: "0",
+              xs: "0"
+            },
+            width: {
+              md: "auto",
+              sm: "-webkit-fill-available",
+              xs: "-webkit-fill-available"
+            },
+            alignItems: "center",
+            background: "rgba(255, 179, 209, 1)",
+}}
         // ref={boxRef}
         // onMouseDown={handleMouseDown}
         // onTouchStart={handleTouchStart}
-        style={
-          progress === 3
-            ? { background: "rgba(232, 215, 124, 1)" }
-            : progress === 2
-              ? { background: "rgba(222, 179, 255, 1)" }
-              : { background: "rgba(255, 179, 209, 1)" }
+        style={swipingDirection == "Swiping up" ? {height: "95px",
+                transition: "all 0.3s ease-in-out",
+                // borderTopLeftRadius: "50%",
+                // borderTop: "14px solid rgb(255, 179, 209)",
+                // borderTopRightRadius: "50%"
+        } : swipingDirection == "Swiping down" ? {
+          height: "35px",
+          transition: "all 0.3s ease-in-out",
+}:{}
         }
       >
         <Container>
           <Grid container>
             <Grid item xs={12} sm={12} md={8} sx={{ alignItems: "center", display: "grid" }}>
-              <Box
-                sx={{
-                  width: "100%",
-                  textAlign: "center",
-                  display: "flex",
-                  gap: "10px",
-                  alignItems: "center",
-                }}
-                
-              >
-                <Box sx={{
-                  display: {
-                    md: "none",
-                    sm: "grid",
-                    xs: "grid"
-                  },
-                  alignItems: "center",
-                }}>
-                  <IoChevronBackCircle style={
-                   { color:"#fff"}
-                  } onClick={decreaseProgress}/>
+              <Box>
+
+
+                <Box
+                  sx={{
+                    width: "100%",
+                    textAlign: "center",
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+
+                >
+                  <CustomLinearProgress
+                    variant="determinate"
+                    value={calculateProgressValue()}
+                  />
+                  <Typography variant="body2" color={"#fff"}>
+                    {progress}/{max}
+                  </Typography>
                 </Box>
-                <CustomLinearProgress
-                  variant="determinate"
-                  value={calculateProgressValue()}
-                />
-                <Typography variant="body2" color={"#fff"}>
-                  {progress}/{max}
-                </Typography>
+                {isMobileChild &&
+                  <Box
+                    {...handlers}
+                    sx={{
+                      width: '100%',
+                      height: '100vh',
+                      position: 'absolute',
+                      cursor: 'pointer',
+                      top: "0"
+                    }}
+                  >
+                    <Box
+                      component="span"
+                      sx={{
+                        width: '40px',
+                        height: '40px',
+                        backgroundColor: 'blue',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  </Box>}
               </Box>
             </Grid>
             <Grid item md={4} sx={{
@@ -495,7 +514,7 @@ if(deltaY > 0){
                 display: "flex",
                 justifyContent: "end",
                 gap: "8px",
-}}>
+              }}>
                 <IoChevronBackCircle
                   onClick={decreaseProgress}
                   disabled={progress <= min}
@@ -532,6 +551,8 @@ if(deltaY > 0){
         </Container>
       </InnerBox>
     </MainBox>
+
+
   );
 }
 

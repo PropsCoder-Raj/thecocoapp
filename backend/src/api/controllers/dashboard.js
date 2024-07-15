@@ -140,7 +140,7 @@ exports.getAllModules = async (req, res, next) => {
 
         return res.status(200).send({
             status: true,
-            message: "Get Child Data Successfully.",
+            message: "Get Modules Data Successfully.",
             result: processedModules
         });
     } catch (error) {
