@@ -10,7 +10,7 @@ import { UserContext } from "src/context/User";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
 import { HiSwitchHorizontal } from "react-icons/hi";
-
+import { FiEdit3 } from "react-icons/fi";
 const style = {
   HandleMargin: {
     marginTop: "20px",
@@ -375,12 +375,39 @@ const LockImg = styled("img")(({ theme }) => ({
   width: "120px",
   height: "120px",
 }));
+const SkeletonBox = styled(Box)(({ theme }) => ({
+  backgroundColor: "#e0e0e0",
+  borderRadius: "4px",
+  margin: "10px",
+  width: "100%",
+  height: "80px",
+  animation: `loading 1.5s infinite`,
+  borderRadius:"68px",
+  '@keyframes loading': {
+    '0%': {
+      backgroundColor: '#e0e0e0',
+    },
+    '50%': {
+      backgroundColor: '#f5f5f5',
+    },
+    '100%': {
+      backgroundColor: '#e0e0e0',
+    }
+  }
+}));
 function Dashboard() {
+  const User = useContext(UserContext);
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
   const [levelData, setLevelData] = useState([]);
-  const User = useContext(UserContext);
+  const [profile, setProfile] = useState("");
+  useEffect(() => {
+    setProfile(User?.profile?.profilePic)
+  }, [User.profile])
   const [childOpen, setChildOpen] =useState(false);
+  useEffect(()=>{
+    setChildOpen(User.childOpen)
+  }, [User.childOpen])
   const [isLogout, setIsLogout] = useState(false);
   const [isOpen, setIsOpen] = useState([]);
   const handleItemClick = (path) => {
@@ -472,7 +499,8 @@ function Dashboard() {
     return <img src={icon} alt={alt} />;
   };
   const handleClose = () => {
-    setChildOpen(false)
+    setChildOpen(false);
+    User.setChildOpen(false)
   };
 useEffect(()=>{
   getChildData();
@@ -559,7 +587,61 @@ useEffect(()=>{
       );
     });
   };
+  const renderSkeletons = () => {
+    return ["0", "1",].map((values, index) => {
+      const isCenterBox = index % 3 === 0;
+      const isSixItems = 6 === 6;
+      const isFirstBox = index === 0;
+      let justifyContent = "center";
 
+      if (index === 0 || (isSixItems && isCenterBox)) {
+        justifyContent = "center";
+      } else if (index % 3 === 2) {
+        justifyContent = "flex-start";
+      } else if (index % 3 === 1) {
+        justifyContent = "flex-end";
+      }
+
+      return (<>
+        <Box
+          key={index}
+          sx={{ display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" }}
+        >
+          <SkeletonBox style={{width:"80%"}}></SkeletonBox>
+        </Box>
+        <Box
+          key={index}
+          sx={{ display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" }}
+        >
+          <SkeletonBox style={{
+            borderRadius: "50%",
+            width: "100px"
+          }}></SkeletonBox> 
+        </Box>
+        <Box
+          key={index}
+          sx={ { display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" } }
+        >
+          <SkeletonBox style={{ borderRadius: "50%",
+            width: "100px"
+          }}></SkeletonBox> <SkeletonBox style={{
+            borderRadius: "50%",
+            width: "100px"
+          }}></SkeletonBox>
+        </Box>
+        <Box
+          key={index}
+          sx={{ display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" }}
+        >
+          <SkeletonBox style={{
+            borderRadius: "50%",
+            width: "100px"
+          }}></SkeletonBox>
+        </Box>
+     </>
+      );
+    });
+  };
   const switchChild = async (id) => {
     const token = localStorage.getItem("token");
     try {
@@ -644,11 +726,27 @@ useEffect(()=>{
   const contentLog = (
     <>
       <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "20px 0px", minWidth: "260px" }}>
-        <Box onClick={() => { setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
+        <Box onClick={() => { setChildOpen(false); User.setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
           <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
           <Typography >
             Back to home
           </Typography>
+        </Box>
+        <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
+          <Typography >
+            Profile
+          </Typography>
+          <Box onClick={() => { navigate("/update-profile") }} sx={{ background: "rgba(230, 248, 254, 1)", padding: "15px", border: "1px solid rgba(51, 200, 245, 1)", borderRadius: "9px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <img src={profile ? profile : "images/defaultPic.png"} alt="#" style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
+              <Typography variant="body1">
+                {User?.profile?.name || "--"}
+              </Typography>
+            </Box>
+            <FiEdit3 style={{ color: "rgba(182, 183, 184, 1)", fontSize: "25px" }} />
+
+          </Box>
+
         </Box>
         <Box pt={2} pb={2} sx={style.mainsidebar}>
           <Box sx="sideMenuBox">
@@ -827,19 +925,23 @@ useEffect(()=>{
     </>
   );
  
+ 
+
+
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
         <Box>
           <Grid container spacing={4}>
-            <Grid item xs={12} sx={style.switchChildBox}>
+            {/* <Grid item xs={12} sx={style.switchChildBox}>
               <Box sx={{display:"flex", justifyContent:"end"}}>
                 <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
               </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={7}>
              
-              {levelData.map((values) => (
+              {levelData.length !== 0 ?
+              levelData.map((values) => (
                 <>
                   {values.modules.map((data) => (
                     <Box>
@@ -881,7 +983,8 @@ useEffect(()=>{
                     </Box>
                   ))}
                 </>
-              ))}
+
+              )) :<Box>{renderSkeletons()}</Box> }
                 
              
             

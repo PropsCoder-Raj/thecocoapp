@@ -164,14 +164,20 @@ export function TopBarData({ onMobileNavOpen }) {
       <>
         <Box flexGrow={1} />
         <Box sx={styles.searchBox}>
-          {/* {isMobileChild && 
-          
-          <Box sx={{display:"grid"}} 
-            onClick={() => User.setChildOpen(true)}
-          >
-            <HiSwitchVertical style={{ color: "rgba(182, 183, 184, 1)" }} fontSize={30}/>
-            </Box>} */}
-          <Box sx={styles.customSelectBox} onClick={() => navigate("/update-profile")} 
+          {!isMobileChild &&
+            <Box sx={styles.customSelectBox} onClick={() => navigate("/update-profile")}
+              style={{
+                alignItems: "center",
+                display: "grid",
+                marginRight: "10px"
+              }}
+            >
+              {/* <Typography variant="h4">Logout</Typography> */}
+              <img src={profile ? profile : "images/defaultPic.png"} alt="#" style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
+            </Box>
+          }
+          {isMobileChild && 
+            <Box sx={styles.customSelectBox} onClick={() => { User.setChildOpen(!User.childOpen)}}
             style={{
               alignItems: "center",
           display: "grid",
@@ -181,7 +187,7 @@ export function TopBarData({ onMobileNavOpen }) {
             {/* <Typography variant="h4">Logout</Typography> */}
             <img src={profile ? profile: "images/defaultPic.png"} alt="#" style={{width:"45px", height:"45px",borderRadius:"50%"}}/>
           </Box>
-          
+          }
         </Box>
       </>
 

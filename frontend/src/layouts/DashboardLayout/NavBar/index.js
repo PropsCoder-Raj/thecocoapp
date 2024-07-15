@@ -347,7 +347,7 @@ const sections1 = [
         title: "Help",
         icon: iconsFunction(
           "images/help.svg",
-          "dashboard"
+          "Help"
         ),
         // href: "/map",
         tabview: "Arbitrage",
@@ -356,7 +356,7 @@ const sections1 = [
       {
         title: "About",
         icon: iconsFunction("images/about.svg",
-          "binaryTree"
+          "About"
         ),
         // href: "/binary-tree",
         tabview: "Arbitrage",
@@ -365,7 +365,7 @@ const sections1 = [
       {
         title: "Log out",
         icon: iconsFunction("images/logout.svg",
-          "wallet"
+          "Log out"
         ),
         // href: "/wallet",
         tabview: "Arbitrage",
@@ -383,7 +383,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
           title: "Help",
           icon: iconsFunction(
             "images/help.svg",
-            "dashboard"
+            "Help"
           ),
           // href: "/map",
           tabview: "Arbitrage",
@@ -392,7 +392,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         {
           title: "About",
           icon: iconsFunction("images/about.svg",
-            "binaryTree"
+            "About"
           ),
           // href: "/binary-tree",
           tabview: "Arbitrage",
@@ -401,7 +401,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         {
           title: "Log out",
           icon: iconsFunction("images/logout.svg",
-            "wallet"
+            "Log out"
           ),
           // href: "/wallet",
           tabview: "Arbitrage",
