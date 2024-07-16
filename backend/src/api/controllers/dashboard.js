@@ -104,7 +104,7 @@ exports.getAllModules = async (req, res, next) => {
                 ...module,
                 complete_status: !!completedModulesList.find(element =>
                     element.module_id.toString() === module._id.toString() &&
-                    (element.child_id ? (element.child_id.toString() === req.user.currentChildActive && element.user_id.toString() === req.user._id) :
+                    (element.child_id && req.user.currentChildActive ? (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id) :
                     element.user_id.toString() === req.user._id.toString())
                 ),
                 levels: levelsLists
@@ -114,8 +114,8 @@ exports.getAllModules = async (req, res, next) => {
                         complete_status: !!completedLevelsList.find(element =>
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
-                            (element.child_id ? 
-                                (element.child_id.toString() === req.user.currentChildActive && element.user_id.toString() === req.user._id.toString()) :
+                            (element.child_id && req.user.currentChildActive ? 
+                                (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
                                 element.user_id.toString() === req.user._id.toString())
                         )
                     }))
@@ -129,9 +129,9 @@ exports.getAllModules = async (req, res, next) => {
                 const modules = element.modules[indexj];
                 updateCurrentStatus(modules.levels);
 
-                if(!req.user.currentChildActive && indexi != 0){
-                    element.modules[indexj].levels[0].current_status = false;
-                }
+                // if(!req.user.currentChildActive && indexi != 0){
+                //     element.modules[indexj].levels[0].current_status = false;
+                // }
 
                 if(indexj != 0){
                     if(element.modules[indexj - 1].complete_status == false){
@@ -261,7 +261,7 @@ exports.getQuestions = async (req, res, next) => {
                 element.module_id.toString() == module_id.toString() &&
                 element.level_id.toString() == level_id.toString() &&
                 element.question_id.toString() == elementQuestions._id.toString() &&
-                (element.child_id ? 
+                (element.child_id && req.user.currentChildActive ? 
                     (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
                     element.user_id.toString() === req.user._id.toString())
             )

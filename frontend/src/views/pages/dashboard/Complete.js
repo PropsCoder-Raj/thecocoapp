@@ -116,7 +116,12 @@ function Complete() {
                                         },
                                     }}>
                                         <Box>
-                                            <Typography variant="h3" color={"rgba(20, 23, 25, 1)"} fontWeight={"600"}>Good job, {localStorage.getItem("childName") || "--"}</Typography>
+                                            <Typography variant="h3" color={"rgba(20, 23, 25, 1)"} fontWeight={"600"}>
+                                                {
+                                                    location?.state?.totalPoints < 50 ? "Good job" : 
+                                                        location?.state?.totalPoints >= 50 && location?.state?.totalPoints <= 100 ? "Great work" : 
+                                                            location?.state?.totalPoints > 100 ? "Excellent effort" : "Good job"
+                                                }, {localStorage.getItem("childName") || ""}</Typography>
                                         </Box>
                                         <Box>
                                             <Typography variant="h4" color={"rgba(254, 141, 67, 1)"} fontWeight={"800"}>Reward</Typography>
