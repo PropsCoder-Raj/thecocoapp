@@ -150,6 +150,11 @@ function ChildProfile() {
             gender: child.gender,
             // profilePic: profileData ? profileData : null
         }));
+        const isSchoolValid = requestBody.find((child) => !child.schoolId);
+        if(isSchoolValid){
+            toast.error("School Id Invalid");
+            setIsLoading(false);
+        }
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
         let sendChildData = location?.state?.childId ? [{...requestBody[0], "profilePic": profilePic} ] : [{ ...requestBody[0], "profilePic":profilePic}];
         try {
