@@ -3,6 +3,12 @@ const { default: mongoose } = require('mongoose');
 const { userServices } = require("../service/users")
 const { createUser, findUser, updateUser } = userServices;
 
+const { childServices } = require("../service/child")
+const { findChild } = childServices;
+
+const { schoolServices } = require("../service/schools")
+const { findSchool } = schoolServices;
+
 const commonFunctions = require('../helper/utils')
 
 /**
@@ -31,8 +37,15 @@ const commonFunctions = require('../helper/utils')
 */
 exports.getProfile = async (req, res, next) => {
     try {
-        const user = await findUser({ _id: req.userId }, { _id: 1, email: 1, name: 1, userType: 1, profilePic: 1 });
-        return res.status(200).send({ status: true, message: "Get User Profile Data Successfully.", data: user });
+        let schoolName = "", schoolLogo = "";
+        const user = await findUser({ _id: req.userId }, { _id: 1, email: 1, name: 1, userType: 1, profilePic: 1, currentChildActive: 1 });
+        if(user.currentChildActive){
+            const child = await findChild({ _id: req.user.currentChildActive });
+            const school = await findSchool({ _id: child.schoolId });
+            schoolName = school.schoolName;
+            schoolLogo = school.logo;
+        }
+        return res.status(200).send({ status: true, message: "Get User Profile Data Successfully.", data: { ...user._doc, schoolName, schoolLogo} });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }
