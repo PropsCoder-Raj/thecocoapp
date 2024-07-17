@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, keyframes, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { redirectToMail } from "src/utils";
 
@@ -26,7 +26,22 @@ const DeskTopTitle = styled("h1")(({ theme }) => ({
     lineHeight: "38px",
   },
 }));
-
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust this value to control the bounce height */
+  }
+`;
 function CocoApp() {
 
 
@@ -64,18 +79,24 @@ function CocoApp() {
               },
             }}
           >
-            <img
+
+
+            {/* <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1",}}>
+
+              <img
               alt=""
               className="positionAbosolute EnergyIconPositionContactSection"
               src="images/energy-icon.svg"
               style={{ top: "unset !important" }}
             />
+            </Box> */}
+            
             <Box sx={{ display: "grid", gap: "20px" }}>
               <DeskTopTitle>
                 Cocoapp
                 <br /> for Schools
               </DeskTopTitle>
-              <Box sx={{ maxWidth: "493px" }}>
+              <Box sx={{ maxWidth: {xs:"auto",sm:"auto", md:"493px"} }}>
                 <Typography variant="h6">
                   Teachers, we’re here to help you! Our free tools support your
                   students as they learn finance through the Cocoapp, both in
@@ -93,11 +114,19 @@ function CocoApp() {
                 Contact us
               </Button>
             </Box>
-            <img
-              alt=""
-              className="positionAbosolute StarIconPositionContactSection"
-              src="images/star-icon.svg"
-            />
+            <Box sx={{
+              display: 'inline-block',
+              animation: `${rotate} 5s linear infinite`,
+              position: "relative",
+              zIndex: "-1",
+             
+            }}>
+              <img
+                className="positionAbosolute StarIconPosition"
+                src="images/star-icon.svg"
+                alt=""
+              /></Box>
+           
           </Grid>
           <Grid
             item

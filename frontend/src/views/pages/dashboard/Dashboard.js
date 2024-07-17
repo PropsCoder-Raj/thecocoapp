@@ -726,12 +726,12 @@ useEffect(()=>{
   const contentLog = (
     <>
       <Box height="100%" display="flex" flexDirection="column" sx={{ padding: "20px 0px", minWidth: "260px" }}>
-        <Box onClick={() => { setChildOpen(false); User.setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
+        {/* <Box onClick={() => { setChildOpen(false); User.setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
           <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
           <Typography >
             Back to home
           </Typography>
-        </Box>
+        </Box> */}
         <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
           <Typography >
             Profile

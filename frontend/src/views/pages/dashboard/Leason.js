@@ -50,11 +50,11 @@ const style = {
     alignItems: "end",
     display: "grid",
     justifyContent: "start",
-    paddingBottom: {
-      md: "0px",
-      sm: "90px",
-      xs: "90px"
-    },
+    // paddingBottom: {
+    //   md: "0px",
+    //   sm: "90px",
+    //   xs: "90px"
+    // },
   },
   CombineBox: {
     display: "grid",
@@ -95,8 +95,8 @@ const MainBox = styled(Box)(({ theme }) => ({
 const InnerBox = styled(Box)(({ theme }) => ({
   display: "grid",
   alignItems: "end",
-  height: "61px",
-  transition: "all 0.3s ease-in-out"
+  height: "71px",
+  transition: "all 0.1s ease-in-out"
 }));
 const AddImg = styled("img")(({ theme }) => ({
   width: "100%",
@@ -248,7 +248,10 @@ function Leason(props) {
     >
       <Container maxWidth="lg">
         <Grid container >
-          <Grid item xs={12} sm={12} md={8}>
+          <Grid item xs={12} sm={12} md={8} sx={{
+            height: "calc(100vh - 125px)",
+            overflow: "auto"
+}}>
             <Box sx={style.CombineBox}>
               <Box sx={style.gridBox}>
                 <Box sx={style.flexBox}>
@@ -445,14 +448,14 @@ function Leason(props) {
         // ref={boxRef}
         // onMouseDown={handleMouseDown}
         // onTouchStart={handleTouchStart}
-        style={swipingDirection == "Swiping up" ? {height: "95px",
-                transition: "all 0.3s ease-in-out",
+        style={swipingDirection == "Swiping up" ? {height: "115px",
+                transition: "all 0.1s ease-in-out",
                 // borderTopLeftRadius: "50%",
                 // borderTop: "14px solid rgb(255, 179, 209)",
                 // borderTopRightRadius: "50%"
         } : swipingDirection == "Swiping down" ? {
           height: "35px",
-          transition: "all 0.3s ease-in-out",
+          transition: "all 0.1s ease-in-out",
 }:{}
         }
       >
@@ -486,16 +489,17 @@ function Leason(props) {
                     sx={{
                       width: '100%',
                       height: '100vh',
-                      position: 'absolute',
+                      position: 'fixed',
                       cursor: 'pointer',
-                      top: "0"
+                      top: "63px",
+                      left:"0"
                     }}
                   >
                     <Box
                       component="span"
                       sx={{
-                        width: '40px',
-                        height: '40px',
+                        width: '100%',
+                        // height: '40px',
                         backgroundColor: 'blue',
                         borderRadius: '50%',
                       }}

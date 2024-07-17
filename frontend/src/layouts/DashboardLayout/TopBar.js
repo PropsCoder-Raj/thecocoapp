@@ -99,7 +99,7 @@ export function TopBarData({ onMobileNavOpen }) {
   const auth = useContext(AuthContext);
   const User = useContext(UserContext);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isMobileChild = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);

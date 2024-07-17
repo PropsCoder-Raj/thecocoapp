@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Container, Grid, Snackbar, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, keyframes, Snackbar, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 const style = {
@@ -13,6 +13,7 @@ const style = {
     "@media(max-width:767px)": {
       marginTop: "15px",
       marginBottom: "30px",
+      minWidth: "220px",
     },
   },
 
@@ -62,7 +63,14 @@ const DeskTopTitle = styled("h1")(({ theme }) => ({
     lineHeight: "38px",
   },
 }));
-
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 function HeroSection() {
   const [open, setOpen] = useState(false);
 
@@ -114,11 +122,6 @@ function HeroSection() {
               },
             }}
           >
-            {/* <img
-              className="positionAbosolute EnergyIconPosition"
-              src="images/energy-icon.svg"
-              alt=""
-            /> */}
             <DeskTopTitle>
               Helping children to make smart money choices !
             </DeskTopTitle>
@@ -136,11 +139,27 @@ function HeroSection() {
             >
               Get started
             </Button>
+            <Box sx={{
+              display: 'inline-block',
+              animation: `${rotate} 5s linear infinite`,
+              position:"relative",
+              zIndex:"-1",
+              top:{
+                md:"0",
+                sm:"-174px",
+                xs:"-185px"
+              },
+              float:{
+                md: "none",
+                sm: "inline-end",
+                xs: "inline-end"
+              }
+            }}>
             <img
               className="positionAbosolute StarIconPosition"
               src="images/star-icon.svg"
               alt=""
-            />
+            /></Box>
           </Grid>
           <Grid
             item

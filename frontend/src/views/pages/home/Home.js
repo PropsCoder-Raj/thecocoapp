@@ -11,6 +11,7 @@ import BenifitsSection from "./BenifitsSection";
 import GettingStarted from "./GettingStarted";
 import AskQuestions from "./AskQuestions";
 import Footer from "src/views/content/Footer";
+import { Box, keyframes } from "@mui/material";
 
 const SectionFunBack = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/FreeFunBackground.png')",
@@ -93,10 +94,46 @@ function Home() {
   useEffect(() => {
     localStorage.removeItem("emailReset")
   }, [])
+  const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust this value to control the bounce height */
+  }
+`;
+  const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
   return (
     <Page title="Home">
       <section>
+        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display:{xs:"none", sm:"none", md:"block"} }}>
+          <img
+            style={{
+              position: "absolute",
+              left: "10px",
+              top: "50px",
+            }}
+            src="images/energy-icon.svg"
+            alt=""
+          /></Box>
         <HeroSection />
+        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "block", sm: "block", md: "none" } }}>
+          <img
+            style={{
+              position: "absolute",
+              left: "10px",
+              bottom: "0px",
+            }}
+            src="images/energy-icon.svg"
+            alt=""
+          /></Box>
       </section>
       <SectionFunBack>
         <FreeFunEffective />
@@ -108,6 +145,15 @@ function Home() {
         <FeedBack />
       </SectionFeedBack>
       <section>
+        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" } }}>
+
+          <img
+            alt=""
+            className="positionAbosolute EnergyIconPositionContactSection"
+            src="images/energy-icon.svg"
+            style={{ top: "unset !important" }}
+          />
+        </Box>
         <CocoApp />
       </section>
       <SectionBenifits>

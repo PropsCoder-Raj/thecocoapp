@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Container, Grid, Typography, Button, Snackbar } from "@mui/material";
+import { Box, Container, Grid, Typography, Button, Snackbar, keyframes } from "@mui/material";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
 
@@ -63,6 +63,14 @@ const BoxCenter = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
 }));
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 function FreeFunEffective() {
     const [open, setOpen] = useState(false);
 
@@ -99,9 +107,30 @@ function FreeFunEffective() {
       <Box sx={style.HandleMargin}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
+            <Box sx={{
+              display: 'inline-block',
+              animation: `${rotate} 5s linear infinite`,
+              position: "relative",
+              // zIndex: "-1",
+              top: {
+                md: "0",
+                sm: "0px",
+                xs: "0px"
+              },
+              float: {
+                md: "inline-end",
+                sm: "inline-end",
+                xs: "inline-end"
+              }
+            }}>
+              <img
+                src="images/Vector.svg"
+                alt=""
+              /></Box>
             <BoxCenter>
               <Typography variant="h1">Free Fun Effective</Typography>
             </BoxCenter>
+            
           </Grid>
           <Grid
             item
@@ -176,6 +205,27 @@ function FreeFunEffective() {
                 Get started
               </Button>
             </HandleBox>
+            <Box sx={{
+              display: 'inline-block',
+              animation: `${rotate} 5s linear infinite`,
+              position: "relative",
+              zIndex: "1",
+              top: {
+                md: "0",
+                sm: "0px",
+                xs: "0px"
+              },
+              float: {
+                md: "inline-end",
+                sm: "inline-end",
+                xs: "inline-end"
+              }
+            }}>
+              <img
+                className="positionAbosolute StarIconPosition"
+                src="images/star-icon.svg"
+                alt=""
+              /></Box>
           </Grid>
         </Grid>
       </Box>

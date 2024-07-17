@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import styled from "@emotion/styled";
+import moment from "moment";
 
 const style = {
     flexBox: {
@@ -110,14 +111,13 @@ function ChildProfile() {
         children: [
             {
                 name: location?.state?.data?.childName || "",
-                schoolId: "",
-                dob: "",
-                gender: "",
-                standard: "",
+                schoolId: location?.state?.data?.schoolId || "",
+                dob: moment(location?.state?.data?.dob).format("YYYY-MM-DD") || "",
+                gender: location?.state?.data?.gender || "",
+                standard: location?.state?.data?.standard || "",
             },
         ],
     };
-
     const UploadImg = async (value) => {
         const token = localStorage.getItem("token");
         setIsLoading(true);
@@ -150,11 +150,6 @@ function ChildProfile() {
             gender: child.gender,
             // profilePic: profileData ? profileData : null
         }));
-        const isSchoolValid = requestBody.find((child) => !child.schoolId);
-        if(isSchoolValid){
-            toast.error("School Id Invalid");
-            setIsLoading(false);
-        }
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
         let sendChildData = location?.state?.childId ? [{...requestBody[0], "profilePic": profilePic} ] : [{ ...requestBody[0], "profilePic":profilePic}];
         try {
