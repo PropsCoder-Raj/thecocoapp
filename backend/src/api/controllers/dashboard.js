@@ -52,7 +52,7 @@ const { updateCurrentStatus } = require('../helper/utils')
 *         description: Conflict
 */
 exports.getAllModules = async (req, res, next) => {
-    try {;
+    try {
 
         // Pipeline to check if modules are present for the child's standard
         const pipelineIsModulePresent = [
@@ -140,6 +140,27 @@ exports.getAllModules = async (req, res, next) => {
                 }
             }   
         }
+
+        if(req.user.currentChildActive){
+            const child = await findChild({ _id: req.user.currentChildActive });
+            for (let index = 0; index < processedModules.length; index++) {
+                const element = processedModules[index];
+                if(child.standard){
+                    if(Number(element.standard_id) > Number(child.standard)){
+                        if(processedModules[index].modules && processedModules[index].modules.length > 0){
+                            processedModules[index].modules[0].levels[0].current_status = false;
+                        }
+                    }
+                }else{
+                    if(element.standard_id > 4){
+                        if(processedModules[index].modules && processedModules[index].modules.length > 0){
+                            processedModules[index].modules[0].levels[0].current_status = false;
+                        }
+                    }
+                }   
+            }
+        }
+
 
         return res.status(200).send({
             status: true,

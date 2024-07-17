@@ -81,6 +81,8 @@ exports.attemptQuestions = async (req, res, next) => {
             const child = await findChild({ _id: req.user.currentChildActive });
             if(child.standard == question.standard_id.standard_id){
                 isPointsAccessible = true;
+            }else if(!child.standard){ 
+                isPointsAccessible = true;
             }
         }else{
             isPointsAccessible = true;
