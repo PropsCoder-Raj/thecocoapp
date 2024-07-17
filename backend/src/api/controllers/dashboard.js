@@ -52,8 +52,7 @@ const { updateCurrentStatus } = require('../helper/utils')
 *         description: Conflict
 */
 exports.getAllModules = async (req, res, next) => {
-    // try {
-        const child = await findChild({ _id: req.user.currentChildActive });
+    try {;
 
         // Pipeline to check if modules are present for the child's standard
         const pipelineIsModulePresent = [
@@ -104,8 +103,9 @@ exports.getAllModules = async (req, res, next) => {
                 ...module,
                 complete_status: !!completedModulesList.find(element =>
                     element.module_id.toString() === module._id.toString() &&
-                    (element.child_id && req.user.currentChildActive ? (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id) :
-                    element.user_id.toString() === req.user._id.toString())
+                    (element.child_id && req.user.currentChildActive ? 
+                        (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                        element.user_id.toString() === req.user._id.toString())
                 ),
                 levels: levelsLists
                     .filter(level => level.module_id.toString() === module._id.toString())
@@ -146,9 +146,9 @@ exports.getAllModules = async (req, res, next) => {
             message: "Get Modules Data Successfully.",
             result: processedModules
         });
-    // } catch (error) {
-    //     return res.status(500).send({ status: false, message: error.message });
-    // }
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    }
 };
 
 /**
@@ -247,10 +247,8 @@ exports.getLessons = async (req, res, next) => {
 exports.getQuestions = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
-        const standard = await findAllCompletedLevels({ level_id: level_id, module_id: module_id })
+        const standard = await findAllCompletedLevels({ level_id: level_id, module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id })
         let questionsLists = await findAllQuestions({ level_id: level_id, module_id: module_id });
-
-        console.log(standard);
 
         const listCompletedQuestions = await findAllCompletedQuestions();
         let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true, attamptedQuestions = standard.length > 0 ? true : false;

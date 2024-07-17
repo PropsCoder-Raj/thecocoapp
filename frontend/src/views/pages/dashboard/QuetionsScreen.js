@@ -188,7 +188,7 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                value={attempt ? percentage : calculateProgressValue()}
+                value={!attempt ? percentage : calculateProgressValue()}
               />
               <Typography variant="body2" color={"#FE8A36"}>
                 {progress}/{max}

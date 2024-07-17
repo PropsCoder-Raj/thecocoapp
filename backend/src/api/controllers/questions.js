@@ -2,6 +2,9 @@
 const { childServices } = require('../service/child');
 const { findAllChildren, insertChild, findChildCount, findChild, updateChild } = childServices;
 
+const { schoolServices } = require("../service/schools")
+const { findSchool } = schoolServices;
+
 const { levelServices } = require('../service/levels');
 const { findAllLevels, findLevel } = levelServices;
 
@@ -69,10 +72,19 @@ const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestio
 exports.attemptQuestions = async (req, res, next) => {
     try {
         const { question_id, module_id, level_id, answer, question_no, demo } = req.body;
-        let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0;
+        let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0, isPointsAccessible = false;
 
         const question = await findQuestion({ _id: question_id, module_id, level_id });
         const levelDetails = await findLevel({ _id: level_id });
+
+        if(req.user.currentChildActive){
+            const child = await findChild({ _id: req.user.currentChildActive });
+            if(child.standard == question.standard_id.standard_id){
+                isPointsAccessible = true;
+            }
+        }else{
+            isPointsAccessible = true;
+        }
 
         if (question.right_answer == answer) {
             correctAnswerStatus = true;
@@ -176,12 +188,12 @@ exports.attemptQuestions = async (req, res, next) => {
         let listAllQuestions = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
         let susscessQuestions = listAllQuestions.filter((question) => question.correstAnswer == true).length;
         let loaderPercentage = Math.ceil(33.33 * susscessQuestions)
-        totalPoints = listAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
+        totalPoints = isPointsAccessible ? listAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0) : 0;
         
         if(nextScreen == "SCORE_BOARD" && demo == false){
             let listChildAllQuestions = await findAllCompletedQuestions({ child_id: req.user.currentChildActive });
             let totalPointsChild = listChildAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
-            await updateChild({ _id: req.user.currentChildActive }, { $set: { totalPoints: totalPointsChild } });
+            isPointsAccessible && await updateChild({ _id: req.user.currentChildActive }, { $set: { totalPoints: totalPointsChild } });
             await updateCompletedLevel({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id },
                 { $set: { module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true } });
 
