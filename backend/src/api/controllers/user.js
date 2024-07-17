@@ -42,8 +42,10 @@ exports.getProfile = async (req, res, next) => {
         if(user.currentChildActive){
             const child = await findChild({ _id: req.user.currentChildActive });
             const school = await findSchool({ _id: child.schoolId });
-            schoolName = school.schoolName;
-            schoolLogo = school.logo;
+            if(school){
+                schoolName = school.schoolName;
+                schoolLogo = school.logo;
+            }
         }
         return res.status(200).send({ status: true, message: "Get User Profile Data Successfully.", data: { ...user._doc, schoolName, schoolLogo} });
     } catch (error) {
