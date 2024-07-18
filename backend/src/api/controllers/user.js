@@ -37,7 +37,7 @@ const commonFunctions = require('../helper/utils')
 */
 exports.getProfile = async (req, res, next) => {
     try {
-        let schoolName = "", schoolLogo = "";
+        let schoolName = "", schoolLogo = "", schoolAddress = "";
         const user = await findUser({ _id: req.userId }, { _id: 1, email: 1, name: 1, userType: 1, profilePic: 1, currentChildActive: 1 });
         if(user.currentChildActive){
             const child = await findChild({ _id: req.user.currentChildActive });
@@ -45,9 +45,10 @@ exports.getProfile = async (req, res, next) => {
             if(school){
                 schoolName = school.schoolName;
                 schoolLogo = school.logo;
+                schoolAddress = school.address;
             }
         }
-        return res.status(200).send({ status: true, message: "Get User Profile Data Successfully.", data: { ...user._doc, schoolName, schoolLogo} });
+        return res.status(200).send({ status: true, message: "Get User Profile Data Successfully.", data: { ...user._doc, schoolName, schoolLogo, schoolAddress} });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }
