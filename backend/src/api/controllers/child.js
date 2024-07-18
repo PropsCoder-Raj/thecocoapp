@@ -1,6 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const { childServices } = require('../service/child');
-const { findAllChildren, insertChild, findChildCount, updateManyChild, findChild, updateChild } = childServices;
+const { findAllChildren, insertChild, findAllChildrenWithPopulate, updateManyChild, findChild, updateChild } = childServices;
 
 const { schoolServices } = require('../service/schools');
 const { findSchool, findAllSchool } = schoolServices;
@@ -44,7 +44,7 @@ const { updateManyCompletedQuestions, findAllCompletedQuestions } = completedQue
 */
 exports.getAllChild = async (req, res, next) => {
     try {
-        const childData = await findAllChildren({ userId: req.userId });
+        const childData = await findAllChildrenWithPopulate({ userId: req.userId });
         return res.status(200).send({ status: true, message: "Get Child Data Successfully.", data: childData });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
