@@ -10078,5 +10078,1733 @@
         "lesson_id": 3,
         "name": "Becoming a Financially Empowered Individual",
         "description": "Being financially empowered means having control over your finances and making informed decisions. Understanding advanced financial planning strategies helps you feel confident and secure about your financial future."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Intro to Finances",
+        "description": "Think rupees are like game points to get awesome stuff! You earn them (allowance, gifts) and use them to buy things (shops, cash, cards). This is finance – understanding how money works. How cool is it to be a Rupee Rockstar who knows financial basics?"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Income & Expenses",
+        "description": "Track your rupees like a detective! Where does your money go (allowance, gifts)? What do you spend on (snacks, games)? A chart shows your rupee flow! Imagine you're catching a rupee thief – where are they hiding? This helps you understand income and expenses."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Financial Goals Basics",
+        "description": "Have a dream goal (bike, trip)? This helps you plan! Pick something you want (bat, movie ticket). We'll figure out the cost and ways to save (weekly savings). Imagine planting a rupee seed – watch it grow into a big savings tree! Goal setting is key to saving smart."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Account Types (Checking/Savings)",
+        "description": "Rupees can grow like a tree!  There are special places (savings accounts) where your rupees earn interest, making your tree bigger!  Think of it like a reward for keeping your money safe.  These accounts are different from your piggy bank – they help your rupees grow faster!  We'll explore different saving options to choose the right one for your goals."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Positive Relationship with Money",
+        "description": "Ever wonder about those plastic cards your parents use? There are two main types: debit cards and credit cards. Debit cards are like having a direct link to your checking account – you spend what you have. Credit cards let you borrow money to buy things, but you gotta pay it back with interest! Think of them like borrowing a friend's bat – use it wisely and pay them back! (Talk to an adult before using credit cards!) It's important to develop a positive relationship with money and understand card responsibility."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Saving & Budgeting Importance",
+        "description": "Imagine building a strong fort to protect your rupees. Making responsible choices today (saving regularly, avoiding unnecessary spending) helps build a solid financial foundation. An important part of this foundation is budgeting – a plan for how you'll use your money. We'll discuss financial literacy tools and develop a growth mindset for financial success in the next levels. With a strong foundation, your financial future will be golden!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Savings Options (CDs/MMAs)",
+        "description": "Rupees can be superstars! We've got different places to save them and watch them grow. Savings accounts are like your rupee's personal gym, where they earn interest (a reward for saving) and get stronger. There are even special options like CDs (Certificates of Deposit) and MMAs (Money Market Accounts) that can give your rupees an extra boost! Explore all these choices to find the perfect fit for your saving goals."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Understanding Credit & Debit Cards",
+        "description": "Plastic cards can be handy, but you gotta use them like a cricket bat - with skill! Debit cards are linked to your checking account, so you only spend what you have. Credit cards let you borrow money to buy things, but you gotta pay it back with interest (extra fees!). Think of it like borrowing a friend's bat – use it wisely and pay them back on time! This is called responsible borrowing. We'll learn how to be a card shark – swipe smart, not fast! (Talk to an adult before using credit cards!)"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Responsible Borrowing & Debt Mgmt",
+        "description": "Imagine building a giant rupee empire! Making smart choices today lays the foundation for a secure financial future. A big part of this is budgeting – a plan for how you'll earn, save, and spend your rupees. We'll use financial tools like charts and apps to track your money and make wise decisions. With a strong foundation, your rupee empire will reach for the stars!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Intro to Investing",
+        "description": "Imagine your rupees growing on a magic money tree! Investing is like planting a rupee seed and watching it grow into a big tree over time. The earlier you start, the bigger the tree (your savings) gets! We'll explore how to invest your rupees wisely (with adult guidance) to become a rupee millionaire... maybe not today, but someday!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "The Power of Comp. Interest (Deep Dive)",
+        "description": "Ever wondered how your rupees grow in a savings account? It's like magic, but it's called compound interest! Imagine earning interest on your interest – your rupees grow faster and faster! We'll take a deep dive into compound interest to show you the super power of saving early. The more you know, the stronger your Rupee Power Up becomes!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Financial Risks & Mgmt Strategies",
+        "description": "The financial world can be tricky sometimes, with unexpected events or tempting purchases. These are like money monsters trying to steal your rupees! We'll further learn about financial risks and develop strategies to manage them. By making smart choices and having a plan, you can outsmart the money monsters and keep your rupees safe and sound!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Fin. Literacy Tools & Resources",
+        "description": "Imagine a gym for your rupees! There are cool apps, websites, and even games that help you manage your money. These tools are like exercise equipment that help you build a strong financial foundation. We have to explore how to use them to track your spending, create budgets, and develop smart money habits. With these tools and a solid foundation, you'll be a financial whiz in no time!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Strong Financial Foundation",
+        "description": "Think saving and making smart financial choices is hard? Not true! This lesson is all about believing in yourself. You can learn and use financial tools to grow your rupees effectively. Just like in cricket, practice makes perfect! The more you learn and grow, the stronger your Rupee Power becomes. Imagine your rupees growing on a money tree – the more you believe, the bigger the tree gets!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Growth Mindset for Financial Success",
+        "description": "Congratulations, you're a Rupee Rockstar! We've learned tons of financial moves – saving, budgeting, and using cool tools. Remember, smart financial choices today will lead to a bright financial future. Keep practicing your Rupee Power skills – the journey continues! We'll explore more ways to manage your money wisely, plan for your future, and become financially independent!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Understanding Taxes & Withholding",
+        "description": "Taxes might sound confusing, but they're like a small contribution you make to your community. Think of it like paying for a cool park everyone enjoys, or for clean water in your neighborhood. Sometimes, a tiny bit of your allowance or gifts might already be taken out for taxes (withholding) before you even get it. Understanding how taxes work is an important part of being a financially responsible Rupee Rockstar!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "College & Career Financial Planning",
+        "description": "Ever dream of becoming a doctor, a cricket star, or maybe an artist? Financial planning helps you reach your future goals! The choices you make about education and career can impact your finances. We'll explore scholarships, ways to save for college, and even different career options. This will put you on the right track to becoming a successful Rupee Rockstar, no matter what path you choose!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Building Financial Independence (Long-Term)",
+        "description": "Imagine celebrating your own \"Rupee Independence Day!\" This lesson is all about setting big, long-term goals, like buying a house, traveling the world, or starting your own business. We'll learn how to make smart financial decisions today that will help you achieve those dreams in the future. By saving regularly, avoiding unnecessary spending, and developing good financial habits, you'll be well on your way to celebrating your financial independence! Remember, the strong financial foundation you build now will help you reach your goals and become a true Rupee Rockstar!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Importance of Tracking Expenses",
+        "description": "Have you ever felt like your pocket money vanishes into thin air? It's a mystery! In this mission, we'll crack the case by tracking your expenses (everything you spend your money on).  Just like following clues, we'll use a cool tracking sheet to reveal exactly where your rupees are going!  For the next week, track all your income (allowance, gifts) and expenses (snacks, games, etc.) in your tracking sheet.  See if you can find any hidden rupee leaks!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Budget Template & Spending Categories",
+        "description": "Being a Rupee Rockstar is all about taking charge! Imagine your rupees are a whole cricket team, with different jobs. We've got some rupees that are fixed expenses (unchanging costs like school supplies) – they're like your dependable opening batsman. Then there are variable expenses (flexible costs like movies or games) – they're like your middle order players, sometimes needed, sometimes not. By using a budget template with categories like \"Entertainment\" and \"Savings,\" you can organize your rupee team and make informed decisions about how to spend wisely! Would you spend all your rupees on just one batsman?  Of course not!  A budget helps you create a balanced team to achieve your rupee goals!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Fixed & Variable Expenses",
+        "description": "Armed with your detective skills and knowledge of fixed vs. variable expenses, you're ready to become a rupee mastermind! By tracking your expenses, you can create a personalized budget that fits your goals, just like a winning cricket strategy. Explore different budgeting tools like templates and apps to transform your plan into action. Remember, a budget is your flexible friend – you can adjust it as needed to become the ultimate Rupee Rockstar!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Tracking Income & Expenses (Tools)",
+        "description": "Being a Rupee Rockstar requires tracking your rupees!  Imagine an awesome app or worksheet as your personal money manager.  You'll record your income (allowance, gifts) and expenses (snacks, games) – it's like keeping score in a cricket match!  These tools will help you see exactly where your rupees are flowing."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Saving & Reducing Spending",
+        "description": "Saving is your superpower! Look at your expense tracker. Are there areas to cut back on movie nights or impulse buys? Every rupee saved is a rupee closer to your goals. We'll explore easy ways to reduce spending and boost your savings!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Sticking to Your Budget & Adjustments",
+        "description": "Sticking to a budget can be tricky, even for the best Rupee Rockstars! Life throws curveballs sometimes. Maybe you need a new textbook (unexpected expense!). That's okay! We can adjust your budget to stay on track. Remember, a budget is your flexible friend, not a strict drill sergeant!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Budgeting for Needs & Goals (School/Gadgets)",
+        "description": "Being a Rupee Commander is all about priorities!  Not all expenses are created equal. School supplies are a NEED –  like your dependable opening batsman in cricket.  That new phone might be a WANT – more like a powerful middle-order batsman.  Your budget is your game plan – use it to decide how many rupees go to each!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Unexpected Expenses & Sticking to Plan",
+        "description": "Sometimes unexpected expenses pop up like sudden rain showers. Maybe your headphones break (unexpected expense!). Don't worry! We'll learn how to adjust your budget to handle these situations without derailing your rupee goals. Always check if you can repair before replacing. Remember, a good Rupee Rockstar stays calm and adjusts their plan as needed!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Financial Communication (Parents/Guardians)",
+        "description": "Communication is key! Talking to your parents/guardians about finances is like having a team meeting with your cricket coach. They can offer advice and maybe even help with matching some of your savings goals! Open communication builds trust and strengthens your financial batting line-up!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Budgeting for Different Income Sources",
+        "description": "Imagine earning extra rupees from chores or helping your family! With more income, you can adjust your budget to reach even bigger goals, like saving for college (long-term goal). It's like having a powerful all-rounder on your cricket team – more rupees to achieve your dreams!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Budgeting Tools & Long-Term Goals",
+        "description": "Level up your rupee game with awesome budgeting tools! These digital coaches, like apps and websites, help you track your financial innings. From income (allowance, chores) to expenses (games, clothes) and long-term goals (dream vacation), these tools will put you on the path to rupee mastery!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Financial Discipline & Avoiding Impulse Purchases",
+        "description": "Impulse purchases can be like a yorker in cricket – tough to resist! But a true Rupee Master has financial discipline. We have to explore strategies to avoid impulse buys and make smart choices with your rupees. Remember, every rupee saved today is a rupee closer to your future goals!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Advanced Budgeting Techniques (Envelopes/50/30/20 Rule)",
+        "description": "Feeling like a budgeting pro? Let's explore advanced techniques like the Envelope System (separating cash for different needs) or the 50/30/20 Rule (dividing income into Needs, Wants & Savings). These are like secret ninja moves to maximize your rupee power!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Emergency Fund & Unexpected Expenses",
+        "description": "Life throws curveballs! A broken phone (unexpected expense) shouldn't derail your plans. That's why an emergency fund is crucial. It's a safety net of rupees saved for surprises. Learn how to build your emergency fund and stay on track even with unexpected expenses!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Budgeting Software & Tools",
+        "description": "Level up your rupee game with budgeting apps and software! These tools go beyond the basics to help you manage your money and reach your goals. Imagine them as superpowers for your rupees:\nTrack your money: See where your rupees go.\nSet goals & budget: Plan for your dream phone, college, or vacation.\nPay bills on time: Avoid late fees and stay organized.\nLearn how to save: Get insights into your spending habits."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Shared Budget (Family/Roommates)",
+        "description": "Imagine sharing your cricket team's resources! That's what budgeting with family or roommates is like. We'll explore how to create a shared budget, deciding how much everyone contributes (income) and spends on shared expenses (groceries, rent). Communication and teamwork are key to Rupee Rockstar success!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Budgeting for Future Expenses (College/Travel)",
+        "description": "Ever dream of college or a world trip? These are long-term goals. We'll learn how to budget for future expenses. set your target. Imagine saving a small amount each month – over time, those rupees will grow like a mighty banyan tree, helping you reach your dreams!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Sustainable Budgeting Habit",
+        "description": "Being a Rupee Rockstar isn't just about saving money, it's about making smart choices! We'll explore sustainable budgeting, finding ways to save money and be eco-friendly (like using reusable water bottles). Remember, a Rupee Rockstar takes care of their money and the planet!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Understanding the Difference",
+        "description": "Not all rupees are created equal! Some things you absolutely NEED, like food and school supplies. These are like your dependable opening batsman in cricket. Other things you just WANT, like a new video game. These are more like exciting all-rounders. Understanding the difference between Needs and Wants is your first step to becoming a Rupee Rockstar!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Prioritizing Needs & Wants (Budget)",
+        "description": "Imagine your rupees are a whole cricket team! Some expenses are your dependable players, ALWAYS there (school supplies) – these are Needs. Others are like exciting all-rounders (movies, games) – sometimes needed. These are Wants. Use a cool budget template to organize your \"team\" and spend wisely! No batsman gets all the rupees, right? A budget helps you create a balanced team to win your rupee goals!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Smart Financial Decisions (Limited Resources)",
+        "description": "Being a Rupee Rockstar is about making smart choices with limited resources. Imagine you only have a certain number of players on your cricket team (your rupees). Choose wisely! Beware of advertising tricks that tempt you to spend on things you don't truly need. Practice your Patience Power to resist impulse purchases. Think twice before you buy – is it a Need or a Want? Could you wait and save for something bigger?"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Advertising & Marketing Impact",
+        "description": "Ever feel like TV ads hypnotize you into buying things? Advertisers use clever tricks to make you WANT things you might not NEED. Learn to recognize these tricks and become a Rupee Shield, protecting your rupees from unnecessary spending!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Resisting Impulse Purchases",
+        "description": "Sometimes, that cool new phone case looks irresistible! But wait! Is it a Need or a Want? Can you delay gratification and save your rupees for something bigger? Develop your Rupee Stopper skill to resist impulse purchases. Remember, a true Rupee Rockstar thinks before they spend!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Delayed Gratification & Long-Term Goals",
+        "description": "Imagine planting a tiny seed today and watching it grow into a mighty banyan tree tomorrow. Delayed gratification is like that seed. By waiting to buy something now, you can save your rupees and achieve bigger goals later, like a dream vacation! Learn to set long-term goals and use delayed gratification to make them a reality."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Prioritization & Goal Setting (Needs & Wants)",
+        "description": "Being a Rupee Rockstar is all about planning! With your family or friends, discuss your Needs (food, clothes) and Wants (movies, games). Work together to prioritize your spending and set clear goals. Imagine your family as a team of explorers, charting a course to reach your financial treasure chest!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Opportunity Cost & Trade-Offs",
+        "description": "Choices involve trade-offs! If you buy that game now, you might not have enough for a concert ticket later. Understanding opportunity cost helps you make smart decisions. Talk with your family or friends about your goals and work together to find the best way to use your rupees, considering both Needs and Wants."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Positive Relationship with Money (Advanced)",
+        "description": "Money isn't just about buying things. It's a tool to help you achieve your dreams and share happiness with others. By learning to manage your rupees wisely, you're building a positive relationship with money that will last a lifetime. Discuss with your family or friends how you can use your rupees to not only buy things you need, but also support things you care about."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Prioritizing Needs & Wants (Scenarios)",
+        "description": "Being a Rupee Rockstar means using your skills in real life!  Imagine different scenarios:\nA friend wants you to buy the latest gadget.\nA movie looks tempting after a long school week.\nPractice prioritizing your Needs and Wants. Can you politely say no to unnecessary spending? Discuss with your family or friends how you can navigate these situations as a team."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Saying No to Unnecessary Spending",
+        "description": "Developing strong communication skills is crucial for a Rupee Rockstar! Learn how to politely decline unnecessary purchases. Practice saying things like \"Thanks, but I'm saving up for something else right now\" or \"Maybe we can find a way to earn some extra rupees together before buying that.\" Remember, your family or friends will understand and support your financial goals!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Financial Confidence & Responsible Choices",
+        "description": "Making responsible choices, even when it's tough, builds your financial confidence. Discuss with your family or friends how you can support each other in making smart financial decisions. By sticking to your budget and prioritizing your goals, you'll feel empowered and confident in your financial journey!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Values in Financial Decision Making",
+        "description": "Everyone has different values! Maybe you value experiences over material things, or maybe you value saving for the future. Understanding your values helps you make smart financial decisions. Discuss with your family or friends what's important to you and how your rupees can reflect those values."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Life Event Financial Planning (Birthdays/Holidays)",
+        "description": "Birthdays and holidays are exciting, but they can also strain your rupee resources! Learn how to plan your spending for these events. Set a budget with your family or friends, decide on creative gift ideas (experiences or homemade gifts!), and avoid overspending. Remember, a thoughtful gift doesn't have to be expensive!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Growth Mindset for Responsible Spending",
+        "description": "Everyone makes mistakes! Maybe you spent more than planned on a movie ticket. Don't beat yourself up! Develop a growth mindset for responsible spending. Learn from your mistakes, adjust your budget if needed, and keep moving forward on your financial goals. Talk with your family or friends about how you can support each other in developing healthy spending habits."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Prioritizing Needs & Long-Term Goals",
+        "description": "Being a champion isn't just about winning today! Think about your long-term goals. Do you dream of going to college or starting your own business? Now is the time to start prioritizing your rupees for those goals. Discuss with your family or friends how you can work together to make your long-term dreams a reality."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Building Financial Resilience (Unexpected Events)",
+        "description": "Life throws curveballs! Maybe your phone breaks (unexpected expense). Building financial resilience means being prepared for these situations. Learn how to create an emergency fund with your family or friends. Set aside a small amount of rupees each month to build a safety net that can help you weather unexpected events without derailing your financial plans."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Developing a Plan for Financial Wellness (Lifelong)",
+        "description": "Financial wellness isn't just about saving money, it's about making smart choices for your entire life! Just like taking care of your physical health, you need to take care of your financial health. Work with your family or friends to develop a lifelong financial wellness plan. This plan will help you make responsible choices, achieve your goals, and live a financially secure life. Discuss your future goals and dreams, and explore ways to use your rupees wisely throughout your life."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Types of Income",
+        "description": "Imagine rupees raining down – that's income!  But where do those rupees come from?  There are two main types:\nEarned Income: You work for it! This could be your allowance for chores or money you earn from a part-time job.\nUnearned Income: You don't directly work for it. This could be a gift from a relative or interest earned on your savings."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Earned vs. Unearned Income",
+        "description": "The difference between earned and unearned income matters! Earned income teaches you the value of hard work. Unearned income is great, but it's important to learn how to manage it wisely."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Career Options & Salary Ranges",
+        "description": "Ever dream of being a doctor, a musician, or a tech whiz? Different careers have different salary ranges (the amount of rupees you earn). Research your dream jobs and see what kind of income they offer. Remember, education and skills can help you unlock higher-paying careers!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Managing Allowance Wisely",
+        "description": "Your allowance is like your training ground for managing rupees! Learn how to budget your allowance wisely. Set aside some for Needs (school supplies), some for Wants (games), and some for savings (future goals). Track your income and expenses to become a true Rupee Manager!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Part-Time Jobs (Age Restrictions)",
+        "description": "Dreaming of earning more rupees? Part-time jobs can be a great option! But remember, there are age restrictions in India. Research the rules and explore jobs that fit your age and interests. Maybe you can help with deliveries, tutor younger students, or do chores for neighbors!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Value of Work & Saving for Goals",
+        "description": "A job isn't just about earning rupees. It teaches you the value of work. The satisfaction of earning your own money is a great feeling! Use part-time income to save for your goals, like a new phone or a trip with friends. Every rupee saved brings you closer to your dreams!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Self-Employment & Entrepreneurship",
+        "description": "Ever dream of being your own boss?  Self-employment and entrepreneurship are all about turning your ideas into income!  Maybe you're a whiz at baking cookies or have a talent for crafting jewelry.  Explore ways to sell your creations and become a mini-mogul!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Income Through Investments (Intro)",
+        "description": "Imagine your rupees growing on a magic rupee tree! Investments are like planting seeds – you invest some money now, and it can grow over time (with some risk involved). We'll explore basic concepts of investments later, but for now, remember – saving is the first step towards future growth!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Financial Planning for Income Sources",
+        "description": "Having different income sources is like having a diverse investment portfolio (we'll learn about that later!). Think about your skills and interests. Can you combine them to create multiple income streams, like a lemonade stand and selling handmade crafts? Financial planning helps you manage all your income sources and work towards your goals."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Skills & Education for Earning Potential",
+        "description": "The more skills and education you have, the higher your earning potential in the future! Focus on developing strong academic skills, but also explore your passions. Are you great at computers? Do you love working with animals? Developing relevant skills now can open doors to well-paying careers later."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Taxes & Withholding from Income",
+        "description": "As a Rupee Rockstar, you'll contribute to society by paying a small portion of your income in taxes. This helps fund public services like schools and roads. Some employers might withhold taxes from your paycheck, meaning they take out a certain amount upfront. Understanding taxes is an important part of financial literacy."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Manage Income for Goals (Short & Long-Term)",
+        "description": "No matter how much you earn, managing your income is key! Set clear short-term goals (new phone) and long-term goals (college). Use your income to pay for Needs, save for your goals, and maybe even invest a small amount (with adult supervision) for the future. Remember, every rupee saved or invested brings you closer to your dreams!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Building a Resume & Interview Skills (Intro)",
+        "description": "Imagine your resume as your rupee magnet, attracting future employers! Learn the basics of building a strong resume that showcases your skills and achievements. Practice basic interview skills like confident handshakes and clear communication. These skills will help you land your dream job and start earning big rupees!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Gig Economy Jobs & Freelance Work",
+        "description": "The world of work is changing! The gig economy offers flexible jobs and freelance work can be a great way to earn rupees using your skills. Explore these options, but remember, they might require different financial planning strategies than traditional jobs."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Financial Goal Setting & Budgeting (Income Levels)",
+        "description": "As your income grows, so do your financial responsibilities! Financial goal setting and budgeting become even more crucial. Learn how to adjust your budget based on your income level and set ambitious yet achievable financial goals for the future. Remember, a well-defined plan is your roadmap to financial success!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Scholarships & Grants for College",
+        "description": "College can be expensive, but don't worry, Rupee Rockstars! Scholarships and grants can help you achieve your academic dreams. Research and apply for scholarships that match your academic achievements and financial needs. Every scholarship rupee saved is a rupee you don't have to borrow!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Passive Income Streams (Concepts)",
+        "description": "Imagine earning rupees even while you sleep! Passive income streams generate income with minimal ongoing effort. While complex investment strategies come later, explore basic concepts like rental income or royalties from creative work. Remember, passive income can be a powerful tool for long-term financial security."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Long-Term Income Strategy for Security",
+        "description": "Financial security is all about planning for the future. Develop a long-term income strategy that considers factors like career growth, potential investments (with adult guidance), and building multiple income streams. Remember, the choices you make today can impact your financial well-being for years to come!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Long-Term Goals (College, Travel)",
+        "description": "Imagine yourself years from now! What are your long-term goals? Do you dream of traveling the world or attending a prestigious college? Setting clear long-term goals is the first step to making them a reality."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Time Value of Money (Intro)",
+        "description": "A rupee today is worth more than a rupee tomorrow! This is the concept of time value of money. The sooner you start saving, the more your rupees can grow over time (with the help of interest). The earlier you begin planning, the easier it will be to reach your goals!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Long-Term Budget Timeline",
+        "description": "Think of your long-term goals as a treasure map! A long-term budget timeline is your roadmap to get there. Break down your goals into smaller steps and plan how much you'll need to save at each stage. This will help you stay motivated and on track!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Cost & Savings Needs (Long-Term Goals)",
+        "description": "Every dream has a price tag! Research the costs associated with your long-term goals (college fees, travel expenses). This will help you determine how much you need to save. Remember, every rupee saved brings you closer to your future!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Savings Strategies (Long-Term)",
+        "description": "There are many ways to save for the future! Explore different savings strategies. Maybe you can set aside a portion of your allowance or part-time job income. Consider opening a special savings account with a higher interest rate (with adult guidance). Every rupee saved adds up over time!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Adjusting Current Budget (Long-Term Goals)",
+        "description": "Reaching your long-term goals might require some adjustments to your current spending habits. Review your budget and see where you can cut back on unnecessary expenses. Remember, every rupee saved today is a rupee closer to your future dreams!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Financial Planning Tools (Calculators, Apps)",
+        "description": "There's no need to navigate your financial journey alone! Explore different financial planning tools like online calculators or budgeting apps. These tools can help you calculate savings goals, track your progress, and make smart financial decisions."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Inflation & Long-Term Goals",
+        "description": "The sneaky thief called inflation can slowly reduce the buying power of your rupees over time. Understanding inflation is important for long-term financial planning. Learn how to adjust your savings goals to account for inflation, ensuring your rupees have the value you need in the future."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Staying Motivated in Long-Term Budgeting",
+        "description": "Saving for long-term goals can take time and discipline. Staying motivated is key! Visualize your goals - dream about that college campus or exotic vacation. Track your progress and celebrate milestones to keep yourself inspired on your rupee-saving journey!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Savings Accounts (IRAs)",
+        "description": "Imagine a special savings account that helps your rupees grow even faster! In the future (with adult guidance), you can explore options like Individual Retirement Accounts (IRAs). These accounts offer tax benefits and can be a powerful tool for long-term savings. (Note: IRAs have specific contribution rules and age restrictions.)"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Investing Basics (Growth Intro)",
+        "description": "Planting a seed today can grow into a mighty tree tomorrow. Investing is similar! By investing your rupees wisely, you can potentially grow your money over time (with some risk involved). We'll explore basic investment concepts later, but for now, remember – saving is the foundation for future growth!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Compound Interest for Long-Term Savings",
+        "description": "Here's a secret weapon for rupee growth – compound interest! Imagine your savings earning interest, and then that interest itself earns even more interest! The longer you save and invest, the more powerful compound interest becomes. Starting early can make a huge difference in your long-term financial success!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Financial Literacy Resources (Planning)",
+        "description": "Financial literacy is like a superpower! The more you learn, the better equipped you are to manage your rupees wisely. Explore different financial literacy resources like books, websites, or even apps designed for young people. Remember, knowledge is power, especially when it comes to your financial future!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Risk Tolerance & Long-Term Investment",
+        "description": "Investing involves a certain amount of risk. Understanding your risk tolerance is crucial. Are you comfortable with some potential ups and downs, or do you prefer a safer approach? This will influence the types of investments you choose later in life (with adult guidance)."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Sustainable Saving Habit (Long-Term Success)",
+        "description": "Building a sustainable saving habit is like planting a money tree that keeps growing! Focus on developing healthy financial habits you can maintain over time. Start small, be consistent, and celebrate your progress. Remember, small steps today can lead to big rewards tomorrow!"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Budgeting for College Applications & Fees",
+        "description": "College applications and fees can add up! Learn how to budget for college expenses. Research application fees, entrance exams, and potential scholarship opportunities. Start saving early and consider part-time work or scholarships to ease the financial burden."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Planning for Retirement (Early Start)",
+        "description": "Retirement might seem far away, but believe it or not, planning for retirement starts now! The concept might seem complex, but understanding the importance of saving early is key. Even small amounts saved today can grow significantly over time, thanks to compound interest, and help you enjoy a comfortable retirement later."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Long-Term Financial Vision",
+        "description": "Imagine yourself in the future – what kind of life do you dream of? Developing a long-term financial vision helps you make informed financial decisions today. Consider your future goals (travel, family, hobbies) and how much they might cost. This will guide your saving and investment strategies throughout your life."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "What are Credit Cards?",
+        "description": "Imagine a card that lets you borrow rupees for a short period. That's a credit card! You use it to make purchases, but unlike a debit card, you need to pay back the borrowed amount later, with some additional charges."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Credit Reports & Scores (Intro)",
+        "description": "Ever heard of a credit report and credit score? These track your borrowing habits and help determine if you'll be approved for a credit card in the future (when you're older!). Using credit cards responsibly can help build a positive credit history, which is important for many financial decisions later in life."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Responsible Credit Card Use",
+        "description": "Responsible credit card use is key! Treat a credit card like a tool, not a magic money machine. Only use it for what you can afford to repay within the due period. Remember, credit card debt can be expensive and stressful."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Benefits & Drawbacks of Credit Cards",
+        "description": "Credit cards can be a double-edged sword. Let's explore the good and the not-so-good:\nBenefits:\nConvenience: Carry less cash, make online purchases easily.\nRewards: Earn points or cashback on purchases.\nBuilding Credit: Responsible use can build a positive credit history (important for future loans).\nDrawbacks:\nDebt Trap: Easy to overspend and get into debt with high-interest rates.\nFees: Annual fees, late payment fees, and more can add up.\nTemptation to Overspend: Using borrowed money can be tempting, leading to overspending."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Avoiding Debt & Making Payments on Time",
+        "description": "Debt is like a heavy backpack – it can weigh you down. Avoid credit card debt by only spending what you can afford to repay on time. Making payments on time is crucial for building a good credit history."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Building a Positive Credit History (Foundation)",
+        "description": "Think of your credit history as your financial report card. Using a credit card responsibly and making payments on time lays a strong foundation for a positive credit history. This will be important when you apply for loans or credit cards in the future (as an adult)."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Minimum Payments & Interest Rates",
+        "description": "Credit card companies set a minimum payment you must pay each month. But beware! If you only pay the minimum, the debt can linger for a long time, and you'll end up paying a lot in interest charges. The best approach is to pay your balance in full each month to avoid accumulating debt."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Avoiding Credit Card Misuse",
+        "description": "A credit card is a tool, and like any tool, it can be misused.  Here's how to avoid common mistakes:\nDon't lend your card to others. You're responsible for any charges they make.\nBeware of cash advances. These often come with higher interest rates.\nResist impulse purchases. Don't buy things you can't afford just because you have a credit card."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Alternatives to Credit Cards (Debit/Prepaid Cards)",
+        "description": "Debit cards and prepaid cards are safer alternatives to credit cards. You can only spend the money you have loaded on them, so there's no risk of getting into debt. These cards can be a good option for young people who are still learning about managing money."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Credit Card Fees & Charges",
+        "description": "Credit cards come with various fees, and they can add up quickly!  These might include:\nAnnual fees: A yearly charge just for having the card.\nLate payment fees: Penalties for not paying your bill on time.\nForeign transaction fees: Extra charges for using your card outside India.\nUnderstanding these fees helps you choose the right credit card (when you're older) and avoid unnecessary costs."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Building Financial Literacy for Credit Card Use",
+        "description": "Financial literacy is your superpower in the credit card maze! The more you know, the better equipped you are to make informed decisions. Learn about credit card terms, interest rates, and responsible spending habits. This knowledge will protect you from making costly mistakes."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Understanding Credit Card Debt Consolidation (Advanced)",
+        "description": "Credit card debt consolidation (advanced topic) involves combining multiple credit card debts into one loan. This can be risky and isn't always the best solution. It's important to understand the pros and cons before considering this option (best discussed with adults when you're older)."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Financial Responsibility & Credit Card Usage",
+        "description": "Financial literacy equips you to navigate the complexities of credit cards. The more you know about credit card terms, interest rates, and responsible spending habits, the better equipped you are to make informed decisions. This knowledge is your superpower, protecting you from costly mistakes."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Building a Sustainable Credit Card Strategy",
+        "description": "Not everyone needs a credit card right away. Debit and prepaid cards are great options for young people or those new to managing money. If you do get a credit card, choose one that aligns with your financial goals and spending habits. Consider annual fees, rewards programs, and interest rates. Develop a sustainable plan – spend what you can afford to repay and set up automatic payments to avoid missed due dates."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Using Credit Cards for Travel Rewards (Intro)",
+        "description": "Some credit cards offer travel rewards programs where you earn points or miles on purchases, redeemable for flights, hotels, or other travel benefits. While tempting for travel enthusiasts, be mindful of potential downsides. These cards often come with higher annual fees and interest rates. Carefully weigh the travel rewards against the costs before getting one."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Financial Planning with Credit Cards (Advanced)",
+        "description": "Credit cards can be a tool for financial planning, but use them strategically. For example, you might use a card for a large purchase with an introductory interest rate, but only with a clear plan to pay it off before the rate increases. Always factor in fees and interest rates when making financial decisions. Don't let the convenience of a credit card cloud your judgment; prioritize your long-term financial goals over short-term benefits."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "The Impact of Credit Card Debt on Long-Term Goals",
+        "description": "Credit card debt can be a major roadblock to achieving your long-term financial goals. High-interest rates can eat away at your savings and make it difficult to save for things like college or a house. Getting into debt early can negatively impact your credit score, making it more expensive to borrow money in the future. Develop healthy financial habits and avoid credit card debt to achieve your long-term financial goals."
+    },
+    {
+        "standard_id": 8,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Developing a Healthy Relationship with Credit",
+        "description": "A healthy relationship with credit cards is built on trust and respect. Treat your credit card as a tool to be used responsibly, not a magic money machine. Understand the terms and conditions of your agreement, including interest rates, fees, and grace periods. Monitor your statements regularly to stay on top of your spending and identify any potential errors."
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Financial Literacy for Adulthood",
+        "description": "Financial literacy empowers you to navigate adult finances!  Learn key concepts like budgeting, saving, investing, and responsible credit usage. By mastering these financial skills, you'll be well-equipped to make informed decisions and achieve your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Financial Independence & Responsibility",
+        "description": "Financial independence means taking control of your finances! Explores the concept of financial independence and how responsible financial choices contribute to achieving it. Learn how to manage your money effectively, avoid debt traps, and build a secure financial future on your own terms!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Financial Products & Services (Basics)",
+        "description": "The financial world offers a variety of products and services. Introduce yourself to essential financial tools like bank accounts, credit cards, and investment vehicles. Learn how to choose the right products and services to manage your money effectively and achieve your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Building Credit & Credit Scores (Intro)",
+        "description": "Credit scores are like your financial report card!  Introduce yourself to the concept of credit scores and how they impact your ability to borrow money. Learn about responsible credit usage, factors that affect your credit score, and how to build a positive credit history for a brighter financial future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Borrowing Money & Loan Risks",
+        "description": "Borrowing money can be a helpful tool, but it's crucial to understand the risks. Explore different types of loans and their associated risks. Learn about interest rates, repayment terms, and how to avoid falling into debt traps. By borrowing responsibly, you can leverage debt to achieve your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Understanding Taxes (Basics)",
+        "description": "Taxes are a more complex topic for adults. Learn about different tax brackets, how to file your taxes, and how taxes impact your financial planning. Fulfilling your tax obligations is a civic duty and an important factor in your overall financial health!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Saving & Investment Options",
+        "description": "Saving is great, but investing can supercharge your financial future! Introduce yourself to different investment options like stocks, bonds, and mutual funds. Learn about the risks and rewards associated with each, and how to choose investments that align with your financial goals and risk tolerance!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Compound Interest & Long-Term Investing",
+        "description": "Compound interest is like magic for your money! It  delves deeper into the concept of compound interest and its power to grow your wealth over time. Learn how starting early and investing consistently can significantly boost your long-term financial security!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Financial Planning (Early Start)",
+        "description": "Financial planning is key to achieving your dreams! Build your previous knowledge to create a personalized financial plan. Consider factors like your income, expenses, financial goals (retirement, education, etc.), and risk tolerance. By taking a comprehensive approach to financial planning, you'll be well on your way to achieving long-term financial success!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Managing Risks & Protecting Assets (Basics)",
+        "description": "Life throws curveballs! Introduce yourself you to risk management strategies for adults. Learn about identifying potential financial risks like job loss or illness. Explore tools like insurance and emergency funds to protect your assets and build resilience in the face of unexpected events!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Financial Scams & Identity Theft (Advanced)",
+        "description": "Financial scams target all ages, but adults need advanced protection. Equip yourself with advanced strategies to avoid financial scams and identity theft. Learn about red flags to watch out for, how to secure your personal information, and how to report suspicious activity. Protecting yourself from financial crimes safeguards your hard-earned money!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Financial Resilience & Unexpected Events",
+        "description": "Financial setbacks happen, but resilience is key! Let's emphasize the importance of building financial resilience. Learn how to create an emergency fund, manage debt effectively, and adapt your financial plan in response to unexpected events. By being prepared and financially flexible, you'll be able to bounce back from challenges and achieve your long-term goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Financial Resources & Tools for Young Adults",
+        "description": "Financial literacy empowers everyone! Equip yourself with resources to become a financial advocate. Explore financial literacy websites, apps, and programs you can share with friends and family. By sharing your financial knowledge, you can help others make informed decisions and build a stronger financial future for your community!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Confidence in Financial Decisions",
+        "description": "Financial knowledge builds confidence! Lets emphasize the importance of trusting your financial judgment. By mastering the financial skills you've learned throughout Mission Money Master, you'll be well-equipped to make informed decisions and advocate for your financial well-being!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Financial Literacy Advocacy",
+        "description": "Financial literacy is a lifelong journey! Empower yourself to become a champion for financial literacy. Learn how to talk about money comfortably, share your financial knowledge with others, and advocate for financial education programs in your community. By inspiring others to prioritize financial literacy, you can create a ripple effect of positive financial change!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Financial Careers & Opportunities",
+        "description": "Do you love numbers and helping others? Explore diverse financial careers! Learn about roles like financial advisors, accountants, or loan officers. Discover how your financial knowledge and skills can translate into rewarding career paths that make a difference!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Literacy in Everyday Life",
+        "description": "Financial literacy empowers your everyday decisions!  Explore how financial knowledge impacts your daily life. Learn how to budget for groceries, compare prices when shopping, and make smart financial choices, no matter how big or small, to achieve your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Strong Financial Foundation for Adulthood",
+        "description": "Building a strong financial foundation sets you up for success! Lets emphasize essential habits for adulting. Learn about responsible credit card use, saving for emergencies, and building a budget that reflects your lifestyle. By making smart financial choices now, you'll be well on your way to financial security and achieving your dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Income Sources (Earned & Unearned)",
+        "description": "Financial planning starts with understanding your income! Explore different income sources, like salaries, allowances, or investment returns (earned income) and gifts or inheritances (unearned income). By identifying all your income streams, you can create a realistic budget for managing your finances effectively!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Fixed vs. Variable Expenses",
+        "description": "Not all expenses are created equal! Introduce yourself to fixed and variable expenses. Fixed expenses (rent, utilities) stay the same each month, while variable expenses (groceries, entertainment) can fluctuate. Understanding this distinction is crucial for creating a flexible and sustainable budget!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Advanced Budgeting & Expense Tracking",
+        "description": "Level up your budgeting skills! Lets delves deeper into advanced budgeting techniques. Learn about methods like the 50/30/20 rule or zero-based budgeting. Explore expense tracking tools and apps to monitor your spending habits and identify areas for improvement. By taking control of your expenses, you'll be well on your way to achieving your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Living Below Your Means & Avoiding Impulse Purchases",
+        "description": "Financial freedom starts with responsible spending! Lets emphasize living below your means and avoiding impulse purchases. Learn how to prioritize needs over wants, resist emotional spending triggers, and make conscious choices that align with your long-term financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Prioritizing Spending & Trade-Offs",
+        "description": "Budgeting is about making informed choices! Explore prioritizing spending and making trade-offs. Learn how to evaluate your needs and wants, allocate your resources effectively, and make conscious decisions that maximize your financial well-being!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Budgeting Tools & Technology Apps",
+        "description": "Technology can be your budgeting BFF! Introduce yourself to budgeting tools and technology apps. Explore features that help you categorize expenses, track spending habits, and set financial goals. By leveraging technology, you can simplify budgeting and stay on track towards financial success!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Saving for Specific Goals with a Budget (Advanced)",
+        "description": "Your budget is a tool to achieve your dreams! Lets emphasize advanced goal-oriented budgeting. Learn how to set SMART financial goals (Specific, Measurable, Achievable, Relevant, Time-bound) and factor them into your budget. Explore strategies like sinking funds to allocate money towards specific goals and achieve them efficiently!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Monitoring Budget Progress & Adjustments",
+        "description": "A budget is a living document! Lets highlight the importance of monitoring your budget progress. Learn how to track your income and expenses regularly, identify areas where you can optimize your spending, and adjust your budget as needed. By staying flexible and adaptable, you'll ensure your budget remains aligned with your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Budgeting Strategies for Different Lifestyles",
+        "description": "Life throws curveballs, but your budget can adapt! Explore budgeting strategies for different life situations. Learn how to budget for unexpected expenses, adjust your budget for varying income types (part-time jobs, freelance work), and factor in taxes to ensure your financial plan is comprehensive and effective!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Unexpected Expenses & Budget Buffer",
+        "description": "Things don't always go according to plan! Introduce yourself to unexpected expenses and the importance of a budget buffer. Learn about common unexpected expenses (car repairs, medical bills), how to estimate their cost, and how to build a buffer in your budget using savings to handle them without derailing your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Budgeting for Different Income Types",
+        "description": "Not all income is created equal! Explore budgeting strategies for different income types. Learn how to adjust your budget for income sources like part-time jobs, freelance work, or seasonal income. By understanding your income flow, you can create a realistic and adaptable budget that works for you!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Taxes & Your Budget (Basics)",
+        "description": "Taxes may seem complex, but budgeting for them is essential! Learn about different tax brackets (income levels with different tax rates) and how to estimate taxes owed. By factoring in taxes, you can ensure your budget accurately reflects your financial obligations!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Preliminary College Budget",
+        "description": "College is an exciting adventure! Introduces yourself to create a preliminary college budget. Learn about estimating college costs (tuition, fees, housing, living expenses), exploring financial aid options, and factoring in potential part-time jobs. By planning early, you can create a realistic budget for a smooth transition to college life!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Budgeting for Independent Living (Basics)",
+        "description": "Independent living comes with new financial responsibilities! Explore basic budgeting for independent living. Learn about essential expenses like rent, utilities, groceries, transportation, and how to estimate their costs. By creating a budget that reflects your independent lifestyle, you'll be well on your way to financial responsibility!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Financial Planning Tools & Resources",
+        "description": "There's a wealth of knowledge available to help you succeed! Introduce yourself to valuable financial planning tools and resources. Explore online budgeting apps, financial literacy websites, and scholarship search engines. By leveraging these resources, you can make informed financial decisions and take control of your financial future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Managing Debt Payments in Your Budget",
+        "description": "Debt can be a tool for achieving financial goals, but responsible management is crucial. Lets explore integrating debt payments into your budget. Learn about different types of debt (good debt for investment, bad debt for unnecessary spending), effective debt repayment strategies (debt avalanche or snowball methods), and how to leverage debt to build your financial future while minimizing risks!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Goal Setting & Long-Term Budgeting",
+        "description": "Financial goals are your roadmap to success! Lets emphasize setting clear and achievable long-term financial goals. Learn about different types of goals (retirement, education, homeownership) and how to factor them into your long-term budget. By prioritizing your goals and creating a plan to achieve them, you'll be well on your way to turning your dreams into reality!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Building a Secure Financial Future",
+        "description": "Financial security is key to achieving your dreams. Lets explore strategies for building a  secure financial future. Learn about emergency funds (3-6 months of living expenses), saving for  retirement through employer-sponsored plans or IRAs, and leveraging financial tools like investment  accounts. By making smart financial decisions now and building a solid foundation, you'll create a  path to financial freedom and a prosperous future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Short-Term vs. Long-Term Goals",
+        "description": "Goals are the building blocks of your financial future! Introduce yourself to the  difference between short-term and long-term goals.  Short-term goals are achievable within a  year (saving for a gadget), while long-term goals take longer (saving for college). Identifying your  goals is the first step towards achieving them!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "SMART Financial Goals for Different Timeframes",
+        "description": "Setting SMART financial goals helps ensure success! SMART stands for Specific, Measurable, Achievable, Relevant, and Time-bound. For example, a short-term goal could be saving ₹500 in three months to buy a book you love. A long-term goal might be saving ₹20,000 in two years for a new bicycle. By breaking down your goals and tracking progress, you can stay motivated and reach both short-term and long-term financial goals."
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Financial Goal Vision Board",
+        "description": "Turn your dreams into reality with a vision board! This level introduces you to the power of financial goal vision boards. Learn how to create a vision board that visually represents your financial goals. By collecting images and quotes that inspire you, you can keep your goals at the forefront of your mind and stay motivated on your financial journey!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Advanced Goal Prioritization & Trade-Offs",
+        "description": "You can't achieve everything at once! Lets delves into advanced goal prioritization and trade-offs. Learn how to evaluate your financial goals, identify your most important ones, and make conscious choices when resources are limited. By prioritizing your goals effectively, you can ensure you're working towards what matters most to you!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Goal Strategies & Timelines",
+        "description": "Every goal needs a plan! Lets explore developing winning strategies and timelines for your financial goals. Learn about different strategies (saving a specific amount each month, looking for scholarships) and how to create realistic timelines based on your goals and financial resources. With a clear plan in place, you'll be well on your way to achieving your financial dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 7,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Financial Decisions & Goal Impact",
+        "description": "Financial decisions have consequences! Lets emphasize understanding how your choices impact your financial goals. Learn how to analyze the financial implications of your decisions (like impulse purchases or taking on debt) and how they can affect your ability to achieve your goals. By making informed financial decisions that align with your long-term plans, you'll be setting yourself up for financial success!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Sacrifices Today for Future Security",
+        "description": "Building a secure future sometimes requires short-term sacrifices. Lets explore the concept of delayed gratification. Learn how prioritizing long-term financial goals over immediate wants can lead to greater financial security and freedom in the future. By making smart choices today, you'll be well on your way to achieving your dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Advanced College Expense Planning",
+        "description": "College is an investment, but planning can minimize financial burdens. Lets dive deeper into advanced college expense planning. Learn about the different costs associated with college (tuition, fees, living expenses), strategies to minimize costs (scholarships, grants, in-state schools), and how to factor these expenses into your long-term financial plan. By planning ahead, you can manage college costs effectively!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Financial Goals for Life Choices",
+        "description": "Life decisions have financial implications. Lets emphasize aligning financial goals with your life choices. Learn how to consider the financial impact of your career path, future living arrangements, or starting a family. By setting goals that are realistic based on your life aspirations, you'll be creating a roadmap for financial success that aligns with your dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Saving & Investing for Long-Term Goals",
+        "description": "Long-term goals require long-term strategies! Introduce yourself to saving and investing for the future. Learn about the power of compound interest, different investment options (stocks, bonds, mutual funds), and how to allocate your savings to grow your wealth over time. By starting early and investing strategically, you'll be well on your way to achieving your long-term financial aspirations!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Tracking Progress & Adjustments",
+        "description": "Monitoring progress is key to achieving any goal! Lets emphasize the importance of tracking your progress towards your long-term financial goals. Learn about creating a budget and tracking your savings and expenses. By using tools and apps to monitor your progress, you can identify areas for improvement and adjust your financial plan as needed to stay on track!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 8,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "The Power of Positive Reinforcement for Goal Achievement",
+        "description": "Staying motivated is crucial for long-term success! Lets explore the power of positive reinforcement for goal achievement. Learn about setting small milestones and rewarding yourself for reaching them. By celebrating your wins, no matter how small, you'll stay motivated and on track to achieve your long-term financial dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Financial Goal Mentorship & Support Systems",
+        "description": "You don't have to go it alone! Introduce yourself to the importance of financial goal  mentorship and support systems. Learn about finding mentors who can offer guidance and  encouragement on your financial journey. Explore online communities or connect with  financially savvy friends or family members. By building a support network, you'll gain valuable insights and stay motivated to achieve your goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Overcoming Challenges & Obstacles to Goals",
+        "description": "The road to financial success isn't always smooth. Introduce yourself to overcome challenges and obstacles that might hinder your financial goals. Learn about identifying potential roadblocks like unexpected expenses or lack of motivation. Develop strategies to face these challenges head-on, adjust your plan as needed, and bounce back from setbacks with resilience!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Financial Goal Celebration & Motivation",
+        "description": "Celebrate your wins and stay motivated! Lets emphasize the importance of financial goal celebration. Learn about setting milestones and rewarding yourself for achieving them. By acknowledging your progress and celebrating your successes, you'll stay motivated and inspired to keep working towards your long-term financial dreams!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Financial Goal Refinement & Adaptability",
+        "description": "Life is a journey, and so are your financial goals! Lets emphasize the importance of refinement and adaptability when it comes to your financial goals. Learn how to reassess your goals regularly, consider how your life circumstances might change, and adjust your financial plan accordingly. By remaining flexible and adaptable, you'll ensure your goals continue to support your financial well-being throughout your life!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Building Long-Term Financial Habits",
+        "description": "Financial habits are the building blocks of your financial future! Lets focus on cultivating long-term financial habits that stick. Learn about automating savings and bill payments, setting financial reminders, and creating a system for tracking your progress. By integrating positive financial habits into your daily routine, you'll be well on your way to financial security and achieving your long-term goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 9,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Financial Wellness & Goal Fulfillment",
+        "description": "Financial well-being is more than just money! Lets explore the connection between financial goal achievement and overall well-being. Learn how achieving your financial goals can contribute to a more fulfilling life, reduce stress, and allow you to pursue your passions. By managing your money wisely and working towards your goals, you'll be creating a path to a financially secure and fulfilling future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Skills & Interests for Careers",
+        "description": "The world is full of exciting career possibilities! Introduces yourself to career exploration tools that help you identify your strengths and interests. Learn about different career paths that align with your unique personality and skillset. By discovering your ideal work environment and the skills you bring to the table, you'll be well on your way to finding a fulfilling career you love!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Exploring Career Options & Salaries",
+        "description": "Research is key! Lets deep dive into exploring different career options and their associated salary ranges. Learn about various industries and professions, their job descriptions, and the qualifications they require. By researching potential careers that align with your interests and financial goals, you can make informed decisions about your future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Education & Training for Careers",
+        "description": "Education and training pave the way for success! Lets explore the educational requirements and training options for different careers. Learn about traditional college degrees, vocational training programs, apprenticeships, and certifications needed for various professions. By understanding the educational pathways for your desired career, you can chart a clear course to achieving your goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Understanding Pay Types (Hourly, Salary, Commission)",
+        "description": "Demystify different pay structures! Lets introduce you to common pay types like hourly wages (paid by the hour worked), salaries (fixed regular payments), and commissions (earnings based on sales or performance). Understanding how you'll be compensated empowers you to negotiate effectively and make informed career choices that align with your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Education & Experience Impact on Earnings",
+        "description": "Education and experience are valuable assets! Lets explore how your education and experience level can impact your earning potential. Learn about careers with higher entry-level salaries for those with specific degrees or certifications. By investing in your education and gaining experience, you can unlock higher earning opportunities throughout your career journey!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 10,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Part-Time Jobs & Earning While Learning",
+        "description": "Part-time jobs offer a win-win situation! Lets explore the benefits of part-time jobs. Learn how part-time work can provide valuable work experience to enhance your resume, develop professional skills, and allow you to earn money while you continue your education or explore different career paths. By gaining experience and a financial boost, you'll be well on your way to a successful and rewarding career!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Scholarships & Grants for Higher Education",
+        "description": "Scholarships and grants are like free money for college! Introduce yourself to the wonderful world of scholarships and grants. Learn about different scholarship types (merit-based, need-based), how to find scholarship opportunities online and through organizations, and how to craft winning applications. By leveraging scholarships and grants, you can significantly reduce your college expenses and graduate with less debt!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Financial Aid Options for College/Training",
+        "description": "Financial aid makes college accessible! Lets explore different financial aid options available for college and training programs. Learn about federal loans, work-study programs, and state-funded grants. By understanding the various financial aid options, you can develop a funding strategy that minimizes out-of-pocket costs and allows you to pursue your academic aspirations!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Earning Potential & Financial Goals",
+        "description": "College is an investment in your future! Lets emphasize aligning your college major with your long-term financial goals. Learn about researching career paths associated with your interests, their earning potential, and the return on investment (ROI) for different degrees. By considering future earning potential when choosing your academic path, you can make informed choices that contribute to your financial success!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Early Career Action Plan",
+        "description": "A plan is your roadmap to achieving your goals! Introduce yourself to create an early career action plan. Learn about setting short-term career goals (landing internships, volunteering), researching target industries, and identifying the skills and experiences you need to succeed. By developing a clear action plan, you'll be well on your way to a successful career launch!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Networking for Future Careers",
+        "description": "Your network is your net worth! Lets emphasize the importance of networking for career success. Learn about attending industry events, connecting with professionals on LinkedIn, and building relationships with mentors who can offer guidance and support. By actively networking, you'll expand your professional circle, discover potential opportunities, and increase your visibility in your desired field!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 11,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Soft Skills & Earning Potential",
+        "description": "Soft skills are essential for career success! Lets explore the impact of soft skills on your earning potential. Learn about communication skills like teamwork, problem-solving, and critical thinking. By developing strong soft skills, you'll become a more valuable asset to employers, leading to increased earning potential and career advancement opportunities!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Introduction to Entrepreneurship",
+        "description": "Do you dream of being your own boss?  Introduce yourself to the world of entrepreneurship. Learn about the key characteristics of successful entrepreneurs, the challenges and rewards of starting your own business, and resources available to help you get started. By exploring this option, you can determine if entrepreneurship aligns with your financial goals and aspirations!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Financial Planning by Career Path",
+        "description": "Different careers require different financial plans! Lets explore the importance of financial planning by career path. Learn about researching salary ranges for various professions, estimating living expenses in different locations, and tailoring your financial plan to your chosen career path. By understanding the financial implications of your career choices, you can make informed decisions and achieve long-term financial security!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Student Loan Basics",
+        "description": "Student loans can be a reality. Lets equip you with the basics of student loan management. Learn about different types of student loans (federal, private), repayment options, and strategies for minimizing interest. By understanding your student loan obligations, you can develop a plan to manage your debt effectively and avoid future financial burdens!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Adaptability in Earning Potential",
+        "description": "The future of work is dynamic! Lets explore the importance of adaptability in earning potential. Learn about the changing job market, the rise of the gig economy, and strategies for developing diverse skillsets. By remaining adaptable and upskilling yourself, you'll be prepared to thrive in an evolving job market and maintain a healthy earning potential throughout your career!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Literacy & Career Success",
+        "description": "Financial literacy is your key to career advancement! Lets emphasize the connection between financial literacy and career success. Learn how strong financial management skills can impress employers, showcase your responsibility, and make you a more valuable asset. By prioritizing financial literacy, you'll open doors to greater career opportunities and financial security!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 12,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Fulfilling Future Through Career Choices",
+        "description": "Your career is a journey, not just a destination! Lets explore aligning your career choices with your long-term vision for a fulfilling future. Learn about identifying your passions and values, researching careers that spark your interest, and choosing a path that contributes to your overall well-being. By prioritizing your fulfillment alongside financial goals, you'll be well on your way to a thriving and rewarding career!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Understanding College Costs",
+        "description": "College costs go beyond tuition! Lets break down the different expenses associated with college. Learn about tuition fees, room and board, textbooks, supplies, transportation, and potential living expenses. By understanding the full cost picture, you can make informed decisions and plan your college funding effectively!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "College Funding Options (Savings, Loans, Grants)",
+        "description": "College funding isn't a one-size-fits-all solution! Lets explore various college funding options. Learn about scholarships, grants, work-study programs, student loans, and using savings to minimize debt. By researching different funding options, you can develop a personalized financial plan to cover your college costs!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Detailed College Budget Template",
+        "description": "Budgeting is key to college financial success! Lets provide you with a detailed college budget template. Learn about categorizing college expenses (tuition, housing, food), estimating costs, and factoring in potential income sources (part-time job, scholarships). By creating a realistic budget, you can track your spending, make informed financial choices, and avoid overspending throughout your college journey!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Cost-Saving Strategies for College",
+        "description": "College on a budget is possible! Lets  introduce you to cost-saving strategies for college. Learn about exploring in-state tuition options, applying for scholarships and grants, finding affordable housing (dorms with roommates, off-campus apartments), and utilizing used textbooks and free online resources. By being resourceful and making smart financial choices, you can significantly reduce your college expenses!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Living on a Budget as a College Student",
+        "description": "Budgeting is your secret weapon in college! Lets empower you with budgeting hacks for student life. Learn about creating a realistic budget that reflects your income and expenses, utilizing budgeting apps, prioritizing needs over wants, and tracking your spending habits. By mastering your money, you'll avoid unnecessary debt and have greater financial freedom while in college!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 13,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Managing Unexpected Expenses in College",
+        "description": "Life throws curveballs! Lets equip you with skills to manage unexpected expenses in college. Learn about creating an emergency fund to cover car repairs, medical bills, or unexpected travel costs. Explore options for part-time jobs or side hustles to generate extra income. By being prepared for the unexpected, you'll minimize financial stress and navigate challenges with confidence!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Comparing Financial Aid Packages",
+        "description": "Financial aid offers can be complex! Lets equip you to compare financial aid packages effectively. Learn about understanding the difference between grants and loans, analyzing award letters, and calculating the net cost of attendance for each college. By meticulously comparing your options, you can choose the financial aid package that minimizes debt and best aligns with your financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Debt Impact on Your College Budget",
+        "description": "Student loan debt is a reality for many. Lets emphasize understanding the impact of debt on your college budget. Learn about calculating loan repayment costs, factoring them into your monthly expenses, and creating a budget that allows you to comfortably manage your debt after graduation. By making informed borrowing decisions, you'll avoid financial hardship in the long run!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Advanced College Budget Prioritization",
+        "description": "Prioritizing is key to a healthy college budget! Lets deep dive into advanced college budget prioritization. Learn about using financial need as a guiding principle, differentiating between essential expenses (tuition, rent) and variable expenses (entertainment, dining out). By strategically prioritizing your spending, you'll optimize your budget and ensure financial stability throughout your college journey!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "College Lifestyles & Budgeting (On-Campus vs. Off-Campus)",
+        "description": "College life comes with different living options! Lets explore budgeting for on-campus vs. off-campus living. Learn about the pros and cons of each, associated costs (dorms, utilities, groceries), and budgeting strategies for both scenarios. By understanding the financial implications of your living situation, you can make informed choices that align with your lifestyle and budget goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Building an Emergency College Fund",
+        "description": "Life throws curveballs – even in college! Lets equip you with strategies for building an emergency college fund. Learn about setting small savings goals, exploring side hustles or part-time jobs to generate income, and utilizing budgeting apps to track your progress. By having an emergency fund, you'll be prepared for unexpected expenses and avoid financial stress during your college years!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 14,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "Financial Aid Resources for College Students",
+        "description": "Financial aid resources are available! Lets empower you to navigate financial aid for college students. Learn about exploring federal and state grants, scholarship opportunities, work-study programs, and loan options. Explore online resources and connect with financial aid advisors at your chosen college to maximize your financial aid package and minimize out-of-pocket costs!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Work-Study Programs & Earning While Learning",
+        "description": "Work-study programs offer a win-win! Lets deep dive into work-study programs. Learn about the benefits of balancing coursework with part-time work on campus. Explore how work-study can help you earn money, gain valuable experience, and contribute to your college costs while developing new skills that enhance your resume!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Managing Debt Wisely During College",
+        "description": "Debt can be a tool, not a burden! Lets empower you with strategies for managing debt wisely during college. Learn about different loan types (federal vs. private), understanding interest rates and repayment terms, and creating a debt repayment plan for after graduation. By making informed borrowing decisions and prioritizing repayment, you'll graduate financially secure and avoid future debt burdens!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Financial Planning for Studying Abroad (if applicable)",
+        "description": "Studying abroad can be an enriching experience! (If applicable) Lets equip you with financial planning strategies for studying abroad. Learn about budgeting for additional expenses (travel, visas, international living costs), exploring scholarships and grants specifically for international study programs, and researching cost-effective study abroad destinations. By planning ahead and managing your finances effectively, you can turn your dream of studying abroad into a reality!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Budgeting for Different College Degrees & Majors",
+        "description": "College degrees vary in cost and future earning potential. Lets explore budgeting for different majors. Learn about researching average salaries for different career paths associated with your interests, estimating program-specific costs (e.g., lab fees for science majors), and factoring these considerations into your overall college budget. By making informed choices about your major, you'll graduate financially prepared for your chosen career path!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Literacy & College Success",
+        "description": "Financial literacy is your key to college success! Lets emphasize the vital connection between financial literacy and college achievement. Learn about essential financial concepts like budgeting, debt management, and saving for the future. By developing strong financial literacy skills, you'll make informed financial decisions throughout your college experience and beyond, setting yourself up for long-term financial security!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 15,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Smart Financial Decisions for a Brighter Future",
+        "description": "Smart financial choices today empower your future! Lets equip you with the knowledge to make informed financial decisions during college. Learn about minimizing unnecessary expenses, exploring scholarship and grant opportunities, and prioritizing investments in your future like professional development or certifications relevant to your chosen field. By making smart financial decisions now, you'll be well on your way to achieving your long-term financial goals and a brighter future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Intro to Credit Cards",
+        "description": "Unlock the world of responsible credit card use! Lets introduce you to credit cards as a financial tool. Learn about using credit cards for purchases, building your credit history, and the importance of managing your credit responsibly to avoid debt. By understanding the basics of credit cards, you'll be empowered to make informed financial decisions!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Rates, Fees, & Credit Limits",
+        "description": "Credit cards come with terms and conditions. Learn about interest rates (APR), annual fees, foreign transaction fees, and understanding your credit limit to avoid overspending. By familiarizing yourself with these factors, you'll be able to choose the right credit card for your needs and use it responsibly!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Credit History & Scores",
+        "description": "Your credit history matters! Lets explore credit scores and how they're calculated. Learn about how your credit card usage (on-time payments, credit utilization) impacts your credit score, which in turn affects loan approvals and interest rates. By building a positive credit history with responsible credit card use, you'll unlock greater financial opportunities in the future!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": "Credit Card Debt Dangers",
+        "description": "Credit cards can be a double-edged sword. Learn about the snowball effect of high interest rates, late fees, and the potential damage to your credit score. By understanding these risks, you'll be empowered to use credit cards responsibly and avoid falling into debt traps!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": "Responsible Credit Card Habits",
+        "description": "Master the art of responsible credit card use! Lets dive into building healthy credit card habits. Learn about paying your balance in full and on time, keeping your credit utilization ratio low, and avoiding impulse purchases. By following these practices, you'll build a strong credit history and reap the rewards of credit cards without the burden of debt!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 16,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": "Comparing Credit Card Offers",
+        "description": "Not all credit cards are created equal! Letsl equip you to compare credit card offers like a pro. Learn about factors to consider like interest rates, annual fees, rewards programs, and cash-back benefits. By carefully comparing offers and choosing a card that aligns with your spending habits, you can maximize the benefits and minimize the drawbacks of credit card use!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": "Budgeting for Credit Card Use",
+        "description": "Budgeting is key to credit card mastery! Lets equip you with budgeting strategies for credit card use. Learn about incorporating credit card spending into your overall budget, setting spending limits for different categories, and tracking your purchases to avoid overspending. By budgeting effectively, you'll be in control of your credit card and avoid unwanted debt!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": "Needs vs. Wants with Credit Cards",
+        "description": "Distinguish needs from wants when using credit cards! Lets empower you to make smart spending decisions. Learn about prioritizing essential purchases (groceries, gas) over non-essential ones (entertainment, dining out) with your credit card. By understanding the difference between needs and wants, you'll avoid impulse purchases and maintain healthy credit card habits!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": "Benefits of Responsible Credit Card Use",
+        "description": "Responsible credit card use comes with perks! Lets explore the benefits of using your credit card wisely. Learn about earning rewards points, cash back benefits, and travel miles through responsible credit card use. By leveraging these rewards programs, you can stretch your dollar further and make your credit card work for you!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": "Credit Card Statements & Payments",
+        "description": "Understanding your credit card statement is key! Lets equip you to decipher credit card statements. Learn about key terms like minimum payment, due date, interest charges, and how to interpret your transaction history. By understanding your statement, you'll be empowered to make informed decisions about payments and avoid unnecessary fees!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": "Managing Multiple Credit Cards",
+        "description": "Mastering multiple cards requires responsibility. Lets explore managing multiple credit cards effectively. Learn about using different cards for specific categories (rewards programs, travel), keeping track of due dates and minimum payments for each card, and prioritizing paying off high-interest cards first. By developing a strategic approach, you'll avoid confusion and maintain control over your credit card debt."
+    },
+    {
+        "standard_id": 9,
+        "module_id": 17,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": "On-Time Payments & Avoiding Debt",
+        "description": "On-time payments are crucial for a healthy credit score! Lets emphasize the importance of making on-time credit card payments. Learn about the negative consequences of late payments (late fees, credit score damage), setting up automatic payments to avoid missed deadlines, and prioritizing paying your balance in full whenever possible. By maintaining a consistent track record of on-time payments, you'll build a strong credit history and avoid the burden of credit card debt!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": "Financial Tools & Resources for Credit Cards",
+        "description": "Knowledge is power when it comes to credit cards! Lets introduce you to valuable financial tools and resources. Learn about credit monitoring services to track your credit score, budgeting apps to manage your spending, and educational resources from reputable organizations to stay informed about credit card best practices. By leveraging these tools, you'll maintain control over your credit card usage and make informed financial decisions!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": "Strategies for Good Credit Score",
+        "description": "A good credit score unlocks financial opportunities! Lets equip you with strategies to build and maintain a healthy credit score. Learn about the factors that impact your credit score (payment history, credit utilization ratio, credit card history length), and explore strategies like making on-time payments, keeping credit card balances low, and avoiding opening too many credit cards at once. By prioritizing these practices, you'll build a strong credit score that will benefit you in the long run, such as securing loans with favorable interest rates!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": "Long-Term Financial Planning with Credit",
+        "description": "Credit cards can be tools for long-term financial planning – used responsibly! Lets explore how to leverage credit cards for future benefits. Learn about using credit cards to build your credit history for future loan applications, taking advantage of rewards programs to save on travel or everyday purchases, and utilizing credit card benefits like extended warranties or purchase protection. By strategically using credit cards for your long-term goals, you can make them work for you and contribute to your financial well-being!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": "Credit Card Fraud Protection",
+        "description": "Protect yourself from credit card fraud! Lets equip you with knowledge on credit card fraud protection. Learn about identifying suspicious activity on your statements, reporting lost or stolen cards immediately, and utilizing security features like chip technology and SMS notifications. By staying vigilant and taking proactive measures, you'll minimize the risk of credit card fraud and safeguard your financial security!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": "Financial Literacy & Credit Management",
+        "description": "Financial literacy empowers informed credit management! Lets emphasize the importance of financial literacy for credit card use. Learn about essential financial concepts like budgeting, debt management, and responsible credit card habits. By developing strong financial literacy skills, you'll make informed decisions about credit card use, avoid financial pitfalls, and achieve your long-term financial goals!"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 18,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": "Secure Financial Future with Credit",
+        "description": "Credit cards, used wisely, can contribute to a secure financial future! Lets explore building a strong financial foundation with credit. Learn about using credit cards to build your credit history for future loan applications, strategically utilizing rewards programs to save towards long-term goals (e.g., down payment on a house), and prioritizing responsible credit card habits to avoid debt. By leveraging credit for your long-term financial well-being, you'll graduate financially prepared and ready to conquer your future!"
     }
 ]
