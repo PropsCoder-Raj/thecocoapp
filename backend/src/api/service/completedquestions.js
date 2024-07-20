@@ -32,6 +32,11 @@ const completedQuestionsService = {
     deleteCompletedQuestion: async (query) => {
         return await CompletedQuestions.deleteOne(query);
     },
+
+    // Function to delete many a completed question based on query
+    deleteManyCompletedQuestion: async (query) => {
+        return await CompletedQuestions.deleteMany(query);
+    },
 };
 
 // Export the completed questions services

@@ -10,7 +10,8 @@ const questionschema = new mongoose.Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'modules', required: true },
     attemptCount: { type: Number, default: 1 }, 
     points: { type: Number, default: 0 }, 
-    correstAnswer: { type: Boolean, default: false } 
+    correstAnswer: { type: Boolean, default: false },
+    isDummy: { type: Boolean, default: false } 
 }, { timestamps: true });
 
 // Create the questions model

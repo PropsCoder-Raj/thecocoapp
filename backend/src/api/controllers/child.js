@@ -123,7 +123,6 @@ exports.createChild = async (req, res, next) => {
 
         // Insert child records
         const insertedChildren = await insertChild(childList);
-        console.log("insertedChildren: ", insertedChildren);
 
         // Update user's currentChildActive field to the last inserted child's ID
         await updateUser({ _id: req.userId }, { $set: { currentChildActive: insertedChildren[insertedChildren.length - 1]._id } });
@@ -132,11 +131,10 @@ exports.createChild = async (req, res, next) => {
             let listUsersChildIds = listUsersChild.map(child => child._id);
             await updateManyChild({ _id: { $in: listUsersChildIds } }, { $set: { activeStatus: false } });
         }else{
-            const listQuestion = await findAllCompletedQuestions({user_id: req.userId});
+            const listQuestion = await findAllCompletedQuestions({user_id: req.userId, isDummy: false });
             const totalPoints = listQuestion.reduce((total, acc) => {
                 return total + Number(acc.points)
             }, 0);
-            console.log(totalPoints)
             await Promise.all([
                 updateManyCompletedLevels({ user_id: req.userId }, { $set: { child_id: insertedChildren[0]._id  } }),
                 updateManyCompletedModules({ user_id: req.userId }, { $set: { child_id: insertedChildren[0]._id  } }),

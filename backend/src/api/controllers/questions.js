@@ -24,7 +24,7 @@ const { completedLevelsService } = require('../service/completedlevels');
 const { findAllCompletedLevels, createCompletedLevel, updateCompletedLevel } = completedLevelsService;
 
 const { completedQuestionsService } = require('../service/completedquestions');
-const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestion, updateCompletedQuestion } = completedQuestionsService;
+const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestion, updateCompletedQuestion, deleteManyCompletedQuestion } = completedQuestionsService;
 
 
 /**
@@ -92,16 +92,16 @@ exports.attemptQuestions = async (req, res, next) => {
             correctAnswerStatus = true;
         }
 
-        const isCompletedQuesitons = await findCompletedQuestion({ question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id });
+        const isCompletedQuesitons = await findCompletedQuestion({ question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id, isDummy: demo });
         if (isCompletedQuesitons) {
             if (isCompletedQuesitons.correstAnswer == false) {
                 points = correctAnswerStatus ? 25 : 0;
-                await updateCompletedQuestion({ _id: isCompletedQuesitons._id }, { points, correstAnswer: correctAnswerStatus });
+                await updateCompletedQuestion({ _id: isCompletedQuesitons._id, isDummy: demo }, { points, correstAnswer: correctAnswerStatus });
             }
         } else {
             points = correctAnswerStatus ? 50 : 0;
             await updateCompletedQuestion(
-                { question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id }, {
+                { question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id, isDummy: demo }, {
                     $set: {
                         question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id,
                         points, correstAnswer: correctAnswerStatus
@@ -109,7 +109,7 @@ exports.attemptQuestions = async (req, res, next) => {
             });
         }
 
-        const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
+        const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
         let listQuuestions = await findAllQuestions({ module_id, level_id });
         listQuuestions = listQuuestions.map((question) => {
             const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
@@ -187,7 +187,7 @@ exports.attemptQuestions = async (req, res, next) => {
             }
         }
 
-        let listAllQuestions = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
+        let listAllQuestions = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
         let susscessQuestions = listAllQuestions.filter((question) => question.correstAnswer == true).length;
         let loaderPercentage = Math.ceil(33.33 * susscessQuestions)
         totalPoints = isPointsAccessible ? listAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0) : 0;
@@ -204,6 +204,8 @@ exports.attemptQuestions = async (req, res, next) => {
                     $set: { module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true }
                 })
             }
+        }else if(nextScreen == "SCORE_BOARD" && demo == true){
+            await deleteManyCompletedQuestion({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
         }
 
         return res.status(200).send({
@@ -212,11 +214,12 @@ exports.attemptQuestions = async (req, res, next) => {
             result: {
                 correctAnswerStatus,
                 loaderPercentage,
+                susscessQuestions,
                 right_answer: question.right_answer,
                 desc: question.desc,
                 nextQuestionId,
                 nextQuestionNo,
-                totalPoints,
+                totalPoints: demo ? 0 : totalPoints,
                 nextScreen,
                 levelNo: `Level ${levelDetails.level_id}`,
                 levelName: `${levelDetails.name}`,

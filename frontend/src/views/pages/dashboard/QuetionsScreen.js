@@ -152,7 +152,7 @@ function QuetionsScreen() {
           "module_id": location?.state?.module_id,
           "level_id": location?.state?.level_id,
           "answer": answer,
-          "demo": false
+          "demo": attempt
         }
       });
       if (res.status === 200) {
@@ -188,7 +188,8 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                value={!attempt ? percentage : calculateProgressValue()}
+                value={percentage}
+                // value={!attempt ? percentage : calculateProgressValue()}
               />
               <Typography variant="body2" color={"#FE8A36"}>
                 {progress}/{max}
