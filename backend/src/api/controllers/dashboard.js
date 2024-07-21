@@ -160,7 +160,7 @@ exports.getAllModules = async (req, res, next) => {
                     }
                     for (let indexL = 0; indexL < processedModules[index].modules.length; indexL++) {
                         const elementL = processedModules[index].modules[indexL];
-                        elementL.module_id = levelCount;
+                        elementL.module_number = levelCount;
                         levelCount++;
                     }
                 }
@@ -169,7 +169,7 @@ exports.getAllModules = async (req, res, next) => {
             for (let index = 0; index < processedModules.length; index++) {
                 for (let indexL = 0; indexL < processedModules[index].modules.length; indexL++) {
                     const elementL = processedModules[index].modules[indexL];
-                    elementL.module_id = levelCount;
+                    elementL.module_number = levelCount;
                     levelCount++;
                 }
             }
