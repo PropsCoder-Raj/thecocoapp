@@ -63,7 +63,7 @@ const InnerBox = styled(Box)(({ theme }) => ({
 }));
 
 const TakeImg = styled("img")(({ theme }) => ({
-  maxWidth: "330px",
+  maxWidth: "200px",
   "@media(max-width:767px)": {width:"100%"},
 }));
 function TakeQuiz() {
@@ -86,7 +86,20 @@ function TakeQuiz() {
           </Grid>
           <Grid item xs={12}>
             <Box sx={style.CombineBox}>
-              <TakeImg src="images/Answer3Q.png" alt="" />
+              <Box sx={{position:"relative",
+                display: "grid",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "330px",
+              }}>
+              <TakeImg src="images/Coco-Idle_Without_Talking.gif" alt="" />
+              <Box sx={{ borderRadius: "8px", border:"1px solid #D8D8D8", padding:"27px", width:"329px", position:"absolute", bottom:{
+                md:"-90px",
+                sm:"-90px",
+                xs:"-50px"
+              }, background:"#fff"}}>
+                <Typography variant="h4">Answer 3 questions and know do you remember what you read!</Typography>
+              </Box></Box>
             </Box>
           </Grid>
         </Grid>

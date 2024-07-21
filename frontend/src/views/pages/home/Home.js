@@ -57,6 +57,7 @@ const SectionBenifits = styled("section")(({ theme }) => ({
   backgroundColor: "#FCF7FF",
   "@media(max-width:767px)": {
     paddingTop: "15px",
+    backgroundImage: "url('/images/BenifitsMobile.png')",
   },
 }));
 const GetStart = styled("section")(({ theme }) => ({
@@ -142,10 +143,28 @@ function Home() {
         <OurMission />
       </section>
       <SectionFeedBack>
+        <Box sx={{
+          display: 'inline-block',
+          animation: `${rotate} 5s linear infinite`,
+          position: "relative",
+          top: {
+            md: "0",
+            sm: "0px",
+            xs: "0px"
+          },
+          right:"60px",
+          float: {
+            md: "inline-end",
+            sm: "inline-end",
+            xs: "inline-end"
+          }
+        }}>
+          <img src="images/round-icon.svg" />
+        </Box>
         <FeedBack />
       </SectionFeedBack>
       <section>
-        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" } }}>
+        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" }, top:"34px" }}>
 
           <img
             alt=""
@@ -157,9 +176,26 @@ function Home() {
         <CocoApp />
       </section>
       <SectionBenifits>
+       
         <BenifitsSection />
+
+       
       </SectionBenifits>
       <GetStart>
+        <Box sx={{
+          display: 'inline-block',
+          animation: `${rotate} 5s linear infinite`,
+          position: "relative",
+          zIndex: "1",
+          top:"30px",
+          left:"34%",
+          
+        }}>
+          <img
+            className="positionAbosolute StarIconPosition"
+            src="images/star-icon.svg"
+            alt=""
+          /></Box>
         <GettingStarted />
       </GetStart>
       <AskQuestionsBack>

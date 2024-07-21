@@ -68,7 +68,7 @@ function Verify(props) {
   };
 
   const reSendOTPHandle = async () => {
-    const url = ApiConfig.loginGenerateOtp;
+    const url = ApiConfig.signupGenerateOtp;
     try {
       const res = await axios.post(url, {
         email: location?.state?.email.email || location?.state?.email,
@@ -77,7 +77,7 @@ function Verify(props) {
       if (res.status === 200) {
         toast.success(res.data.message);
         setIsLoading(false);
-        auth.setEndTime(moment().add(3, "m").unix());
+        auth.setEndTime(moment().add(16, "s").unix());
       }
     } catch (error) {
       toast.error(

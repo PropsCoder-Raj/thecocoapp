@@ -84,6 +84,7 @@ function SaveChild(props) {
                 justifyContent: "space-between",
                 borderRadius: "5px",
                 alignItems: "center",
+                cursor: "pointer",
               }}
               onClick={() => {
                 setChildAdd(true);
@@ -242,6 +243,7 @@ function SaveChild(props) {
                       justifyContent: "space-between",
                       borderRadius: "5px",
                       alignItems: "center",
+                      cursor: "pointer",
                     }}
                   >
                     <Box

@@ -1,6 +1,9 @@
 
 //Live URL
-const url = "http://thecocoapp.com:8080/api/v1/";
+const url = "https://node.thecocoapp.com/api/v1/";
+
+//staging URL
+// const url = "http://thecocoapp.com:8080/api/v1/";
 
 //Local URL
 // const url = "http://localhost:8080/api/v1/";

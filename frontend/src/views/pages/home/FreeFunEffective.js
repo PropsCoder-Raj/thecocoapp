@@ -146,8 +146,10 @@ function FreeFunEffective() {
             }}
           >
             <Box sx={style.handleimgPosiotion}>
-              <StyledImgM alt="" src="images/mobileScreen.svg" />
-            </Box>
+              <StyledImgM alt="" src="images/Finalized.gif" />
+              {/* <video src="images/Finalized.mp4" autoPlay loop style={{ width:"-webkit-fill-available"}}/>   */}
+                        </Box>
+
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <Box mt={2} sx={style.mappedBox}>
@@ -191,7 +193,7 @@ function FreeFunEffective() {
             }}
           >
             <Box mt={2}>
-              <StyledImg alt="" src="images/mobileScreen.svg" />
+              <StyledImg alt="" src="images/mobileScreen.gif" />
             </Box>
           </Grid>
 

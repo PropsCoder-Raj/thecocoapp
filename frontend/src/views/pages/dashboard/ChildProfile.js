@@ -111,8 +111,8 @@ function ChildProfile() {
         children: [
             {
                 name: location?.state?.data?.childName || "",
-                schoolId: location?.state?.data?.schoolId || "",
-                dob: moment(location?.state?.data?.dob).format("YYYY-MM-DD") || "",
+                schoolId: location?.state?.data?.schoolId?.schoolId || "",
+                dob: location?.state?.data?.dob? moment(location?.state?.data?.dob).format("YYYY-MM-DD") :"",
                 gender: location?.state?.data?.gender || "",
                 standard: location?.state?.data?.standard || "",
             },

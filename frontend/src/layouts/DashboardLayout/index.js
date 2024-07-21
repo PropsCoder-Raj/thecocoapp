@@ -87,9 +87,13 @@ const CoinImg = styled("img")(({ theme }) => ({
 
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-  const themeSetting = useContext(SettingsContext);
   const User = useContext(UserContext);
+  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  useEffect(() => {
+    setMobileNavOpen(User.childOpen)
+  }, [User.childOpen])
+  const themeSetting = useContext(SettingsContext);
+
   const [selectedTab, setSelectedTab] = useState("Arbitrage");
   const [childData, setChildData] = useState([]);
 
@@ -124,7 +128,7 @@ const DashboardLayout = ({ children }) => {
         {(location.pathname === "/update-profile" || location.pathname === "/child-profile") && (
           <NavBar
             tabView={selectedTab}
-            onMobileClose={() => setMobileNavOpen(false)}
+              onMobileClose={() => { User.setChildOpen(false)}}
             openMobile={isMobileNavOpen}
             setSelectedTab={(item) => setSelectedTab(item)}
           />

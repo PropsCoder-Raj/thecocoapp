@@ -5,6 +5,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import TopBar from "./TopBar";
 import styled from "@emotion/styled";
 const styles = {
+  mainScreenBack:{
+    overflow: "auto", height: "100vh"
+  },
   content: {
     minHeight: "500px",
     borderRadius: "10px",
@@ -38,7 +41,6 @@ const styles = {
     height: "100vh",
     alignItems: "center",
     display: "flex",
-    overflow: "auto",
     paddingTop: "62px",
     "@media(max-width:900px)": {
       display: "grid",
@@ -71,9 +73,9 @@ const LoginLayout = ({ children }) => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={styles.mainScreenBack}>
+    <Box sx={styles.mainScreenBack} >
       <TopBar />
-      <Container>
+      <Container >
         <Box sx={styles.mainBox}>
           <Box sx={styles.boxMnage}>
             <ManageLayout>

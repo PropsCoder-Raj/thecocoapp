@@ -24,6 +24,8 @@ const [callApi, setCallApi] =useState(false);
       }
     } catch (error) {
       console.log(error, "error");
+      localStorage.clear();
+      sessionStorage.clear();
       navigate("/login")
     }
   };
