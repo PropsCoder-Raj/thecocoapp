@@ -175,11 +175,14 @@ exports.getAllModules = async (req, res, next) => {
             }
         }
 
-        let currentModule = "", currentLevel = "", currentStandard = "";
+        let currentModule = "", currentLevel = "", currentStandard = "", isStandard = true;
         for (let indexi = 0; indexi < processedModules.length; indexi++) {
             const elementi = processedModules[indexi];
             for (let indexj = 0; indexj < elementi.modules.length; indexj++) {
                 const modules = elementi.modules[indexj];
+                if(modules.module_number != undefined){
+                    isStandard = false;
+                }
                 for (let indexk = 0; indexk < modules.levels.length; indexk++) {
                     const levels = modules.levels[indexk];
                     if(levels.current_status == true){
@@ -199,7 +202,8 @@ exports.getAllModules = async (req, res, next) => {
             result: processedModules,
             currentModule,
             currentLevel,
-            currentStandard
+            currentStandard,
+            standard: isStandard
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
