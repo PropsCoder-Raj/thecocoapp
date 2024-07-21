@@ -7,6 +7,31 @@ const cloudinary = require('cloudinary').v2;
 const nodemailer = require('nodemailer');
 const emailTemplates = require('./emailTemplates');
 const otpGenerator = require('otp-generator');
+var { SendMailClient } = require("zeptomail");
+
+const sendMailUsingZepto = async (toEmail, subject, htmlBody) => {
+    const url = "api.zeptomail.in/";
+    const token = "Zoho-enczapikey " + process.env.zepto_secret;
+    let client = new SendMailClient({ url, token });
+    return await client.sendMail({
+        "from":
+        {
+            "address": "hello@thecocoapp.com",
+            "name": "Cocoapp"
+        },
+        "to":
+            [
+                {
+                    "email_address":
+                    {
+                        "address": toEmail
+                    }
+                }
+            ],
+        "subject": subject,
+        "htmlbody": htmlBody,
+    });
+}
 
 // Function to generate JWT token
 exports.generateJWT = async (payload) => {
@@ -21,7 +46,7 @@ exports.updateCurrentStatus = (array) => {
         } else {
             array[i].current_status = array[i - 1].complete_status;
         }
-        
+
         if (array[i].current_status === true && array[i].complete_status === true) {
             array[i].current_status = false;
         }
@@ -53,54 +78,57 @@ exports.uploadImageCloudinary = async (url) => {
 
 exports.sendPinChangedGenerateOTPMail = async (email, otp) => {
     let html = emailTemplates.pinChangedGenerateOTP(otp);
-    var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            "user": "panditrohit532@gmail.com",
-            "pass": "sajutseiqfrgitkm"
-        }
-    });
-    var mailOptions = {
-        from: "panditrohit532@gmail.com",
-        to: email,
-        subject: "OTP for PIN Change Verification",
-        html: html,
-    };
-    return await transporter.sendMail(mailOptions);
+    return await sendMailUsingZepto(email, "OTP for PIN Change Verification", html);
+    // var transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         "user": "panditrohit532@gmail.com",
+    //         "pass": "sajutseiqfrgitkm"
+    //     }
+    // });
+    // var mailOptions = {
+    //     from: "panditrohit532@gmail.com",
+    //     to: email,
+    //     subject: "OTP for PIN Change Verification",
+    //     html: html,
+    // };
+    // return await transporter.sendMail(mailOptions);
 }
 
 exports.sendSignupGenerateOTPMail = async (email, otp) => {
     let html = emailTemplates.signupGenerateOTP(otp);
-    var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            "user": "panditrohit532@gmail.com",
-            "pass": "sajutseiqfrgitkm"
-        }
-    });
-    var mailOptions = {
-        from: "panditrohit532@gmail.com",
-        to: email,
-        subject: "Verify Your Account",
-        html: html,
-    };
-    return await transporter.sendMail(mailOptions);
+    return await sendMailUsingZepto(email, "Verify Your Account", html);
+    // var transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         "user": "panditrohit532@gmail.com",
+    //         "pass": "sajutseiqfrgitkm"
+    //     }
+    // });
+    // var mailOptions = {
+    //     from: "panditrohit532@gmail.com",
+    //     to: email,
+    //     subject: "Verify Your Account",
+    //     html: html,
+    // };
+    // return await transporter.sendMail(mailOptions);
 }
 
 exports.sendLoginGenerateOTPMail = async (email, otp) => {
     let html = emailTemplates.loginGenerateOTP(otp);
-    var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            "user": "panditrohit532@gmail.com",
-            "pass": "sajutseiqfrgitkm"
-        }
-    });
-    var mailOptions = {
-        from: "panditrohit532@gmail.com",
-        to: email,
-        subject: "Your OTP for Login",
-        html: html,
-    };
-    return await transporter.sendMail(mailOptions);
+    return await sendMailUsingZepto(email, "Your OTP for Login", html);
+    // var transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         "user": "panditrohit532@gmail.com",
+    //         "pass": "sajutseiqfrgitkm"
+    //     }
+    // });
+    // var mailOptions = {
+    //     from: "panditrohit532@gmail.com",
+    //     to: email,
+    //     subject: "Your OTP for Login",
+    //     html: html,
+    // };
+    // return await transporter.sendMail(mailOptions);
 }

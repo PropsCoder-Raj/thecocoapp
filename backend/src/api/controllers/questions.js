@@ -214,7 +214,7 @@ exports.attemptQuestions = async (req, res, next) => {
             result: {
                 correctAnswerStatus,
                 loaderPercentage,
-                susscessQuestions,
+                susscessQuestions: susscessQuestions >= 3 ? 3 : Number(susscessQuestions) + 1,
                 right_answer: question.right_answer,
                 desc: question.desc,
                 nextQuestionId,

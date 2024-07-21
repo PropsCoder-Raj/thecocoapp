@@ -235,7 +235,7 @@ function QuetionsScreen() {
                 // value={attempt ? percentage : calculateProgressValue()}
               />
               <Typography variant="body2" color={"#FE8A36"}>
-                {percentage > 1 ? susscessQuestions : 0}/{max}
+                {percentage > 1 ? susscessQuestions : 1}/{max}
               </Typography>
             </Box>
           </Grid>
