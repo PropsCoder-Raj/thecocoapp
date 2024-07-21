@@ -175,11 +175,31 @@ exports.getAllModules = async (req, res, next) => {
             }
         }
 
+        let currentModule = "", currentLevel = "", currentStandard = "";
+        for (let indexi = 0; indexi < processedModules.length; indexi++) {
+            const elementi = processedModules[indexi];
+            for (let indexj = 0; indexj < elementi.modules.length; indexj++) {
+                const modules = elementi.modules[indexj];
+                for (let indexk = 0; indexk < modules.levels.length; indexk++) {
+                    const levels = modules.levels[indexk];
+                    if(levels.current_status == true){
+                        const standardId = await findStandard({_id: levels.standard_id});
+                        currentStandard = standardId.standard_id;
+                        currentModule = modules.module_id;
+                        currentLevel = levels.level_id;
+                    }
+                }
+            }
+        }
+
 
         return res.status(200).send({
             status: true,
             message: "Get Modules Data Successfully.",
-            result: processedModules
+            result: processedModules,
+            currentModule,
+            currentLevel,
+            currentStandard
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
