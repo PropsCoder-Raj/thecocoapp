@@ -50,7 +50,7 @@ const styles = {
   },
   BoxStyle: {
     padding: "34px",
-    border: "2px solid rgba(216, 216, 216, 1)",
+    border: "1px solid rgba(229, 229, 229, 1)",
     borderRadius: "16px",
   },
   profileBox: {

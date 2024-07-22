@@ -28,7 +28,7 @@ const style = {
   },
   BoxStyle: {
     padding: "22px",
-    border: "2px solid rgba(216, 216, 216, 1)",
+    border: "1px solid rgba(229, 229, 229, 1)",
     borderRadius: "16px",
     marginTop: "22px",
     "@media(max-width:767px)": {
@@ -938,8 +938,8 @@ useEffect(()=>{
                         values.profilePic
                           ? values.profilePic
                           : values.gender === "Male"
-                            ? "images/boyprofile.jpg"
-                            : "images/girlprofile.jpg"
+                            ? "images/boyprofile.png"
+                            : "images/girlprofile.png"
                       }
                     />
                     <Box>
@@ -1101,7 +1101,7 @@ useEffect(()=>{
                         <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
                           <ProfileImg alt="" src={
                               values.profilePic ? values.profilePic :
-                            values.gender == "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                            values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
                             <Box > <Typography variant="body1">{values.childName}</Typography>
                         <Box sx={style.GapBox}>
                             <Typography variant="body1">{values.totalPoints}</Typography>

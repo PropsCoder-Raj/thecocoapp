@@ -6,8 +6,10 @@ import {
     Grid,
     styled,
     Typography,
+    useMediaQuery,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 const style = {
     flexBox: {
@@ -51,7 +53,7 @@ const style = {
         borderRadius: "20px",
         "@media(max-width:600px)": {
             maxWidth: "235px",
-            padding: "10px",
+            padding: "10px 15px",
         },
     },
 
@@ -69,7 +71,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
     "@media(max-width:767px)": { padding: "30px" },
     background: "rgba(255, 253, 243, 1)"
 }));
@@ -84,17 +86,19 @@ const TakeImg = styled("img")(({ theme }) => ({
     },
 }));
 const TaddyImg = styled("img")(({ theme }) => ({
-     width: "240px",
+    width: "160px",
     "@media(max-width:650px)": {
-     width: "160px"
+     width: "150px"
     },
     "@media(max-width:500px)": {
-        width: "160px"
+        width: "140px"
     },
 }));
 function Complete() {
     const navigate = useNavigate();
     const location = useLocation();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     return (
         <MainBox style={{position:"relative", height:"100vh"}}>
             <Container maxWidth="lg">
@@ -103,7 +107,7 @@ function Complete() {
                         <Box sx={style.CombineBox}>
                             <Box>
                                 <Box sx={{ position: "relative", zIndex: "1" }}>
-                                    <TakeImg src="images/starback.png" alt="" />
+                                    <TakeImg src={isMobile ? "images/starback1.png" :"images/starback.png"} alt="" />
                                     <Box sx={{
                                         position: "absolute", bottom: "47px", left: "50%",
                                         textAlign: "center",
@@ -111,7 +115,7 @@ function Complete() {
                                         minHeight: "80px",
                                         display: "grid",
                                         "@media(max-width:600px)": {
-                                            bottom: "20px",
+                                            bottom: "18px",
                                         },
                                     }}>
                                         <Typography color={"rgba(255, 255, 255, 1)"} variant="h4">{location?.state?.levelNo || " "}</Typography>
@@ -126,7 +130,7 @@ function Complete() {
                                         },
                                     }}>
                                         <Box>
-                                            <Typography variant="h3" color={"rgba(20, 23, 25, 1)"} fontWeight={"600"}>Good job, {localStorage.getItem("childName") || " "}</Typography>
+                                            <Typography variant="h3" color={"rgba(45, 43, 41, 1)"} fontWeight={"600"}>Good job, {localStorage.getItem("childName") || " "}</Typography>
                                         </Box>
                                         <Box>
                                             <Typography variant="h4" color={"rgba(254, 141, 67, 1)"} fontWeight={"800"}>Reward</Typography>
@@ -135,7 +139,7 @@ function Complete() {
                                                     style={{ width: "32px", height: "32px" }} /><Typography color={"rgba(254, 141, 67, 1)"} variant="h1">{location?.state?.totalPoints || " "}</Typography>
                                             </Box></Box>
                                         <Box>
-                                            <Button onClick={() => { navigate("/dashboard") }} variant="contained">Yay, OK!</Button>
+                                            <Button fullWidth onClick={() => { navigate("/dashboard") }} variant="contained">Yay, OK!</Button>
                                         </Box></Box>
                                 </Box>
                             </Box>
@@ -149,9 +153,21 @@ function Complete() {
                 <Container>
             <Box sx={{
                 display: "flex",
-                justifyContent: "end"
+                justifyContent: "center"
             }}>
+                        <Box onClick={() => { navigate("/dashboard") }} sx={{
+                            position:"relative",
+                            left: "50px",
+                            display:"flex",
+                }}>
                         <TaddyImg alt="" src="images/Coco-Idle_Without_Talking.gif"  />
+                            <img alt="" src="images/coinStar.png" style={{
+                                position: "relative",
+                                left: "-100px",
+                                maxWidth:"180px"
+}}/>
+                        
+                        </Box>
             </Box></Container>
             <InnerBox>
                

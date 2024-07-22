@@ -144,7 +144,7 @@ function Home() {
       </section>
       <SectionFeedBack>
         <Box sx={{
-          display: 'inline-block',
+          display: { md: 'inline-block', sm:"none", xs:"none"},
           animation: `${rotate} 5s linear infinite`,
           position: "relative",
           top: {

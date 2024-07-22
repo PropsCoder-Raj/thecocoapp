@@ -79,7 +79,7 @@ function SaveChild(props) {
             <Box
               sx={{
                 padding: "11px 13px",
-                border: "1px solid rgba(216, 216, 216, 1)",
+                border: "1px solid #E5E5E5",
                 display: "flex",
                 justifyContent: "space-between",
                 borderRadius: "5px",
@@ -238,7 +238,7 @@ function SaveChild(props) {
                   <Box
                     sx={{
                       padding: "11px 13px",
-                      border: "1px solid rgba(216, 216, 216, 1)",
+                      border: "1px solid #E5E5E5",
                       display: "flex",
                       justifyContent: "space-between",
                       borderRadius: "5px",

@@ -45,6 +45,11 @@ const style = {
   gridBox: {
     display: "grid",
     gap: "16px",
+    maxWidth:"700px",
+    "@media(max-width:900px)": {
+      maxWidth:"-webkit-fill-available"
+    },
+
   },
   logoBox: {
     height: "-webkit-fill-available",
@@ -323,7 +328,7 @@ function Leason(props) {
           </Grid>
           <Grid item md={4} sm={12} xs={12}>
             <Box sx={{
-              background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid rgba(216, 216, 216, 1)", display: {
+              background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
 
                 md: "block",
                 sm: "none",

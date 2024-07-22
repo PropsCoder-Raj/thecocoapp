@@ -89,7 +89,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
     position: "fixed",
     bottom: "0",
     width: "-webkit-fill-available",
@@ -137,9 +137,11 @@ function QuetionsScreen() {
     const [progress, setProgress] = useState(1);
     const nextProgress = () => {
       setProgress(correctAnsData.nextQuestionNo); // Increment or reset to minimum
+      setCorrectAns(null);
     };
   const[activeindex, setActiveIndex] =useState("");
-  const [correctAns, setCorrectAns] = useState("");
+  const [correctAns, setCorrectAns] = useState(null);
+  console.log(correctAns, "correctAns");
   const handleClose = (event, reason) => {
 
     setOpen(false);
@@ -349,6 +351,7 @@ function QuetionsScreen() {
                 )}
 
                 <Button
+                  disabled={correctAns == null }
                  sx={{
                   width:{
                     md:"155px",
@@ -366,16 +369,13 @@ function QuetionsScreen() {
                       ? { background: "#58CC02" }
                       : correctAns === false
                       ? { background: "#FF4B4B" }
-                      : { background: "#FE8A36" }
+                        : { background: "#FE8A36", color:"rgb(188 102 40)" }
                   }
                   variant="contained"
                   onClick={() => { 
+                    setCorrectAns(null);
                   
-                    if(activeindex === ""){
-                      setOpen(true)
-                    }else{
                     setActiveIndex("");  
-                    setCorrectAns("");
                     if (correctAnsData.nextScreen === "SCORE_BOARD"){
                       navigate("/complete",
                         {state:{
@@ -385,7 +385,7 @@ function QuetionsScreen() {
                       )
                     }else{
                       nextProgress();
-                    }}
+                    }
                   }}
                 >
                   Continue
