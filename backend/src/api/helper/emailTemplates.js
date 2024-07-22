@@ -32,8 +32,8 @@ exports.signupGenerateOTP = (otp) => {
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center; padding: 20px; color: #ffffff; background: #6B3A17;">
-                    <p>Copyright &copy; <span id="year"></span> The CoCo App</p>
+                <td style="text-align: center; padding: 20px; color: #ffffff; background: #FE8A36;font-weight: bold;">
+                    <p>Copyright &copy; 2024 The Cocoapp. All rights reserved.</p>
                 </td>
             </tr>
         </table>
@@ -79,8 +79,8 @@ exports.pinChangedGenerateOTP = (otp) => {
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center; padding: 20px; color: #ffffff; background: #6B3A17;">
-                    <p>Copyright &copy; <span id="year"></span> The CoCo App</p>
+                <td style="text-align: center; padding: 20px; color: #ffffff; background: #FE8A36;font-weight: bold;">
+                    <p>Copyright &copy; 2024 The Cocoapp. All rights reserved.</p>
                 </td>
             </tr>
         </table>
@@ -126,8 +126,8 @@ exports.loginGenerateOTP = (otp) => {
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center; padding: 20px; color: #ffffff; background: #6B3A17;">
-                    <p>Copyright &copy; <span id="year"></span> The CoCo App</p>
+                <td style="text-align: center; padding: 20px; color: #ffffff; background: #FE8A36;font-weight: bold;">
+                    <p>Copyright &copy; 2024 The Cocoapp. All rights reserved.</p>
                 </td>
             </tr>
         </table>
