@@ -1146,6 +1146,14 @@ function Dashboard() {
                 <Box sx={style.BoxStyle}>
                   <AddImg alt="" src="images/add.png" />
                   <AdSense />
+                  <div>
+                    <ins class="adsbygoogle"
+                      sx={{ display: "block" }}
+                      data-ad-client="ca-pub-9618067449915081"
+                      data-ad-slot="9991895618"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+                  </div>
                 </Box>
               </Box>
             </Grid>
