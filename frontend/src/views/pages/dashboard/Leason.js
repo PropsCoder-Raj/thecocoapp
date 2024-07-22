@@ -363,6 +363,7 @@ function Leason(props) {
                 xs: "-webkit-fill-available"
               },
               justifyContent: "center",
+              paddingRight: "32px",
               marginBottom: "5px",
               background: getBackground(progress),
               backgroundSize: '100% 200%',

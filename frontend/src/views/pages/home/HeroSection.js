@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Box, Button, Container, Grid, keyframes, Snackbar, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, keyframes, Snackbar, Typography, useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
 
 const style = {
   HandleMargin: {
@@ -81,6 +82,8 @@ function HeroSection() {
   const handleClose = (event, reason) => {
     setOpen(false);
   };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <Container maxWidth="lg">
       <Box>
@@ -129,6 +132,7 @@ function HeroSection() {
               Start them young! Cocoapp equips children with the financial
               knowledge they need to make smart choices.
             </Typography>
+            <Box sx={isMobile?{display:"flex", justifyContent:"center"}:{}}>
             <Button
               onClick={() => {
                 
@@ -138,7 +142,7 @@ function HeroSection() {
               sx={style.HandleMargin}
             >
               Get started
-            </Button>
+            </Button></Box>
             <Box sx={{
               display: 'inline-block',
               animation: `${rotate} 5s linear infinite`,

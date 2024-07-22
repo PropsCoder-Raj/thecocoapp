@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography, useMediaQuery } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateLabels } from "src/utils";
 import { IoMdClose } from "react-icons/io";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTheme } from "@emotion/react";
 
 const style = {
   flexBox: {
@@ -45,25 +46,13 @@ const style = {
     display: "grid",
     overflow: "auto",
     "@media(max-width:767px)": {
-      height: "calc(100vh - 314px)",
+      height: "calc(100vh - 300px)",
       justifyContent: "start",
       alignItems: "start",
       display: "block"
     },
   },
-  manageBoxHeight: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "calc(100vh - 259px)",
-    display: "grid",
-    overflow: "auto",
-    "@media(max-width:767px)": {
-      height: "calc(100vh - 314px)",
-      justifyContent: "start",
-      alignItems: "start",
-      display:"block"
-     },
-  },
+
   displaycustom:{
     display:"block",
     "@media(max-width:767px)": {
@@ -155,6 +144,8 @@ function QuetionsScreen() {
   const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(quetionsData, "quetionsData");
   const [max, setMax] = useState(quetionsData.length);
   useEffect(() => {
@@ -280,7 +271,7 @@ function QuetionsScreen() {
         </Grid>
       </Container>
       {correctAns === true && 
-      <Container>
+        <Container sx={isMobile ? { marginTop:"-7px"} :{}}>
         <Box sx={{
           display: "flex",
           justifyContent: "end"
