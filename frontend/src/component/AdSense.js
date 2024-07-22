@@ -5,7 +5,7 @@ const AdSense = () => {
         const script = document.createElement('script');
         script.async = true;
         script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-        script.setAttribute('data-ad-client', 'ca-pub-9618067449915081');
+        script.setAttribute('data-ad-client', 'ca-pub-8429136628825533');
         script.crossOrigin = 'anonymous';
         document.body.appendChild(script);
 
@@ -22,8 +22,8 @@ const AdSense = () => {
         <div>
             <ins className="adsbygoogle"
                 style={{ display: 'block' }}
-                data-ad-client="ca-pub-9618067449915081"
-                data-ad-slot="9991895618"
+                data-ad-client="ca-pub-8429136628825533"
+                data-ad-slot="6987607102"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
         </div>
