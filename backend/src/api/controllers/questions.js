@@ -189,7 +189,7 @@ exports.attemptQuestions = async (req, res, next) => {
 
         let listAllQuestions = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
         let susscessQuestions = listAllQuestions.filter((question) => question.correstAnswer == true).length;
-        let loaderPercentage = Math.ceil(33.33 * susscessQuestions)
+        let loaderPercentage = Math.ceil(33.33 * (susscessQuestions >= 3 ? 3 : Number(susscessQuestions) + 1))
         totalPoints = isPointsAccessible ? listAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0) : 0;
         
         if(nextScreen == "SCORE_BOARD" && demo == false){
