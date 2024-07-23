@@ -13,7 +13,6 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
-import { Link, animateScroll as scroll, scroller } from 'react-scroll';
 import AdSense from "src/component/AdSense";
 const style = {
   HandleMargin: {
@@ -35,14 +34,14 @@ const style = {
     marginTop: "22px",
     "@media(max-width:767px)": {
       padding: "8px 12px",
-      
+
     },
   },
   GapBox: {
     display: "flex",
     gap: "5px",
     alignItems: "center",
-    justifyContent:"start"
+    justifyContent: "start"
   },
   GridBox: {
     display: "grid",
@@ -81,7 +80,7 @@ const style = {
     top: "-16px",
     background: "#fff",
     textAlign: "center",
-    cursor:"pointer",
+    cursor: "pointer",
     alignItems: "center",
     display: "grid",
   },
@@ -89,7 +88,7 @@ const style = {
     fontSize: "16px",
     fontWeight: "800",
     color: "#00BAF2",
-    lineHeight:"19px"
+    lineHeight: "19px"
   },
   desktopDrawer: {
     width: "270px",
@@ -128,16 +127,16 @@ const style = {
       // },
     },
   },
-  switchChildBox:{
-display:"none",
+  switchChildBox: {
+    display: "none",
     "@media(max-width:600px)": {
       display: "block",
     },
   },
-  switchChild:{
-    display:"flex",
-    gap:"10px", 
-    alignItems:"start"
+  switchChild: {
+    display: "flex",
+    gap: "10px",
+    alignItems: "start"
   },
   mobileDrawer: {
     width: 256,
@@ -349,17 +348,17 @@ display:"none",
       lineHeight: "24px",
     },
   },
-  makeBack:{
+  makeBack: {
     backgroundImage: "url('/images/nameBackground.png')",
     backgroundSize: "cover",
     minHeight: "56px",
-    width:"100%",
-    textAlign:"center",
-    display:"grid",
-    justifyContent:"center",
-    alignItems:"center",
-    marginTop:"60px",
-    marginBottom:"100px",
+    width: "100%",
+    textAlign: "center",
+    display: "grid",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "60px",
+    marginBottom: "100px",
     "@media(max-width:767px)": {
       marginTop: "40px",
       marginBottom: "100px",
@@ -373,7 +372,7 @@ display:"none",
 const StyledImg = styled("img")(({ theme }) => ({
   width: "124px",
   height: "auto",
-  marginTop:"-47px"
+  marginTop: "-47px"
 }));
 const TaddyImg = styled("img")(({ theme }) => ({
   width: "115px",
@@ -382,7 +381,7 @@ const TaddyImg = styled("img")(({ theme }) => ({
 const ProfileImg = styled("img")(({ theme }) => ({
   width: "70px",
   height: "70px",
-  margin:"0 12px"
+  margin: "0 12px"
 }));
 const CoinImg = styled("img")(({ theme }) => ({
   width: "24px",
@@ -406,7 +405,7 @@ const SkeletonBox = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "80px",
   animation: `loading 1.5s infinite`,
-  borderRadius:"68px",
+  borderRadius: "68px",
   '@keyframes loading': {
     '0%': {
       backgroundColor: '#e0e0e0',
@@ -429,8 +428,8 @@ function Dashboard() {
   useEffect(() => {
     setProfile(User?.profile?.profilePic)
   }, [User.profile])
-  const [childOpen, setChildOpen] =useState(false);
-  useEffect(()=>{
+  const [childOpen, setChildOpen] = useState(false);
+  useEffect(() => {
     setChildOpen(User.childOpen)
   }, [User.childOpen])
   const [isLogout, setIsLogout] = useState(false);
@@ -527,9 +526,9 @@ function Dashboard() {
     setChildOpen(false);
     User.setChildOpen(false)
   };
-useEffect(()=>{
-  getChildData();
-}, [childOpen])
+  useEffect(() => {
+    getChildData();
+  }, [childOpen])
 
   const getChildData = async () => {
     const token = localStorage.getItem("token");
@@ -542,7 +541,7 @@ useEffect(()=>{
       if (res.status === 200) {
         setChildData(res.data.data);
         getAllModuleData();
-      } 
+      }
     } catch (error) {
       console.log(error, "error");
     }
@@ -584,12 +583,12 @@ useEffect(()=>{
                 });
               }}
             >
-              <Typography  sx={style.textCss}>START</Typography>
+              <Typography sx={style.textCss}>START</Typography>
             </Box>
           )}
           <LockImg
             onClick={() => {
-              if (level.complete_status || level.current_status) {
+              if (level.complete_status) {
                 navigate("/leason", {
                   state: {
                     module_id: level.module_id,
@@ -606,7 +605,7 @@ useEffect(()=>{
                   : "images/lock.png"
             }
             alt=""
-            style={level.complete_status || level.current_status ? { cursor: "pointer" } : {}}
+            style={level.complete_status ? { cursor: "pointer" } : {}}
           />
         </Grid>
       );
@@ -632,7 +631,7 @@ useEffect(()=>{
           key={index}
           sx={{ display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" }}
         >
-          <SkeletonBox style={{width:"80%"}}></SkeletonBox>
+          <SkeletonBox style={{ width: "80%" }}></SkeletonBox>
         </Box>
         <Box
           key={index}
@@ -641,13 +640,14 @@ useEffect(()=>{
           <SkeletonBox style={{
             borderRadius: "50%",
             width: "100px"
-          }}></SkeletonBox> 
+          }}></SkeletonBox>
         </Box>
         <Box
           key={index}
-          sx={ { display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" } }
+          sx={{ display: "flex", justifyContent: "center", gap: "30px", alignItems: "center" }}
         >
-          <SkeletonBox style={{ borderRadius: "50%",
+          <SkeletonBox style={{
+            borderRadius: "50%",
             width: "100px"
           }}></SkeletonBox> <SkeletonBox style={{
             borderRadius: "50%",
@@ -663,7 +663,7 @@ useEffect(()=>{
             width: "100px"
           }}></SkeletonBox>
         </Box>
-     </>
+      </>
       );
     });
   };
@@ -674,8 +674,8 @@ useEffect(()=>{
         method: "POST",
         url: ApiConfig.switchChild,
         headers: { token: token },
-        params:{
-          childId :id
+        params: {
+          childId: id
         }
       });
       if (res.status === 200) {
@@ -701,12 +701,7 @@ useEffect(()=>{
           currentModule: res?.data?.currentModule,
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
-         })
-        // scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
-        //   duration: 500,
-        //   delay: 0,
-        //   smooth: 'easeInOutQuart'
-        // });
+        })
       }
     } catch (error) {
       console.log(error, "error");
@@ -715,13 +710,13 @@ useEffect(()=>{
     }
   };
 
-  useEffect(()=>{
-    
-      childData.map((values, items) => {
-        if (values.activeStatus){
-          localStorage.setItem("childName", values.childName);
-        }
-      })
+  useEffect(() => {
+
+    childData.map((values, items) => {
+      if (values.activeStatus) {
+        localStorage.setItem("childName", values.childName);
+      }
+    })
   }, [childData])
   const renderedSections = [
     {
@@ -921,46 +916,46 @@ useEffect(()=>{
   );
   const content = (
     <>
-      <Box height="100%" display="flex" flexDirection="column" sx={childOpen ?{
-        padding: "64px 20px 20px 20px", minWidth: "260px" 
-      }:{ padding: "20px", minWidth: "260px" }}>
+      <Box height="100%" display="flex" flexDirection="column" sx={childOpen ? {
+        padding: "64px 20px 20px 20px", minWidth: "260px"
+      } : { padding: "20px", minWidth: "260px" }}>
         <Box sx={style.BoxStyle}>
-          {childData.length > 0 ?  <>
-          <Typography variant="h4">Switch Profile</Typography>
-          {childData.map((values, items) => {
-            return (
-              <Box sx={style.profileBox} key={items} onClick={() => switchChild(values._id)}>
-                <Box
-                  style={
-                    values.activeStatus
-                      ? { background: "rgba(241, 245, 249, 1)", cursor: "pointer" }
-                      : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }
-                  }
-                  sx={style.userBox}
-                >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <ProfileImg
-                      alt=""
-                      src={
-                        values.profilePic
-                          ? values.profilePic
-                          : values.gender === "Male"
-                            ? "images/boyprofile.png"
-                            : "images/girlprofile.png"
-                      }
-                    />
-                    <Box>
-                      <Typography variant="body1">{values.childName}</Typography>
-                      <Box sx={style.GapBox}>
-                        <Typography variant="body1">{values.totalPoints}</Typography>
-                        <CoinImg alt="" src="images/Coin.png" />
+          {childData.length > 0 ? <>
+            <Typography variant="h4">Switch Profile</Typography>
+            {childData.map((values, items) => {
+              return (
+                <Box sx={style.profileBox} key={items} onClick={() => switchChild(values._id)}>
+                  <Box
+                    style={
+                      values.activeStatus
+                        ? { background: "rgba(241, 245, 249, 1)", cursor: "pointer" }
+                        : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }
+                    }
+                    sx={style.userBox}
+                  >
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <ProfileImg
+                        alt=""
+                        src={
+                          values.profilePic
+                            ? values.profilePic
+                            : values.gender === "Male"
+                              ? "images/boyprofile.png"
+                              : "images/girlprofile.png"
+                        }
+                      />
+                      <Box>
+                        <Typography variant="body1">{values.childName}</Typography>
+                        <Box sx={style.GapBox}>
+                          <Typography variant="body1">{values.totalPoints}</Typography>
+                          <CoinImg alt="" src="images/Coin.png" />
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-            );
-          })}</> : <Box  onClick={()=>{
+              );
+            })}</> : <Box onClick={() => {
               navigate("/child-profile", {
                 state: {
                   name: "Add",
@@ -968,40 +963,37 @@ useEffect(()=>{
                   childId: "",
                   data: ""
                 }
-              }) 
+              })
               User.setChildOpen(false)
             }} sx={{ padding: "8px", }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: "8px",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-              >
-                <LiaUserCircleSolid
-                  style={{ color: "#D8D8D8", fontSize: "25px" }}
-                />
-                <Typography variant="body2">Add child</Typography>
-              </Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "8px",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+            >
+              <LiaUserCircleSolid
+                style={{ color: "#D8D8D8", fontSize: "25px" }}
+              />
+              <Typography variant="body2">Add child</Typography>
+            </Box>
           </Box>}
         </Box>
         {contentLog}
       </Box>
     </>
   );
- 
-  const getOrdinalSuffix=(number) =>{
+
+  const getOrdinalSuffix = (number) => {
     console.log("currentLevel: ", number);
     const suffixes = ["th", "st", "nd", "rd"];
     const value = number % 100;
     return number + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
   }
 
-  const removeOrdinalSuffixes =(value)=> {
-    console.log(value.replace(/(\d+)(st|nd|rd|th)/g, '$1'));
-    return value.replace(/(\d+)(st|nd|rd|th)/g, '$1');
-  }
+
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
@@ -1012,70 +1004,70 @@ useEffect(()=>{
                 <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
               </Box>
             </Grid> */}
-            <Grid item xs={12} sm={12} md={7} sx={{paddingRight:{
-              xl:"55px",
-              md:"55px",
-              sm:"0",
-              xs:"0"
-            }}}>
-             
+            <Grid item xs={12} sm={12} md={7} sx={{
+              paddingRight: {
+                xl: "55px",
+                md: "55px",
+                sm: "0",
+                xs: "0"
+              }
+            }}>
+
               {levelData.length !== 0 ?
-              levelData.map((values, i) => (
-               <>
-                  {(values?.name && currentData?.isStanard) &&
-                    <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} 
-                      // id={removeOrdinalSuffixes(values?.name)}
-                    >
-                    <Typography variant="h4" color={"#434547"} sx={{marginBottom:"7px"}}>{values?.name}</Typography>  
-                </Box> }
-                
-                  {values.modules.map((data) => (
-                    <Box>
-                      <Box
-                        sx={{
-                          background: "rgba(255, 245, 209, 1)",
-                          borderRadius: "30px",
-                          padding: "0 75px",
-                          paddingBottom: "25px",
-                          textAlign: "center",
-                          marginTop: "47px",
-                        }}
-                      >
-                        <Box>
-                          <StyledImg alt="" src={`images/module/${data.module_id}.png`} />
-                        </Box>
+                levelData.map((values, i) => (
+                  <>
+                    {(values?.name && currentData?.isStanard) &&
+                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}}>
+                        <Typography variant="h4" color={"#434547"} sx={{ marginBottom: "7px" }}>{values?.name}</Typography>
+                      </Box>}
+
+                    {values.modules.map((data) => (
+                      <Box>
                         <Box
                           sx={{
-                            backgroundImage: "url('/images/moduleNameBack.png')",
-                            padding: "6px",
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat",
+                            background: "rgba(255, 245, 209, 1)",
+                            borderRadius: "30px",
+                            padding: "0 75px",
+                            paddingBottom: "25px",
                             textAlign: "center",
-                            borderRadius:"20px"
+                            marginTop: "47px",
                           }}
                         >
-                          <Typography
-                            variant="h4"
-                            color={"#fff"}
-                            sx={{ fontWeight: "600" }}
+                          <Box>
+                            <StyledImg alt="" src={`images/module/${data.module_id}.png`} />
+                          </Box>
+                          <Box
+                            sx={{
+                              backgroundImage: "url('/images/moduleNameBack.png')",
+                              padding: "6px",
+                              backgroundSize: "cover",
+                              backgroundRepeat: "no-repeat",
+                              textAlign: "center",
+                              borderRadius: "20px"
+                            }}
                           >
-                            Module {data.module_number ? data.module_number : data.module_id}
-                          </Typography>
+                            <Typography
+                              variant="h4"
+                              color={"#fff"}
+                              sx={{ fontWeight: "600" }}
+                            >
+                              Module {data.module_number ? data.module_number : data.module_id}
+                            </Typography>
+                          </Box>
                         </Box>
+                        <Grid container spacing={3} sx={style.levelMargin}>
+                          {renderBoxes(data.levels)}
+                        </Grid>
                       </Box>
-                      <Grid container spacing={3} sx={style.levelMargin}>
-                        {renderBoxes(data.levels)}
-                      </Grid>
-                    </Box>
-                  ))}
-                </>
+                    ))}
+                  </>
 
-              )) :<Box>{renderSkeletons()}</Box> }
-                
-             
-            
+                )) : <Box>{renderSkeletons()}</Box>}
+
+
+
             </Grid>
-            <Grid item xs={5} sx={{ display: { xs: "none", sm:"none", md: "block" } }}>
+            <Grid item xs={5} sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
               <Box sx={style.GridBox}>
                 <Box sx={style.BoxStyle}>
                   <Box
@@ -1086,7 +1078,7 @@ useEffect(()=>{
                     <Box>
                       <Typography variant="h3" fontWeight={"700"} mb={1} color={"#4B4B4B"}>
                         Hey I am Coco!
-                         {/* {childData.map((values, items) => {
+                        {/* {childData.map((values, items) => {
                           if (values.activeStatus){
                             return values.childName
                           }
@@ -1098,57 +1090,57 @@ useEffect(()=>{
                     </Box>
                   </Box>
                 </Box>
-                {childData.length > 0 ? 
-                <Box sx={style.BoxStyle}>
-                    <Typography variant="h4" fontWeight={"600"} color={"#434547"}>Switch Profile</Typography>
-                  {childData.map((values, items)=>{
-                    return(
-                      <Box sx={style.profileBox} onClick={() => { switchChild(values._id)}}>
-                      <Box
-                          style={values.activeStatus ?{
-                            background: "rgba(241, 245, 249, 1)",cursor:"pointer"
-                          } : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }}
-                        sx={style.userBox}
-                      >
-                        <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
-                          <ProfileImg alt="" src={
-                              values.profilePic ? values.profilePic :
-                            values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
-                            <Box > <Typography variant="body1">{values.childName}</Typography>
-                        <Box sx={style.GapBox}>
-                            <Typography variant="body1">{values.totalPoints}</Typography>
-                          <CoinImg alt="" src="images/Coin.png" />
-                              </Box></Box></Box>
-                      </Box>
-                  </Box>)
-                  })}
-                 
-                </Box> :
+                {childData.length > 0 ?
                   <Box sx={style.BoxStyle}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                      cursor: "pointer",
-                    }}
-                    onClick={()=>{
-                      navigate("/child-profile", {
-                        state: {
-                          name: "Add",
-                          img: "",
-                          childId: "",
-                          data: ""
-                        }
-                      }) 
-                      User.setChildOpen(false)
-                    }}
-                  >
-                    <LiaUserCircleSolid
-                      style={{ color: "#D8D8D8", fontSize: "25px" }}
-                    />
-                    <Typography variant="body2">Add child</Typography>
-                  </Box>
+                    <Typography variant="h4" fontWeight={"600"} color={"#434547"}>Switch Profile</Typography>
+                    {childData.map((values, items) => {
+                      return (
+                        <Box sx={style.profileBox} onClick={() => { switchChild(values._id) }}>
+                          <Box
+                            style={values.activeStatus ? {
+                              background: "rgba(241, 245, 249, 1)", cursor: "pointer"
+                            } : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }}
+                            sx={style.userBox}
+                          >
+                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                              <ProfileImg alt="" src={
+                                values.profilePic ? values.profilePic :
+                                  values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
+                              <Box > <Typography variant="body1">{values.childName}</Typography>
+                                <Box sx={style.GapBox}>
+                                  <Typography variant="body1">{values.totalPoints}</Typography>
+                                  <CoinImg alt="" src="images/Coin.png" />
+                                </Box></Box></Box>
+                          </Box>
+                        </Box>)
+                    })}
+
+                  </Box> :
+                  <Box sx={style.BoxStyle}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "8px",
+                        alignItems: "center",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        navigate("/child-profile", {
+                          state: {
+                            name: "Add",
+                            img: "",
+                            childId: "",
+                            data: ""
+                          }
+                        })
+                        User.setChildOpen(false)
+                      }}
+                    >
+                      <LiaUserCircleSolid
+                        style={{ color: "#D8D8D8", fontSize: "25px" }}
+                      />
+                      <Typography variant="body2">Add child</Typography>
+                    </Box>
                   </Box>
                 }
                 <Box sx={style.BoxStyle}>
@@ -1161,13 +1153,13 @@ useEffect(()=>{
         </Box>
       </Container>
 
-        <Drawer open={childOpen}
-          onClose={()=>handleClose()}
+      <Drawer open={childOpen}
+        onClose={() => handleClose()}
         anchor="right"
-          >
-          {content}
-        </Drawer>
-     
+      >
+        {content}
+      </Drawer>
+
     </Page>
   );
 }
