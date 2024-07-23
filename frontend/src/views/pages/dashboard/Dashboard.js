@@ -1145,7 +1145,6 @@ function Dashboard() {
                 }
                 <Box sx={style.BoxStyle}>
                   <AddImg alt="" src="images/add.png" />
-                  <AdSense />
                 </Box>
               </Box>
             </Grid>
