@@ -702,11 +702,11 @@ useEffect(()=>{
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
          })
-        scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
-          duration: 500,
-          delay: 0,
-          smooth: 'easeInOutQuart'
-        });
+        // scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
+        //   duration: 500,
+        //   delay: 0,
+        //   smooth: 'easeInOutQuart'
+        // });
       }
     } catch (error) {
       console.log(error, "error");
