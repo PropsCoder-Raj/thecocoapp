@@ -1023,7 +1023,9 @@ useEffect(()=>{
               levelData.map((values, i) => (
                <>
                   {(values?.name && currentData?.isStanard) &&
-                    <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} id={removeOrdinalSuffixes(values?.name)}>
+                    <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} 
+                      // id={removeOrdinalSuffixes(values?.name)}
+                    >
                     <Typography variant="h4" color={"#434547"} sx={{marginBottom:"7px"}}>{values?.name}</Typography>  
                 </Box> }
                 
