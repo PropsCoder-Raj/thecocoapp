@@ -137,7 +137,7 @@ function QuetionsScreen() {
   };
   const [open, setOpen] = useState(false);
   const [attempt, setAttempt] = useState(false);
-  const [percentage, setPercentage] = useState(1);
+  const [percentage, setPercentage] = useState(Math.ceil(33.33));
   const [susscessQuestions, setSusscessQuestions] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
