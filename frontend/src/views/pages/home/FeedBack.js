@@ -27,7 +27,15 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
-function Feedback() {
+
+function Feedback() {const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust this value to control the bounce height */
+  }
+`;
   return (
     <Container maxWidth="lg">
       <Box sx={style.mainBox}>
@@ -36,13 +44,14 @@ function Feedback() {
           sx={{
             display: "flex",
             justifyContent: { xs: "center", sm: "center", md: "start" },
+            animation: `${bounce} 2.5s infinite`,
           }}
         >
           <img src="images/doubleCote.svg" alt="#" />
         </Box>
 
         <Typography
-          variant="h2"
+          variant="h1"
           sx={{
             fontWeight: {
               xs: "600",

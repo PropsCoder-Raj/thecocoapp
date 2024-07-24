@@ -35,7 +35,7 @@ const style = {
         paddingBottom: "20px",
         justifyContent: "center",
         alignItems: "center",
-        height:"calc(100vh - 120px)"
+        height:"calc(100vh - 190px)"
     },
     buttonHandle: {
         display: "flex",
