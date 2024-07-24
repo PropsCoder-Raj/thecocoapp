@@ -25,12 +25,17 @@ const completedQuestionsService = {
 
     // Function to update multiple completed questions based on query
     updateManyCompletedQuestions: async (query, updateObj) => {
-        return await CompletedQuestions.updateMany(query, updateObj, { new: true, upsert: true });
+        return await CompletedQuestions.updateMany(query, updateObj, { new: true });
     },
 
     // Function to delete a completed question based on query
     deleteCompletedQuestion: async (query) => {
         return await CompletedQuestions.deleteOne(query);
+    },
+
+    // Function to delete many a completed question based on query
+    deleteManyCompletedQuestion: async (query) => {
+        return await CompletedQuestions.deleteMany(query);
     },
 };
 

@@ -53,7 +53,6 @@ const { updateCurrentStatus } = require('../helper/utils')
 */
 exports.getAllModules = async (req, res, next) => {
     try {
-        const child = await findChild({ _id: req.user.currentChildActive });
 
         // Pipeline to check if modules are present for the child's standard
         const pipelineIsModulePresent = [
@@ -104,8 +103,9 @@ exports.getAllModules = async (req, res, next) => {
                 ...module,
                 complete_status: !!completedModulesList.find(element =>
                     element.module_id.toString() === module._id.toString() &&
-                    element.child_id.toString() === req.user.currentChildActive &&
-                    element.user_id.toString() === req.user._id
+                    (element.child_id && req.user.currentChildActive ?
+                        (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                        element.user_id.toString() === req.user._id.toString())
                 ),
                 levels: levelsLists
                     .filter(level => level.module_id.toString() === module._id.toString())
@@ -114,34 +114,96 @@ exports.getAllModules = async (req, res, next) => {
                         complete_status: !!completedLevelsList.find(element =>
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
-                            element.child_id.toString() === req.user.currentChildActive.toString() &&
-                            element.user_id.toString() === req.user._id.toString()
+                            (element.child_id && req.user.currentChildActive ?
+                                (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                                element.user_id.toString() === req.user._id.toString())
                         )
                     }))
             }))]
         }))
 
-        for (let index = 0; index < processedModules.length; index++) {
-            const element = processedModules[index];
+        for (let indexi = 0; indexi < processedModules.length; indexi++) {
+            const element = processedModules[indexi];
 
-            for (let index = 0; index < element.modules.length; index++) {
-                const modules = element.modules[index];
+            for (let indexj = 0; indexj < element.modules.length; indexj++) {
+                const modules = element.modules[indexj];
                 updateCurrentStatus(modules.levels);
+
+                if (!req.user.currentChildActive && indexi != 0) {
+                    element.modules[indexj].levels[0].current_status = false;
+                }
+
+                if (indexj != 0) {
+                    if (element.modules[indexj - 1].complete_status == false) {
+                        element.modules[indexj].levels[0].current_status = false;
+                    }
+                }
             }
-            
+        }
+        
+        let levelCount = 1;
+        if (req.user.currentChildActive) {
+            const child = await findChild({ _id: req.user.currentChildActive });
+            for (let index = 0; index < processedModules.length; index++) {
+                const element = processedModules[index];
+                if (child.standard) {
+                    if (Number(element.standard_id) > Number(child.standard)) {
+                        if (processedModules[index].modules && processedModules[index].modules.length > 0) {
+                            processedModules[index].modules[0].levels[0].current_status = false;
+                        }
+                    }
+                } else {
+                    if (element.standard_id > 4) {
+                        if (processedModules[index].modules && processedModules[index].modules.length > 0) {
+                            processedModules[index].modules[0].levels[0].current_status = false;
+                        }
+                    }
+                    for (let indexL = 0; indexL < processedModules[index].modules.length; indexL++) {
+                        const elementL = processedModules[index].modules[indexL];
+                        elementL.module_number = levelCount;
+                        levelCount++;
+                    }
+                }
+            }
+        } else {
+            for (let index = 0; index < processedModules.length; index++) {
+                for (let indexL = 0; indexL < processedModules[index].modules.length; indexL++) {
+                    const elementL = processedModules[index].modules[indexL];
+                    elementL.module_number = levelCount;
+                    levelCount++;
+                }
+            }
         }
 
-        // processedModules = processedModules.forEach((element) => ({
-        //     element.modules.map(module => {
-        //         updateCurrentStatus(module.levels),
-        //         currentChapterName = element.levels.find((level) => level.current_status === true).name
-        //     };
-        // }));
+        let currentModule = "", currentLevel = "", currentStandard = "", isStandard = true;
+        for (let indexi = 0; indexi < processedModules.length; indexi++) {
+            const elementi = processedModules[indexi];
+            for (let indexj = 0; indexj < elementi.modules.length; indexj++) {
+                const modules = elementi.modules[indexj];
+                if(modules.module_number != undefined){
+                    isStandard = false;
+                }
+                for (let indexk = 0; indexk < modules.levels.length; indexk++) {
+                    const levels = modules.levels[indexk];
+                    if(levels.current_status == true){
+                        const standardId = await findStandard({_id: levels.standard_id});
+                        currentStandard = standardId.standard_id;
+                        currentModule = modules.module_id;
+                        currentLevel = levels.level_id;
+                    }
+                }
+            }
+        }
+
 
         return res.status(200).send({
             status: true,
-            message: "Get Child Data Successfully.",
-            result: processedModules
+            message: "Get Modules Data Successfully.",
+            result: processedModules,
+            currentModule,
+            currentLevel,
+            currentStandard,
+            standard: isStandard
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
@@ -186,8 +248,8 @@ exports.getLessons = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
         const child = await findChild({ _id: req.user.currentChildActive });
-        const standard = await findStandard({ standard_id: child.standard })
-        const lessonsLists = await findAllLessons({ standard_id: standard._id, level_id: level_id, module_id: module_id });
+        // const standard = await findStandard({ standard_id: child.standard })
+        const lessonsLists = await findAllLessons({ level_id: level_id, module_id: module_id });
 
         const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
         let listQuuestions = await findAllQuestions({ module_id, level_id });
@@ -244,12 +306,11 @@ exports.getLessons = async (req, res, next) => {
 exports.getQuestions = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
-        const child = await findChild({ _id: req.user.currentChildActive });
-        const standard = await findStandard({ standard_id: child.standard })
-        let questionsLists = await findAllQuestions({ standard_id: standard._id, level_id: level_id, module_id: module_id });
+        const standard = await findAllCompletedLevels({ level_id: level_id, module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id })
+        let questionsLists = await findAllQuestions({ level_id: level_id, module_id: module_id });
 
         const listCompletedQuestions = await findAllCompletedQuestions();
-        let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true;
+        let currentQuestion = questionsLists[0]._id, currentPage = 1, previousQuestionsComplete = true, attamptedQuestions = standard.length > 0 ? true : false;
 
         for (let index = 0; index < questionsLists.length; index++) {
             const elementQuestions = questionsLists[index];
@@ -257,8 +318,9 @@ exports.getQuestions = async (req, res, next) => {
                 element.module_id.toString() == module_id.toString() &&
                 element.level_id.toString() == level_id.toString() &&
                 element.question_id.toString() == elementQuestions._id.toString() &&
-                element.child_id.toString() === req.user.currentChildActive &&
-                element.user_id.toString() === req.user._id
+                (element.child_id && req.user.currentChildActive ?
+                    (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                    element.user_id.toString() === req.user._id.toString())
             )
             previousQuestionsComplete = isCompletedQuesitons ? isCompletedQuesitons.correstAnswer : false;
             if (isCompletedQuesitons) {
@@ -275,8 +337,8 @@ exports.getQuestions = async (req, res, next) => {
 
         return res.status(200).send({
             status: true,
-            message: "Get Leesons Data Successfully.",
-            result: { currentQuestion, currentPage, quesitons: questionsLists }
+            message: "Get Questions Data Successfully.",
+            result: { attamptedQuestions, currentQuestion, currentPage, quesitons: questionsLists }
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

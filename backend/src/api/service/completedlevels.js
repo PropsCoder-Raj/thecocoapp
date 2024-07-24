@@ -23,7 +23,7 @@ const completedLevelsService = {
 
     // Function to update multiple completed levels based on query
     updateManyCompletedLevels: async (query, updateObj) => {
-        return await CompletedLevels.updateMany(query, updateObj, { new: true, upsert: true });
+        return await CompletedLevels.updateMany(query, updateObj, { new: true });
     },
 
     // Function to delete a completed level based on query

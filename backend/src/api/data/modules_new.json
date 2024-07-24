@@ -348,5 +348,65 @@
         "standard_id": 7,
         "module_id": 18,
         "name": "Informed Decisions"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 1,
+        "name": "Fin. Literacy Intro"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 2,
+        "name": "Budgeting Basics"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 3,
+        "name": "Needs vs. Wants"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 4,
+        "name": "Income Sources"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 5,
+        "name": "Long-Term Budgeting"
+    },
+    {
+        "standard_id": 8,
+        "module_id": 6,
+        "name": "Credit Cards"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 1,
+        "name": "Adult Finance"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 2,
+        "name": "Personal Budgeting"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 3,
+        "name": "Goal Setting (Short vs. Long-Term)"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 4,
+        "name": "Career & Earning Potential"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 5,
+        "name": "College Budgeting (Advanced)"
+    },
+    {
+        "standard_id": 9,
+        "module_id": 6,
+        "name": "Credit Cards"
     }
 ]

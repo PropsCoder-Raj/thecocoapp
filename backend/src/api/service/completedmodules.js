@@ -23,7 +23,7 @@ const completedModulesService = {
 
     // Function to update multiple completed modules based on query
     updateManyCompletedModules: async (query, updateObj) => {
-        return await CompletedModules.updateMany(query, updateObj, { new: true, upsert: true });
+        return await CompletedModules.updateMany(query, updateObj, { new: true });
     },
 
     // Function to delete a completed module based on query

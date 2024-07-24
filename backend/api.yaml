@@ -158,3 +158,36 @@ definitions:
       confirm_pin:
         type: string
         example: "5053"
+
+
+  change_school_def:
+    required:
+      - email
+      - schoolName
+      - schoolId
+      - address
+      - phoneNumber
+      - PrincipalName
+      - logo
+    properties:
+      email:
+        type: string
+        example: "school2@example.com"
+      schoolName:
+        type: string
+        example: "School Two"
+      schoolId:
+        type: number
+        example: 1
+      address:
+        type: string
+        example: "123 First St, Townsville"
+      phoneNumber:
+        type: number
+        example: 1234567890
+      PrincipalName:
+        type: string
+        example: "Rokade Sir"
+      logo:
+        type: string
+        example: "https://i.pinimg.com/736x/48/a3/54/48a354314bb3517dabc705eb3ee8b968.jpg"

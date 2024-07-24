@@ -16,7 +16,7 @@ const questionServices = {
     // Function to find a question by query
     findQuestion: async (query) => {
         // Find a question in the database based on the query
-        return await questionModel.findOne(query);
+        return await questionModel.findOne(query).populate("standard_id");
     },
     // Function to count questions by query
     findQuestionCount: async (query) => {

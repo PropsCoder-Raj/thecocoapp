@@ -551,7 +551,7 @@ exports.resetPinPassword = async (req, res, next) => {
 */
 exports.deleteData = async (req, res, next) => {
     try {
-        let collections = ["questions", "completed_questions", "completed_modules", "completed_levels", "modules", "levels"]
+        let collections = ["questions", "completed_questions", "completed_modules", "completed_levels", "modules", "levels", 'lessons']
         collections.map(async (collectionName) => {
             console.log("collectionName: ", collectionName);
             await mongoose.connection.db.dropCollection(collectionName);

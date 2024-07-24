@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Define the school schema
 const schoolSchema = new mongoose.Schema({
   schoolId: { type: Number, unique: true, default: 0 },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   schoolName: { type: String, default: '' },
   address: { type: String, default: '' },
   phoneNumber: { type: Number, default: 0 },
