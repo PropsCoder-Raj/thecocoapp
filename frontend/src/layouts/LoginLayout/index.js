@@ -79,7 +79,7 @@ const LoginLayout = ({ children }) => {
         <Box sx={styles.mainBox}>
           <Box sx={styles.boxMnage}>
             <ManageLayout>
-              <ImageGroup alt="" src="images/loginBack.png" />
+              <ImageGroup alt="" src="images/loginBack.png" style={{borderRadius:"10px"}} />
             </ManageLayout>
           </Box>
           <Box sx={styles.content}>
