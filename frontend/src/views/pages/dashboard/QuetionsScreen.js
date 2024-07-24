@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography, useMediaQuery } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateLabels } from "src/utils";
 import { IoMdClose } from "react-icons/io";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTheme } from "@emotion/react";
 
 const style = {
   flexBox: {
@@ -25,7 +26,7 @@ const style = {
   },
   CombineBox: {
     display: "grid",
-    padding: "20px",
+    padding: "20px 0",
     gap: "25px",
     maxWidth: "700px",
   },
@@ -38,18 +39,34 @@ const style = {
       display:"block",
     }
   },
-  manageBoxHeight: {
+  manageBBHeight:{
     justifyContent: "center",
     alignItems: "center",
-    height: "calc(100vh - 238px)",
+    height: "calc(100vh - 368px)",
     display: "grid",
     overflow: "auto",
-    "@media(max-width:767px)": { height: "calc(100vh - 285px)",
+    "@media(max-width:767px)": {
+      height: "calc(100vh - 300px)",
       justifyContent: "start",
       alignItems: "start",
-      display:"block"
-     },
+      display: "block"
+    },
   },
+
+  displaycustom:{
+    display:"block",
+    "@media(max-width:767px)": {
+      display: "none",
+    }
+  },
+  displaycustom1:{
+    display: "none",
+    "@media(max-width:767px)": {
+      display: "flex",
+      gap: "8px",
+      alignItems:"center"
+    }
+  }
 };
 const MainBox = styled(Box)(({ theme }) => ({
   padding: "60px 0px 0 0px",
@@ -60,9 +77,9 @@ const MainBox = styled(Box)(({ theme }) => ({
   alignContent: "space-between",
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
-  padding: "45px",
-  borderTop: "2px solid #D8D8D8",
-      position: "fixed",
+    padding: "45px",
+    borderTop: "1px solid #E5E5E5",
+    position: "fixed",
     bottom: "0",
     width: "-webkit-fill-available",
   "@media(max-width:767px)": { padding: "15px" },
@@ -72,14 +89,21 @@ const TakeImg = styled("img")(({ theme }) => ({
   width: "80px",
   height:"80px",
   "@media(max-width:767px)": {
-    width: "40px",
-    height: "40px", },
-  "@media(max-width:1000px)": {
-    width: "55px",
-    height: "55px",
-},
+    width: "30px",
+    height: "30px", },
+ 
 }));
-
+const TakeImg1 = styled("img")(({ theme }) => ({
+  width: "80px",
+  height: "80px",
+  "@media(max-width:767px)": {
+    width: "30px",
+    height: "30px",
+  },
+  "@media(max-width:1000px)": {
+    width: "30px",
+    height: "30px",
+  },}));
 const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
   width: "-webkit-fill-available",
   height: "10px",
@@ -90,15 +114,23 @@ const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
     borderRadius: "4px",
   },
 }));
+const EffectImg = styled("img")(({ theme }) => ({
+  width: "200px",
+  "@media(max-width:767px)": {
+ width:"120px"
+  },
+}))
 function QuetionsScreen() {
   const navigate = useNavigate();
     let min = 1;
     const [progress, setProgress] = useState(1);
     const nextProgress = () => {
       setProgress(correctAnsData.nextQuestionNo); // Increment or reset to minimum
+      setCorrectAns(null);
     };
   const[activeindex, setActiveIndex] =useState("");
-  const [correctAns, setCorrectAns] = useState("");
+  const [correctAns, setCorrectAns] = useState(null);
+  console.log(correctAns, "correctAns");
   const handleClose = (event, reason) => {
 
     setOpen(false);
@@ -106,11 +138,14 @@ function QuetionsScreen() {
   const [open, setOpen] = useState(false);
   const [attempt, setAttempt] = useState(false);
   const [percentage, setPercentage] = useState(1);
+  const [susscessQuestions, setSusscessQuestions] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
   const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(quetionsData, "quetionsData");
   const [max, setMax] = useState(quetionsData.length);
   useEffect(() => {
@@ -131,7 +166,7 @@ function QuetionsScreen() {
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
         setMax(res.data.result.quesitons.length)
-        setAttempt(res.data.result.loaderPercentage)
+        setAttempt(res.data.result.attamptedQuestions)
       }
     } catch (error) {
       console.log(error, "error");
@@ -152,7 +187,7 @@ function QuetionsScreen() {
           "module_id": location?.state?.module_id,
           "level_id": location?.state?.level_id,
           "answer": answer,
-          "demo": false
+          "demo": attempt
         }
       });
       if (res.status === 200) {
@@ -160,6 +195,7 @@ function QuetionsScreen() {
         setCorrectAnsData(res.data.result)
         //res.data.result.loaderPercentage
         setPercentage(res.data.result.loaderPercentage)
+        setSusscessQuestions(res.data.result.susscessQuestions)
       }
     } catch (error) {
       console.log(error, "error");
@@ -188,18 +224,19 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                value={attempt ? percentage : calculateProgressValue()}
+                value={percentage}
+                // value={attempt ? percentage : calculateProgressValue()}
               />
               <Typography variant="body2" color={"#FE8A36"}>
-                {progress}/{max}
+                {percentage > 1 ? susscessQuestions : 1}/{max}
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <Box sx={style.manageBoxHeight}>
+            <Box sx={correctAns == "" ? style.manageBoxHeight : style.manageBBHeight}>
               <Box sx={style.CombineBox}>
                 <Box sx={{ marginBottom: "20px" }}>
-                  <Typography variant="h3">
+                  <Typography variant="h3" fontWeight={600}>
                     {quetionsData[progress - 1]?.name || "--"}
                   </Typography>
                 </Box>
@@ -211,9 +248,12 @@ function QuetionsScreen() {
                       gap: "8px",
                       padding: "12px",
                       borderRadius: "8px",
-                      border: "1px solid #D8D8D8",
+                      border: activeindex === index ? "1px solid rgba(0, 186, 242, 1)" :"1px solid #D8D8D8",
                       cursor: "pointer",
                       background: activeindex === index ? "#E6F8FE" : "#fff",
+                      "&:hover":{
+                        background:"#E6F8FE"
+                      }
                     }}
                     onClick={() => {
                       setActiveIndex(index);
@@ -230,10 +270,22 @@ function QuetionsScreen() {
           </Grid>
         </Grid>
       </Container>
+      {correctAns === true && 
+        <Container sx={isMobile ? { marginTop:"-7px"} :{}}>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "end"
+        }}>
+            <EffectImg alt="" src="images/Coco-Idle_Talking-crop.gif" />
+        </Box></Container>}
       <InnerBox
-        style={
+        sx={
           correctAns === true
-            ? { background: "#D7FFB8", marginTop: "55px", border:"none" }
+            ? { background: "#D7FFB8", marginTop: "55px", border: "none", padding: {
+              md: "29px",
+              sm: "29px",
+              xs:"15px"
+            }, height:"128px" }
             : correctAns === false
             ? { background: "#FFCFCF", marginTop: "65px", border:"none" }
             : { background: "#ffff" }
@@ -259,15 +311,19 @@ function QuetionsScreen() {
                   <Box
                     sx={{ display: "flex", gap: "8px", alignItems: "center" }}
                   >
-                    <TakeImg src="images/wrong.png" alt="" />
+                    <Box sx={style.displaycustom}>
+                    <TakeImg src="images/wrong.png" alt="" /></Box>
                     <Box>
+                      <Box sx={{display:"flex", gap:"8px", alignItems:"center"}}>
+                          <Box sx={style.displaycustom1}>
+                            <TakeImg1 src="images/wrong.png" alt="" /></Box>
                       <Typography
                         variant="h4"
                         color={"#FF4B4B"}
                         fontWeight={600}
                       >
                         Try next time
-                      </Typography>
+                      </Typography></Box>
                       <Typography
                         variant="h4"
                         color={"#FF4B4B"}
@@ -286,28 +342,31 @@ function QuetionsScreen() {
                 )}
 
                 <Button
+                  disabled={correctAns == null }
                  sx={{
                   width:{
                     md:"155px",
                     sm: "-webkit-fill-available",
                     xs:"-webkit-fill-available"
-                  }
+                  },
+                   marginTop: {
+                      md: "0",
+                      sm: "10px",
+                      xs: "10px"
+                    }
                 }}
                   style={
                     correctAns === true
                       ? { background: "#58CC02" }
                       : correctAns === false
                       ? { background: "#FF4B4B" }
-                      : { background: "#FE8A36" }
+                        : { background: "#FE8A36", color:"rgb(188 102 40)" }
                   }
                   variant="contained"
                   onClick={() => { 
+                    setCorrectAns(null);
                   
-                    if(activeindex === ""){
-                      setOpen(true)
-                    }else{
                     setActiveIndex("");  
-                    setCorrectAns("");
                     if (correctAnsData.nextScreen === "SCORE_BOARD"){
                       navigate("/complete",
                         {state:{
@@ -317,7 +376,7 @@ function QuetionsScreen() {
                       )
                     }else{
                       nextProgress();
-                    }}
+                    }
                   }}
                 >
                   Continue

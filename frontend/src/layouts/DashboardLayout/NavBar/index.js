@@ -26,6 +26,7 @@ import { MdHistory } from "react-icons/md";
 import { ListItem, ListItemText, Collapse } from "@mui/material";
 import { IoMdArrowBack } from "react-icons/io";
 import { useTheme } from "@emotion/react";
+import { redirectToMail } from "src/utils";
 
 function renderNavItems({ items, pathname, depth = 0, state, setSelectedTab }) {
   return (
@@ -448,7 +449,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
         <Box sx={styles.logoBox}>
 
         </Box>
-        <Box onClick={() => { navigate("/dashboard") }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
+        <Box onClick={() => { navigate("/dashboard"); User.setChildOpen(false) }} sx={{ display: "flex", alignItems: "center", gap: "8px", borderBottom: "1px solid rgba(229, 229, 229, 1)", cursor: "pointer" }}>
           <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
           <Typography >
             Back to home
@@ -497,6 +498,12 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                             handleSublistToggle(j);
                           } else if (item.clickable) {
                             handleItemClick(item.href);
+                          }
+                          if(item.title === "Help"){
+                           
+                              redirectToMail("hello@thecocoapp.com");
+                          } else if (item.title === "About"){
+                            navigate("/")
                           }
                         }}
                       >
@@ -614,7 +621,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
     {isMobile && (
       <Drawer
-        anchor="left"
+        anchor="right"
         sx={{
           paper: styles.desktopDrawer,
         }}

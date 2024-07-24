@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Box, Container, Grid, LinearProgress, Typography, keyframes, styled, useMediaQuery } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { IoVolumeMediumOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ import { FaAngleDoubleUp } from "react-icons/fa";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useTheme } from "@emotion/react";
 import { useSwipeable } from "react-swipeable";
+import { UserContext } from "src/context/User";
 
 
 const bottomToTop = keyframes`
@@ -44,6 +45,11 @@ const style = {
   gridBox: {
     display: "grid",
     gap: "16px",
+    maxWidth:"700px",
+    "@media(max-width:900px)": {
+      maxWidth:"-webkit-fill-available"
+    },
+
   },
   logoBox: {
     height: "-webkit-fill-available",
@@ -75,7 +81,7 @@ const style = {
   },
 };
 const MainBox = styled(Box)(({ theme }) => ({
-  padding: "60px 0px 0 0px",
+  padding: "54px 0px 0 0px",
   [theme.breakpoints.down("md")]: {
     padding: "36px 0px 0 0px",
   },
@@ -100,10 +106,7 @@ const InnerBox = styled(Box)(({ theme }) => ({
 }));
 const AddImg = styled("img")(({ theme }) => ({
   width: "100%",
-  maxHeight: "400px",
-  "@media(max-width:900px)": {
-    maxHeight: "300px",
-  },
+  maxHeight: "300px",
 }));
 const SchoolLogo = styled("img")(({ theme }) => ({
   width: "60px",
@@ -125,6 +128,7 @@ function Leason(props) {
   const navigate = useNavigate();
   let min = 1;
   const theme = useTheme();
+  const User = useContext(UserContext);
   const isMobileChild = useMediaQuery(theme.breakpoints.down('md'));
   const [progress, setProgress] = useState(1);
   const location = useLocation();
@@ -233,10 +237,32 @@ function Leason(props) {
     onSwipedDown: handleSwipedDown,
     onSwiping: handleSwiping,
   });
+  const containerRef = useRef(null);
 
+  useEffect(() => {
+    const handleTouchMove = (event) => {
+      if (event.touches.length > 1) {
+        return;
+      }
+      event.preventDefault();
+    };
+
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('touchmove', handleTouchMove);
+      }
+    };
+  }, []);
   return (
 
     <MainBox
+      ref={containerRef}
       sx={{
         background: getBackground(progress),
         backgroundSize: '100% 200%',
@@ -247,9 +273,9 @@ function Leason(props) {
 
     >
       <Container maxWidth="lg">
-        <Grid container >
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={8} sx={{
-            height: "calc(100vh - 125px)",
+            height: "calc(100vh - 77px)",
             overflow: "auto"
 }}>
             <Box sx={style.CombineBox}>
@@ -286,88 +312,95 @@ function Leason(props) {
                 <Box
                   sx={{ display: "flex", alignItems: "start", gap: "15px" }}
                 >
-                  <SchoolLogo alt="#" src="images/schoolLogo.png" />
+                  {User?.profile?.schoolLogo && 
+                    <SchoolLogo alt="#" src={User?.profile?.schoolLogo} />}
                   <Box>
+
+                    {User?.profile?.schoolName && 
                     <Typography variant="body2">
-                      Pravara Public School
-                    </Typography>
-                    <Typography variant="body2">Pravaranagar</Typography>
+                        {User?.profile?.schoolName}
+                    </Typography>}
+                    {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
                   </Box>
                 </Box>
               </Box>
             </Box>
           </Grid>
           <Grid item md={4} sm={12} xs={12}>
-            <Box sx={{ background: "rgba(255, 255, 255, 1)" }}>
+            <Box sx={{
+              background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
+
+                md: "block",
+                sm: "none",
+                xs: "none"
+              } }}>
               <Box sx={{
-                display: {
-                  md: "block",
-                  sm: "none",
-                  xs: "none"
-                }
+               
               }}>
                 <AddImg alt="" src="images/add.png" />
               </Box>
+             
+            </Box>
+            <Box sx={{
+              display: {
+                md: "none",
+                sm: "flex",
+                xs: "flex"
+              },
+              position: {
+                md: "relative",
+                sm: "fixed",
+                xs: "fixed"
+              },
+              bottom: {
+                md: "",
+                sm: "54px",
+                xs: "54px"
+              },
+              width: {
+                md: "auto",
+                sm: "-webkit-fill-available",
+                xs: "-webkit-fill-available"
+              },
+              justifyContent: "center",
+              paddingRight: "32px",
+              marginBottom: "5px",
+              background: getBackground(progress),
+              backgroundSize: '100% 200%',
+              backgroundPosition: 'bottom',
+              animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
+              transition: 'background 1s',// Smooth transition effect
+            }}
+
+            >
               <Box sx={{
-                display: {
-                  md: "none",
-                  sm: "flex",
-                  xs: "flex"
-                },
-                position: {
-                  md: "relative",
-                  sm: "fixed",
-                  xs: "fixed"
-                },
-                bottom: {
-                  md: "",
-                  sm: "54px",
-                  xs: "54px"
-                },
-                width: {
-                  md: "auto",
-                  sm: "-webkit-fill-available",
-                  xs: "-webkit-fill-available"
-                },
-                justifyContent: "center",
-                marginBottom: "5px",
-                background: getBackground(progress),
-                backgroundSize: '100% 200%',
-                backgroundPosition: 'bottom',
-                animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
-                transition: 'background 1s',// Smooth transition effect
+                animation: `${bounce} 1s infinite`, // Infinite bouncing animation
+
               }}
+              // ref={boxRef}
+              // onMouseDown={handleMouseDown}
+              // onTouchStart={handleTouchStart}
 
               >
-                <Box sx={{
-                  animation: `${bounce} 1s infinite`, // Infinite bouncing animation
-
-                }}
-                // ref={boxRef}
-                // onMouseDown={handleMouseDown}
-                // onTouchStart={handleTouchStart}
-
-                >
-                  {swipingDirection === 'Swiping down' ?  <FaAngleDoubleDown style={
+                {swipingDirection == 'Swiping down' ? <FaAngleDoubleDown style={
+                  progress === 3
+                    ? { color: "rgba(232, 215, 124, 1)" }
+                    : progress === 2
+                      ? { color: "rgba(222, 179, 255, 1)" }
+                      : { color: "rgba(255, 179, 209, 1)" }
+                } /> : <FaAngleDoubleUp
+                  style={
                     progress === 3
                       ? { color: "rgba(232, 215, 124, 1)" }
                       : progress === 2
                         ? { color: "rgba(222, 179, 255, 1)" }
                         : { color: "rgba(255, 179, 209, 1)" }
-                  } />:<FaAngleDoubleUp
-                    style={
-                      progress === 3
-                        ? { color: "rgba(232, 215, 124, 1)" }
-                        : progress === 2
-                          ? { color: "rgba(222, 179, 255, 1)" }
-                          : { color: "rgba(255, 179, 209, 1)" }
-                    }
-                  
-                  />}
+                  }
 
-                </Box>
+                />}
 
               </Box>
+
             </Box>
           </Grid>
         </Grid>
@@ -381,17 +414,17 @@ function Leason(props) {
             xs: "20px 25px"
           },
           position: {
-            md: "relative",
+            md: "fixed",
             sm: "fixed",
             xs: "fixed"
           },
           bottom: {
-            md: "",
+            md: "0",
             sm: "0",
             xs: "0"
           },
           width: {
-            md: "auto",
+            md: "100%",
             sm: "-webkit-fill-available",
             xs: "-webkit-fill-available"
           },
@@ -405,17 +438,17 @@ function Leason(props) {
               xs: "20px 25px"
             },
             position: {
-              md: "relative",
+              md: "fixed",
               sm: "fixed",
               xs: "fixed"
             },
             bottom: {
-              md: "",
+              md: "0",
               sm: "0",
               xs: "0"
             },
             width: {
-              md: "auto",
+              md: "100%",
               sm: "-webkit-fill-available",
               xs: "-webkit-fill-available"
             },
@@ -428,17 +461,17 @@ function Leason(props) {
               xs: "20px 25px"
             },
             position: {
-              md: "relative",
+              md: "fixed",
               sm: "fixed",
               xs: "fixed"
             },
             bottom: {
-              md: "",
+              md: "0",
               sm: "0",
               xs: "0"
             },
             width: {
-              md: "auto",
+              md: "100%",
               sm: "-webkit-fill-available",
               xs: "-webkit-fill-available"
             },
@@ -524,7 +557,7 @@ function Leason(props) {
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
-
+                  cursor={"pointer"}
                 />
 
                 <IoChevronForwardCircle
@@ -547,7 +580,7 @@ function Leason(props) {
                   disabled={progress >= max}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
-
+                  cursor={"pointer"}
                 />
               </Box>
             </Grid>

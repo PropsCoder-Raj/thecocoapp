@@ -65,7 +65,7 @@ function SignUp(props) {
           type: "signUp",
         },
       });
-      auth.setEndTime(moment().add(3, "m").unix());
+      auth.setEndTime(moment().add(16, "s").unix());
       }
     } catch (error) {
       toast.error(

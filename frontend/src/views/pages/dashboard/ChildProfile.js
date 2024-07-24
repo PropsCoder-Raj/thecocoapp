@@ -79,7 +79,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
     "@media(max-width:767px)": { padding: "30px" },
 }));
 
@@ -111,8 +111,8 @@ function ChildProfile() {
         children: [
             {
                 name: location?.state?.data?.childName || "",
-                schoolId: location?.state?.data?.schoolId || "",
-                dob: moment(location?.state?.data?.dob).format("YYYY-MM-DD") || "",
+                schoolId: location?.state?.data?.schoolId?.schoolId || "",
+                dob: location?.state?.data?.dob? moment(location?.state?.data?.dob).format("YYYY-MM-DD") :"",
                 gender: location?.state?.data?.gender || "",
                 standard: location?.state?.data?.standard || "",
             },

@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, keyframes, Typography } from "@mui/material";
 const style = {
   mainBox: {
     display: "grid",
     gap: "20px",
-    margin: "60px auto",
+    margin: "50px auto",
     maxWidth: "660px",
     textAlign: {
       xs: "center",
@@ -19,10 +19,19 @@ const style = {
     },
   },
 };
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 function Feedback() {
   return (
     <Container maxWidth="lg">
       <Box sx={style.mainBox}>
+        
         <Box
           sx={{
             display: "flex",

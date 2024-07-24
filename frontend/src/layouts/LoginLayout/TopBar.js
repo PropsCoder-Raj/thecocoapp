@@ -31,10 +31,10 @@ export default function TopBar() {
   const navigate = useNavigate();
   const previousPathname = usePreviousPathname();
  const navigateToPrevious = () => {
-   if (previousPathname && location.pathname !== previousPathname) {
-     navigate(previousPathname);
-   } else {
+   if (location.pathname === "/login") {
      navigate("/");
+   } else {
+     navigate("/login");
    }
  };
   return (

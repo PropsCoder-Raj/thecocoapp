@@ -72,7 +72,7 @@ function ResetPin(props) {
                     localStorage.removeItem("emailReset")
                 }else{
                     localStorage.setItem("emailReset", values.email);
-                    auth.setEndTime(moment().add(3, "m").unix());
+                    auth.setEndTime(moment().add(16, "s").unix());
                 }
                 toast.success(res.data.message);
                 setIsLoading(false);
@@ -96,7 +96,7 @@ function ResetPin(props) {
             if (res.status === 200) {
                 toast.success(res.data.message);
                 setIsLoading(false);
-                auth.setEndTime(moment().add(3, "m").unix());
+                auth.setEndTime(moment().add(16, "s").unix());
             }
         } catch (error) {
             toast.error(

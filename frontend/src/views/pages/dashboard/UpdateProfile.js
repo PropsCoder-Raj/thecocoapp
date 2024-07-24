@@ -72,7 +72,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
     "@media(max-width:767px)": { padding: "30px" },
 }));
 
@@ -277,7 +277,7 @@ function UpdateProfile() {
                                             state: {
                                                 name: values.childName,
                                                 img: values.profilePic ? values.profilePic :
-                                                    values.gender == "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg",
+                                                    values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png",
                                                 childId: values._id,
                                                 data:values
                                             }
@@ -286,7 +286,7 @@ function UpdateProfile() {
                                 >
                                     <ProfileImg alt="" src={
                                         values.profilePic ? values.profilePic :
-                                            values.gender == "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                                            values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
                                     <Box > <Typography variant="body1">{values.childName}</Typography>
                                         <Box sx={style.GapBox}>
                                             {/* <Typography variant="body1">{values.totalPoints}</Typography>
