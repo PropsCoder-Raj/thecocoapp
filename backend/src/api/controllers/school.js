@@ -106,12 +106,12 @@ exports.updateSchoolDetails = async (req, res, next) => {
     try {
 
         const isSchool = await findSchool({ _id: req.query.schoolId });
-        if(!isSchool){
-            return res.status(404).send({
-                status: false,
-                message: "School not found."
-            });    
-        }
+        // if(!isSchool){
+        //     return res.status(404).send({
+        //         status: false,
+        //         message: "School not found."
+        //     });    
+        // }
 
         const schoolResult = await updateSchool({ _id: isSchool._id  }, { $set: req.body })
         // Respond with success message and inserted child records
