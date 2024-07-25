@@ -13,7 +13,7 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
-import AdSense from "src/component/AdSense";
+import { Link, animateScroll as scroll, scroller } from 'react-scroll';
 const style = {
   HandleMargin: {
     marginTop: "20px",
@@ -588,7 +588,7 @@ function Dashboard() {
           )}
           <LockImg
             onClick={() => {
-              if (level.complete_status) {
+              if (level.complete_status || level.current_status) {
                 navigate("/leason", {
                   state: {
                     module_id: level.module_id,
@@ -605,7 +605,7 @@ function Dashboard() {
                   : "images/lock.png"
             }
             alt=""
-            style={level.complete_status ? { cursor: "pointer" } : {}}
+            style={level.complete_status || level.current_status ? { cursor: "pointer" } : {}}
           />
         </Grid>
       );
@@ -702,6 +702,11 @@ function Dashboard() {
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
         })
+        scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
+          duration: 500,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
       }
     } catch (error) {
       console.log(error, "error");
@@ -993,7 +998,10 @@ function Dashboard() {
     return number + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
   }
 
-
+  const removeOrdinalSuffixes = (value) => {
+    console.log(value.replace(/(\d+)(st|nd|rd|th)/g, '$1'));
+    return value.replace(/(\d+)(st|nd|rd|th)/g, '$1');
+  }
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
@@ -1017,7 +1025,7 @@ function Dashboard() {
                 levelData.map((values, i) => (
                   <>
                     {(values?.name && currentData?.isStanard) &&
-                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}}>
+                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} id={removeOrdinalSuffixes(values?.name)}>
                         <Typography variant="h4" color={"#434547"} sx={{ marginBottom: "7px" }}>{values?.name}</Typography>
                       </Box>}
 

@@ -233,7 +233,7 @@ function QuetionsScreen() {
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <Box sx={correctAns == "" ? style.manageBoxHeight : style.manageBBHeight}>
+            <Box sx={correctAns == "" ? style.manageBBHeight : style.manageBBHeight}>
               <Box sx={style.CombineBox}>
                 <Box sx={{ marginBottom: "20px" }}>
                   <Typography variant="h3" fontWeight={600}>
@@ -271,7 +271,8 @@ function QuetionsScreen() {
         </Grid>
       </Container>
       {correctAns === true && 
-        <Container sx={isMobile ? { marginTop:"-7px"} :{}}>
+        <Container sx={isMobile ? { position:"fixed", bottom:"125px"
+        } : { position: "fixed", bottom: "125px" }}>
         <Box sx={{
           display: "flex",
           justifyContent: "end"
