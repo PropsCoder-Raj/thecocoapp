@@ -1,5 +1,5 @@
 const { schoolServices } = require('../service/schools');
-const { findAllSchool, findSchool, updateSchool } = schoolServices;
+const { findAllSchool, findSchool, updateSchool, createSchool } = schoolServices;
 
 /**
 * @swagger
@@ -63,6 +63,51 @@ exports.isValidSchool = async (req, res, next) => {
     }
 }
 
+/**
+* @swagger
+* /school/create-school:
+*   post:
+*     summary: Create user school data
+*     tags:
+*       - Schools
+*     description: Create user school data
+*     produces:
+*       - application/json
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication.
+*         required: true
+*         schema:
+*           type: string
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/definitions/change_school_def'
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.createSchoolDetails = async (req, res, next) => {
+    try {
+        const schoolResult = await createSchool(req.body)
+        // Respond with success message and inserted child records
+        return res.status(200).send({
+            status: true,
+            message: "School created successfully.",
+            result: schoolResult
+        });
+    } catch (error) {
+        // Handle any errors during the process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
 
 
 /**
@@ -106,12 +151,12 @@ exports.updateSchoolDetails = async (req, res, next) => {
     try {
 
         const isSchool = await findSchool({ _id: req.query.schoolId });
-        // if(!isSchool){
-        //     return res.status(404).send({
-        //         status: false,
-        //         message: "School not found."
-        //     });    
-        // }
+        if(!isSchool){
+            return res.status(404).send({
+                status: false,
+                message: "School not found."
+            });    
+        }
 
         const schoolResult = await updateSchool({ _id: isSchool._id  }, { $set: req.body })
         // Respond with success message and inserted child records
