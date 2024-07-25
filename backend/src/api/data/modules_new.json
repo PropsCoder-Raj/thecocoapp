@@ -408,5 +408,35 @@
         "standard_id": 9,
         "module_id": 6,
         "name": "Credit Cards"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 1,
+        "name": "Fin. Independence"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 2,
+        "name": "Build a Budget"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 3,
+        "name": "Fin. Goal Setting"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 4,
+        "name": "Earning & Careers"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 5,
+        "name": "College Financing"
+    },
+    {
+        "standard_id": 10,
+        "module_id": 6,
+        "name": "Credit Cards"
     }
 ]
