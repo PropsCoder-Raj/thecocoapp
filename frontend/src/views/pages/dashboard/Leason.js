@@ -138,7 +138,6 @@ function Leason(props) {
   const boxRef = useRef(null);
   const [startY, setStartY] = useState(0);
   const [direction, setDirection] = useState("UP");
-
   useEffect(() => {
     getleasonData();
   }, [])
@@ -308,6 +307,7 @@ function Leason(props) {
                   </Typography>
                 </Box>
               </Box>
+              {!isMobileChild &&
               <Box sx={style.logoBox}>
                 <Box
                   sx={{ display: "flex", alignItems: "start", gap: "15px" }}
@@ -323,10 +323,11 @@ function Leason(props) {
                     {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
                   </Box>
                 </Box>
-              </Box>
+              </Box>}
             </Box>
           </Grid>
           <Grid item md={4} sm={12} xs={12}>
+            
             <Box sx={{
               background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
 
@@ -341,6 +342,7 @@ function Leason(props) {
               </Box>
              
             </Box>
+           
             <Box sx={{
               display: {
                 md: "none",
@@ -496,7 +498,29 @@ function Leason(props) {
 }:{}
         }
       >
-        <Container>
+        {isMobileChild &&
+          <Box sx={style.logoBox} style={{
+            position: "fixed",
+            bottom: "117px",
+            left: "16px",
+            height: "max-content"
+          }}>
+            <Box
+              sx={{ display: "flex", alignItems: "start", gap: "15px" }}
+            >
+              {User?.profile?.schoolLogo &&
+                <SchoolLogo alt="#" src={User?.profile?.schoolLogo} />}
+              <Box>
+
+                {User?.profile?.schoolName &&
+                  <Typography variant="body2">
+                    {User?.profile?.schoolName}
+                  </Typography>}
+                {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
+              </Box>
+            </Box>
+          </Box>}
+        <Container style={{padding:"0"}}>
           <Grid container>
             <Grid item xs={12} sm={12} md={8} sx={{ alignItems: "center", display: "grid" }}>
               <Box>

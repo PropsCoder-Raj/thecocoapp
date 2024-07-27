@@ -14,7 +14,7 @@ const styles = {
     minWidth: "430px",
     padding: "28px",
     color: "#1A1919",
-    margin: "auto 0 auto 50px",
+    margin: "50px 0 auto 50px",
     background: "#FFF",
     border: "1px solid rgba(229, 229, 229, 1)",
     "@media(max-width:600px)": {
@@ -32,14 +32,15 @@ const styles = {
     maxWidth: "155px",
   },
   boxMnage: {
-    margin: "auto 50px auto 50px",
+    margin: "50px 50px 50px 50px",
+    position: "sticky",
+    top: "50px",
+    height: "fit-content",
     "@media(max-width:900px)": {
       display: "none",
     },
   },
   mainBox: {
-    height: "100vh",
-    alignItems: "center",
     display: "flex",
     paddingTop: "62px",
     "@media(max-width:900px)": {
