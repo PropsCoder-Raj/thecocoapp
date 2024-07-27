@@ -314,7 +314,7 @@ function QuetionsScreen() {
                   >
                     <Box sx={style.displaycustom}>
                     <TakeImg src="images/wrong.png" alt="" /></Box>
-                    <Box>
+                      <Box sx={{ maxWidth:"870px"}}>
                       <Box sx={{display:"flex", gap:"8px", alignItems:"center"}}>
                           <Box sx={style.displaycustom1}>
                             <TakeImg1 src="images/wrong.png" alt="" /></Box>
@@ -345,16 +345,15 @@ function QuetionsScreen() {
                 <Button
                   disabled={correctAns == null }
                  sx={{
-                  width:{
-                    md:"155px",
-                    sm: "-webkit-fill-available",
-                    xs:"-webkit-fill-available"
-                  },
+                  width:"155px",
                    marginTop: {
                       md: "0",
                       sm: "10px",
                       xs: "10px"
-                    }
+                    },
+                   "@media(max-width:767px)": {
+                     width: "-webkit-fill-available",
+                   },
                 }}
                   style={
                     correctAns === true
