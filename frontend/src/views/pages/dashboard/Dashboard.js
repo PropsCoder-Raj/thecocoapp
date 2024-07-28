@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Box, Button, Collapse, Container, Dialog, DialogActions, DialogContent, Drawer, Grid, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,31 @@ const style = {
       marginTop: "15px",
       marginBottom: "30px",
     },
+  },
+  mainscrollHide:{
+    height: "100vh",
+    overflow: "auto",
+ '-ms-overflow-style': 'none',  // Internet Explorer 10+
+    'scrollbar-width': 'none',  // Firefox
+    '&::-webkit-scrollbar': {
+      display: 'none !important'  // Safari and Chrome
+    },
+   
+
+/* Scrollbar track */
+"&::-webkit-scrollbar-track": {
+  display: 'none !important'
+},
+
+/* Scrollbar thumb */
+"&::-webkit-scrollbar-thumb": {
+  display: 'none !important'
+},
+
+/* Scrollbar thumb on hover */
+"&::-webkit -scrollbar-thumb:hover": {
+  display: 'none !important'
+}
   },
   BoxStyle: {
     padding: "22px",
@@ -69,6 +94,7 @@ const style = {
   GridManrgin: {
     padding: "20px 40px !important",
     position: "relative",
+   
   },
   customBorder: {
     padding: "6px",
@@ -565,10 +591,10 @@ function Dashboard() {
       return (
         <Grid
           item
-          xs={isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
+          xs={levelValue.length == 5 && (index === 1 || index === 2 || index === 3 || index === 4) ? 6 : isFirstBox || (isSixItems && isCenterBox) ? 12 :  6}
           key={level._id}
           container
-          justifyContent={justifyContent}
+          justifyContent={levelValue.length == 5 && index == 4 ? "flex-start" : levelValue.length == 5 && index == 3 ?"flex-end" :justifyContent}
           sx={style.GridManrgin}
         >
           {level.current_status && (
@@ -1002,10 +1028,31 @@ function Dashboard() {
     console.log(value.replace(/(\d+)(st|nd|rd|th)/g, '$1'));
     return value.replace(/(\d+)(st|nd|rd|th)/g, '$1');
   }
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (gridRef.current) {
+        const scrollTop = gridRef.current.scrollTop;
+        console.log(`Scrolled down: ${scrollTop}px`);
+      }
+    };
+
+    const currentRef = gridRef.current;
+    if (currentRef) {
+      currentRef.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
   return (
     <Page title="Dashboard">
-      <Container maxWidth="lg">
-        <Box>
+      <Container ref={gridRef} maxWidth="lg" sx={style.mainscrollHide} >
+        <Box >
           <Grid container spacing={6}>
             {/* <Grid item xs={12} sx={style.switchChildBox}>
               <Box sx={{display:"flex", justifyContent:"end"}}>
@@ -1075,7 +1122,9 @@ function Dashboard() {
 
 
             </Grid>
-            <Grid item xs={5} sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+            <Grid item xs={5} sx={{
+              display: { xs: "none", sm: "none", md: "block" }, position: "sticky", top: "0",
+              height: "fit-content", paddingTop:"0 !important" }}>
               <Box sx={style.GridBox}>
                 <Box sx={style.BoxStyle}>
                   <Box
