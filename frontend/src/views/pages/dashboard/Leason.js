@@ -5,7 +5,7 @@ import { IoVolumeMediumOutline } from "react-icons/io5";
 import { GoShareAndroid } from "react-icons/go";
 import { IoChevronBackCircle } from "react-icons/io5";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import { handleSpeak } from "src/utils";
+import { handleSpeak, stopSpeak, getVoice } from "src/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
@@ -15,7 +15,7 @@ import { FaAngleDoubleDown } from "react-icons/fa";
 import { useTheme } from "@emotion/react";
 import { useSwipeable } from "react-swipeable";
 import { UserContext } from "src/context/User";
-
+import html2canvas from 'html2canvas';
 
 const bottomToTop = keyframes`
   0% {
@@ -135,9 +135,7 @@ function Leason(props) {
   const [leasonData, setLeasonData] = useState([]);
   const [max, setMax] = useState(leasonData.length);
   const [animationTrigger, setAnimationTrigger] = useState(false);
-  const boxRef = useRef(null);
-  const [startY, setStartY] = useState(0);
-  const [direction, setDirection] = useState("UP");
+ 
   useEffect(() => {
     getleasonData();
   }, [])
@@ -163,12 +161,28 @@ function Leason(props) {
   };
   const increaseProgress = () => {
     setProgress((prev) => (prev < max ? prev + 1 : max));
-    handleSpeak("  ")
+    
     setAnimationTrigger(true);
 
   };
+  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    const voicesChanged = () => {
+      setSelectedVoice(getVoice());
+    };
+
+    synth.onvoiceschanged = voicesChanged;
+    voicesChanged(); // Initial call
+
+    return () => {
+      stopSpeak(); // Stop speaking when the component is unmounted
+    };
+  }, []);
   const decreaseProgress = () => {
+    stopSpeak();
     setProgress((prev) => (prev > min ? prev - 1 : min));
     setAnimationTrigger(true);
 
@@ -202,6 +216,7 @@ function Leason(props) {
   const [swipingDirection, setSwipingDirection] = useState('');
 
   const handleSwipedUp = () => {
+    stopSpeak();
     setSwipedUp(true);
     setSwipingDirection('up');
     console.log("Swiped Up");
@@ -217,6 +232,7 @@ function Leason(props) {
   };
 
   const handleSwipedDown = () => {
+    stopSpeak();
     setSwipedUp(false);
     setSwipingDirection('down');
     console.log("Swiped Down");
@@ -258,6 +274,27 @@ function Leason(props) {
       }
     };
   }, []);
+
+
+  const captureAndShare = async () => {
+    const element = document.getElementById('capture-area'); // The area you want to capture
+    const canvas = await html2canvas(element);
+    const dataUrl = canvas.toDataURL('image/png');
+
+    if (navigator.canShare && navigator.canShare({ files: [new File([dataUrl], 'screenshot.png', { type: 'image/png' })] })) {
+      const blob = await fetch(dataUrl).then(res => res.blob());
+      const file = new File([blob], 'screenshot.png', { type: 'image/png' });
+
+      navigator.share({
+        files: [file],
+        title: 'Check out Cocoapp!',
+        text: `Helping children to make smart money choices!\nStart them young! Cocoapp equips children with the financial knowledge they need to make smart choices.\n\nFor more information, visit https://thecocoapp.web.app/`,
+        url: 'https://thecocoapp.web.app/',
+      }).catch(error => console.log('Sharing failed', error));
+    } else {
+      console.log('Sharing not supported');
+    }
+  };
   return (
 
     <MainBox
@@ -269,7 +306,7 @@ function Leason(props) {
         animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
         transition: 'background 1s',// Smooth transition effect,
       }}
-
+      id="capture-area"
     >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
@@ -284,21 +321,30 @@ function Leason(props) {
                     color="rgba(0, 0, 0, 1)"
                     onClick={() => {
                       navigate("/dashboard");
+                      stopSpeak();
                     }}
                     cursor={"pointer"}
                   />
                   {/* <Box
                     sx={{ display: "flex", gap: "16px", alignItems: "center" }}
                   >
-                    <IoVolumeMediumOutline
+                     <IoVolumeMediumOutline
+                      disabled={isSpeaking}
                       cursor={"pointer"}
                       color="rgba(0, 0, 0, 1)"
                       onClick={() => {
-                        handleSpeak(leasonData[progress - 1]?.name + ". " + leasonData[progress - 1]?.description);
+                        setIsSpeaking(true); 
+                        const options = {
+                          voice: selectedVoice,
+                          pitch: 1.5, // Higher pitch
+                          rate: 1, // Normal rate
+                          volume: 1,
+                        };
+                        handleSpeak(leasonData[progress - 1]?.name + ". " + leasonData[progress - 1]?.description, options, () => { setIsSpeaking(false); });
                       }}
                     />
-                    <GoShareAndroid color="rgba(0, 0, 0, 1)" />
-                  </Box> */}
+                    <GoShareAndroid cursor={"pointer"} color="rgba(0, 0, 0, 1)" onClick={captureAndShare} />
+                  </Box>  */}
                 </Box>
                 <Box sx={{}}>
                   <Typography variant="h1">{leasonData[progress - 1]?.name || "--"}</Typography>
@@ -590,6 +636,7 @@ function Leason(props) {
 
                 <IoChevronForwardCircle
                   onClick={() => {
+                    stopSpeak();
                     if (max == 0) {
 
                     } else {
