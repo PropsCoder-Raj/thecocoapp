@@ -325,7 +325,7 @@ function Leason(props) {
                     }}
                     cursor={"pointer"}
                   />
-                  <Box
+                  {/* <Box
                     sx={{ display: "flex", gap: "16px", alignItems: "center" }}
                   >
                      <IoVolumeMediumOutline
@@ -344,7 +344,7 @@ function Leason(props) {
                       }}
                     />
                     <GoShareAndroid cursor={"pointer"} color="rgba(0, 0, 0, 1)" onClick={captureAndShare} />
-                  </Box> 
+                  </Box>  */}
                 </Box>
                 <Box sx={{}}>
                   <Typography variant="h1">{leasonData[progress - 1]?.name || "--"}</Typography>
