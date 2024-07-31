@@ -28,7 +28,7 @@ const style = {
     },
   },
   mainscrollHide:{
-    height: "100vh",
+    // height: "100vh",
     overflow: "auto",
  '-ms-overflow-style': 'none',  // Internet Explorer 10+
     'scrollbar-width': 'none',  // Firefox
@@ -728,11 +728,14 @@ function Dashboard() {
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
         })
-        scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
+       
+           scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
           duration: 500,
           delay: 0,
           smooth: 'easeInOutQuart'
         });
+        
+       
       }
     } catch (error) {
       console.log(error, "error");

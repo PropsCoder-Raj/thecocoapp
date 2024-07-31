@@ -211,7 +211,7 @@ function FreeFunEffective() {
               display: 'inline-block',
               animation: `${rotate} 5s linear infinite`,
               position: "relative",
-              zIndex: "1",
+              zIndex: "0",
               top: {
                 md: "0",
                 sm: "0px",

@@ -84,9 +84,9 @@ const LoginLayout = ({ children }) => {
             </ManageLayout>
           </Box>
           <Box sx={styles.content}>
-            <Box sx={{display:"flex", justifyContent:"center"}}>
+            {/* <Box sx={{display:"flex", justifyContent:"center"}}>
               <ImageLayOut alt="" src="images/mobileLayOut.png" />
-            </Box>
+            </Box> */}
             <Box
               sx={{ display: "flex", justifyContent: "center" }}
               onClick={() => navigate("/")}

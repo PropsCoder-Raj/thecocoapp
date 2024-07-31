@@ -76,9 +76,9 @@ function OurMission() {
             <Box mt={2} sx={style.mappedBox}>
               <CustomBox>
                 <Box sx={style.DesignBox}>
-                  <Typography variant="body2">🏆 Our Mission</Typography>
+                  <Typography variant="body2" fontWeight={400}>🏆 Our Mission</Typography>
                 </Box>
-                <Typography variant="h2" sx={{ color: "#fff" }}>
+                <Typography variant="h2" sx={{ color: "#fff", fontWeight:{xs:"500", sm:"600", md:"600", lg:"600"} }}>
                   To make financial literacy accessible and engaging for all
                   children. We believe that it is a crucial life skill that
                   should be nurtured from a young age.

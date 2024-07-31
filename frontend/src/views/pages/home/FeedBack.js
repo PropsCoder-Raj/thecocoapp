@@ -53,10 +53,7 @@ function Feedback() {const bounce = keyframes`
         <Typography
           variant="h1"
           sx={{
-            fontWeight: {
-              xs: "600",
-              sm: "800",
-            },
+            fontWeight:700,
           }}
         >
           “If we can change the beginning of the story, we can change the whole

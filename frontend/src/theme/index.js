@@ -276,7 +276,7 @@ const themesOptions = [
           containedPrimary: {
             color: "#fff",
             padding: "10px 35px",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             borderRadius: "8px",
@@ -293,7 +293,7 @@ const themesOptions = [
             backgroundColor: "#FE8A36",
             padding: "8px 27px",
             filter: "drop-shadow(0px 13px 27px rgba(0, 0, 0, 0.25))",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             color: "#fff",
@@ -314,7 +314,7 @@ const themesOptions = [
           },
           contained: {
             background: "#FE8A36",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             "&.Mui-disabled": {
@@ -523,7 +523,7 @@ const themesOptions = [
           containedPrimary: {
             color: "#fff",
             padding: "10px 35px",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             borderRadius: "8px",
@@ -540,7 +540,7 @@ const themesOptions = [
             backgroundColor: "#FE8A36",
             padding: "8px 27px",
             filter: "drop-shadow(0px 13px 27px rgba(0, 0, 0, 0.25))",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             color: "#fff",
@@ -561,7 +561,7 @@ const themesOptions = [
           },
           contained: {
             background: "#FE8A36",
-            fontWeight: "800",
+            fontWeight: "600",
             fontSize: "16px",
             lineHeight: "22px",
             "&.Mui-disabled": {

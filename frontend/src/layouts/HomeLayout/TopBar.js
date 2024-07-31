@@ -131,7 +131,7 @@ export default function TopBar() {
                 }}
               >
                 <LuMail />
-                <Typography variant="body1">hello@thecocoapp.com</Typography>
+                <Typography variant="body2">hello@thecocoapp.com</Typography>
               </Box>
               <Box
                 style={{ cursor: "pointer" }}
@@ -143,7 +143,7 @@ export default function TopBar() {
                 }}
               >
                 <LuMail />
-                <Typography variant="body1">
+                <Typography variant="body2">
                   edupartners@thecocoapp.com
                 </Typography>
               </Box>
