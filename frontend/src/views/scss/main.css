@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -6,12 +10,16 @@ body {
 
 
 .sticky {
-    position: -webkit-sticky; /* For Safari */
+    position: -webkit-sticky;
+    /* For Safari */
     position: sticky;
-    top: 70%; /* Adjust this value based on how far down the element should "stick" */
-    z-index: 1000; /* Optional: Ensure the element stays above other content */
-    background-color: white; /* Optional: Maintain background color */
-  }
+    top: 70%;
+    /* Adjust this value based on how far down the element should "stick" */
+    z-index: 1000;
+    /* Optional: Ensure the element stays above other content */
+    background-color: white;
+    /* Optional: Maintain background color */
+}
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -37,4 +45,3 @@ body {
 .srollBoxNav ::-webkit-scrollbar {
     display: none;
 }
-
