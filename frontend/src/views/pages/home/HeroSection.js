@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Container, Grid, keyframes, Snackbar, Typography, useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   HandleMargin: {
@@ -74,6 +75,7 @@ const rotate = keyframes`
 `;
 function HeroSection() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setOpen(true);
@@ -135,8 +137,7 @@ function HeroSection() {
             <Box sx={isMobile?{display:"flex", justifyContent:"center"}:{}}>
             <Button
               onClick={() => {
-                
-                handleClick()
+                localStorage.getItem("token") ? navigate("/dashboard") : navigate("/login");
               }}
               variant="contained"
               sx={style.HandleMargin}

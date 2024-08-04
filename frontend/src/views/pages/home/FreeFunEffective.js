@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Container, Grid, Typography, Button, Snackbar, keyframes } from "@mui/material";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   mappedBox: {
@@ -73,6 +74,7 @@ const rotate = keyframes`
 `;
 function FreeFunEffective() {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate()
 
     const handleClick = () => {
       setOpen(true);
@@ -201,7 +203,9 @@ function FreeFunEffective() {
             <HandleBox>
               <Button
                 variant="contained"
-                onClick={() => {handleClick()}}
+                onClick={() => {
+                  localStorage.getItem("token") ? navigate("/dashboard") : navigate("/login");
+                }}
                 sx={{ minWidth: "260px" }}
               >
                 Get started

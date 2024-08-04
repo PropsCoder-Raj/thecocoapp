@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Container, Grid, Typography, Button, Accordion, AccordionSummary, AccordionDetails, Snackbar } from "@mui/material";
 import styled from "@emotion/styled";
 import { MdOutlineExpandMore } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 const style = {
@@ -14,7 +15,7 @@ const style = {
   innerBox: {
     display: "flex",
     gap: "20px",
-    alignItems:"center"
+    alignItems: "center"
   },
   innerSmallBox: {
     display: "flex",
@@ -44,18 +45,19 @@ const BorderCss = styled("div")(({ theme }) => ({
   marginLeft: "16px",
   marginTop: "8px",
   marginBottom: "8px",
-  minHeight:"106px"
+  minHeight: "106px"
 }));
 function GettingStarted() {
-   const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
 
-   const handleClick = () => {
-     setOpen(true);
-   };
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-   const handleClose = (event, reason) => {
-     setOpen(false);
-   };
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
   const CardData = [
     {
       title: "Get in touch with us",
@@ -82,11 +84,11 @@ function GettingStarted() {
       ],
     },
   ];
-const [expanded, setExpanded] = useState(null); 
+  const [expanded, setExpanded] = useState(null);
 
-const handleExpansion = (key) => {
-  setExpanded(expanded === key ? null : key);
-};
+  const handleExpansion = (key) => {
+    setExpanded(expanded === key ? null : key);
+  };
   return (
     <Container maxWidth="lg">
       <Box mt={2} mb={4}>
@@ -160,7 +162,7 @@ const handleExpansion = (key) => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  handleClick();
+                  localStorage.getItem("token") ? navigate("/dashboard") : navigate("/login");
                 }}
               >
                 Get started
@@ -225,7 +227,7 @@ const handleExpansion = (key) => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  handleClick();
+                  localStorage.getItem("token") ? navigate("/dashboard") : navigate("/login");
                 }}
                 sx={{ width: "260px" }}
               >
@@ -247,7 +249,7 @@ const handleExpansion = (key) => {
         onClose={handleClose}
         message="Cocoapp Launches in July!"
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        // action={action}
+      // action={action}
       />
     </Container>
   );
