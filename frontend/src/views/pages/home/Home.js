@@ -166,7 +166,7 @@ function Home() {
       <Helmet>
         <title>{getMetaTitle()}</title>
         <meta name="description" content={getMetaDescription()} />
-        <link rel="canonical" href={`http://localhost:3000${window.location.hash}`} />
+        <link rel="canonical" href={`https://thecocoapp.com/${window.location.hash}`} />
       </Helmet>
       <section id="hero">
         <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" } }}>
