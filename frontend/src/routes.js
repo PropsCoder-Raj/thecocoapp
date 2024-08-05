@@ -84,14 +84,14 @@ export const routes = [
   {
     exact: true,
     path: "/update-profile",
-    layout: DashboardLayout,
+    // layout: DashboardLayout,
     // guard: true,
     component: lazy(() => import("src/views/pages/dashboard/UpdateProfile")),
   },
   {
     exact: true,
     path: "/child-profile",
-    layout: DashboardLayout,
+    // layout: DashboardLayout,
     // guard: true,
     component: lazy(() => import("src/views/pages/dashboard/ChildProfile")),
   },

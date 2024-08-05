@@ -16,6 +16,7 @@ import { useTheme } from "@emotion/react";
 import { useSwipeable } from "react-swipeable";
 import { UserContext } from "src/context/User";
 import html2canvas from 'html2canvas';
+import useSound from "use-sound";
 
 const bottomToTop = keyframes`
   0% {
@@ -68,9 +69,9 @@ const style = {
     alignItems: "flex-start",
 
     height: {
-      md: "calc(100vh - 130px)",
-      sm: "calc(100vh - 125px)",
-      xs: "calc(100vh - 125px)"
+      md: "calc(100vh - 160px)",
+      sm: "calc(100vh - 160px)",
+      xs: "calc(100vh - 160px)"
     },
 
   },
@@ -135,7 +136,7 @@ function Leason(props) {
   const [leasonData, setLeasonData] = useState([]);
   const [max, setMax] = useState(leasonData.length);
   const [animationTrigger, setAnimationTrigger] = useState(false);
- 
+  const [swipeUp] = useSound('sound/swoosh-sound-effects.mp3');
   useEffect(() => {
     getleasonData();
   }, [])
@@ -220,7 +221,8 @@ function Leason(props) {
     setSwipedUp(true);
     setSwipingDirection('up');
     console.log("Swiped Up");
-    increaseProgress()
+    increaseProgress();
+    swipeUp();
     if (progress === max) {
       navigate("/take-quiz", {
         state: {
@@ -237,6 +239,7 @@ function Leason(props) {
     setSwipingDirection('down');
     console.log("Swiped Down");
     decreaseProgress();
+    swipeUp();
   };
 
   const handleSwiping = (e) => {
@@ -311,8 +314,13 @@ function Leason(props) {
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={8} sx={{
-            height: "calc(100vh - 77px)",
-            overflow: "auto"
+            height: "calc(100vh - 100px)",
+            overflow: "auto",
+            paddingTop:{
+              xs:"56px !important",
+              sm:"56px !important",
+              md:"32px"
+            }
 }}>
             <Box sx={style.CombineBox}>
               <Box sx={style.gridBox}>
@@ -627,7 +635,7 @@ function Leason(props) {
                 gap: "8px",
               }}>
                 <IoChevronBackCircle
-                  onClick={decreaseProgress}
+                  onClick={() => { decreaseProgress(); swipeUp()}}
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
@@ -637,6 +645,7 @@ function Leason(props) {
                 <IoChevronForwardCircle
                   onClick={() => {
                     stopSpeak();
+                    swipeUp()
                     if (max == 0) {
 
                     } else {

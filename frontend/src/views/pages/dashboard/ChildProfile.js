@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
+    Container,
     FormHelperText,
     Grid,
     MenuItem,
     Select,
     TextField,
     Typography,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
 import { Form, Formik, FieldArray } from "formik";
 import * as yup from "yup";
@@ -46,16 +49,6 @@ const style = {
         display: "grid",
         justifyContent: "start",
     },
-    CombineBox: {
-        paddingBottom: "20px",
-        justifyContent: "center",
-        alignItems: "center",
-        border: "1px solid rgba(229, 229, 229, 1)",
-        margin: "auto",
-        maxWidth: "550px",
-        borderRadius: "10px",
-        padding: "40px"
-    },
     buttonHandle: {
         display: "flex",
         justifyContent: "end",
@@ -69,13 +62,133 @@ const style = {
         border: "1px solid rgba(229, 229, 229, 1)",
         borderRadius: "8px"
     },
+    flexBox: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItem: "center",
+
+        "@media(max-width:1000px)": {},
+        "@media(max-width:767px)": {},
+    },
+    editBox: {
+        position: "relative",
+        bottom: "0",
+        right: "30%"
+    },
+    gridBox: {
+        display: "grid",
+        gap: "16px",
+    },
+    logoBox: {
+        height: "-webkit-fill-available",
+        alignItems: "end",
+        display: "grid",
+        justifyContent: "start",
+    },
+    CombineBox: {
+        paddingBottom: "20px",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "1px solid rgba(229, 229, 229, 1)",
+        margin: "auto",
+        maxWidth: "550px",
+        borderRadius: "10px",
+        padding: "40px",
+        "@media(max-width:600px)": {
+            border: "none",
+            padding:"8px"
+        },
+    },
+    buttonHandle: {
+        display: "flex",
+        justifyContent: "end",
+        gap: "8px",
+    },
+    profileBox: {
+        display: "flex",
+        gap: "8px",
+        padding: "10px",
+        margin: "15px 0",
+        border: "1px solid rgba(229, 229, 229, 1)",
+        borderRadius: "8px",
+        cursor: "pointer"
+    },
+    mainScreenBack: {
+        overflow: "auto",
+        height: "100vh"
+    },
+    content: {
+        minHeight: "500px",
+        borderRadius: "10px",
+        minWidth: "430px",
+        padding: "28px",
+        color: "#1A1919",
+        margin: "50px 0 auto 50px",
+        background: "#FFF",
+        border: "1px solid rgba(229, 229, 229, 1)",
+        "@media(max-width:600px)": {
+            padding: "0 0px",
+        },
+        "@media(max-width:900px)": {
+            margin: "0px 10px",
+            border: "none",
+            padding: "0 0px",
+            minWidth: "auto"
+        },
+    },
+    logo: {
+        cursor: "pointer",
+        maxWidth: "155px",
+    },
+    boxMnage: {
+        margin: "0px 50px 50px 0px",
+        position: "sticky",
+        top: "50px",
+        height: "fit-content",
+        "@media(max-width:900px)": {
+            display: "none",
+        },
+    },
+    mainBox: {
+        display: "flex",
+        paddingTop: "130px",
+        alignItems: "flex-start",
+        "@media(max-width:900px)": {
+            display: "grid",
+            alignItems: "baseline",
+            paddingTop: "60px",
+        },
+    },
 };
+
+const ImageGroup = styled("img")({
+    width: "100%",
+});
+const ImageLayOut = styled("img")({
+    width: "100%",
+    maxWidth: "170px",
+    marginTop: "-30px",
+    display: "none",
+    "@media(max-width:900px)": {
+        display: "block",
+    },
+});
+const ManageLayout = styled(Box)({
+    background: "rgb(255 253 243)",
+    minHeight: "500px",
+    border: "1px solid #E5E5E5",
+    borderRadius: "10px",
+});
 const MainBox = styled(Box)(({ theme }) => ({
-    padding: "15px 0px 0 0px",
+    padding: "0px 0px 0 0px",
     overflow: "auto",
     alignItems: "end",
     justifyContent: "space-between",
     alignContent: "space-between",
+    minWidth: "480px",
+    "@media(max-width:600px)": {
+        minWidth: "auto",
+    },
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
@@ -91,6 +204,19 @@ const ProfileImg = styled("img")(({ theme }) => ({
     width: "70px",
     height: "70px",
     margin: "0 12px"
+}));
+const Root = styled("div")(({ theme }) => ({
+    flexGrow: 1,
+    display: "block",
+    position: "fixed",
+    width: "-webkit-fill-available",
+    zIndex: "1",
+    backgroundColor: "#fff",
+    boxShadow: "none",
+    border: "1px solid #E5E5E5",
+    borderRadius: "0",
+    padding: "12px 5px",
+    "@media(max-width:767px)": { border: "none" },
 }));
 function ChildProfile() {
     const navigate = useNavigate();
@@ -118,6 +244,12 @@ function ChildProfile() {
             },
         ],
     };
+    useEffect(()=>{
+        if (location?.state?.data?.schoolId?.schoolId){
+             schoolIdCheck(location?.state?.data?.schoolId?.schoolId)
+        }
+       
+    }, [location?.state?.data?.schoolId?.schoolId])
     const UploadImg = async (value) => {
         const token = localStorage.getItem("token");
         setIsLoading(true);
@@ -249,284 +381,317 @@ function ChildProfile() {
             setProfileData(profilePic);
         }
     };
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     return (
-        <MainBox>
-            <Box sx={{
-                paddingBottom: "20px",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "auto",
-                maxWidth: "550px",
-                borderRadius: "10px",
-            }}>
-                <Box sx={{ display: "flex", gap: "15px", alignItems: "center", cursor:"pointer" }} onClick={() => { navigate("/update-profile")}}>
-                    <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
-                    <Typography >
-                        {location?.state?.name || "--"} Profile
-                    </Typography></Box></Box>
-
-            <Box sx={style.CombineBox}>
-                <div
-                    style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <div
-                        style={{
+          <Box sx={style.mainScreenBack} >
+            <Root>
+                <Container>
+                    <Box sx={style.flexBox} onClick={() => { navigate("/update-profile")}}>
+                        <Box sx={{
                             display: "flex",
+                            gap: "5px",
+                            alignItems: "center",
+                            cursor: "pointer"
+}}>
+                            <IoMdArrowBack style={isMobile ? { color: "#FE8A36", fontSize: "25px" } : { color: "#000" }} />
+                            {!isMobile && <Typography>Back</Typography>} </Box>
+            </Box></Container></Root>
+      <Container >
+        <Box sx={style.mainBox}>
+          <Box sx={style.boxMnage}>
+            <ManageLayout>
+              <ImageGroup alt="" src="images/loginBack.png" style={{borderRadius:"10px"}} />
+            </ManageLayout>
+          </Box >
+        
+                    <MainBox>
+                        {/* <Box sx={{
+                            paddingBottom: "20px",
                             justifyContent: "center",
-                            marginBottom: "10px",
-                            position: "relative"
-                        }}
-                    >
-                        <img
-                            src={
-                                profilePic
-                                    ? profilePic
-                                    : "images/defaultPic.png"
-                            }
-                            alt=""
-                            style={{
-                                width: "80px",
-                                height: "80px",
-                                borderRadius: "50%",
-                            }}
-                        />
-                        <div style={{
-                            position: "absolute", bottom: "-10px",
-                            right: "35px",
+                            alignItems: "center",
+                            margin: "auto",
+                            maxWidth: "550px",
+                            borderRadius: "10px",
                         }}>
-                            <Box sx={style.editBox}>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple="false"
-                                    style={{
-                                        position: "absolute",
-                                        zIndex: "1",
-                                        width: "-webkit-fill-available",
-                                        overflow: "hidden",
-                                        height: "100%",
-                                        opacity: "0",
-                                    }}
-                                    onChange={(e) => handleImageSelect(e)}
-                                />
-                                <img src="images/editProfile.svg" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
+                            <Box sx={{ display: "flex", gap: "15px", alignItems: "center", cursor: "pointer" }} onClick={() => { navigate("/update-profile") }}>
+                                <IoMdArrowBack color={"rgba(182, 183, 184, 1)"} />
+                                <Typography >
+                                    {location?.state?.name || "--"} Profile
+                                </Typography></Box>
+                                </Box> */}
+
+                        <Box sx={style.CombineBox}>
+                            <Box sx={{display:"flex", justifyContent:"center", marginBottom:"10px"}}>
+                                <Typography >
+                                    {location?.state?.name || "--"} Profile
+                                </Typography>
                             </Box>
-                        </div>
-                    </div>
-
-                    <Typography >
-                        Change Profile Photo
-                    </Typography>
-
-                </div>
-                <Formik
-                    onSubmit={handleFormSubmit}
-                    initialValues={formInitialSchema}
-                    validationSchema={yup.object().shape({
-                        children: yup.array().of(
-                            yup.object().shape({
-                                name: yup.string().required("Please enter your full name."),
-                                schoolId: yup.string(),
-                                dob: yup.string(),
-                                gender: yup.string(),
-                                standard: yup.string(),
-                            })
-                        ),
-                    })}
-                >
-                    {({
-                        errors,
-                        handleBlur,
-                        handleChange,
-                        handleSubmit,
-                        touched,
-                        values,
-                    }) => (
-                        <Form onSubmit={handleSubmit}>
-                            <FieldArray name="children">
-                                {({ push, remove }) => (
-                                    <>
-                                        {values.children.map((child, index) => (
-                                            <Grid key={index} sx={{ margin: "13px 0" }}>
-                                               
-                                                <Box sx={{ margin: "13px 0" }}>
-                                                    <TextField
-                                                        placeholder="Child's full name"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        size="small"
-                                                        inputProps={{ maxLength: 256 }}
-                                                        value={child.name}
-                                                        name={`children.${index}.name`}
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.name &&
-                                                            errors.children?.[index]?.name
-                                                        )}
-                                                        onBlur={handleBlur}
-                                                        onChange={handleChange}
-                                                    />
-                                                    <FormHelperText
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.name &&
-                                                            errors.children?.[index]?.name
-                                                        )}
-                                                    >
-                                                        {touched.children?.[index]?.name &&
-                                                            errors.children?.[index]?.name}
-                                                    </FormHelperText>
-                                                </Box>
-                                                <Box sx={{ margin: "13px 0" }}>
-                                                    <TextField
-                                                        placeholder="Enter School Id"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        inputProps={{ maxLength: 256 }}
-                                                        value={child.schoolId}
-                                                        name={`children.${index}.schoolId`}
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.schoolId &&
-                                                            errors.children?.[index]?.schoolId
-                                                        )}
-                                                        onBlur={handleBlur}
-                                                        onChange={(e) => {
-                                                            handleChange(e);
-                                                            schoolIdCheck(e.target.value); // Call your additional function here
-                                                        }}
-                                                    />
-                                                    <FormHelperText
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.schoolId &&
-                                                            errors.children?.[index]?.schoolId
-                                                        )}
-                                                    >
-                                                        {touched.children?.[index]?.schoolId &&
-                                                            errors.children?.[index]?.schoolId}
-                                                    </FormHelperText>
-                                                </Box>
-                                                <Box sx={{ margin: "13px 0" }}>
-                                                    <TextField
-                                                        type="date"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        size="small"
-                                                        inputProps={{ maxLength: 256 }}
-                                                        value={child.dob}
-                                                        name={`children.${index}.dob`}
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.dob &&
-                                                            errors.children?.[index]?.dob
-                                                        )}
-                                                        onBlur={handleBlur}
-                                                        onChange={handleChange}
-                                                    />
-                                                    <FormHelperText
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.dob &&
-                                                            errors.children?.[index]?.dob
-                                                        )}
-                                                    >
-                                                        {touched.children?.[index]?.dob &&
-                                                            errors.children?.[index]?.dob}
-                                                    </FormHelperText>
-                                                </Box>
-                                                <Typography variant="h5" sx={{ textAlign: "start" }}>
-                                                    Gender
-                                                </Typography>
-                                                <Box sx={{ margin: "13px 0" }}>
-                                                    <Select
-                                                        labelId="demo-simple-select-helper-label"
-                                                        id="demo-simple-select-helper"
-                                                        value={child.gender}
-                                                        onChange={handleChange}
-                                                        name={`children.${index}.gender`}
-                                                        fullWidth
-                                                        displayEmpty
-                                                        inputProps={{ "aria-label": "Without label" }}
-                                                    >
-                                                        <MenuItem value="" disabled>Choose one</MenuItem>
-                                                        <MenuItem value="Male">Boy</MenuItem>
-                                                        <MenuItem value="Female">Girl</MenuItem>
-                                                    </Select>
-                                                    <FormHelperText
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.gender &&
-                                                            errors.children?.[index]?.gender
-                                                        )}
-                                                    >
-                                                        {touched.children?.[index]?.gender &&
-                                                            errors.children?.[index]?.gender}
-                                                    </FormHelperText>
-                                                </Box>
-                                                {checkId && 
-                                                <>
-                                                <Typography variant="h5" sx={{ textAlign: "start" }}>
-                                                    Standard
-                                                </Typography>
-                                                <Box sx={{ margin: "13px 0" }}>
-                                                    <Select
-                                                        labelId="demo-simple-select-helper-label"
-                                                        id="demo-simple-select-helper"
-                                                        value={child.standard}
-                                                        onChange={handleChange}
-                                                        name={`children.${index}.standard`}
-                                                        fullWidth
-                                                        displayEmpty
-                                                        inputProps={{ "aria-label": "Without label" }}
-                                                    >
-                                                        <MenuItem value="" disabled>Choose one</MenuItem>
-                                                        {[ 4, 5, 6, 7, 8, 9, 10].map((value) => (
-                                                            <MenuItem key={value} value={value.toString()}>
-                                                                {value}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                    <FormHelperText
-                                                        error={Boolean(
-                                                            touched.children?.[index]?.standard &&
-                                                            errors.children?.[index]?.standard
-                                                        )}
-                                                    >
-                                                        {touched.children?.[index]?.standard &&
-                                                            errors.children?.[index]?.standard}
-                                                    </FormHelperText>
-                                                </Box></>}
-
-                                            </Grid>
-                                        ))}
-                                    </>
-                                )}
-                            </FieldArray>
-                            <Grid>
-                                <Box sx={{ marginTop: "26px" }}>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        disabled={isLoading}
-                                        fullWidth
-                                    >
-                                        Save
-                                        {isLoading && <ButtonCircularProgress />}
-                                    </Button>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: "grid",
+                            <div
+                                style={{
+                                    display: "grid",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: "flex",
                                         justifyContent: "center",
-                                        mt: "13px",
+                                        marginBottom: "10px",
+                                        position: "relative"
                                     }}
-                                ></Box>
-                            </Grid>
-                        </Form>
-                    )}
-                </Formik>
-            </Box>
+                                >
+                                    <img
+                                        src={
+                                            profilePic
+                                                ? profilePic
+                                                : "images/defaultPic.png"
+                                        }
+                                        alt=""
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            borderRadius: "50%",
+                                        }}
+                                    />
+                                    <div style={{
+                                        position: "absolute", bottom: "-10px",
+                                        right: "35px",
+                                    }}>
+                                        <Box sx={style.editBox}>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                multiple="false"
+                                                style={{
+                                                    position: "absolute",
+                                                    zIndex: "1",
+                                                    width: "-webkit-fill-available",
+                                                    overflow: "hidden",
+                                                    height: "100%",
+                                                    opacity: "0",
+                                                }}
+                                                onChange={(e) => handleImageSelect(e)}
+                                            />
+                                            <img src="images/editProfile.svg" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
+                                        </Box>
+                                    </div>
+                                </div>
+
+                                <Typography >
+                                    Change Profile Photo
+                                </Typography>
+
+                            </div>
+                            <Formik
+                                onSubmit={handleFormSubmit}
+                                initialValues={formInitialSchema}
+                                validationSchema={yup.object().shape({
+                                    children: yup.array().of(
+                                        yup.object().shape({
+                                            name: yup.string().required("Please enter your full name."),
+                                            schoolId: yup.string(),
+                                            dob: yup.string(),
+                                            gender: yup.string(),
+                                            standard: yup.string(),
+                                        })
+                                    ),
+                                })}
+                            >
+                                {({
+                                    errors,
+                                    handleBlur,
+                                    handleChange,
+                                    handleSubmit,
+                                    touched,
+                                    values,
+                                }) => (
+                                    <Form onSubmit={handleSubmit}>
+                                        <FieldArray name="children">
+                                            {({ push, remove }) => (
+                                                <>
+                                                    {values.children.map((child, index) => (
+                                                        <Grid key={index} sx={{ margin: "13px 0" }}>
+
+                                                            <Box sx={{ margin: "13px 0" }}>
+                                                                <TextField
+                                                                    placeholder="Child's full name"
+                                                                    variant="outlined"
+                                                                    fullWidth
+                                                                    size="small"
+                                                                    inputProps={{ maxLength: 256 }}
+                                                                    value={child.name}
+                                                                    name={`children.${index}.name`}
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.name &&
+                                                                        errors.children?.[index]?.name
+                                                                    )}
+                                                                    onBlur={handleBlur}
+                                                                    onChange={handleChange}
+                                                                />
+                                                                <FormHelperText
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.name &&
+                                                                        errors.children?.[index]?.name
+                                                                    )}
+                                                                >
+                                                                    {touched.children?.[index]?.name &&
+                                                                        errors.children?.[index]?.name}
+                                                                </FormHelperText>
+                                                            </Box>
+                                                            <Box sx={{ margin: "13px 0" }}>
+                                                                <TextField
+                                                                    placeholder="Enter School Id"
+                                                                    variant="outlined"
+                                                                    fullWidth
+                                                                    inputProps={{ maxLength: 256 }}
+                                                                    value={child.schoolId}
+                                                                    name={`children.${index}.schoolId`}
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.schoolId &&
+                                                                        errors.children?.[index]?.schoolId
+                                                                    )}
+                                                                    onBlur={handleBlur}
+                                                                    onChange={(e) => {
+                                                                        handleChange(e);
+                                                                        schoolIdCheck(e.target.value); // Call your additional function here
+                                                                    }}
+                                                                />
+                                                                <FormHelperText
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.schoolId &&
+                                                                        errors.children?.[index]?.schoolId
+                                                                    )}
+                                                                >
+                                                                    {touched.children?.[index]?.schoolId &&
+                                                                        errors.children?.[index]?.schoolId}
+                                                                </FormHelperText>
+                                                            </Box>
+                                                            <Box sx={{ margin: "13px 0" }}>
+                                                                <TextField
+                                                                    type="date"
+                                                                    variant="outlined"
+                                                                    fullWidth
+                                                                    size="small"
+                                                                    inputProps={{ maxLength: 256 }}
+                                                                    value={child.dob}
+                                                                    name={`children.${index}.dob`}
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.dob &&
+                                                                        errors.children?.[index]?.dob
+                                                                    )}
+                                                                    onBlur={handleBlur}
+                                                                    onChange={handleChange}
+                                                                />
+                                                                <FormHelperText
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.dob &&
+                                                                        errors.children?.[index]?.dob
+                                                                    )}
+                                                                >
+                                                                    {touched.children?.[index]?.dob &&
+                                                                        errors.children?.[index]?.dob}
+                                                                </FormHelperText>
+                                                            </Box>
+                                                            <Typography variant="h5" sx={{ textAlign: "start" }}>
+                                                                Gender
+                                                            </Typography>
+                                                            <Box sx={{ margin: "13px 0" }}>
+                                                                <Select
+                                                                    labelId="demo-simple-select-helper-label"
+                                                                    id="demo-simple-select-helper"
+                                                                    value={child.gender}
+                                                                    onChange={handleChange}
+                                                                    name={`children.${index}.gender`}
+                                                                    fullWidth
+                                                                    displayEmpty
+                                                                    inputProps={{ "aria-label": "Without label" }}
+                                                                >
+                                                                    <MenuItem value="" disabled>Choose one</MenuItem>
+                                                                    <MenuItem value="Male">Boy</MenuItem>
+                                                                    <MenuItem value="Female">Girl</MenuItem>
+                                                                </Select>
+                                                                <FormHelperText
+                                                                    error={Boolean(
+                                                                        touched.children?.[index]?.gender &&
+                                                                        errors.children?.[index]?.gender
+                                                                    )}
+                                                                >
+                                                                    {touched.children?.[index]?.gender &&
+                                                                        errors.children?.[index]?.gender}
+                                                                </FormHelperText>
+                                                            </Box>
+                                                            {checkId &&
+                                                                <>
+                                                                    <Typography variant="h5" sx={{ textAlign: "start" }}>
+                                                                        Standard
+                                                                    </Typography>
+                                                                    <Box sx={{ margin: "13px 0" }}>
+                                                                        <Select
+                                                                            labelId="demo-simple-select-helper-label"
+                                                                            id="demo-simple-select-helper"
+                                                                            value={child.standard}
+                                                                            onChange={handleChange}
+                                                                            name={`children.${index}.standard`}
+                                                                            fullWidth
+                                                                            displayEmpty
+                                                                            inputProps={{ "aria-label": "Without label" }}
+                                                                        >
+                                                                            <MenuItem value="" disabled>Choose one</MenuItem>
+                                                                            {[4, 5, 6, 7, 8, 9, 10].map((value) => (
+                                                                                <MenuItem key={value} value={value.toString()}>
+                                                                                    {value}
+                                                                                </MenuItem>
+                                                                            ))}
+                                                                        </Select>
+                                                                        <FormHelperText
+                                                                            error={Boolean(
+                                                                                touched.children?.[index]?.standard &&
+                                                                                errors.children?.[index]?.standard
+                                                                            )}
+                                                                        >
+                                                                            {touched.children?.[index]?.standard &&
+                                                                                errors.children?.[index]?.standard}
+                                                                        </FormHelperText>
+                                                                    </Box></>}
+
+                                                        </Grid>
+                                                    ))}
+                                                </>
+                                            )}
+                                        </FieldArray>
+                                        <Grid>
+                                            <Box sx={{ marginTop: "26px" }}>
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    disabled={isLoading}
+                                                    fullWidth
+                                                >
+                                                    Save
+                                                    {isLoading && <ButtonCircularProgress />}
+                                                </Button>
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    display: "grid",
+                                                    justifyContent: "center",
+                                                    mt: "13px",
+                                                }}
+                                            ></Box>
+                                        </Grid>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </Box>
 
 
-        </MainBox>
+                    </MainBox>
+        </Box>
+      </Container>
+    </Box>
+       
     );
 }
 

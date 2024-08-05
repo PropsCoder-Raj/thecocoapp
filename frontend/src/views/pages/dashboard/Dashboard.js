@@ -28,7 +28,7 @@ const style = {
     },
   },
   mainscrollHide:{
-    // height: "100vh",
+    height: "calc(100vh - 64px )",
     overflow: "auto",
  '-ms-overflow-style': 'none',  // Internet Explorer 10+
     'scrollbar-width': 'none',  // Firefox
@@ -451,6 +451,7 @@ function Dashboard() {
   const [levelData, setLevelData] = useState([]);
   const [currentData, setCurrentData] = useState();
   const [profile, setProfile] = useState("");
+  const [targetId, setTargetId] = useState(null);
   useEffect(() => {
     setProfile(User?.profile?.profilePic)
   }, [User.profile])
@@ -471,80 +472,6 @@ function Dashboard() {
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-  const levels = [
-    {
-      _id: "6679a728f2eac92152686fb5",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 1,
-      name: "What is Money?",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: true,
-      current_status: false,
-    },
-    {
-      _id: "6679a728f2eac92152686fb6",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 2,
-      name: "History of Money",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: false,
-      current_status: true,
-    },
-    {
-      _id: "6679a728f2eac92152686fb7",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 3,
-      name: "Different Types of Money",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: false,
-      current_status: false,
-    },
-    {
-      _id: "6679a728f2eac92152686fb8",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 4,
-      name: "The Value of Money",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: false,
-      current_status: false,
-    },
-    {
-      _id: "6679a728f2eac92152686fb9",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 5,
-      name: "How Money is Made",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: false,
-      current_status: false,
-    },
-    {
-      _id: "6679a728f2eac92152686fba",
-      standard_id: "6679a728f2eac92152686fa5",
-      module_id: "6679a728f2eac92152686fb0",
-      level_id: 6,
-      name: "Money Around the World",
-      __v: 0,
-      createdAt: "2024-06-24T17:04:40.371Z",
-      updatedAt: "2024-06-24T17:04:40.371Z",
-      complete_status: false,
-      current_status: false,
-    },
-  ];
   const iconsFunction = (icon, alt) => {
     return <img src={icon} alt={alt} />;
   };
@@ -728,12 +655,12 @@ function Dashboard() {
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
         })
-       
-           scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
-          duration: 500,
-          delay: 0,
-          smooth: 'easeInOutQuart'
-        });
+        setTargetId(`${res?.data?.currentStandard + " " + "Standard"}`); 
+        //    scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
+        //   duration: 500,
+        //   delay: 0,
+        //   smooth: 'easeInOutQuart'
+        // });
         
        
       }
@@ -1052,6 +979,13 @@ function Dashboard() {
       }
     };
   }, []);
+
+  const elementsRef = useRef({});
+  useEffect(() => {
+    if (targetId && elementsRef.current[targetId]) {
+      elementsRef.current[targetId].scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [targetId]);
   return (
     <Page title="Dashboard">
       <Container ref={gridRef} maxWidth="lg" sx={style.mainscrollHide} >
@@ -1075,7 +1009,10 @@ function Dashboard() {
                 levelData.map((values, i) => (
                   <>
                     {(values?.name && currentData?.isStanard) &&
-                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} id={removeOrdinalSuffixes(values?.name)}>
+                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} 
+                      id={removeOrdinalSuffixes(values?.name)}
+                        ref={(el) => (elementsRef.current[removeOrdinalSuffixes(values?.name)] = el)}
+                      >
                         <Typography variant="h4" color={"#434547"} sx={{ marginBottom: "7px" }}>{values?.name}</Typography>
                       </Box>}
 

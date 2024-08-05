@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Box,
     Button,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import useSound from "use-sound";
 
 const style = {
     flexBox: {
@@ -100,6 +101,13 @@ function Complete() {
     const location = useLocation();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const [winner] = useSound('sound/winners_W9Cpenj.mp3');
+    useEffect(()=>{
+        if (location?.state?.totalPoints){
+          winner()   
+        }
+       
+    }, [location?.state?.totalPoints])
     return (
         <MainBox style={{position:"relative", height:"100vh"}}>
             <Container maxWidth="lg">

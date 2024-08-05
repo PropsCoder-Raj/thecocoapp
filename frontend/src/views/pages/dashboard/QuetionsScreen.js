@@ -7,6 +7,7 @@ import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useTheme } from "@emotion/react";
+import useSound from "use-sound";
 
 const style = {
   flexBox: {
@@ -130,7 +131,7 @@ function QuetionsScreen() {
     };
   const[activeindex, setActiveIndex] =useState("");
   const [correctAns, setCorrectAns] = useState(null);
-  console.log(correctAns, "correctAns");
+
   const handleClose = (event, reason) => {
 
     setOpen(false);
@@ -141,6 +142,8 @@ function QuetionsScreen() {
   const [susscessQuestions, setSusscessQuestions] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
+  const [correct] = useSound('sound/correct-answer-sound-effect-19.mp3');
+  const [wrong] = useSound('sound/wrong_SriFgVc.mp3');
   const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
@@ -192,10 +195,16 @@ function QuetionsScreen() {
       });
       if (res.status === 200) {
         setCorrectAns(res.data.result.correctAnswerStatus);
+       
         setCorrectAnsData(res.data.result)
         //res.data.result.loaderPercentage
         setPercentage(res.data.result.loaderPercentage)
-        setSusscessQuestions(res.data.result.susscessQuestions)
+        setSusscessQuestions(res.data.result.susscessQuestions) 
+        if (res.data.result.correctAnswerStatus){
+          correct()
+        }else{
+wrong()
+        }
       }
     } catch (error) {
       console.log(error, "error");
