@@ -7,6 +7,8 @@ const swaggerJsdoc = require('swagger-jsdoc'); // Package to generate Swagger do
 const swaggerUi = require('swagger-ui-express'); // Package to serve Swagger UI
 const bodyParser = require('body-parser'); // Package to body parsing
 
+require("./api/helper/cron-jobs");
+
 require('dotenv').config(); // Load environment variables from .env file
 
 // Import custom middleware functions

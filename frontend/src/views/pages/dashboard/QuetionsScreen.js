@@ -76,6 +76,12 @@ const MainBox = styled(Box)(({ theme }) => ({
   alignItems: "end",
   justifyContent: "space-between",
   alignContent: "space-between",
+  "@media(max-width:767px)": {
+    position: "fixed",
+    top: "56px",
+    padding:"0"
+  },
+  
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",

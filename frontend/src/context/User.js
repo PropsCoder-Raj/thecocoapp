@@ -23,10 +23,13 @@ const [callApi, setCallApi] =useState(false);
         setProfile(res.data.data);
       }
     } catch (error) {
-      console.log(error, "error");
-      localStorage.clear();
-      sessionStorage.clear();
-      navigate("/login")
+      if (error.response.status === 419 || error.response.status === 401){
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate("/login")
+      }
+      console.log(error.response.status, "error");
+      
     }
   };
   useEffect(() => {

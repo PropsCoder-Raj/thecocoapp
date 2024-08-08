@@ -73,7 +73,11 @@ const style = {
       sm: "calc(100vh - 160px)",
       xs: "calc(100vh - 160px)"
     },
-
+    "@media(max-width:767px)": {
+      position: "fixed",
+      top: "56px",
+      padding: "0"
+    },
   },
   buttonHandle: {
     display: "flex",
@@ -317,8 +321,8 @@ function Leason(props) {
             height: "calc(100vh - 100px)",
             overflow: "auto",
             paddingTop:{
-              xs:"56px !important",
-              sm:"56px !important",
+              xs:"0px !important",
+              sm:"0px !important",
               md:"32px"
             }
 }}>
@@ -333,26 +337,6 @@ function Leason(props) {
                     }}
                     cursor={"pointer"}
                   />
-                  {/* <Box
-                    sx={{ display: "flex", gap: "16px", alignItems: "center" }}
-                  >
-                     <IoVolumeMediumOutline
-                      disabled={isSpeaking}
-                      cursor={"pointer"}
-                      color="rgba(0, 0, 0, 1)"
-                      onClick={() => {
-                        setIsSpeaking(true); 
-                        const options = {
-                          voice: selectedVoice,
-                          pitch: 1.5, // Higher pitch
-                          rate: 1, // Normal rate
-                          volume: 1,
-                        };
-                        handleSpeak(leasonData[progress - 1]?.name + ". " + leasonData[progress - 1]?.description, options, () => { setIsSpeaking(false); });
-                      }}
-                    />
-                    <GoShareAndroid cursor={"pointer"} color="rgba(0, 0, 0, 1)" onClick={captureAndShare} />
-                  </Box>  */}
                 </Box>
                 <Box sx={{}}>
                   <Typography variant="h1">{leasonData[progress - 1]?.name || "--"}</Typography>
@@ -606,7 +590,7 @@ function Leason(props) {
                       height: '100vh',
                       position: 'fixed',
                       cursor: 'pointer',
-                      top: "63px",
+                      top: "85px",
                       left:"0"
                     }}
                   >

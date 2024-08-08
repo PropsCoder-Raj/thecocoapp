@@ -500,7 +500,8 @@ function Dashboard() {
     }
   };
 
-  const renderBoxes = (levelValue) => {
+  const renderBoxes = (props) => {
+    const { levelValue  , Name} = props;
     return levelValue.map((level, index) => {
       const isCenterBox = index % 3 === 0;
       const isSixItems = levelValue.length === 6;
@@ -526,6 +527,7 @@ function Dashboard() {
         >
           {level.current_status && (
             <Box
+              ref={(el) => (elementsRef.current[removeOrdinalSuffixes(Name)] = el)}
               sx={style.customBorder}
               onClick={() => {
                 navigate("/leason", {
@@ -1011,7 +1013,7 @@ function Dashboard() {
                     {(values?.name && currentData?.isStanard) &&
                       <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} 
                       id={removeOrdinalSuffixes(values?.name)}
-                        ref={(el) => (elementsRef.current[removeOrdinalSuffixes(values?.name)] = el)}
+                        // ref={(el) => (elementsRef.current[removeOrdinalSuffixes(values?.name)] = el)}
                       >
                         <Typography variant="h4" color={"#434547"} sx={{ marginBottom: "7px" }}>{values?.name}</Typography>
                       </Box>}
@@ -1051,7 +1053,7 @@ function Dashboard() {
                           </Box>
                         </Box>
                         <Grid container spacing={3} sx={style.levelMargin}>
-                          {renderBoxes(data.levels)}
+                          {renderBoxes({ levelValue: data.levels, Name: values?.name })}
                         </Grid>
                       </Box>
                     ))}
