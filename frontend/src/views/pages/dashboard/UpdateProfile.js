@@ -179,6 +179,7 @@ const Root = styled("div")(({ theme }) => ({
 function UpdateProfile() {
     const navigate = useNavigate();
     const location = useLocation();
+    const normalizeString = (str) => str ? str.trim().toLowerCase() : '';
     const User = useContext(UserContext);
     const [childData, setChildData] = useState([]);
     const theme = useTheme();
@@ -190,7 +191,6 @@ function UpdateProfile() {
     const [profileData, setProfileData] = useState("");
     const [name, setName] = useState("");
     useEffect(() => { setName(User?.profile?.name || "") }, [User.profile])
-    console.log(childData, "childData");
     useEffect(() => {
         getChildData();
     }, [])
@@ -352,11 +352,9 @@ function UpdateProfile() {
                                         variant="outlined"
                                         fullWidth
                                         size="small"
-                                        disabled
-                                        inputProps={{ maxLength: 256 }}
+                                        inputProps={{ maxLength: 256, readOnly: true }}
                                         value={User?.profile?.email}
                                         name="name"
-                                        onChange={() => { }}
                                         style={{ margin: "15px 0" }}
                                     />
                                     <TextField
@@ -379,6 +377,17 @@ function UpdateProfile() {
                                 {
                                     childData.length != 0 &&
                                     childData.map((values, items) => {
+                                        const normalizedGender = normalizeString(values.gender);
+                                        let defaultPic = normalizedGender === "male"
+                                            ? "images/boyprofile.png"
+                                            : "images/boyprofile.png";
+
+                                        let profilePicture = values.profilePic
+                                            ? values.profilePic
+                                            : defaultPic;
+
+                                        console.log('Default Pic:', defaultPic);
+                                        console.log('Profile Picture:', profilePicture);
                                         return (
                                             <Box sx={style.profileBox}>
                                                 <Box
@@ -390,17 +399,14 @@ function UpdateProfile() {
                                                             navigate("/child-profile", {
                                                                 state: {
                                                                     name: values.childName,
-                                                                    img: values.profilePic ? values.profilePic :
-                                                                        values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png",
+                                                                    img: profilePicture,
                                                                     childId: values._id,
                                                                     data: values
                                                                 }
                                                             })
                                                         }}
                                                     >
-                                                        <ProfileImg alt="" src={
-                                                            values.profilePic ? values.profilePic :
-                                                                values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
+                                                        <ProfileImg alt="" src={profilePicture} />
                                                         <Box > <Typography variant="body1">{values.childName}</Typography>
                                                             <Box sx={style.GapBox}>
                                                                 {/* <Typography variant="body1">{values.totalPoints}</Typography>

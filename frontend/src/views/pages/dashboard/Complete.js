@@ -101,13 +101,11 @@ function Complete() {
     const location = useLocation();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-    const [winner] = useSound('sound/winners_W9Cpenj.mp3');
+    const [winner, { stop, play }] = useSound('images/winners_W9Cpenj.mp3', { preload: true });
     useEffect(()=>{
-        if (location?.state?.totalPoints){
-          winner()   
-        }
+        winner()  
        
-    }, [location?.state?.totalPoints])
+    }, [])
     return (
         <MainBox style={{position:"relative", height:"100vh"}}>
             <Container maxWidth="lg">

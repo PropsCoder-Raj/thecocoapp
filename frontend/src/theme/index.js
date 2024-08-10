@@ -163,10 +163,10 @@ const themesOptions = [
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: { borderColor: "rgba(216, 216, 216, 1)" },
+          notchedOutline: { borderColor: "rgba(229, 229, 229, 1)" },
           root: {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "rgba(216, 216, 216, 1)",
+              borderColor: "rgba(229, 229, 229, 1)",
             },
             input: {
               padding: "11px 13px",
@@ -410,10 +410,10 @@ const themesOptions = [
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: { borderColor: "rgba(216, 216, 216, 1)" },
+          notchedOutline: { borderColor: "rgba(229, 229, 229, 1)" },
           root: {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "rgba(216, 216, 216, 1)",
+              borderColor: "rgba(229, 229, 229, 1)",
             },
             input: {
               padding: "11px 13px",

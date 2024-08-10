@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Box, Button, Collapse, Container, Dialog, DialogActions, DialogContent, Drawer, Grid, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from "@mui/material";
+import { Box, Button, Collapse, Container, Dialog, DialogActions, DialogContent, Drawer, Grid, keyframes, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import Page from "src/component/Page";
@@ -14,6 +14,16 @@ import { FiEdit3 } from "react-icons/fi";
 import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import { Link, animateScroll as scroll, scroller } from 'react-scroll';
+
+
+const bounce = keyframes`
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Adjust this value to control the bounce height */
+    }
+  `;
 const style = {
   HandleMargin: {
     marginTop: "20px",
@@ -94,7 +104,7 @@ const style = {
   GridManrgin: {
     padding: "20px 40px !important",
     position: "relative",
-   
+
   },
   customBorder: {
     padding: "6px",
@@ -109,6 +119,7 @@ const style = {
     cursor: "pointer",
     alignItems: "center",
     display: "grid",
+    animation: `${bounce} 1s infinite`,
   },
   textCss: {
     fontSize: "16px",
@@ -423,6 +434,7 @@ const AddImg = styled("img")(({ theme }) => ({
 const LockImg = styled("img")(({ theme }) => ({
   width: "120px",
   height: "120px",
+  marginLeft: "16px"
 }));
 const SkeletonBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#e0e0e0",
@@ -444,6 +456,7 @@ const SkeletonBox = styled(Box)(({ theme }) => ({
     }
   }
 }));
+
 function Dashboard() {
   const User = useContext(UserContext);
   const navigate = useNavigate();
@@ -985,9 +998,11 @@ function Dashboard() {
   const elementsRef = useRef({});
   useEffect(() => {
     if (targetId && elementsRef.current[targetId]) {
-      elementsRef.current[targetId].scrollIntoView({ behavior: 'smooth' });
+      elementsRef.current[targetId].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [targetId]);
+
+ 
   return (
     <Page title="Dashboard">
       <Container ref={gridRef} maxWidth="lg" sx={style.mainscrollHide} >

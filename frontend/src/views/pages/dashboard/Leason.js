@@ -73,7 +73,7 @@ const style = {
       sm: "calc(100vh - 160px)",
       xs: "calc(100vh - 160px)"
     },
-    "@media(max-width:767px)": {
+    "@media(max-width:900px)": {
       position: "fixed",
       top: "56px",
       padding: "0"
@@ -322,7 +322,7 @@ function Leason(props) {
             overflow: "auto",
             paddingTop:{
               xs:"0px !important",
-              sm:"0px !important",
+              sm:"32px !important",
               md:"32px"
             }
 }}>
@@ -364,7 +364,11 @@ function Leason(props) {
               </Box>}
             </Box>
           </Grid>
-          <Grid item md={4} sm={12} xs={12}>
+          <Grid item md={4} sm={12} xs={12} sx={{  paddingTop:{
+              xs:"0px !important",
+              sm:"32px !important",
+              md:"32px"
+            }}} >
             
             <Box sx={{
               background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
