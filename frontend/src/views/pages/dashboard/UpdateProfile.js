@@ -380,7 +380,7 @@ function UpdateProfile() {
                                         const normalizedGender = normalizeString(values.gender);
                                         let defaultPic = normalizedGender === "male"
                                             ? "images/boyprofile.png"
-                                            : "images/boyprofile.png";
+                                            : "images/girlprofile.png";
 
                                         let profilePicture = values.profilePic
                                             ? values.profilePic

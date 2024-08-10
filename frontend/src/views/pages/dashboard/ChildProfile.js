@@ -283,7 +283,8 @@ function ChildProfile() {
             // profilePic: profileData ? profileData : null
         }));
         let RequestUrl = location?.state?.childId ? `${ApiConfig.updateChild}?childId=${location.state?.childId}` : ApiConfig.createChild
-        let sendChildData = location?.state?.childId ? [{...requestBody[0], "profilePic": profilePic} ] : [{ ...requestBody[0], "profilePic":profilePic}];
+        let sendChildData = location?.state?.childId ? [{ ...requestBody[0], "profilePic": profilePic !== "images/ boyprofile.png" || profilePic !== "images/girlprofile.png" ? profilePic : null }] : [{ ...requestBody[0], "profilePic": profilePic !== "images/ boyprofile.png" || profilePic !== "images/girlprofile.png" ? profilePic : null
+}];
         try {
             let res = ""
             location?.state?.childId ?
