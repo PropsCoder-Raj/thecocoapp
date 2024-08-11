@@ -27,6 +27,9 @@ const { completedQuestionsService } = require('../service/completedquestions');
 const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestion, updateCompletedQuestion, deleteManyCompletedQuestion } = completedQuestionsService;
 
 
+const { currentQuestionsService } = require('../service/currentquestions');
+const { updateCurrentQuestions, deleteCurrentQuestions } = currentQuestionsService;
+
 /**
 * @swagger
 * /questions/attempt-questions:
@@ -206,6 +209,14 @@ exports.attemptQuestions = async (req, res, next) => {
             }
         }else if(nextScreen == "SCORE_BOARD" && demo == true){
             await deleteManyCompletedQuestion({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
+        }
+
+        if(nextScreen == "SCORE_BOARD"){
+            await deleteCurrentQuestions({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id  });
+        }else{
+            await updateCurrentQuestions({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id  }, {
+                $set: { nextQuestionId, nextQuestionNo, susscessQuestions: susscessQuestions >= 3 ? 3 : Number(susscessQuestions) + 1, loaderPercentage, totalPoints: demo ? 0 : totalPoints, nextScreen }
+            })
         }
 
         return res.status(200).send({

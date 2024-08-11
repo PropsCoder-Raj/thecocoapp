@@ -23,6 +23,9 @@ const { findAllCompletedLevels } = completedLevelsService;
 const { completedQuestionsService } = require('../service/completedquestions');
 const { findAllCompletedQuestions } = completedQuestionsService;
 
+const { currentQuestionsService } = require('../service/currentquestions');
+const { findAllCurrentQuestions } = currentQuestionsService;
+
 
 const { updateCurrentStatus } = require('../helper/utils')
 
@@ -94,6 +97,7 @@ exports.getAllModules = async (req, res, next) => {
         // Fetch completed modules and levels for the current child
         const completedModulesList = await findAllCompletedModules();
         const completedLevelsList = await findAllCompletedLevels();
+        const currentQuestionsList = await findAllCurrentQuestions();
 
         let currentChapterName = "";
 
@@ -111,6 +115,12 @@ exports.getAllModules = async (req, res, next) => {
                     .filter(level => level.module_id.toString() === module._id.toString())
                     .map(level => ({
                         ...level._doc,
+                        currentQuestionDetails: currentQuestionsList.find(element =>
+                            element.level_id.toString() === level._id.toString() &&
+                            element.module_id.toString() === module._id.toString() &&
+                            (element.child_id && req.user.currentChildActive ?
+                                (element.child_id.toString() === req.user.currentChildActive.toString() && element.user_id.toString() === req.user._id.toString()) :
+                                element.user_id.toString() === req.user._id.toString())),
                         complete_status: !!completedLevelsList.find(element =>
                             element.level_id.toString() === level._id.toString() &&
                             element.module_id.toString() === module._id.toString() &&
