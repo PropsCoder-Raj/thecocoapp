@@ -382,16 +382,21 @@ function UpdateProfile() {
                                             ? "images/boyprofile.png"
                                             : "images/girlprofile.png";
 
-                                        let profilePicture = values.profilePic
+                                        let profilePicture = values.profilePic && values.profilePic !== "images/boyprofile.png" && values.profilePic !== "images/girlprofile.png"
                                             ? values.profilePic
                                             : defaultPic;
 
                                         console.log('Default Pic:', defaultPic);
                                         console.log('Profile Picture:', profilePicture);
                                         return (
-                                            <Box sx={style.profileBox}>
+                                            <Box 
+                                                style={values.activeStatus ? {
+                                                    background: "rgba(241, 245, 249, 1)", cursor: "pointer"
+                                                } : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }}
+                                            sx={style.profileBox}>
                                                 <Box
-                                                    style={{ background: "rgba(255, 255, 255, 1)" }}
+                                                    
+                                                    
                                                     sx={style.userBox}
                                                 >
                                                     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}

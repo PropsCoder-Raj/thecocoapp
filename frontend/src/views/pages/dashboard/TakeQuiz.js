@@ -45,7 +45,7 @@ const style = {
 };
 const MainBox = styled(Box)(({ theme }) => ({
   padding: "30px 0px 0 0px",
-  height: "100vh",
+  height: "calc(100vh - 30px)",
   overflow: "auto",
   alignItems: "end",
   justifyContent: "space-between",

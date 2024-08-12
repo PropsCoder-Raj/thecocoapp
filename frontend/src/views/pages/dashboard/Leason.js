@@ -48,7 +48,8 @@ const style = {
     gap: "16px",
     maxWidth:"700px",
     "@media(max-width:900px)": {
-      maxWidth:"-webkit-fill-available"
+      maxWidth:"-webkit-fill-available",
+      paddingRight:"25px"
     },
 
   },
@@ -87,16 +88,19 @@ const style = {
 };
 const MainBox = styled(Box)(({ theme }) => ({
   padding: "54px 0px 0 0px",
+  height: "calc(100vh - 54px)",
   [theme.breakpoints.down("md")]: {
     padding: "36px 0px 0 0px",
+    height: "calc(100vh - 36px)",
   },
   [theme.breakpoints.down("sm")]: {
     padding: "36px 0px 0 0px",
+    height: "calc(100vh - 36px)",
   },
   [theme.breakpoints.down("xs")]: {
     padding: "36px 0px 0 0px",
+    height: "calc(100vh - 36px)",
   },
-  height: "100vh",
   overflow: "auto",
   alignItems: "end",
   justifyContent: "space-between",
@@ -339,8 +343,14 @@ function Leason(props) {
                   />
                 </Box>
                 <Box sx={{}}>
-                  <Typography variant="h1">{leasonData[progress - 1]?.name || "--"}</Typography>
-                  <Typography variant="h4" sx={{ marginTop: "14px" }}>
+                  <Typography variant="h1" 
+                  // sx={{textAlign: "justify"}}
+                  >{leasonData[progress - 1]?.name || "--"}</Typography>
+                  <Typography variant="h4" 
+                  
+                  sx={{ marginTop: "14px",
+                  textAlign: "justify"
+                   }}>
                     {leasonData[progress - 1]?.description || "--"}
                   </Typography>
                 </Box>
@@ -594,7 +604,7 @@ function Leason(props) {
                       height: '100vh',
                       position: 'fixed',
                       cursor: 'pointer',
-                      top: "85px",
+                      top: "125px",
                       left:"0"
                     }}
                   >

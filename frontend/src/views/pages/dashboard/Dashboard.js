@@ -46,7 +46,10 @@ const style = {
       display: 'none !important'  // Safari and Chrome
     },
    
+    "@media(max-width:900px)": {
+      padding: "16px 0px 16px 16px",
 
+    },
 /* Scrollbar track */
 "&::-webkit-scrollbar-track": {
   display: 'none !important'
@@ -434,7 +437,6 @@ const AddImg = styled("img")(({ theme }) => ({
 const LockImg = styled("img")(({ theme }) => ({
   width: "120px",
   height: "120px",
-  marginLeft: "16px"
 }));
 const SkeletonBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#e0e0e0",
@@ -1043,6 +1045,10 @@ function Dashboard() {
                             paddingBottom: "25px",
                             textAlign: "center",
                             marginTop: "47px",
+                            "@media(max-width:900px)": {
+                                  marginRight: "16px"
+
+                            },
                           }}
                         >
                           <Box>
