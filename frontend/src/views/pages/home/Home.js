@@ -14,6 +14,8 @@ import Footer from "src/views/content/Footer";
 import { Box, keyframes } from "@mui/material";
 import { Helmet } from "react-helmet";
 
+import AdSense from "../../../component/AdSense";
+
 const SectionFunBack = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/FreeFunBackground.png')",
   backgroundSize: "cover",
@@ -251,6 +253,9 @@ function Home() {
         </Box>
         <GettingStarted />
       </GetStart>
+      <div style={{ width: "90%", margin: '100px auto' }}>
+        <AdSense />
+      </div>
       <AskQuestionsBack id="askquestions">
         <AskQuestions />
       </AskQuestionsBack>
