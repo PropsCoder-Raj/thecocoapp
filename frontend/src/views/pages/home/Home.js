@@ -253,7 +253,7 @@ function Home() {
         </Box>
         <GettingStarted />
       </GetStart>
-      <div style={{ width: "90%", margin: '100px auto' }}>
+      <div style={{ width: "80%", margin: '100px auto' }}>
         <AdSense />
       </div>
       <AskQuestionsBack id="askquestions">
