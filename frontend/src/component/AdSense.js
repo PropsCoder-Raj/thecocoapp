@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
-const AdSense = () => {
+const AdSense = (props) => {
+    const { className } = props;
     useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
@@ -19,7 +20,7 @@ const AdSense = () => {
     }, []);
 
     return (
-        <div>
+        <div className={`${className}`}>
             <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-8429136628825533"
