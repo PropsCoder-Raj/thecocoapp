@@ -162,6 +162,15 @@ function Home() {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      const element = document.querySelector('.google-auto-placed');
+      if (element) {
+        element.style.display = 'none';
+      }
+    }, 2500)
+  }, []);
+
 
   return (
     <Page title="Home">
