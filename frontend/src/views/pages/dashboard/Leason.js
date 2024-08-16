@@ -381,7 +381,7 @@ function Leason(props) {
               md:"32px"
             }}} >
             
-            <Box sx={{
+            <Box className="show-on-medium-and-up hide-on-med-and-down" sx={{
               height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
                 md: "block",
                 sm: "none",
