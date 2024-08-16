@@ -18,6 +18,8 @@ import { UserContext } from "src/context/User";
 import html2canvas from 'html2canvas';
 import useSound from "use-sound";
 import AdSense from "src/component/AdSense";
+import { BrowserView, MobileView } from 'react-device-detect';
+
 
 const bottomToTop = keyframes`
   0% {
@@ -47,10 +49,10 @@ const style = {
   gridBox: {
     display: "grid",
     gap: "16px",
-    maxWidth:"700px",
+    maxWidth: "700px",
     "@media(max-width:900px)": {
-      maxWidth:"-webkit-fill-available",
-      paddingRight:"25px"
+      maxWidth: "-webkit-fill-available",
+      paddingRight: "25px"
     },
 
   },
@@ -171,7 +173,7 @@ function Leason(props) {
   };
   const increaseProgress = () => {
     setProgress((prev) => (prev < max ? prev + 1 : max));
-    
+
     setAnimationTrigger(true);
 
   };
@@ -325,12 +327,12 @@ function Leason(props) {
           <Grid item xs={12} sm={12} md={8} sx={{
             height: "calc(100vh - 100px)",
             overflow: "auto",
-            paddingTop:{
-              xs:"0px !important",
-              sm:"32px !important",
-              md:"32px"
+            paddingTop: {
+              xs: "0px !important",
+              sm: "32px !important",
+              md: "32px"
             }
-}}>
+          }}>
             <Box sx={style.CombineBox}>
               <Box sx={style.gridBox}>
                 <Box sx={style.flexBox}>
@@ -344,55 +346,60 @@ function Leason(props) {
                   />
                 </Box>
                 <Box sx={{}}>
-                  <Typography variant="h1" 
+                  <Typography variant="h1"
                   // sx={{textAlign: "justify"}}
                   >{leasonData[progress - 1]?.name || "--"}</Typography>
-                  <Typography variant="h4" 
-                  
-                  sx={{ marginTop: "14px",
-                  textAlign: "justify"
-                   }}>
+                  <Typography variant="h4"
+
+                    sx={{
+                      marginTop: "14px",
+                      textAlign: "justify"
+                    }}>
                     {leasonData[progress - 1]?.description || "--"}
                   </Typography>
                 </Box>
               </Box>
               {!isMobileChild &&
-              <Box sx={style.logoBox}>
-                <Box
-                  sx={{ display: "flex", alignItems: "start", gap: "15px" }}
-                >
-                  {User?.profile?.schoolLogo && 
-                    <SchoolLogo alt="#" src={User?.profile?.schoolLogo} />}
-                  <Box>
+                <Box sx={style.logoBox}>
+                  <Box
+                    sx={{ display: "flex", alignItems: "start", gap: "15px" }}
+                  >
+                    {User?.profile?.schoolLogo &&
+                      <SchoolLogo alt="#" src={User?.profile?.schoolLogo} />}
+                    <Box>
 
-                    {User?.profile?.schoolName && 
-                    <Typography variant="body2">
-                        {User?.profile?.schoolName}
-                    </Typography>}
-                    {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
+                      {User?.profile?.schoolName &&
+                        <Typography variant="body2">
+                          {User?.profile?.schoolName}
+                        </Typography>}
+                      {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
+                    </Box>
                   </Box>
-                </Box>
-              </Box>}
+                </Box>}
             </Box>
           </Grid>
-          <Grid item md={4} sm={12} xs={12} sx={{  paddingTop:{
-              xs:"0px !important",
-              sm:"32px !important",
-              md:"32px"
-            }}} >
-            
-            <Box className="show-on-medium-and-up hide-on-med-and-down" sx={{
-              height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
-                md: "block",
-                sm: "none",
-                xs: "none"
-              } }}>
-              <Box sx={{
-               
+          <Grid item md={4} sm={12} xs={12} sx={{
+            paddingTop: {
+              xs: "0px !important",
+              sm: "32px !important",
+              md: "32px"
+            }
+          }} >
+            <BrowserView>
+              <Box className="show-on-medium-and-up hide-on-med-and-down" sx={{
+                height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
+                  md: "block",
+                  sm: "none",
+                  xs: "none"
+                }
               }}>
-                <AdSense width="500px" height="250px" />
+                <Box sx={{
+
+                }}>
+                  <AdSense width="500px" height="250px" />
+                </Box>
               </Box>
-            </Box>
+            </BrowserView>
             <Box sx={{
               display: {
                 md: "none",
@@ -409,7 +416,7 @@ function Leason(props) {
                 sm: "54px",
                 xs: "54px"
               },
-              left:{
+              left: {
                 md: "",
                 sm: "0",
                 xs: "0"
@@ -464,27 +471,27 @@ function Leason(props) {
       <InnerBox
         sx={progress === 3
           ? {
-          padding: {
-            md: "10px 25px",
-            sm: "20px 25px",
-            xs: "20px 25px"
-          },
-          position: {
-            md: "fixed",
-            sm: "fixed",
-            xs: "fixed"
-          },
-          bottom: {
-            md: "0",
-            sm: "0",
-            xs: "0"
-          },
-          width: {
-            md: "100%",
-            sm: "-webkit-fill-available",
-            xs: "-webkit-fill-available"
-          },
-            alignItems : "center",
+            padding: {
+              md: "10px 25px",
+              sm: "20px 25px",
+              xs: "20px 25px"
+            },
+            position: {
+              md: "fixed",
+              sm: "fixed",
+              xs: "fixed"
+            },
+            bottom: {
+              md: "0",
+              sm: "0",
+              xs: "0"
+            },
+            width: {
+              md: "100%",
+              sm: "-webkit-fill-available",
+              xs: "-webkit-fill-available"
+            },
+            alignItems: "center",
 
             background: "rgba(232, 215, 124, 1)",
           } : progress === 2 ? {
@@ -533,19 +540,20 @@ function Leason(props) {
             },
             alignItems: "center",
             background: "rgba(255, 179, 209, 1)",
-}}
+          }}
         // ref={boxRef}
         // onMouseDown={handleMouseDown}
         // onTouchStart={handleTouchStart}
-        style={swipingDirection == "Swiping up" ? {height: "115px",
-                transition: "all 0.1s ease-in-out",
-                // borderTopLeftRadius: "50%",
-                // borderTop: "14px solid rgb(255, 179, 209)",
-                // borderTopRightRadius: "50%"
+        style={swipingDirection == "Swiping up" ? {
+          height: "115px",
+          transition: "all 0.1s ease-in-out",
+          // borderTopLeftRadius: "50%",
+          // borderTop: "14px solid rgb(255, 179, 209)",
+          // borderTopRightRadius: "50%"
         } : swipingDirection == "Swiping down" ? {
           height: "35px",
           transition: "all 0.1s ease-in-out",
-}:{}
+        } : {}
         }
       >
         {isMobileChild &&
@@ -570,7 +578,7 @@ function Leason(props) {
               </Box>
             </Box>
           </Box>}
-        <Container style={{padding:"0"}}>
+        <Container style={{ padding: "0" }}>
           <Grid container>
             <Grid item xs={12} sm={12} md={8} sx={{ alignItems: "center", display: "grid" }}>
               <Box>
@@ -603,7 +611,7 @@ function Leason(props) {
                       position: 'fixed',
                       cursor: 'pointer',
                       top: "125px",
-                      left:"0"
+                      left: "0"
                     }}
                   >
                     <Box
@@ -631,7 +639,7 @@ function Leason(props) {
                 gap: "8px",
               }}>
                 <IoChevronBackCircle
-                  onClick={() => { decreaseProgress(); swipeUp()}}
+                  onClick={() => { decreaseProgress(); swipeUp() }}
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
