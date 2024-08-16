@@ -231,6 +231,9 @@ function Home() {
         </Box>
         <FeedBack />
       </SectionFeedBack>
+      <div className="adsence-block" style={{ width: "80%", margin: '100px auto' }}>
+        <AdSense className="adsence-block" />
+      </div>
       <section id="cocoapp">
         <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" }, top: "34px" }}>
           <img

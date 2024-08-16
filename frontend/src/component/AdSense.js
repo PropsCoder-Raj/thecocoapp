@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const AdSense = (props) => {
-    const { className } = props;
+    const { className, width, height } = props;
     useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
@@ -19,10 +19,24 @@ const AdSense = (props) => {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
     }, []);
 
+    // Conditionally set styles based on props
+    const adStyle = {
+        display: 'block',
+        width: width || 'auto',  // default to 'auto' if no width is provided
+        height: height || 'auto', // default to 'auto' if no height is provided
+    };
+
+    // Conditionally set styles based on props
+    const adContentStyle = {
+        display: 'relative',
+        width: width || 'auto',  // default to 'auto' if no width is provided
+        height: height || 'auto', // default to 'auto' if no height is provided
+    };
+
     return (
-        <div className={`${className}`}>
+        <div className={`${className}`} style={(width && height) && adContentStyle}>
             <ins className="adsbygoogle"
-                style={{ display: 'block' }}
+                style={adStyle}
                 data-ad-client="ca-pub-8429136628825533"
                 data-ad-slot="6987607102"
                 data-ad-format="auto"

@@ -17,6 +17,7 @@ import { useSwipeable } from "react-swipeable";
 import { UserContext } from "src/context/User";
 import html2canvas from 'html2canvas';
 import useSound from "use-sound";
+import AdSense from "src/component/AdSense";
 
 const bottomToTop = keyframes`
   0% {
@@ -381,8 +382,7 @@ function Leason(props) {
             }}} >
             
             <Box sx={{
-              background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
-
+              height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
                 md: "block",
                 sm: "none",
                 xs: "none"
@@ -390,11 +390,9 @@ function Leason(props) {
               <Box sx={{
                
               }}>
-                <AddImg alt="" src="images/add.png" />
+                <AdSense width="300px" height="250px" />
               </Box>
-             
             </Box>
-           
             <Box sx={{
               display: {
                 md: "none",
