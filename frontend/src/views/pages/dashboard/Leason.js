@@ -390,7 +390,7 @@ function Leason(props) {
               <Box sx={{
                
               }}>
-                <AdSense width="300px" height="250px" />
+                <AdSense width="500px" height="250px" />
               </Box>
             </Box>
             <Box sx={{
