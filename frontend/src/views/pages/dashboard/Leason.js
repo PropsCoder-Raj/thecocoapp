@@ -18,7 +18,7 @@ import { UserContext } from "src/context/User";
 import html2canvas from 'html2canvas';
 import useSound from "use-sound";
 import AdSense from "src/component/AdSense";
-import { BrowserView, MobileView } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 
 const bottomToTop = keyframes`
@@ -385,7 +385,7 @@ function Leason(props) {
               md: "32px"
             }
           }} >
-            <BrowserView>
+            {!isMobile && 
               <Box className="show-on-medium-and-up hide-on-med-and-down" sx={{
                 height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid #E5E5E5", display: {
                   md: "block",
@@ -399,7 +399,7 @@ function Leason(props) {
                   <AdSense width="500px" height="250px" />
                 </Box>
               </Box>
-            </BrowserView>
+            }
             <Box sx={{
               display: {
                 md: "none",
