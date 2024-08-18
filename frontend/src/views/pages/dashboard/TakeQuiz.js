@@ -161,7 +161,7 @@ function TakeQuiz() {
               size={"30px"}
             />
           </Box>
-          <AdSense className="adsence-block" width="100%" height="100vh" />
+          <AdSense className="adsence-block" width="100%" height="1300px" />
         </Box>
       }
     </MainBox>
