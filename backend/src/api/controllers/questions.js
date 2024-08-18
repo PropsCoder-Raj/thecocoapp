@@ -5,6 +5,9 @@ const { findAllChildren, insertChild, findChildCount, findChild, updateChild } =
 const { schoolServices } = require("../service/schools")
 const { findSchool } = schoolServices;
 
+const { moduleServices } = require("../service/modules")
+const { findAllModules } = moduleServices;
+
 const { levelServices } = require('../service/levels');
 const { findAllLevels, findLevel } = levelServices;
 
@@ -78,7 +81,8 @@ exports.attemptQuestions = async (req, res, next) => {
         let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0, isPointsAccessible = false;
 
         const question = await findQuestion({ _id: question_id, module_id, level_id });
-        const levelDetails = await findLevel({ _id: level_id });
+        const levelsList = await findAllLevels({ module_id });
+        const levelDetails = levelsList.find((level) => level._id.toString() == level_id.toString());
 
         if(req.user.currentChildActive){
             const child = await findChild({ _id: req.user.currentChildActive });
@@ -202,10 +206,21 @@ exports.attemptQuestions = async (req, res, next) => {
             await updateCompletedLevel({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id },
                 { $set: { module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true } });
 
-            if(levelDetails.level_id == 6){
+            if(levelDetails.level_id == levelsList.length){
                 await updateCompletedModule({ module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id }, {
                     $set: { module_id: module_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true }
-                })
+                });
+
+                const modulesList = await findAllModules();
+                const currentModule = modulesList.find((module) => module._id.toString() == module_id.toString());
+                const moduleCount = modulesList.filter((module) => module.standard_id.toString() == currentModule.standard_id.toString()).length;
+
+                if(currentModule.module_id == moduleCount){
+                    const child = await findChild({ _id: req.user.currentChildActive });
+                    if(child){
+                        await updateChild({ _id: req.user.currentChildActive }, { $set: { standard: (Number(child.standard) + 1).toString() } });
+                    }
+                }
             }
         }else if(nextScreen == "SCORE_BOARD" && demo == true){
             await deleteManyCompletedQuestion({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id, isDummy: demo });
