@@ -161,16 +161,7 @@ function TakeQuiz() {
               size={"30px"}
             />
           </Box>
-          <Box sx={{ height: "100vh" }}>
-            <Box sx={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              <AdSense className="adsence-block" />
-            </Box>
-          </Box>
+          <AdSense className="adsence-block" sx={{ height: "100vh" }} />
         </Box>
       }
     </MainBox>
