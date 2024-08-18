@@ -21,5 +21,9 @@ router.get('/get-lessons/:level_id/:module_id', verifyToken, controller.getLesso
 // Define a route handler for GET requests to the '/get-questions' endpoint
 router.get('/get-questions/:level_id/:module_id', verifyToken, controller.getQuestions);
 
+
+// Define a route handler for GET requests to the '/get-lessons-single' endpoint
+router.get('/get-lessons-single', controller.getLessonsSingle);
+
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

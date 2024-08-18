@@ -257,17 +257,7 @@ exports.getAllModules = async (req, res, next) => {
 exports.getLessons = async (req, res, next) => {
     try {
         const { level_id, module_id } = req.params;
-        const child = await findChild({ _id: req.user.currentChildActive });
-        // const standard = await findStandard({ standard_id: child.standard })
         const lessonsLists = await findAllLessons({ level_id: level_id, module_id: module_id });
-
-        const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
-        let listQuuestions = await findAllQuestions({ module_id, level_id });
-        listQuuestions = listQuuestions.map((question) => {
-            const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
-            return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
-        });
-
         return res.status(200).send({
             status: true,
             message: "Get Leesons Data Successfully.",
@@ -349,6 +339,51 @@ exports.getQuestions = async (req, res, next) => {
             status: true,
             message: "Get Questions Data Successfully.",
             result: { attamptedQuestions, currentQuestion, currentPage, quesitons: questionsLists }
+        });
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+
+
+/**
+* @swagger
+* /dashboard/get-lessons-single:
+*   get:
+*     summary: Get lessons
+*     tags:
+*       - Dashboard
+*     description: Get lessons
+*     produces:
+*       - application/json'
+*     parameters:
+*       - in: query
+*         name: level_id
+*         description: Level Doc Id
+*         type: string
+*       - in: query
+*         name: _id
+*         description: lesssons Doc Id
+*         type: string
+*     responses:
+*       '200':  
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.getLessonsSingle = async (req, res, next) => {
+    try {
+        const { level_id, _id } = req.query;
+        if(!level_id || !_id){
+            return res.status(400).send({ status: false, message: "Please provide level_id or _id" });
+        }
+        const lessonsLists = await findAllLessons(req.query);
+        return res.status(200).send({
+            status: true,
+            message: "Get Leesons Data Successfully.",
+            result: lessonsLists,
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
