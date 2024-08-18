@@ -150,7 +150,7 @@ function TakeQuiz() {
         </Container>
       </InnerBox>
       {isMobile && closeAdd &&
-        <div sx={{ position: "fixed", top: "0", width: "100%", height: "100vh !important", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
+        <div style={{ position: "fixed", top: "0", width: "100%", height: "100vh !important", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
           <Box sx={{ padding: "20px", display: "flex", justifyContent: "end" }}>
             <IoMdClose
               color="#000"
