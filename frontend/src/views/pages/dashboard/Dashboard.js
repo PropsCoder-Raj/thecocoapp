@@ -521,6 +521,7 @@ function Dashboard() {
       const isCenterBox = index % 3 === 0;
       const isSixItems = levelValue.length === 6;
       const isFirstBox = index === 0;
+      const logvalue = level.current_status ? level : ""
       let justifyContent = "center";
 
       if (index === 0 || (isSixItems && isCenterBox)) {
@@ -541,16 +542,28 @@ function Dashboard() {
           sx={style.GridManrgin}
         >
           {level.current_status && (
+           
             <Box
               ref={(el) => (elementsRef.current[removeOrdinalSuffixes(Name)] = el)}
               sx={style.customBorder}
               onClick={() => {
-                navigate("/leason", {
+                if (level?.currentQuestionDetails){
+                  navigate("/questions", {
+                    state: {
+                      module_id: level.module_id,
+                      level_id: level._id,
+                      nextQuestionNo: level?.currentQuestionDetails?.nextQuestionNo
+                    },
+                  });
+                }else{
+                    navigate("/leason", {
                   state: {
                     module_id: level.module_id,
                     level_id: level._id,
                   },
                 });
+                }
+              
               }}
             >
               <Typography sx={style.textCss}>START</Typography>
@@ -965,14 +978,12 @@ function Dashboard() {
   );
 
   const getOrdinalSuffix = (number) => {
-    console.log("currentLevel: ", number);
     const suffixes = ["th", "st", "nd", "rd"];
     const value = number % 100;
     return number + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
   }
 
   const removeOrdinalSuffixes = (value) => {
-    console.log(value.replace(/(\d+)(st|nd|rd|th)/g, '$1'));
     return value.replace(/(\d+)(st|nd|rd|th)/g, '$1');
   }
   const gridRef = useRef(null);
@@ -981,7 +992,6 @@ function Dashboard() {
     const handleScroll = () => {
       if (gridRef.current) {
         const scrollTop = gridRef.current.scrollTop;
-        console.log(`Scrolled down: ${scrollTop}px`);
       }
     };
 

@@ -28,12 +28,12 @@ const [callApi, setCallApi] =useState(false);
         sessionStorage.clear();
         navigate("/login")
       }
-      console.log(error.response.status, "error");
+      console.log(error, "error");
       
     }
   };
   useEffect(() => {
-    if (window.localStorage.getItem("token") && window.location.pathname !== "/") {
+    if (window.localStorage.getItem("token") && window.location.pathname !== "/" && window.location.pathname !== "/leason-share") {
       getViewMyProfile();
     }
   }, [window.location.pathname]);

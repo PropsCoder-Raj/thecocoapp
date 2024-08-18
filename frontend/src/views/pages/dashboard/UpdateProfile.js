@@ -386,8 +386,6 @@ function UpdateProfile() {
                                             ? values.profilePic
                                             : defaultPic;
 
-                                        console.log('Default Pic:', defaultPic);
-                                        console.log('Profile Picture:', profilePicture);
                                         return (
                                             <Box 
                                                 style={values.activeStatus ? {

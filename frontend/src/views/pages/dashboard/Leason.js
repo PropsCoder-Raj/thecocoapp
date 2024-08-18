@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Box, Container, Grid, LinearProgress, Typography, keyframes, styled, useMediaQuery } from "@mui/material";
+import { Box, Container, Dialog, DialogActions, DialogContent, Grid, LinearProgress, Typography, keyframes, styled, useMediaQuery } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { IoVolumeMediumOutline } from "react-icons/io5";
 import { GoShareAndroid } from "react-icons/go";
@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { FaAngleDoubleUp } from "react-icons/fa";
+import { FaAngleDoubleUp, FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useTheme } from "@emotion/react";
 import { useSwipeable } from "react-swipeable";
@@ -19,7 +19,9 @@ import html2canvas from 'html2canvas';
 import useSound from "use-sound";
 import AdSense from "src/component/AdSense";
 import { isMobile } from 'react-device-detect';
-
+import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { Button } from "react-scroll";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const bottomToTop = keyframes`
   0% {
@@ -88,6 +90,112 @@ const style = {
     justifyContent: "end",
     gap: "8px",
   },
+  lightDailogOpen: {
+    "& .MuiDialog-paperWidthSm": {
+      width: "100%",
+      maxWidth: "fit-content",
+      padding: "20px",
+      borderRadius: "20px",
+      background: "#FFF",
+      boxShadow: "3px 4px 9px 0px rgba(0, 0, 0, 0.25)",
+      // [theme.breakpoints.down('md')]: {
+      //   padding: "30px",
+      // },
+      // [theme.breakpoints.down('sm')]: {
+      //   padding: "5px",
+      // },
+    },
+  "& .facebook": {
+    background: "#0088cc",
+    width: "100%",
+    height: "48px",
+      border: "none",
+    borderRadius: "30px",
+    fontFamily: "Open Sans",
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: "16px",
+    lineHeight: "24px",
+    textTransform: "none",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    "&:hover": {
+      background: "#0088cc",
+    },
+  },
+   "& .twitter": {
+    background: "#0DCAF0",
+    width: "100%",
+     border: "none",
+    height: "48px",
+    borderRadius: "30px",
+    fontStyle: "normal",
+    fontWeight: "400",
+    textTransform: "none",
+    fontSize: "16px",
+    lineHeight: "24px",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    "&:hover": {
+      background: "#00d2fc",
+    },
+  },
+   "& .google": {
+    background:
+      "linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)",
+    width: "100%",
+    height: "48px",
+    borderRadius: "30px",
+    fontStyle: "normal",
+    textTransform: "none",
+    fontWeight: "400",
+    fontSize: "16px",
+    lineHeight: "24px",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    border:"none"
+  },
+   "& .whatsapp": {
+    background: "#4AEB67",
+    width: "100%",
+     border: "none",
+    height: "48px",
+    borderRadius: "30px",
+    fontStyle: "normal",
+    textTransform: "none",
+    fontWeight: "400",
+    fontSize: "16px",
+    lineHeight: "24px",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+  },
+   "& .emailButton": {
+    background: "#0F91F2",
+    width: "100%",
+    height: "48px",
+     border: "none",
+    borderRadius: "30px",
+    fontStyle: "normal",
+    fontWeight: "400",
+    textTransform: "none",
+    fontSize: "16px",
+    lineHeight: "24px",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    "&:hover": {
+      background: "#0F91F2",
+    },
+  },}
 };
 const MainBox = styled(Box)(({ theme }) => ({
   padding: "54px 0px 0 0px",
@@ -144,13 +252,14 @@ function Leason(props) {
   const isMobileChild = useMediaQuery(theme.breakpoints.down('md'));
   const [progress, setProgress] = useState(1);
   const location = useLocation();
+
   const [leasonData, setLeasonData] = useState([]);
   const [max, setMax] = useState(leasonData.length);
   const [animationTrigger, setAnimationTrigger] = useState(false);
   const [swipeUp] = useSound('sound/swoosh-sound-effects.mp3');
   useEffect(() => {
     getleasonData();
-  }, [])
+  }, [location?.state?.level_id])
   const getleasonData = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -226,12 +335,11 @@ function Leason(props) {
   };
   const [swipedUp, setSwipedUp] = useState(false);
   const [swipingDirection, setSwipingDirection] = useState('');
-
+  const [isLogout, setIsLogout] = useState(false);
   const handleSwipedUp = () => {
     stopSpeak();
     setSwipedUp(true);
     setSwipingDirection('up');
-    console.log("Swiped Up");
     increaseProgress();
     swipeUp();
     if (progress === max) {
@@ -248,7 +356,6 @@ function Leason(props) {
     stopSpeak();
     setSwipedUp(false);
     setSwipingDirection('down');
-    console.log("Swiped Down");
     decreaseProgress();
     swipeUp();
   };
@@ -257,7 +364,7 @@ function Leason(props) {
     const { dir } = e;
     if (dir === 'Up' || dir === 'Down') {
       setSwipingDirection(`Swiping ${dir.toLowerCase()}`);
-      console.log(`Swiping ${dir.toLowerCase()}`);
+
     }
   };
 
@@ -289,26 +396,14 @@ function Leason(props) {
     };
   }, []);
 
+  function shareOnInstagram(code) {
+    const instagramURL = "https://www.instagram.com/";
+    const shareURL = `${instagramURL}create`;
+    window.open(shareURL, "_blank");
+  }
 
-  const captureAndShare = async () => {
-    const element = document.getElementById('capture-area'); // The area you want to capture
-    const canvas = await html2canvas(element);
-    const dataUrl = canvas.toDataURL('image/png');
 
-    if (navigator.canShare && navigator.canShare({ files: [new File([dataUrl], 'screenshot.png', { type: 'image/png' })] })) {
-      const blob = await fetch(dataUrl).then(res => res.blob());
-      const file = new File([blob], 'screenshot.png', { type: 'image/png' });
-
-      navigator.share({
-        files: [file],
-        title: 'Check out Cocoapp!',
-        text: `Helping children to make smart money choices!\nStart them young! Cocoapp equips children with the financial knowledge they need to make smart choices.\n\nFor more information, visit https://thecocoapp.web.app/`,
-        url: 'https://thecocoapp.web.app/',
-      }).catch(error => console.log('Sharing failed', error));
-    } else {
-      console.log('Sharing not supported');
-    }
-  };
+  
   return (
 
     <MainBox
@@ -344,6 +439,11 @@ function Leason(props) {
                     }}
                     cursor={"pointer"}
                   />
+                  <Box
+                    sx={{ display: "flex", gap: "16px", alignItems: "center" }}
+                  >
+                    <GoShareAndroid cursor={"pointer"} color="rgba(0, 0, 0, 1)" onClick={() => { setIsLogout(true)}} />
+                  </Box> 
                 </Box>
                 <Box sx={{}}>
                   <Typography variant="h1"
@@ -675,6 +775,81 @@ function Leason(props) {
           </Grid>
         </Container>
       </InnerBox>
+      {isLogout && (
+        <Dialog
+          maxWidth="sm"
+          fullWidth
+          sx={style.lightDailogOpen
+
+          }
+          open={isLogout}
+          onClose={() => setIsLogout(false)}
+        >
+          <DialogContent>
+            <Box sx={style.dialougTitle} align="center">
+              <Typography
+                variant="h3"
+              >
+                Share this link on social media:
+              </Typography>
+            
+            </Box>
+          </DialogContent>
+          <DialogActions
+            style={{
+              display: "block",
+            }}
+          >
+            <Box
+              mt={2}
+              sx={{display:"flex", gap:"8px", justifyContent:"space-between"}}
+            >
+              <Button className="whatsapp"
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+              <WhatsappShareButton
+                  url={`https://thecocoapp.com/shared-leason?level_id=${leasonData[progress - 1]?.level_id}&id=${leasonData[progress - 1]?._id}&number=${progress}`}
+                  style={{ display: 'flex', alignItems: 'center' }}
+                  description={"Check this out"}
+              >
+                  <FaWhatsapp />
+                  &nbsp;<Typography variant="body2" >Whatsapp</Typography>  
+              </WhatsappShareButton>
+              </Button>
+              {/* <Button
+                className="google"
+                onClick={() => shareOnInstagram(props.code)}
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <FaInstagram style={{ width: '25px', height: '25px' }} />
+                &nbsp; Instagram
+              </Button> */}
+              <Button className="emailButton"
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <FacebookShareButton
+                  url={`https://thecocoapp.com/shared-leason?level_id=${leasonData[progress - 1]?.level_id}&id=${leasonData[progress - 1]?._id}&number=${progress}`}
+                  style={{ display: 'flex', alignItems: 'center' }}
+                  description={"Check this out"}
+                >
+                  <FaFacebookF style={{ width: '25px', height: '25px' }} />
+                  &nbsp;<Typography variant="body2" >Facebook</Typography> 
+                </FacebookShareButton>
+              </Button>
+              
+               <CopyToClipboard
+                text={`https://thecocoapp.com/shared-leason?level_id=${leasonData[progress - 1]?.level_id}&id=${leasonData[progress - 1]?._id}&number=${progress}`}
+                onCopy={() => toast.success("Link copied to clipboard!")}
+              ><Button className="google">
+               
+                  {" Copy Link"}
+               
+              </Button> 
+              </CopyToClipboard>
+            </Box>
+          </DialogActions>
+        </Dialog>
+      )}
     </MainBox>
 
 

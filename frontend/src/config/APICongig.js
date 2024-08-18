@@ -34,6 +34,7 @@ const ApiConfig = {
   allModules : `${url}dashboard/get-all-modules`,
   //leason
   getLeason: `${url}dashboard/get-lessons`,
+  getSharedLeason: `${url}dashboard/get-lessons-single`,
   //questions
   getQuestions: `${url}dashboard/get-questions`,
   attemptQuestions: `${url}questions/attempt-questions`,

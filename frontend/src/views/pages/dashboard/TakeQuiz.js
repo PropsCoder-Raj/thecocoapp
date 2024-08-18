@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -6,9 +6,12 @@ import {
   Grid,
   styled,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack, IoMdClose } from "react-icons/io";
+import AdSense from "src/component/AdSense";
+import { useTheme } from "@emotion/react";
 
 const style = {
   flexBox: {
@@ -69,6 +72,10 @@ const TakeImg = styled("img")(({ theme }) => ({
 function TakeQuiz() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [ closeAdd, setCloseAdd]= useState(true);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <MainBox>
       <Container maxWidth="lg">
@@ -120,6 +127,7 @@ function TakeQuiz() {
                     state: {
                       module_id: location?.state?.level_id,
                       level_id: location?.state?.module_id,
+                      nextQuestionNo:1,
                     },
                   });
                 }}
@@ -138,6 +146,21 @@ function TakeQuiz() {
           </Grid>
         </Container>
       </InnerBox>
+      {isMobile && closeAdd &&
+        <Box sx={{ position: "fixed", top: "0", width: "100%", height: "100vh", zIndex: "1", background:"rgb(255, 255, 255, 0.75)" }}>
+        <Box sx={{padding:"20px", display:"flex", justifyContent:"end"}}>
+          <IoMdClose
+              color="#000"
+            onClick={() => {
+              setCloseAdd(false)
+            }}
+            cursor={"pointer"}
+            size={"30px"}
+          />
+        </Box>
+        <AdSense className="adsence-block" />
+        </Box>
+        }
     </MainBox>
   );
 }

@@ -148,14 +148,22 @@ function QuetionsScreen() {
   const [susscessQuestions, setSusscessQuestions] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
+  useEffect(() => {
+    if (location?.state?.nextQuestionNo) {
+      setProgress(location?.state?.nextQuestionNo);
+      setSusscessQuestions(location?.state?.nextQuestionNo)
+    } else {
+      setProgress(1)
+      setSusscessQuestions(1)
+    }
+
+  }, [location?.state?.nextQuestionNo])
   const [correct] = useSound('sound/correct-answer-sound-effect-19.mp3');
   const [wrong] = useSound('sound/wrong_SriFgVc.mp3');
   const [quetionsData, setQuetionsData] = useState([]);
-  const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  console.log(quetionsData, "quetionsData");
   const [max, setMax] = useState(quetionsData.length);
   useEffect(() => {
     getQuetionsData();
@@ -172,6 +180,7 @@ function QuetionsScreen() {
         //   module_id: location?.state?.module_id
         // }
       });
+      
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
         setMax(res.data.result.quesitons.length)

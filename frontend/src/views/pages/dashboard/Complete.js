@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -11,6 +11,8 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import useSound from "use-sound";
+import AdSense from "src/component/AdSense";
+import { IoMdClose } from "react-icons/io";
 
 const style = {
     flexBox: {
@@ -72,10 +74,9 @@ const MainBox = styled(Box)(({ theme }) => ({
     // alignContent: "space-around",
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
-    padding: "45px",
     borderTop: "1px solid #E5E5E5",
-    "@media(max-width:767px)": { padding: "30px" },
-    background: "rgba(255, 253, 243, 1)"
+    display:"flex",
+    justifyContent:"center"
 }));
 
 const TakeImg = styled("img")(({ theme }) => ({
@@ -100,12 +101,13 @@ function Complete() {
     const navigate = useNavigate();
     const location = useLocation();
     const theme = useTheme();
+    const [closeAdd, setCloseAdd] = useState(true);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [winner, { stop, play }] = useSound('images/winners_W9Cpenj.mp3', { preload: true });
-    useEffect(()=>{
-        winner()  
+    // useEffect(()=>{
+    //     winner()  
        
-    }, [])
+    // }, [])
     return (
         <MainBox style={{position:"relative", height:"100vh"}}>
             <Container maxWidth="lg">
@@ -176,18 +178,27 @@ function Complete() {
                         
                         </Box>
             </Box></Container>
+                {!isMobile &&
             <InnerBox>
+                    <AdSense height="90px" />
                
-                <Container>
-                    <Grid spacing={4}>
-                        <Grid item xs={12}>
-                            <Box sx={style.buttonHandle}>
-
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </InnerBox></Box>
+            </InnerBox>}</Box>
+            {isMobile && closeAdd &&
+                <Box sx={{ position: "fixed", top: "0", width: "100%", height: "100vh", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
+                    <Box sx={{ padding: "20px", display: "flex", justifyContent: "end" }}>
+                        <IoMdClose
+                            color="#000"
+                            onClick={() => {
+                                setCloseAdd(false);
+                                winner()
+                            }}
+                            cursor={"pointer"}
+                            size={"30px"}
+                        />
+                    </Box>
+                    <AdSense className="adsence-block" />
+                </Box>
+            }
         </MainBox>
     );
 }

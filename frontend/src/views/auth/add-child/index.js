@@ -97,8 +97,6 @@ function AddChild(props) {
                 params: { school_id :value }
             });
             if (res.status === 200) {
-                // setcheckId(res.data.data);
-                console.log(res.data.data, "reslut");
                 setcheckId(res.data.data)
             }
         } catch (error) {

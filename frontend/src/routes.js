@@ -62,6 +62,13 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/shared-leason",
+    // layout: DashboardLayout,
+    guard: false,
+    component: lazy(() => import("src/views/pages/home/ShareLeason")),
+  },
+  {
+    exact: true,
     path: "/take-quiz",
     // layout: DashboardLayout,
     guard: true,
