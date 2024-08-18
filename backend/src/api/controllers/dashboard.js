@@ -90,6 +90,31 @@ exports.getAllModules = async (req, res, next) => {
             });
         }
 
+        // Get the current month and year
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1; // Months are zero-based
+        const currentYear = currentDate.getFullYear();
+
+        // Determine the date source (either child or user)
+        const dateSource = req.user.currentChildActive
+        ? await findChild({ _id: req.user.currentChildActive }).then(child => child.createdAt)
+        : req.user.createdAt;
+
+        // Create a Date object from the determined source
+        const userDate = new Date(dateSource);
+
+        // Extract month and year from the userDate
+        const userMonth = userDate.getMonth() + 1;
+        const userYear = userDate.getFullYear();
+
+        const isFirstSemester = 
+        (userMonth >= 1 && currentMonth > 5) || 
+        (userYear < currentYear);
+
+        const isSecondSemester = 
+        (userMonth >= 6 && currentMonth > 10) || 
+        (userYear < currentYear);
+
         // Fetch all levels and lessons
         const levelsLists = await findAllLevels();
         const lessonsLists = await findAllLessons();
@@ -188,11 +213,12 @@ exports.getAllModules = async (req, res, next) => {
         let currentModule = "", currentLevel = "", currentStandard = "", isStandard = true;
         for (let indexi = 0; indexi < processedModules.length; indexi++) {
             const elementi = processedModules[indexi];
+
             for (let indexj = 0; indexj < elementi.modules.length; indexj++) {
                 const modules = elementi.modules[indexj];
                 if(modules.module_number != undefined){
                     isStandard = false;
-                }
+                }    
                 for (let indexk = 0; indexk < modules.levels.length; indexk++) {
                     const levels = modules.levels[indexk];
                     if(levels.current_status == true){
@@ -202,6 +228,37 @@ exports.getAllModules = async (req, res, next) => {
                         currentLevel = levels.level_id;
                     }
                 }
+            }
+        }
+
+        if(!isFirstSemester){
+            const currentUserModule = processedModules.find((current) => current.standard_id == currentStandard);
+            // Safely access `modules` array from `elementi`, default to an empty array if `elementi` or `modules` is undefined
+            const modules = currentUserModule?.modules ?? [];
+            
+            // Calculate the index for the middle of the array
+            const startIndex = 0;
+            
+            // Check if the module at `startIndex` exists and has `levels` with at least one element
+            if (modules[startIndex]?.levels?.length > 0) {
+                // Set the `current_status` of the first level to `false`
+                modules[startIndex].levels[0].current_status = false;
+            }
+        }
+
+        // Check if it is not the second semester
+        if (!isSecondSemester) {
+            const currentUserModule = processedModules.find((current) => current.standard_id == currentStandard);
+            // Safely access `modules` array from `elementi`, default to an empty array if `elementi` or `modules` is undefined
+            const modules = currentUserModule?.modules ?? [];
+            
+            // Calculate the index for the middle of the array
+            const halfIndex = Math.floor(modules.length / 2);
+            
+            // Check if the module at `halfIndex` exists and has `levels` with at least one element
+            if (modules[halfIndex]?.levels?.length > 0) {
+                // Set the `current_status` of the first level to `false`
+                modules[halfIndex].levels[0].current_status = false;
             }
         }
 
