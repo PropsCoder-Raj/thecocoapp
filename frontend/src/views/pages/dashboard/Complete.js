@@ -183,7 +183,7 @@ function Complete() {
                     <AdSense height="90px" />
                
             </InnerBox>}</Box>
-            {isMobile && closeAdd &&
+            {/* {isMobile && closeAdd &&
                 <Box sx={{ position: "fixed", top: "0", width: "100%", height: "100vh", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
                     <Box sx={{ padding: "20px", display: "flex", justifyContent: "end" }}>
                         <IoMdClose
@@ -198,7 +198,7 @@ function Complete() {
                     </Box>
                     <AdSense className="adsence-block" />
                 </Box>
-            }
+            } */}
         </MainBox>
     );
 }
