@@ -430,7 +430,7 @@ function Leason(props) {
           }}>
             <Box sx={style.CombineBox}>
               <Box sx={style.gridBox}>
-                {/* <Box sx={style.flexBox}>
+                <Box sx={style.flexBox}>
                   <IoMdClose
                     color="rgba(0, 0, 0, 1)"
                     onClick={() => {
@@ -439,12 +439,12 @@ function Leason(props) {
                     }}
                     cursor={"pointer"}
                   />
-                  <Box
+                  {/* <Box
                     sx={{ display: "flex", gap: "16px", alignItems: "center" }}
                   >
                     <GoShareAndroid cursor={"pointer"} color="rgba(0, 0, 0, 1)" onClick={() => { setIsLogout(true)}} />
-                  </Box> 
-                </Box> */}
+                  </Box>  */}
+                </Box>
                 <Box sx={{}}>
                   <Typography variant="h1"
                   // sx={{textAlign: "justify"}}
