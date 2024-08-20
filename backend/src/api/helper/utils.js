@@ -35,8 +35,14 @@ const sendMailUsingZepto = async (toEmail, subject, htmlBody) => {
 
 // Function to generate JWT token
 exports.generateJWT = async (payload) => {
-    // Generate JWT token with payload and secret key, set expiration time to 24 hours
+    // Generate JWT token with payload and secret key, set expiration time to 90 days
     return await jwt.sign(payload, process.env.jwtsecret, { expiresIn: "90d" })
+}
+
+// Function to generate Admin JWT token
+exports.generateAdminJWT = async (payload) => {
+    // Generate JWT token with payload and secret key, set expiration time to 7 days
+    return await jwt.sign(payload, process.env.jwtsecretadmin, { expiresIn: "7d" })
 }
 
 exports.updateCurrentStatus = (array) => {

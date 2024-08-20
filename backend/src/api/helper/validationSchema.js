@@ -12,6 +12,33 @@ const generateOTPSchema = Joi.object({
         .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required to generate an OTP.' })
 });
 
+// Example schema for validating login admin input
+const loginAdminSchema = Joi.object({
+    email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
+        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
+    password: joiPassword
+        .string()
+        .minOfSpecialCharacters(1)
+        .minOfLowercase(1)
+        .minOfUppercase(1)
+        .minOfNumeric(1)
+        .noWhiteSpaces()
+        .min(8)
+        .messages({
+            "password.minOfUppercase":
+                "password should contain at least {#min} uppercase character",
+            "password.minOfSpecialCharacters":
+                "password should contain at least {#min} special character",
+            "password.minOfLowercase":
+                "password should contain at least {#min} lowercase character",
+            "password.minOfNumeric":
+                "password should contain at least {#min} numeric character",
+            "password.noWhiteSpaces": "password should not contain white spaces",
+            "password.min": "password length must be password",
+        })
+});
+
 // Example schema for validating verify otp input
 const verifyOTPSchema = Joi.object({
     email: Joi.string()
@@ -116,5 +143,6 @@ module.exports = {
     signupWithVerifiedEmailSchema,
     signupWithVerifiedEmailPinSchema,
     loginPinSchema,
-    resetPinSchema
+    resetPinSchema,
+    loginAdminSchema
 };

@@ -69,6 +69,51 @@ async function verifyToken(req, res, next) {
   });
 }
 
+
+
+async function verifyAdminToken(req, res, next) {
+  // Extract the token from the request headers
+  const token = req.headers.token;
+
+  // If token is not provided in the headers
+  if (!token) {
+    return res.status(404).send({ status: false, message: "Admin Token not found." });
+  }
+
+  // Verify the JWT token
+  jwt.verify(token, process.env.jwtsecretadmin, async (err, result) => {
+    // If there's an error in verification
+    if (err) {
+      // If the error is due to token expiration
+      if (err.name == "TokenExpiredError") {
+        return res.status(440).send({
+          responseCode: 440,
+          responseMessage: "Session Expired, Please login again.",
+        });
+      } else {
+        return res.status(401).send({
+          responseCode: 401,
+          responseMessage: "Unauthorized person.",
+        });
+      }
+    } else {
+      // Check if the user exists in the database
+      const isUser = await findUser({ _id: result.id, userType: userTypeEnums.ADMIN });
+      if (!isUser) {
+        return res.status(404).json({
+          responseCode: 404,
+          responseMessage: "Admin not found."
+        })
+      }
+
+      // Attach the user ID to the request object for future use
+      req.userId = result.id;
+      req.user = isUser;
+      next();
+    }
+  });
+}
+
 function validateRequest(schema) {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
@@ -84,5 +129,6 @@ module.exports = {
   notFound,
   errorHandler,
   verifyToken,
-  validateRequest
+  validateRequest,
+  verifyAdminToken
 };

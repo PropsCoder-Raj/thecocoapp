@@ -1,6 +1,8 @@
 const mongoose = require('mongoose'); // Import mongoose
+const bcrypt = require('bcrypt');
 require("dotenv").config()
 
+const User = require('../model/User');
 const School = require('../model/School');
 const Standards = require('../model/Standards');
 const Modules = require('../model/Modules');
@@ -14,9 +16,39 @@ let initialModules = require('../data/modules_new.json');
 let initialLevels = require('../data/levels_new.json');
 let initialLessons = require('../data/lessons_new.json');
 let initialQuestions = require('../data/questions_new.json');
+const userType = require('../enums/userType');
 
 // MongoDB connection URI
 const mongoURI = process.env.mongodb_url;
+
+const admincreateDefaultAdmin = async () => {
+    try {
+        const DEFAULT_ADMIN_EMAIL = process.env.DEFAULT_ADMIN_EMAIL; // Replace with your default admin email
+        const DEFAULT_ADMIN_PASSWORD = process.env.DEFAULT_ADMIN_PASSWORD; // Replace with your default admin password
+
+        // Check if an admin user already exists
+        const existingAdmin = await User.findOne({ userType: userType.ADMIN });
+        if (existingAdmin) {
+            console.log('Admin user already exists.');
+            return;
+        }
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(DEFAULT_ADMIN_PASSWORD, 10);
+
+        // Create a new admin user
+        const newAdmin = new User({
+            name: "Ar. Soham",
+            email: DEFAULT_ADMIN_EMAIL,
+            password: hashedPassword,
+            userType: userType.ADMIN,
+        });
+
+        await newAdmin.save();
+        console.log('Default admin user created successfully.');
+    } catch (error) {
+        console.error('Error creating default admin user:', error);
+    }
+};
 
 const importInitialSchoolData = async () => {
     try {
@@ -60,7 +92,7 @@ const importInitialModules = async () => {
                     };
                 }
             });
-            
+
             await Modules.insertMany(updatedModules);
             console.log('Initial Modules data imported successfully.');
         } else {
@@ -79,7 +111,7 @@ const importInitialLevels = async () => {
             const standardsList = await Standards.find();
             let updatedLevels = initialLevels.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
-                if(standard){
+                if (standard) {
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
                     if (modules) {
                         return {
@@ -112,7 +144,7 @@ const importInitialLessons = async () => {
             const levelsList = await Levels.find();
             let updatedLessons = initialLessons.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
-                if(standard){
+                if (standard) {
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
                     if (modules) {
                         const levels = levelsList.find((levels) => levels.level_id == element.level_id && levels.standard_id.toString() == standard._id.toString() && levels.module_id.toString() == modules._id.toString());
@@ -149,7 +181,7 @@ const importInitialQuestions = async () => {
             const levelsList = await Levels.find();
             let updatedQuestions = initialQuestions.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
-                if(standard){
+                if (standard) {
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
                     if (modules) {
                         const levels = levelsList.find((levels) => levels.level_id == element.level_id && levels.standard_id.toString() == standard._id.toString() && levels.module_id.toString() == modules._id.toString());
@@ -181,6 +213,7 @@ const importInitialQuestions = async () => {
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(async () => {
         console.log('MongoDB connected successfully');
+        await admincreateDefaultAdmin();
         await importInitialSchoolData();
         await importInitialStandards();
         await importInitialModules();
