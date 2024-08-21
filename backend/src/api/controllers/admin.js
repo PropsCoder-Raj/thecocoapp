@@ -112,8 +112,37 @@ exports.dashboardCount = async (req, res, next) => {
 // Fetch all schools with child count using aggregation
 exports.schoolsList = async (req, res, next) => {
     try {
-        // Aggregate schools with child count
+        // Extract query parameters
+        const { page = 1, limit = 10, search = "", fromdate = null, todate = null } = req.query;
+
+        // Convert page and limit to numbers
+        const pageNumber = parseInt(page, 10);
+        const limitNumber = parseInt(limit, 10);
+
+        // Set default values for pagination
+        const skip = (pageNumber - 1) * limitNumber;
+
+        // Build the match stage based on search and date range
+        const matchStage = {};
+        if (search) {
+            matchStage.$or = [
+                { schoolName: { $regex: search, $options: "i" } },
+                { email: { $regex: search, $options: "i" } },
+                { address: { $regex: search, $options: "i" } }
+            ];
+        }
+        if (fromdate && todate) {
+            matchStage.createdAt = {
+                $gte: new Date(fromdate),
+                $lte: new Date(todate)
+            };
+        }
+
+        // Aggregate schools with child count and apply pagination
         const schools = await aggregateSchool([
+            {
+                $match: matchStage
+            },
             {
                 $sort: {
                     createdAt: -1
@@ -137,28 +166,75 @@ exports.schoolsList = async (req, res, next) => {
                     logo: 1,
                     childrenCount: { $size: "$children" }
                 }
+            },
+            {
+                $facet: {
+                    data: [
+                        { $skip: skip },
+                        { $limit: limitNumber }
+                    ],
+                    totalCount: [
+                        { $count: "total" }
+                    ]
+                }
             }
         ]);
 
-        // Send a 200 response with the schools list
-        return res.status(200).send({ status: true, message: "Schools fetched successfully.", data: schools });
+        // Calculate total pages
+        const totalCount = schools[0].totalCount.length > 0 ? schools[0].totalCount[0].total : 0;
+        const totalPages = Math.ceil(totalCount / limitNumber);
+
+        // Send a 200 response with the schools list and pagination info
+        return res.status(200).send({
+            status: true,
+            message: "Schools fetched successfully.",
+            data: schools[0].data,
+            totalPages: totalPages,
+            limit: limitNumber,
+            page: pageNumber
+        });
     } catch (error) {
         // Handle any errors that occur during the schools retrieval process
         return res.status(500).send({ status: false, message: error.message });
     }
-}
+};
 
-// Fetch all childs where school id is specified and also child with parent user details gets selected using aggregation
+
+// Fetch all children where school id is specified and also include parent user details using aggregation
 exports.schoolChildrenList = async (req, res, next) => {
     try {
         const { schoolId } = req.query; // Extract schoolId from query parameters
+        const { page = 1, limit = 10, search = "", fromdate = null, todate = null } = req.query; // Extract additional query parameters
 
-        // Aggregate children with parent user details with only username & email
+        // Convert page and limit to numbers
+        const pageNumber = parseInt(page, 10);
+        const limitNumber = parseInt(limit, 10);
+
+        // Set default values for pagination
+        const skip = (pageNumber - 1) * limitNumber;
+
+        // Build the match stage based on search and date range
+        const matchStage = {
+            schoolId: new mongoose.Types.ObjectId(schoolId)
+        };
+
+        if (search) {
+            matchStage.$or = [
+                { childName: { $regex: search, $options: "i" } }
+            ];
+        }
+
+        if (fromdate && todate) {
+            matchStage.dob = {
+                $gte: new Date(fromdate),
+                $lte: new Date(todate)
+            };
+        }
+
+        // Aggregate children with parent user details and apply pagination
         const children = await aggregateChild([
             {
-                $match: {
-                    schoolId: new mongoose.Types.ObjectId(schoolId)
-                }
+                $match: matchStage
             },
             {
                 $lookup: {
@@ -180,13 +256,35 @@ exports.schoolChildrenList = async (req, res, next) => {
                         profilePic: { $arrayElemAt: ["$parent.profilePic", 0] }
                     }
                 }
+            },
+            {
+                $facet: {
+                    data: [
+                        { $skip: skip },
+                        { $limit: limitNumber }
+                    ],
+                    totalCount: [
+                        { $count: "total" }
+                    ]
+                }
             }
         ]);
 
-        // Send a 200 response with the children list
-        return res.status(200).send({ status: true, message: "Children fetched successfully.", data: children });
+        // Calculate total pages
+        const totalCount = children[0].totalCount.length > 0 ? children[0].totalCount[0].total : 0;
+        const totalPages = Math.ceil(totalCount / limitNumber);
+
+        // Send a 200 response with the children list and pagination info
+        return res.status(200).send({
+            status: true,
+            message: "Children fetched successfully.",
+            data: children[0].data,
+            totalPages: totalPages,
+            limit: limitNumber,
+            page: pageNumber
+        });
     } catch (error) {
         // Handle any errors that occur during the children retrieval process
         return res.status(500).send({ status: false, message: error.message });
     }
-}
+};
