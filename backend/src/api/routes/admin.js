@@ -23,6 +23,9 @@ router.get('/dashboard-count', verifyAdminToken, controller.dashboardCount);
 // Define a route handler for GET requests to the '/school-list' endpoint
 router.get('/school-list', verifyAdminToken, controller.schoolsList);
 
+// Define a route handler for GET requests to the '/school-details' endpoint
+router.get('/school-details', verifyAdminToken, controller.getSchoolDetails);
+
 // Define a route handler for GET requests to the '/school-children-list' endpoint
 router.get('/school-children-list', verifyAdminToken, controller.schoolChildrenList);
 

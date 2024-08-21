@@ -199,6 +199,25 @@ exports.schoolsList = async (req, res, next) => {
     }
 };
 
+// Get the details of a school by id
+exports.getSchoolDetails = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Extract school id from request parameters
+
+        // Find the school by id
+        const school = await findSchool(id);
+        if (!school) {
+            // If school not found, send a 400 response with an error message
+            return res.status(400).send({ status: false, message: "School not found." });
+        }
+
+        // Send a 200 response with the school details
+        return res.status(200).send({ status: true, message: "School fetched successfully.", data: school });
+    } catch (error) {
+        // Handle any errors that occur during the school retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
 
 // Fetch all children where school id is specified and also include parent user details using aggregation
 exports.schoolChildrenList = async (req, res, next) => {
