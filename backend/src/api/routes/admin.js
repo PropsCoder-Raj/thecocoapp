@@ -20,5 +20,11 @@ router.post('/login', validateRequest(loginAdminSchema), controller.loginAdmin);
 // Define a route handler for GET requests to the '/dashboard-count' endpoint
 router.get('/dashboard-count', verifyAdminToken, controller.dashboardCount);
 
+// Define a route handler for GET requests to the '/school-list' endpoint
+router.get('/school-list', verifyAdminToken, controller.schoolsList);
+
+// Define a route handler for GET requests to the '/school-children-list' endpoint
+router.get('/school-children-list', verifyAdminToken, controller.schoolChildrenList);
+
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

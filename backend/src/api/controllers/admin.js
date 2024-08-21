@@ -6,7 +6,7 @@ const { userServices } = require("../service/users");
 const { createUser, findUser, updateUser } = userServices;
 
 const { childServices } = require('../service/child');
-const { findAllChildren, insertChild, findChildCount, findChild } = childServices;
+const { findAllChildren, insertChild, findChildCount, findChild, aggregateChild } = childServices;
 
 const { levelServices } = require('../service/levels');
 const { findAllLevels } = levelServices;
@@ -33,7 +33,7 @@ const { currentQuestionsService } = require('../service/currentquestions');
 const { findAllCurrentQuestions } = currentQuestionsService;
 
 const { schoolServices } = require('../service/schools');
-const { findAllSchool, findSchool, updateSchool, createSchool } = schoolServices;
+const { findAllSchool, findSchool, updateSchool, createSchool, aggregateSchool } = schoolServices;
 
 const commonFunction = require("../helper/utils");
 const userTypeEnums = require("../enums/userType");
@@ -105,6 +105,88 @@ exports.dashboardCount = async (req, res, next) => {
         });
     } catch (error) {
         // Handle any errors that occur during the count retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+// Fetch all schools with child count using aggregation
+exports.schoolsList = async (req, res, next) => {
+    try {
+        // Aggregate schools with child count
+        const schools = await aggregateSchool([
+            {
+                $sort: {
+                    createdAt: -1
+                }
+            },
+            {
+                $lookup: {
+                    from: "childrens",
+                    localField: "_id",
+                    foreignField: "schoolId",
+                    as: "children"
+                }
+            },
+            {
+                $project: {
+                    schoolName: 1,
+                    email: 1,
+                    phone: 1,
+                    address: 1,
+                    phoneNumber: 1,
+                    logo: 1,
+                    childrenCount: { $size: "$children" }
+                }
+            }
+        ]);
+
+        // Send a 200 response with the schools list
+        return res.status(200).send({ status: true, message: "Schools fetched successfully.", data: schools });
+    } catch (error) {
+        // Handle any errors that occur during the schools retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+// Fetch all childs where school id is specified and also child with parent user details gets selected using aggregation
+exports.schoolChildrenList = async (req, res, next) => {
+    try {
+        const { schoolId } = req.query; // Extract schoolId from query parameters
+
+        // Aggregate children with parent user details with only username & email
+        const children = await aggregateChild([
+            {
+                $match: {
+                    schoolId: new mongoose.Types.ObjectId(schoolId)
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "parent"
+                }
+            },
+            {
+                $project: {
+                    childName: 1,
+                    gender: 1,
+                    dob: 1,
+                    totalPoints: 1,
+                    parent: {
+                        name: { $arrayElemAt: ["$parent.name", 0] },
+                        email: { $arrayElemAt: ["$parent.email", 0] },
+                        profilePic: { $arrayElemAt: ["$parent.profilePic", 0] }
+                    }
+                }
+            }
+        ]);
+
+        // Send a 200 response with the children list
+        return res.status(200).send({ status: true, message: "Children fetched successfully.", data: children });
+    } catch (error) {
+        // Handle any errors that occur during the children retrieval process
         return res.status(500).send({ status: false, message: error.message });
     }
 }

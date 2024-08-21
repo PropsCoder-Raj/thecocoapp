@@ -22,6 +22,11 @@ const schoolServices = {
     updateSchool: async (query, updateObj) => {
         return await schoolModel.findOneAndUpdate(query, updateObj, { new: true, upsert: true});
     },
+    
+    // Function to aggregate school by pipeline
+    aggregateSchool: async (pipeline) => {
+        return await schoolModel.aggregate(pipeline);
+    }
 }
 
 // Export the school services

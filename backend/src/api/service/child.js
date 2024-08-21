@@ -41,6 +41,10 @@ const childServices = {
     updateManyChild: async (query, updateObj) => {
         return await childModel.updateMany(query, updateObj, { new: true, upsert: true });
     },
+    // Function to aggregate a child based with pipeline
+    aggregateChild: async (pipeline) => {
+        return await childModel.aggregate(pipeline);
+    },
 }
 
 // Export the child services
