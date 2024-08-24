@@ -29,5 +29,12 @@ router.get('/school-details', verifyAdminToken, controller.getSchoolDetails);
 // Define a route handler for GET requests to the '/school-children-list' endpoint
 router.get('/school-children-list', verifyAdminToken, controller.schoolChildrenList);
 
+
+// Define a route handler for GET requests to the '/users-list' endpoint
+router.get('/users-list', verifyAdminToken, controller.usersList);
+
+// Define a route handler for GET requests to the '/user-details' endpoint
+router.get('/user-details', verifyAdminToken, controller.getUserDetails);
+
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

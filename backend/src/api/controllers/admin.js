@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 // Import service functions for user, child, levels, lessons, questions, standards, completed modules, completed levels, completed questions, current questions, and schools.
 const { userServices } = require("../service/users");
-const { createUser, findUser, updateUser } = userServices;
+const { createUser, findUser, updateUser, aggregateUsers } = userServices;
 
 const { childServices } = require('../service/child');
 const { findAllChildren, insertChild, findChildCount, findChild, aggregateChild } = childServices;
@@ -302,6 +302,104 @@ exports.schoolChildrenList = async (req, res, next) => {
             limit: limitNumber,
             page: pageNumber
         });
+    } catch (error) {
+        // Handle any errors that occur during the children retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+
+// Fetch all users from the database with aggregation & pagination
+exports.usersList = async (req, res, next) => {
+    try {
+        const { page = 1, limit = 10, search = "", fromdate = null, todate = null } = req.query; // Extract query parameters
+
+        // Convert page and limit to numbers
+        const pageNumber = parseInt(page, 10);
+        const limitNumber = parseInt(limit, 10);
+
+        // Set default values for pagination
+        const skip = (pageNumber - 1) * limitNumber;
+
+        // Build the match stage based on search and date range
+        const matchStage = {
+            userType: userTypeEnums.USER
+        };
+
+        if (search) {
+            matchStage.$or = [
+                { name: { $regex: search, $options: "i" } },
+                { email: { $regex: search, $options: "i" } }
+            ];
+        }
+
+        if (fromdate && todate) {
+            matchStage.createdAt = {
+                $gte: new Date(fromdate),
+                $lte: new Date(todate)
+            };
+        }
+
+        // Aggregate users and apply pagination
+        const users = await aggregateUsers([
+            {
+                $match: matchStage
+            },
+            {
+                $sort: {
+                    createdAt: -1
+                }
+            },
+            {
+                $facet: {
+                    data: [
+                        { $skip: skip },
+                        { $limit: limitNumber }
+                    ],
+                    totalCount: [
+                        { $count: "total" }
+                    ]
+                }
+            }
+        ]);
+
+        // Calculate total pages
+        const totalCount = users[0].totalCount.length > 0 ? users[0].totalCount[0].total : 0;
+        const totalPages = Math.ceil(totalCount / limitNumber);
+
+        // Send a 200 response with the users list and pagination info
+        return res.status(200).send({
+            status: true,
+            message: "Users fetched successfully.",
+            data: users[0].data,
+            totalPages: totalPages,
+            limit: limitNumber,
+            page: pageNumber
+        });
+    } catch (error) {
+        // Handle any errors that occur during the users retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+
+// Fetch all childs of a user realtion with school & get school details using aggregation without pagination
+exports.getUserDetails = async (req, res, next) => {
+    try {
+        const { userId } = req.query; // Extract userId from query parameters
+
+        // Find the user by id
+        const user = await findUser({ _id: userId });
+
+        // Find all children of a user
+        const children = await findAllChildren({ userId: userId });
+
+        // Fetch school details for each child
+        const childrenWithSchool = await Promise.all(children.map(async (child) => {
+            const school = await findSchool(child.schoolId);
+            return { ...child._doc, school };
+        }));
+
+        // Send a 200 response with the children list
+        return res.status(200).send({ status: true, message: "Children fetched successfully.", user, data: childrenWithSchool });
     } catch (error) {
         // Handle any errors that occur during the children retrieval process
         return res.status(500).send({ status: false, message: error.message });

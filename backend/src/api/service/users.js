@@ -17,6 +17,10 @@ const userServices = {
     updateUser: async (query, updateObj, projection = {}) => {
         return await userModel.findOneAndUpdate(query, updateObj, { new: true, upsert: true, projection});
     },
+    // Function to aggregate a users collection
+    aggregateUsers: async (pipeline) => {
+        return await userModel.aggregate(pipeline);
+    },
 }
 
 // Export the user services
