@@ -308,7 +308,7 @@ exports.schoolChildrenList = async (req, res, next) => {
     }
 };
 
-// Fetch all users from the database with aggregation & pagination
+// Fetch all users from the database with aggregation & pagination with child count
 exports.usersList = async (req, res, next) => {
     try {
         const { page = 1, limit = 10, search = "", fromdate = null, todate = null } = req.query; // Extract query parameters
@@ -324,14 +324,12 @@ exports.usersList = async (req, res, next) => {
         const matchStage = {
             userType: userTypeEnums.USER
         };
-
         if (search) {
             matchStage.$or = [
                 { name: { $regex: search, $options: "i" } },
                 { email: { $regex: search, $options: "i" } }
             ];
         }
-
         if (fromdate && todate) {
             matchStage.createdAt = {
                 $gte: new Date(fromdate),
@@ -339,7 +337,7 @@ exports.usersList = async (req, res, next) => {
             };
         }
 
-        // Aggregate users and apply pagination
+        // Aggregate users with child count and apply pagination
         const users = await aggregateUsers([
             {
                 $match: matchStage
@@ -347,6 +345,22 @@ exports.usersList = async (req, res, next) => {
             {
                 $sort: {
                     createdAt: -1
+                }
+            },
+            {
+                $lookup: {
+                    from: "childrens",
+                    localField: "_id",
+                    foreignField: "userId",
+                    as: "children"
+                }
+            },
+            {
+                $project: {
+                    name: 1,
+                    email: 1,
+                    profilePic: 1,
+                    childrenCount: { $size: "$children" }
                 }
             },
             {
