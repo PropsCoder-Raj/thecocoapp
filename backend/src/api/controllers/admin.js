@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 // Import service functions for user, child, levels, lessons, questions, standards, completed modules, completed levels, completed questions, current questions, and schools.
 const { userServices } = require("../service/users");
-const { createUser, findUser, updateUser, aggregateUsers } = userServices;
+const { createUser, findUser, updateUser, aggregateUsers, findAllUser } = userServices;
 
 const { childServices } = require('../service/child');
 const { findAllChildren, insertChild, findChildCount, findChild, aggregateChild } = childServices;
@@ -78,16 +78,21 @@ exports.dashboardCount = async (req, res, next) => {
             lessonCount,
             questionCount,
             standardCount,
-            schoolCount
+            schoolCount,
+            normalChildCount,
         ] = await Promise.all([
-            findUser({ userType: userTypeEnums.USER }), // Count users
+            findAllUser({ userType: userTypeEnums.USER }), // Count users
             findChildCount(), // Count children
             findAllLevels(), // Get all levels
             findAllLessons(), // Get all lessons
             findAllQuestions(), // Get all questions
             findAllStandards(), // Get all standards
-            findAllSchool() // Get all schools
+            findAllSchool(), // Get all schools
+            findAllChildren({ schoolId: null }) // Count children without school
         ]);
+
+        const normalUsersCount = [...new Set(normalChildCount.map(child => child.userId))];
+
 
         // Send a 200 response with the counts
         return res.status(200).send({
@@ -100,7 +105,11 @@ exports.dashboardCount = async (req, res, next) => {
                 lessonCount: lessonCount.length, // Number of lessons
                 questionCount: questionCount.length, // Number of questions
                 standardCount: standardCount.length, // Number of standards
-                schoolCount: schoolCount.length // Number of schools
+                schoolCount: schoolCount.length, // Number of schools
+                normalUsersCount: normalUsersCount.length,
+                withSchoolUsersCount: userCount.length - normalUsersCount.length,
+                normalChildCount: normalChildCount.length,
+                withSchoolChildCount: childCount - normalChildCount.length
             }
         });
     } catch (error) {
