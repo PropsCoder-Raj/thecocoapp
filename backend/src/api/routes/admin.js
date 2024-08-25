@@ -4,6 +4,8 @@ const express = require('express');
 const { validateRequest } = require("../../middlewares")
 const { loginAdminSchema } = require("../helper/validationSchema")
 
+const upload = require('../helper/multerConfig');
+
 // Import middleware for token verification
 const { verifyAdminToken } = require("../../middlewares");
 
@@ -35,6 +37,9 @@ router.get('/users-list', verifyAdminToken, controller.usersList);
 
 // Define a route handler for GET requests to the '/user-details' endpoint
 router.get('/user-details', verifyAdminToken, controller.getUserDetails);
+
+// Define a route handler for POST import requests to the '/import-users' endpoint
+router.post('/import-users', verifyAdminToken, upload.single('excel'), controller.importUsers);
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 // Import service functions for user, child, levels, lessons, questions, standards, completed modules, completed levels, completed questions, current questions, and schools.
 const { userServices } = require("../service/users");
-const { createUser, findUser, updateUser, aggregateUsers, findAllUser } = userServices;
+const { createUser, findUser, updateUser, aggregateUsers, findAllUser, insertManyUsers } = userServices;
 
 const { childServices } = require('../service/child');
 const { findAllChildren, insertChild, findChildCount, findChild, aggregateChild } = childServices;
@@ -37,6 +37,8 @@ const { findAllSchool, findSchool, updateSchool, createSchool, aggregateSchool }
 
 const commonFunction = require("../helper/utils");
 const userTypeEnums = require("../enums/userType");
+const { convertExcelToJson } = require('../helper/excelService');
+const userType = require('../enums/userType');
 
 // Handle admin login
 exports.loginAdmin = async (req, res, next) => {
@@ -425,6 +427,64 @@ exports.getUserDetails = async (req, res, next) => {
         return res.status(200).send({ status: true, message: "Children fetched successfully.", user, data: childrenWithSchool });
     } catch (error) {
         // Handle any errors that occur during the children retrieval process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+
+// import many user & child after user created there userId data using upload excel file and return them as array
+exports.importUsers = async (req, res, next) => {
+    try {
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const filePath = req.file.path;
+        const jsonData = await convertExcelToJson(filePath);
+
+        const schoolList = await findAllSchool();
+        const usersList = await findAllUser({ userType: userType.USER });
+
+        for (let index = 0; index < jsonData.length; index++) {
+            const element = jsonData[index];
+            
+            const school = schoolList.find(school => school.schoolId == element.school_id);
+            const user = usersList.find(user => user.email == element.user_email);
+
+            if (!school) {
+                return res.status(400).send({ status: false, message: `School not found for ${element.school_id}` });
+            }
+
+            if (user) {
+                return res.status(400).send({ status: false, message: `User already found for ${element.user_email}` });
+            }
+        }
+
+        const users = jsonData.map((element) => {
+            return {
+                name: element.user_name,
+                email: element.user_email,
+                password: bcrypt.hashSync("123456", 10),
+                userType: userTypeEnums.USER
+            }
+        });
+
+        const userResults = await insertManyUsers(users)
+
+        const children = jsonData.map((element) => {
+            return {
+                childName: element.child_name,
+                schoolId: new mongoose.Types.ObjectId(schoolList.find(school => school.schoolId == element.school_id)._id),
+                userId: userResults.find(user => user.email == element.user_email)._id,
+                standard: element.child_standard
+            }
+        });
+
+        const childsResults = await insertChild(children)
+
+        // Send a 200 response with the created users
+        return res.status(200).send({ status: true, message: "Users imported successfully.", jsonData, usersList, userResults, childsResults });
+    } catch (error) {
+        // Handle any errors that occur during the users import process
         return res.status(500).send({ status: false, message: error.message });
     }
 };

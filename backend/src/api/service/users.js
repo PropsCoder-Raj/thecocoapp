@@ -26,6 +26,10 @@ const userServices = {
     aggregateUsers: async (pipeline) => {
         return await userModel.aggregate(pipeline);
     },
+    // Function to insert many users
+    insertManyUsers: async (users) => {
+        return await userModel.insertMany(users);
+    },
 }
 
 // Export the user services
