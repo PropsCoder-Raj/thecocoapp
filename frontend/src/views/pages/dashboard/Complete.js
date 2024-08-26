@@ -38,7 +38,7 @@ const style = {
         paddingBottom: "20px",
         justifyContent: "center",
         alignItems: "center",
-        height:"calc(100vh - 190px)"
+        height: "calc(100vh - 190px)"
     },
     buttonHandle: {
         display: "flex",
@@ -75,8 +75,8 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     borderTop: "1px solid #E5E5E5",
-    display:"flex",
-    justifyContent:"center"
+    display: "flex",
+    justifyContent: "center"
 }));
 
 const TakeImg = styled("img")(({ theme }) => ({
@@ -91,7 +91,7 @@ const TakeImg = styled("img")(({ theme }) => ({
 const TaddyImg = styled("img")(({ theme }) => ({
     width: "160px",
     "@media(max-width:650px)": {
-     width: "150px"
+        width: "150px"
     },
     "@media(max-width:500px)": {
         width: "140px"
@@ -106,17 +106,17 @@ function Complete() {
     const [winner, { stop, play }] = useSound('images/winners_W9Cpenj.mp3', { preload: true });
     // useEffect(()=>{
     //     winner()  
-       
+
     // }, [])
     return (
-        <MainBox style={{position:"relative", height:"100vh"}}>
+        <MainBox style={{ position: "relative", height: "100vh" }}>
             <Container maxWidth="lg">
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Box sx={style.CombineBox}>
                             <Box>
                                 <Box sx={{ position: "relative", zIndex: "1" }}>
-                                    <TakeImg src={isMobile ? "images/starback1.png" :"images/starback.png"} alt="" />
+                                    <TakeImg src={isMobile ? "images/starback1.png" : "images/starback.png"} alt="" />
                                     <Box sx={{
                                         position: "absolute", bottom: "47px", left: "50%",
                                         textAlign: "center",
@@ -152,53 +152,35 @@ function Complete() {
                                         </Box></Box>
                                 </Box>
                             </Box>
-                           
+
                         </Box>
-                     
+
                     </Grid>
                 </Grid>
             </Container>
-            <Box sx={{position:"fixed", bottom:"0", width:"100%"}}>
+            <Box sx={{ position: "fixed", bottom: "0", width: "100%" }}>
                 <Container>
-            <Box sx={{
-                display: "flex",
-                justifyContent: "center"
-            }}>
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
                         <Box onClick={() => { navigate("/dashboard") }} sx={{
-                            position:"relative",
+                            position: "relative",
                             left: "50px",
-                            display:"flex",
-                }}>
-                        <TaddyImg alt="" src="images/Coco-Idle_Without_Talking.gif"  />
+                            display: "flex",
+                        }}>
+                            <TaddyImg alt="" src="images/Coco-Idle_Without_Talking.gif" />
                             <img alt="" src="images/coinStar.png" style={{
                                 position: "relative",
                                 left: "-100px",
-                                maxWidth:"180px"
-}}/>
-                        
+                                maxWidth: "180px"
+                            }} />
+
                         </Box>
-            </Box></Container>
-                {!isMobile &&
-            <InnerBox>
-                    <AdSense height="90px" />
-               
-            </InnerBox>}</Box>
-            {/* {isMobile && closeAdd &&
-                <Box sx={{ position: "fixed", top: "0", width: "100%", height: "100vh", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
-                    <Box sx={{ padding: "20px", display: "flex", justifyContent: "end" }}>
-                        <IoMdClose
-                            color="#000"
-                            onClick={() => {
-                                setCloseAdd(false);
-                                winner()
-                            }}
-                            cursor={"pointer"}
-                            size={"30px"}
-                        />
                     </Box>
-                    <AdSense className="adsence-block" />
-                </Box>
-            } */}
+                </Container>
+            </Box>
+
         </MainBox>
     );
 }
