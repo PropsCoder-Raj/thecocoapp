@@ -11,7 +11,6 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import useSound from "use-sound";
-import AdSense from "src/component/AdSense";
 import { IoMdClose } from "react-icons/io";
 
 const style = {

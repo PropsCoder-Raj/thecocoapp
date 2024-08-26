@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoMdArrowBack, IoMdClose } from "react-icons/io";
-import AdSense from "src/component/AdSense";
 import { useTheme } from "@emotion/react";
 
 const style = {
@@ -149,21 +148,6 @@ function TakeQuiz() {
           </Grid>
         </Container>
       </InnerBox>
-      {/* {isMobile && closeAdd &&
-        <div style={{ position: "fixed", top: "0", width: "100%", height: "100vh", zIndex: "1", background: "rgb(255, 255, 255, 0.75)" }}>
-          <Box sx={{ padding: "20px", display: "flex", justifyContent: "end" }}>
-            <IoMdClose
-              color="#000"
-              onClick={() => {
-                setCloseAdd(false);
-              }}
-              cursor={"pointer"}
-              size={"30px"}
-            />
-          </Box>
-          <AdSense />
-        </div>
-      } */}
     </MainBox>
   );
 }
