@@ -22,7 +22,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 3px;
     height: 6px;
 }
 
@@ -33,7 +33,7 @@ body {
 
 /* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #888888;
     border-radius: 5px;
 }
 
@@ -48,6 +48,16 @@ body {
 
 .google-auto-placed {
     display: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.right-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.right-sidebar {
+    -ms-overflow-style: none;
 }
 
 

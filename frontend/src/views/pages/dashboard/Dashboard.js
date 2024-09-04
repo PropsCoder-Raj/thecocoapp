@@ -15,6 +15,9 @@ import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import { Link, animateScroll as scroll, scroller } from 'react-scroll';
 
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+
 
 const bounce = keyframes`
     0%, 100% {
@@ -37,37 +40,37 @@ const style = {
       marginBottom: "30px",
     },
   },
-  mainscrollHide:{
+  mainscrollHide: {
     height: "calc(100vh - 64px )",
     overflow: "auto",
- '-ms-overflow-style': 'none',  // Internet Explorer 10+
+    '-ms-overflow-style': 'none',  // Internet Explorer 10+
     'scrollbar-width': 'none',  // Firefox
     '&::-webkit-scrollbar': {
       display: 'none !important'  // Safari and Chrome
     },
-   
+
     "@media(max-width:900px)": {
       padding: "16px 0px 16px 16px",
 
     },
-/* Scrollbar track */
-"&::-webkit-scrollbar-track": {
-  display: 'none !important'
-},
+    /* Scrollbar track */
+    "&::-webkit-scrollbar-track": {
+      display: 'none !important'
+    },
 
-/* Scrollbar thumb */
-"&::-webkit-scrollbar-thumb": {
-  display: 'none !important'
-},
+    /* Scrollbar thumb */
+    "&::-webkit-scrollbar-thumb": {
+      display: 'none !important'
+    },
 
-/* Scrollbar thumb on hover */
-"&::-webkit -scrollbar-thumb:hover": {
-  display: 'none !important'
-}
+    /* Scrollbar thumb on hover */
+    "&::-webkit -scrollbar-thumb:hover": {
+      display: 'none !important'
+    }
   },
   BoxStyle: {
     padding: "22px",
-    border: "1px solid rgba(229, 229, 229, 1)",
+    border: "2px solid #D8D8D8",
     borderRadius: "16px",
     marginTop: "22px",
     "@media(max-width:767px)": {
@@ -516,7 +519,7 @@ function Dashboard() {
   };
 
   const renderBoxes = (props) => {
-    const { levelValue  , Name} = props;
+    const { levelValue, Name } = props;
     return levelValue.map((level, index) => {
       const isCenterBox = index % 3 === 0;
       const isSixItems = levelValue.length === 6;
@@ -535,19 +538,19 @@ function Dashboard() {
       return (
         <Grid
           item
-          xs={levelValue.length == 5 && (index === 1 || index === 2 || index === 3 || index === 4) ? 6 : isFirstBox || (isSixItems && isCenterBox) ? 12 :  6}
+          xs={levelValue.length == 5 && (index === 1 || index === 2 || index === 3 || index === 4) ? 6 : isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
           key={level._id}
           container
-          justifyContent={levelValue.length == 5 && index == 4 ? "flex-start" : levelValue.length == 5 && index == 3 ?"flex-end" :justifyContent}
+          justifyContent={levelValue.length == 5 && index == 4 ? "flex-start" : levelValue.length == 5 && index == 3 ? "flex-end" : justifyContent}
           sx={style.GridManrgin}
         >
           {level.current_status && (
-           
+
             <Box
               ref={(el) => (elementsRef.current[removeOrdinalSuffixes(Name)] = el)}
               sx={style.customBorder}
               onClick={() => {
-                if (level?.currentQuestionDetails){
+                if (level?.currentQuestionDetails) {
                   navigate("/questions", {
                     state: {
                       module_id: level.module_id,
@@ -555,15 +558,15 @@ function Dashboard() {
                       nextQuestionNo: level?.currentQuestionDetails?.nextQuestionNo
                     },
                   });
-                }else{
-                    navigate("/leason", {
-                  state: {
-                    module_id: level.module_id,
-                    level_id: level._id,
-                  },
-                });
+                } else {
+                  navigate("/leason", {
+                    state: {
+                      module_id: level.module_id,
+                      level_id: level._id,
+                    },
+                  });
                 }
-              
+
               }}
             >
               <Typography sx={style.textCss}>START</Typography>
@@ -685,14 +688,14 @@ function Dashboard() {
           currentStandard: res?.data?.currentStandard,
           isStanard: res?.data?.standard,
         })
-        setTargetId(`${res?.data?.currentStandard + " " + "Standard"}`); 
+        setTargetId(`${res?.data?.currentStandard + " " + "Standard"}`);
         //    scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
         //   duration: 500,
         //   delay: 0,
         //   smooth: 'easeInOutQuart'
         // });
-        
-       
+
+
       }
     } catch (error) {
       console.log(error, "error");
@@ -1014,7 +1017,7 @@ function Dashboard() {
     }
   }, [targetId]);
 
- 
+
   return (
     <Page title="Dashboard">
       <Container ref={gridRef} maxWidth="lg" sx={style.mainscrollHide} >
@@ -1038,9 +1041,9 @@ function Dashboard() {
                 levelData.map((values, i) => (
                   <>
                     {(values?.name && currentData?.isStanard) &&
-                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} 
-                      id={removeOrdinalSuffixes(values?.name)}
-                        // ref={(el) => (elementsRef.current[removeOrdinalSuffixes(values?.name)] = el)}
+                      <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}}
+                        id={removeOrdinalSuffixes(values?.name)}
+                      // ref={(el) => (elementsRef.current[removeOrdinalSuffixes(values?.name)] = el)}
                       >
                         <Typography variant="h4" color={"#434547"} sx={{ marginBottom: "7px" }}>{values?.name}</Typography>
                       </Box>}
@@ -1056,7 +1059,7 @@ function Dashboard() {
                             textAlign: "center",
                             marginTop: "47px",
                             "@media(max-width:900px)": {
-                                  marginRight: "16px"
+                              marginRight: "16px"
 
                             },
                           }}
@@ -1095,15 +1098,10 @@ function Dashboard() {
 
 
             </Grid>
-            <Grid item xs={5} sx={{
-              display: { xs: "none", sm: "none", md: "block" }, position: "sticky", top: "0",
-              height: "fit-content", paddingTop:"0 !important" }}>
+            <Grid className="right-sidebar" item xs={5} sx={{ display: { xs: "none", sm: "none", md: "block" }, position: "sticky", top: "0", height: "100vh", paddingTop: "0px !important", paddingBottom: "100px", paddingRight: "10px", overflowY: "auto",  }}>
               <Box sx={style.GridBox}>
                 <Box sx={style.BoxStyle}>
-                  <Box
-                    sx={{ display: "flex", gap: "10px", alignItems: "center" }}
-                  >
-                    {/* <TaddyImg alt="" src="images/TaddyIcon.png" /> */}
+                  <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }} >
                     <TaddyImg src="images/Coco-Hello_Talking.gif" alt="#" />
                     <Box>
                       <Typography variant="h3" fontWeight={"700"} mb={1} color={"#4B4B4B"}>
@@ -1121,9 +1119,9 @@ function Dashboard() {
                   </Box>
                 </Box>
                 {childData.length > 0 ?
-                  <Box sx={style.BoxStyle}>
-                    <Typography variant="h4" fontWeight={"600"} color={"#434547"}>Switch Profile</Typography>
-                    {childData.map((values, items) => {
+                  <Box sx={{ ...style.BoxStyle, marginTop: "unset" }}>
+                    <Typography variant="h4" fontWeight={"600"} color={"#000"}>Switch Profile</Typography>
+                    {/* {childData.map((values, items) => {
                       return (
                         <Box sx={style.profileBox} onClick={() => { switchChild(values._id) }}>
                           <Box
@@ -1143,10 +1141,33 @@ function Dashboard() {
                                 </Box></Box></Box>
                           </Box>
                         </Box>)
-                    })}
+                    })} */}
+
+                    <List sx={{ width: '100%' }}>
+                      {childData.length > 0 && childData.map((value) => {
+                        return (
+                          <ListItem
+                            onClick={() => { switchChild(value._id) }}
+                            sx={{ width: "100%", border: "solid 1px lightgray", borderRadius: "10px", marginBottom: "10px", padding: "unset", background: value.activeStatus ? "#F1F5F9" : "#fff" }}
+                            secondaryAction={
+                              <>
+                                <Box sx={style.GapBox}>
+                                  <Typography variant="body1">{value.totalPoints}</Typography>
+                                  <CoinImg alt="" src="images/Coin.png" />
+                                </Box>
+                              </>
+                            }>
+                            <ListItemButton>
+                              <img src={value.gender === "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%", border: value.activeStatus ? "solid 2px green" : "" }} />
+                              <ListItemText primary={`${value.childName}`} sx={{ marginLeft: "15px" }} />
+                            </ListItemButton>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
 
                   </Box> :
-                  <Box sx={style.BoxStyle}>
+                  <Box sx={{ ...style.BoxStyle, marginTop: "unset" }}>
                     <Box
                       sx={{
                         display: "flex",
@@ -1173,7 +1194,7 @@ function Dashboard() {
                     </Box>
                   </Box>
                 }
-                <Box sx={style.BoxStyle}>
+                <Box sx={{...style.BoxStyle, marginTop: "unset"}}>
                   <AddImg alt="" src="images/add.png" />
                 </Box>
               </Box>

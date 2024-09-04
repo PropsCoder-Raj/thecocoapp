@@ -25,8 +25,10 @@ const childServices = {
     },
     // Function to find multiple children by query
     findAllChildrenWithPopulate: async (query, projection = {}) => {
+        console.log("query: ", query);
+        
         // Find multiple children in the database based on the query
-        return await childModel.find(query, projection).populate("schoolId");
+        return await childModel.find(query, projection).populate("schoolId userId");
     },
     // Function to find multiple children by query
     findAllChildren: async (query) => {

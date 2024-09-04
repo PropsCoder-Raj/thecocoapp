@@ -214,8 +214,6 @@ exports.updateChildAPI = async (req, res, next) => {
     }
 }
 
-
-
 /**
 * @swagger
 * /child/switch-to-active-child:

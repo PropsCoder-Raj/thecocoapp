@@ -82,6 +82,7 @@ async function verifyAdminToken(req, res, next) {
 
   // Verify the JWT token
   jwt.verify(token, process.env.jwtsecretadmin, async (err, result) => {
+    console.log("err, result: ", err, result)
     // If there's an error in verification
     if (err) {
       // If the error is due to token expiration

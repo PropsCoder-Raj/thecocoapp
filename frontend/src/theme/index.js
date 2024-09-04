@@ -281,9 +281,13 @@ const themesOptions = [
             lineHeight: "22px",
             borderRadius: "8px",
             backgroundColor: "#FE8A36",
+            boxShadow: "none",
+            transition: "background-color 0.4s ease, color 0.4s ease", // Smooth transition for background color and text color
             "&:hover": {
-              color: "#fff",
-              backgroundColor: "rgba(231, 126, 49, 1)",
+              color: "#FFFFFF", // White text color on hover
+              backgroundColor: "#FE8A36", // "#00baf2", // Darker Blue background color on hover
+              boxShadow: "none",
+              borderBottom: "solid 5px #a25a26",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",

@@ -21,10 +21,10 @@ router.get('/get-profile', verifyToken, controller.getProfile);
 router.put('/update-profile', verifyToken, controller.updateProfile);
 
 // Define a route handler for POST requests to the '/upload-photo' endpoint
-router.post('/upload-photo', verifyToken, controller.uploadPhoto);
+router.post('/upload-photo', controller.uploadPhoto);
 
 // Define a route handler for POST requests to the '/upload-photo' endpoint
-router.post('/upload-photo-multer', verifyToken, upload.single('image'), controller.uploadPhotoMulter);
+router.post('/upload-photo-multer', upload.single('image'), controller.uploadPhotoMulter);
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;
