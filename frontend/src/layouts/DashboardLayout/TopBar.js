@@ -20,7 +20,7 @@ import { IoMenu } from "react-icons/io5";
 import { HiSwitchVertical } from "react-icons/hi";
 
 
-const styles ={
+const styles = {
   root: {
     backgroundColor: "#232B3B;",
   },
@@ -34,9 +34,9 @@ const styles ={
   },
 
   searchBox: {
-    display:"flex",
-    gap:"15px",
-    alignItems:"center"
+    display: "flex",
+    gap: "15px",
+    alignItems: "center"
     // "@media(max-width:900px)": {
     //   display: "none",
     // },
@@ -47,7 +47,7 @@ const styles ={
     gap: "10px",
     justifyContent: "space-evenly",
     alignItems: "center",
-  
+
     "& .contentTypo": {
       color: "rgb(23, 38, 36)",
       display: "flex",
@@ -72,20 +72,20 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
   const themeSeeting = useContext(SettingsContext);
 
   return (
-    
+
     <AppBar
       style={{
         height: "64px",
         justifyContent: "center",
-        zIndex:"1201"
+        zIndex: "1201"
       }}
     ><Container maxWidth="lg">
-      <Toolbar sx={styles.toolbar}>
-        <TopBarData onMobileNavOpen={onMobileNavOpen} />
-      </Toolbar>
+        <Toolbar sx={styles.toolbar}>
+          <TopBarData onMobileNavOpen={onMobileNavOpen} />
+        </Toolbar>
       </Container>
     </AppBar>
-    
+
   );
 };
 
@@ -93,7 +93,7 @@ TopBar.propTypes = {
   sx: PropTypes.string,
 };
 TopBar.defaultProps = {
-  onMobileNavOpen: () => {},
+  onMobileNavOpen: () => { },
 };
 
 export default TopBar;
@@ -114,7 +114,7 @@ export function TopBarData({ onMobileNavOpen }) {
     right: false,
   });
   const [profile, setProfile] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     setProfile(User?.profile?.profilePic)
   }, [User.profile])
   const confirmationHandler = () => {
@@ -128,13 +128,13 @@ export function TopBarData({ onMobileNavOpen }) {
 
   const handleLogOut = async (values) => {
     try {
-     
+
     } catch (error) {
       // Handle error here
     }
   };
 
- 
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -154,8 +154,8 @@ export function TopBarData({ onMobileNavOpen }) {
               />
      
           </IconButton>} */}
-        
-       
+
+
       <img
         alt=""
         style={styles.logo}
@@ -169,7 +169,7 @@ export function TopBarData({ onMobileNavOpen }) {
         <Box flexGrow={1} />
         <Box sx={styles.searchBox}>
           {!isMobileChild &&
-            <Box sx={styles.customSelectBox} onClick={() => navigate("/update-profile")}
+            <Box sx={styles.customSelectBox} onClick={() => { User.setChildOpen(!User.childOpen) }} //onClick={() => navigate("/update-profile")}
               style={{
                 alignItems: "center",
                 display: "grid",
@@ -180,17 +180,17 @@ export function TopBarData({ onMobileNavOpen }) {
               <img src={profile ? profile : "images/defaultPic.png"} alt="#" style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
             </Box>
           }
-          {isMobileChild && 
-            <Box sx={styles.customSelectBox} onClick={() => { User.setChildOpen(!User.childOpen)}}
-            style={{
-              alignItems: "center",
-          display: "grid",
-          marginRight: "10px"
-            }}
+          {isMobileChild &&
+            <Box sx={styles.customSelectBox} onClick={() => { User.setChildOpen(!User.childOpen) }}
+              style={{
+                alignItems: "center",
+                display: "grid",
+                marginRight: "10px"
+              }}
             >
-            {/* <Typography variant="h4">Logout</Typography> */}
-            <img src={profile ? profile: "images/defaultPic.png"} alt="#" style={{width:"45px", height:"45px",borderRadius:"50%"}}/>
-          </Box>
+              {/* <Typography variant="h4">Logout</Typography> */}
+              <img src={profile ? profile : "images/defaultPic.png"} alt="#" style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
+            </Box>
           }
         </Box>
       </>

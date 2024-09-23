@@ -79,7 +79,7 @@ function reduceChildRoutes({ acc, pathname, item, depth }) {
   return acc;
 }
 
-const styles ={
+const styles = {
   mobileDrawer: {
     width: 256,
   },
@@ -206,7 +206,7 @@ const NavBar = () => {
             onClick={() => confirmationHandler()}
             sx={styles.logoutButton}
           >
-            <Typography onClick={()=>setOpen(true)} sx={styles.menuListText}>Logout</Typography>
+            <Typography onClick={() => setOpen(true)} sx={styles.menuListText}>Logout</Typography>
           </Box>
         </Box>
       </Box>
@@ -216,15 +216,15 @@ const NavBar = () => {
   return (
     <>
 
-        <img
+      <img
         alt=""
-          style={{ width: "35px", height: "35px", borderRadius: "100%" }}
-          src={profilePic ? profilePic : "/images/profile.svg"}
-          onClick={() => {
-            setRightBar(!rightBar);
-          }}
-        />
-    
+        style={{ width: "35px", height: "35px", borderRadius: "100%" }}
+        src={profilePic ? profilePic : "/images/profile.svg"}
+        onClick={() => {
+          setRightBar(!rightBar);
+        }}
+      />
+
 
       <Dialog
         styles={{ paper: styles.desktopDrawer }}

@@ -14,9 +14,11 @@ import { FiEdit3 } from "react-icons/fi";
 import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
 import { Link, animateScroll as scroll, scroller } from 'react-scroll';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import { isMobile } from "react-device-detect";
 
 
 const bounce = keyframes`
@@ -48,11 +50,6 @@ const style = {
     '&::-webkit-scrollbar': {
       display: 'none !important'  // Safari and Chrome
     },
-
-    "@media(max-width:900px)": {
-      padding: "16px 0px 16px 16px",
-
-    },
     /* Scrollbar track */
     "&::-webkit-scrollbar-track": {
       display: 'none !important'
@@ -75,7 +72,6 @@ const style = {
     marginTop: "22px",
     "@media(max-width:767px)": {
       padding: "8px 12px",
-
     },
   },
   GapBox: {
@@ -103,14 +99,11 @@ const style = {
   },
   levelMargin: {
     marginTop: "60px",
-    "@media(max-width:767px)": {
-      marginTop: "40px",
-    },
+    marginLeft: "0",
   },
   GridManrgin: {
-    padding: "20px 40px !important",
+    padding: "14px 24px !important",
     position: "relative",
-
   },
   customBorder: {
     padding: "6px",
@@ -406,6 +399,9 @@ const style = {
       marginTop: "40px",
       marginBottom: "100px",
     },
+  },
+  rightSidebar: {
+    display: { xs: "none", sm: "none", md: "block" }, position: "sticky", top: "0", height: "100vh", paddingTop: "0px !important", paddingBottom: "100px", overflowY: "auto",
   }
 };
 
@@ -536,16 +532,16 @@ function Dashboard() {
       }
 
       return (
+        <>
         <Grid
           item
-          xs={levelValue.length == 5 && (index === 1 || index === 2 || index === 3 || index === 4) ? 6 : isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
+          xs={levelValue.length === 5 && (index === 1 || index === 2 || index === 3 || index === 4) ? 6 : isFirstBox || (isSixItems && isCenterBox) ? 12 : 6}
           key={level._id}
           container
-          justifyContent={levelValue.length == 5 && index == 4 ? "flex-start" : levelValue.length == 5 && index == 3 ? "flex-end" : justifyContent}
+          justifyContent={levelValue.length === 5 && index === 4 ? "flex-start" : levelValue.length === 5 && index === 3 ? "flex-end" : justifyContent}
           sx={style.GridManrgin}
         >
           {level.current_status && (
-
             <Box
               ref={(el) => (elementsRef.current[removeOrdinalSuffixes(Name)] = el)}
               sx={style.customBorder}
@@ -566,7 +562,6 @@ function Dashboard() {
                     },
                   });
                 }
-
               }}
             >
               <Typography sx={style.textCss}>START</Typography>
@@ -594,6 +589,7 @@ function Dashboard() {
             style={level.complete_status || level.current_status ? { cursor: "pointer" } : {}}
           />
         </Grid>
+        </>
       );
     });
   };
@@ -910,56 +906,44 @@ function Dashboard() {
   );
   const content = (
     <>
-      <Box height="100%" display="flex" flexDirection="column" sx={childOpen ? {
-        padding: "64px 20px 20px 20px", minWidth: "260px"
-      } : { padding: "20px", minWidth: "260px" }}>
+      <Box height="100%" display="flex" flexDirection="column" sx={childOpen ? { padding: "64px 20px 20px 20px", minWidth: isMobile ? "260px" : "350px" } : { padding: "20px", minWidth: "260px" }}>
         <Box sx={style.BoxStyle}>
           {childData.length > 0 ? <>
             <Typography variant="h4">Switch Profile</Typography>
-            {childData.map((values, items) => {
-              return (
-                <Box sx={style.profileBox} key={items} onClick={() => switchChild(values._id)}>
-                  <Box
-                    style={
-                      values.activeStatus
-                        ? { background: "rgba(241, 245, 249, 1)", cursor: "pointer" }
-                        : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }
-                    }
-                    sx={style.userBox}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      <ProfileImg
-                        alt=""
-                        src={
-                          values.profilePic
-                            ? values.profilePic
-                            : values.gender === "Male"
-                              ? "images/boyprofile.png"
-                              : "images/girlprofile.png"
-                        }
-                      />
-                      <Box>
-                        <Typography variant="body1">{values.childName}</Typography>
+
+            <List sx={{ width: '100%' }}>
+              {childData.length > 0 && childData.map((value) => {
+                return (
+                  <ListItem
+                    onClick={() => { switchChild(value._id) }}
+                    sx={{ width: "100%", border: "solid 1px lightgray", borderRadius: "10px", marginBottom: "10px", padding: "unset", background: value.activeStatus ? "#F1F5F9" : "#fff" }}
+                    secondaryAction={
+                      <>
                         <Box sx={style.GapBox}>
-                          <Typography variant="body1">{values.totalPoints}</Typography>
+                          <Typography variant="body1">{value.totalPoints}</Typography>
                           <CoinImg alt="" src="images/Coin.png" />
                         </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-              );
-            })}</> : <Box onClick={() => {
-              navigate("/child-profile", {
-                state: {
-                  name: "Add",
-                  img: "",
-                  childId: "",
-                  data: ""
-                }
-              })
-              User.setChildOpen(false)
-            }} sx={{ padding: "8px", }}>
+                      </>
+                    }>
+                    <ListItemButton>
+                      <img src={value.gender === "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%", border: value.activeStatus ? "solid 2px green" : "" }} />
+                      <ListItemText primary={`${value.childName}`} sx={{ marginLeft: "15px" }} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </> : <Box onClick={() => {
+            navigate("/child-profile", {
+              state: {
+                name: "Add",
+                img: "",
+                childId: "",
+                data: ""
+              }
+            })
+            User.setChildOpen(false)
+          }} sx={{ padding: "8px", }}>
             <Box
               sx={{
                 display: "flex",
@@ -1021,22 +1005,9 @@ function Dashboard() {
   return (
     <Page title="Dashboard">
       <Container ref={gridRef} maxWidth="lg" sx={style.mainscrollHide} >
-        <Box >
-          <Grid container spacing={6}>
-            {/* <Grid item xs={12} sx={style.switchChildBox}>
-              <Box sx={{display:"flex", justifyContent:"end"}}>
-                <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
-              </Box>
-            </Grid> */}
-            <Grid item xs={12} sm={12} md={7} sx={{
-              paddingRight: {
-                xl: "55px",
-                md: "55px",
-                sm: "0",
-                xs: "0"
-              }
-            }}>
-
+        <Box>
+          <Grid container>
+            <Grid item xs={12} sm={12} md={7} sx={{}}>
               {levelData.length !== 0 ?
                 levelData.map((values, i) => (
                   <>
@@ -1058,10 +1029,6 @@ function Dashboard() {
                             paddingBottom: "25px",
                             textAlign: "center",
                             marginTop: "47px",
-                            "@media(max-width:900px)": {
-                              marginRight: "16px"
-
-                            },
                           }}
                         >
                           <Box>
@@ -1086,7 +1053,7 @@ function Dashboard() {
                             </Typography>
                           </Box>
                         </Box>
-                        <Grid container spacing={3} sx={style.levelMargin}>
+                        <Grid container sx={style.levelMargin}>
                           {renderBoxes({ levelValue: data.levels, Name: values?.name })}
                         </Grid>
                       </Box>
@@ -1098,8 +1065,8 @@ function Dashboard() {
 
 
             </Grid>
-            <Grid className="right-sidebar" item xs={5} sx={{ display: { xs: "none", sm: "none", md: "block" }, position: "sticky", top: "0", height: "100vh", paddingTop: "0px !important", paddingBottom: "100px", paddingRight: "10px", overflowY: "auto",  }}>
-              <Box sx={style.GridBox}>
+            <Grid item xs={12} sm={12} md={5} sx={{ padding: "0 30px " }}>
+              <Box className="right-sidebar" sx={{ ...style.GridBox, ...style.rightSidebar }}>
                 <Box sx={style.BoxStyle}>
                   <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }} >
                     <TaddyImg src="images/Coco-Hello_Talking.gif" alt="#" />
@@ -1119,7 +1086,7 @@ function Dashboard() {
                   </Box>
                 </Box>
                 {childData.length > 0 ?
-                  <Box sx={{ ...style.BoxStyle, marginTop: "unset" }}>
+                  <Box sx={{ ...style.BoxStyle }}>
                     <Typography variant="h4" fontWeight={"600"} color={"#000"}>Switch Profile</Typography>
                     {/* {childData.map((values, items) => {
                       return (
@@ -1133,7 +1100,7 @@ function Dashboard() {
                             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                               <ProfileImg alt="" src={
                                 values.profilePic ? values.profilePic :
-                                  values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
+                                  values.gender === "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
                               <Box > <Typography variant="body1">{values.childName}</Typography>
                                 <Box sx={style.GapBox}>
                                   <Typography variant="body1">{values.totalPoints}</Typography>
@@ -1167,7 +1134,7 @@ function Dashboard() {
                     </List>
 
                   </Box> :
-                  <Box sx={{ ...style.BoxStyle, marginTop: "unset" }}>
+                  <Box sx={{ ...style.BoxStyle }}>
                     <Box
                       sx={{
                         display: "flex",
@@ -1194,7 +1161,7 @@ function Dashboard() {
                     </Box>
                   </Box>
                 }
-                <Box sx={{...style.BoxStyle, marginTop: "unset"}}>
+                <Box sx={{ ...style.BoxStyle }}>
                   <AddImg alt="" src="images/add.png" />
                 </Box>
               </Box>

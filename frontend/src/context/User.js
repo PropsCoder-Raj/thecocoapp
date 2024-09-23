@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 export default function AuthProvider(props) {
   const [profile, setProfile] = useState({});
-const [callApi, setCallApi] =useState(false);
+  const [callApi, setCallApi] = useState(false);
   const navigate = useNavigate();
   const [childOpen, setChildOpen] = useState(false);
   const getViewMyProfile = async (values) => {
@@ -23,13 +23,13 @@ const [callApi, setCallApi] =useState(false);
         setProfile(res.data.data);
       }
     } catch (error) {
-      if (error?.response?.status === 419 || error?.response?.status === 401 || error?.response?.status === 440 ){
+      if (error?.response?.status === 419 || error?.response?.status === 401 || error?.response?.status === 440) {
         localStorage.clear();
         sessionStorage.clear();
         navigate("/login")
       }
       console.log(error, "error");
-      
+
     }
   };
   useEffect(() => {
