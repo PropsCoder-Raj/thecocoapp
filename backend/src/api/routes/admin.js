@@ -14,6 +14,7 @@ const controller = require('../controllers/admin');
 const SchoolController = require('../controllers/admin/school');
 const ChildController = require('../controllers/admin/childs');
 const StandardsController = require('../controllers/admin/standards');
+const modulesController = require('../controllers/admin/modules');
 
 // Create a new router instance
 const router = express.Router();
@@ -74,6 +75,12 @@ router.get('/child/get-all-childs/:type', verifyAdminToken, ChildController.getA
 
 // Define a route handler for GET requests to the '/standards/get-all-standards' endpoint
 router.get('/standards/get-all-standards', verifyAdminToken, StandardsController.standardsList);
+
+
+/*************************modules Section*****************************/
+
+// Define a route handler for GET requests to the '/modules/get-all-modules' endpoint
+router.get('/modules/get-all-modules', verifyAdminToken, modulesController.modulesList);
 
 
 // Export the router instance to make it available for use in other parts of the application

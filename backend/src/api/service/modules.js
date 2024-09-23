@@ -36,7 +36,13 @@ const moduleServices = {
     updateManyModules: async (query, updateObj) => {
         return await modulesModel.updateMany(query, updateObj, { new: true, upsert: true });
     },
+    aggregateModules: async (pipeline) => {
+        console.log("pipeline: ", pipeline);
+        
+        return await modulesModel.aggregate(pipeline);
+    }
 }
 
 // Export the modules services
 module.exports = { moduleServices };
+
