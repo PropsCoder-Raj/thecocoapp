@@ -13,6 +13,7 @@ const { verifyAdminToken } = require("../../middlewares");
 const controller = require('../controllers/admin');
 const SchoolController = require('../controllers/admin/school');
 const ChildController = require('../controllers/admin/childs');
+const StandardsController = require('../controllers/admin/standards');
 
 // Create a new router instance
 const router = express.Router();
@@ -63,6 +64,17 @@ router.post('/import-users/:school_id', verifyAdminToken, upload.single('excel')
 
 // Define a route handler for GET requests to the '/child/get-all-childs/:type' endpoint
 router.get('/child/get-all-childs/:type', verifyAdminToken, ChildController.getAllChild);
+
+
+
+
+
+
+/*************************standards Section*****************************/
+
+// Define a route handler for GET requests to the '/standards/get-all-standards' endpoint
+router.get('/standards/get-all-standards', verifyAdminToken, StandardsController.standardsList);
+
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;
