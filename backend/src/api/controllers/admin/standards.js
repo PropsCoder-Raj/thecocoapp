@@ -31,13 +31,32 @@ exports.standardsList = async (req, res) => {
             };
         }
 
-        // Aggregate standards with child count and apply pagination
+        // Aggregate standards with child count, module count, and apply pagination
         const standards = await aggregateStandards([
             { $match: matchStage },
             { $sort: { standard_id: 1 } },
             {
+                // Lookup to count the modules related to the standard
+                $lookup: {
+                    from: "modules", // collection name for modules
+                    localField: "_id", // field in the standards collection
+                    foreignField: "standard_id", // field in the modules collection
+                    as: "modules" // result alias
+                }
+            },
+            {
+                // Add a field to store the count of modules
+                $addFields: {
+                    moduleCount: { $size: "$modules" }
+                }
+            },
+            {
                 $facet: {
-                    data: [{ $skip: skip }, { $limit: limitNumber }],
+                    data: [
+                        { $skip: skip },
+                        { $limit: limitNumber },
+                        { $project: { name: 1, moduleCount: 1, createdAt: 1 } } // Select necessary fields
+                    ],
                     totalCount: [{ $count: "total" }]
                 }
             }
