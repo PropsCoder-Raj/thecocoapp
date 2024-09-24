@@ -30,15 +30,13 @@ const moduleServices = {
     },
     // Function to update a module based on query
     updateModule: async (query, updateObj) => {
-        return await modulesModel.findOneAndUpdate(query, updateObj, { new: true, upsert: true });
+        return await modulesModel.findOneAndUpdate(query, updateObj, { new: true });
     },
     // Function to update multiple modules based on query
     updateManyModules: async (query, updateObj) => {
         return await modulesModel.updateMany(query, updateObj, { new: true, upsert: true });
     },
     aggregateModules: async (pipeline) => {
-        console.log("pipeline: ", pipeline);
-        
         return await modulesModel.aggregate(pipeline);
     }
 }

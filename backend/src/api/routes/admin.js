@@ -82,6 +82,9 @@ router.get('/standards/get-all-standards', verifyAdminToken, StandardsController
 // Define a route handler for GET requests to the '/modules/get-all-modules' endpoint
 router.get('/modules/get-all-modules', verifyAdminToken, modulesController.modulesList);
 
+// Define a route handler for PUT requests to the '/modules/update-module/:module_id' endpoint
+router.put('/modules/update-module/:module_id', verifyAdminToken, modulesController.updateModule);
+
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;
