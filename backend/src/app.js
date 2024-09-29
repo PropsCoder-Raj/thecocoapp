@@ -66,5 +66,9 @@ app.use(middlewares.notFound);
 // Error handling middleware
 app.use(middlewares.errorHandler);
 
+app.get("/webhooks", (req, res) => {
+    return res.send(req.body);
+})
+
 // Export the Express application instance
 module.exports = app;
