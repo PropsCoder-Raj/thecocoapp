@@ -66,8 +66,14 @@ app.use(middlewares.notFound);
 // Error handling middleware
 app.use(middlewares.errorHandler);
 
-app.get("/webhooks", (req, res) => {
-    return res.send(req.body);
+app.post("/webhooks", (req, res) => {
+    const obj = {
+        params: req.params,
+        body: req.body,
+        query: req.query,
+        message: "Get Data"
+    }
+    console.log(JSON.stringify(obj));
 })
 
 // Export the Express application instance
